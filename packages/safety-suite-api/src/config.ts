@@ -14,7 +14,7 @@ export let config: _Config = {
   initialized: false,
   apiUrlRoot: '',
   loginUrlRoot: '',
-  onAuthError: error => {}
+  onAuthError: () => {}
 };
 
 export default function initializeConfig(newConfig: Config): void {
