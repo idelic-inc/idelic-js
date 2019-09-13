@@ -17,7 +17,7 @@ export let config: _Config = {
   onAuthError: () => {}
 };
 
-export default function initializeConfig(newConfig: Config): void {
+export function initializeConfig(newConfig: Config): void {
   config = {
     ...newConfig,
     initialized: true
