@@ -12,4 +12,3 @@ export type ModelQuery = {
 
 export type AggregationQuery = any;
 export type QueryNode = any;
-

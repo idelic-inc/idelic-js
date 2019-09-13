@@ -8,7 +8,7 @@ export type Config = {
 
 export type _Config = Config & {
   initialized: boolean;
-}
+};
 
 export let config: _Config = {
   initialized: false,
@@ -23,4 +23,3 @@ export default function initializeConfig(newConfig: Config): void {
     initialized: true
   };
 }
-

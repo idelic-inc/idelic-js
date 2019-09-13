@@ -87,4 +87,3 @@ export function unlockAccount(token: AuthToken) {
     }
   };
 }
-

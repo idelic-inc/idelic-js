@@ -1,4 +1,9 @@
-import net, {Response, Request, RequestHeaders, RequestOptions} from 'idelic-safety-net';
+import net, {
+  Response,
+  Request,
+  RequestHeaders,
+  RequestOptions
+} from 'idelic-safety-net';
 
 import {config} from 'src/config';
 import ApiError from 'src/error';
@@ -19,7 +24,9 @@ export function runApi<T>(api: Api, authToken?: string): Promise<Response<T>> {
 
 export function runCancellableApi<T>(api: Api, authToken?: string): Request<T> {
   if (!config.initialized) {
-    throw new Error('Config was not properly initialized. Please call `initializeConfig` first.');
+    throw new Error(
+      'Config was not properly initialized. Please call `initializeConfig` first.'
+    );
   }
 
   const options = api.options || {};
@@ -44,19 +51,23 @@ export function runCancellableApi<T>(api: Api, authToken?: string): Request<T> {
     errors: netError => new ApiError(netError)
   };
 
-  apiBacklog[apiString] = net.request(api.method, `${config['apiUrlRoot']}${api.url}`, options);
+  apiBacklog[apiString] = net.request(
+    api.method,
+    `${config['apiUrlRoot']}${api.url}`,
+    options
+  );
   apiBacklog[apiString].on.complete.finally(() => delete apiBacklog[apiString]);
   return apiBacklog[apiString];
 }
 
 export function catchError(error: ApiError): void {
   if (!config.initialized) {
-    throw new Error('Config was not properly initialized. Please call `initializeConfig` first.');
+    throw new Error(
+      'Config was not properly initialized. Please call `initializeConfig` first.'
+    );
   }
 
-  error.status === 401
-    ? config.onAuthError(error)
-    : console.error(error);
+  error.status === 401 ? config.onAuthError(error) : console.error(error);
 }
 
 function setHeader(headers: RequestHeaders, name: string, value: any): void {
@@ -71,4 +82,3 @@ function setHeader(headers: RequestHeaders, name: string, value: any): void {
     headers[name] = value;
   }
 }
-

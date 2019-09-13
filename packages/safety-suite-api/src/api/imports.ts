@@ -17,7 +17,7 @@ export type IxfComment = {
   comment: {
     date: number; // TODO: Switch to moment.
     text: string;
-  },
+  };
   source: IxfSource;
 };
 
@@ -28,7 +28,7 @@ export type IxfEnum = {
   display: string;
   editable?: boolean;
   fields?: any;
-}
+};
 
 export type IxfEnumValue = {
   enumAlias: Alias;
@@ -36,7 +36,7 @@ export type IxfEnumValue = {
   display: string;
   disabled?: boolean;
   fields?: any;
-}
+};
 
 export type IxfModel = {
   source: IxfSource;
@@ -54,7 +54,6 @@ export type IxfModelGroup = {
   groupType: string;
   fields?: any;
 };
-
 
 export function importData(data: Ixf) {
   return {
@@ -103,4 +102,3 @@ export function importDocuments(documents: IxfDocument[]) {
     options: {body: documents}
   };
 }
-

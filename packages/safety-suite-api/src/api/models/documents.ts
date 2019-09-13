@@ -22,7 +22,7 @@ export type ModelDocument = {
   name: string;
   protected: boolean;
   archived: boolean;
-}
+};
 
 export type InputModelDocument = {
   file: ModelDocumentContent;
@@ -31,7 +31,7 @@ export type InputModelDocument = {
   protected: boolean;
   archived: boolean;
   extension: string;
-}
+};
 
 export type ModelDocumentContent = Blob;
 
@@ -43,7 +43,10 @@ export default {
   ['delete']: deleteModelDocument
 };
 
-export function getModelDocuments(modelId: number, options: RequestOptions): Request<ModelDocument[]> {
+export function getModelDocuments(
+  modelId: number,
+  options: RequestOptions
+): Request<ModelDocument[]> {
   return runCancellableApi({
     method: 'GET',
     url: `/api/models/${modelId}/documents`,
@@ -51,7 +54,10 @@ export function getModelDocuments(modelId: number, options: RequestOptions): Req
   });
 }
 
-export function downloadModelDocument(documentId: number, options: RequestOptions): Request<ModelDocumentContent> {
+export function downloadModelDocument(
+  documentId: number,
+  options: RequestOptions
+): Request<ModelDocumentContent> {
   return runCancellableApi({
     method: 'GET',
     url: `/api/models/documents/${documentId}/content`,
@@ -62,7 +68,12 @@ export function downloadModelDocument(documentId: number, options: RequestOption
   });
 }
 
-export function createModelDocument(modelId: number, input: InputModelDocument, content: ModelDocumentContent, options: RequestOptions): Request<ModelDocument> {
+export function createModelDocument(
+  modelId: number,
+  input: InputModelDocument,
+  content: ModelDocumentContent,
+  options: RequestOptions
+): Request<ModelDocument> {
   const form = new FormData();
   form.append('file', content);
   form.append('name', input.name + input.extension);
@@ -81,7 +92,10 @@ export function createModelDocument(modelId: number, input: InputModelDocument, 
   });
 }
 
-export function updateModelDocument(document: ModelDocument, options: RequestOptions): Request<ModelDocument> {
+export function updateModelDocument(
+  document: ModelDocument,
+  options: RequestOptions
+): Request<ModelDocument> {
   return runCancellableApi({
     method: 'PUT',
     url: '/api/models/documents',
@@ -92,7 +106,10 @@ export function updateModelDocument(document: ModelDocument, options: RequestOpt
   });
 }
 
-export function deleteModelDocument(document: ModelDocument, options: RequestOptions): Request<number> {
+export function deleteModelDocument(
+  document: ModelDocument,
+  options: RequestOptions
+): Request<number> {
   return runCancellableApi({
     method: 'DELETE',
     url: `/api/models/documents/${document.id}`,

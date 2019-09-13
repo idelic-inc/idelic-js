@@ -9,12 +9,12 @@ export const createModelComment = (modelId: Id, comment: Comment) => {
     options: {
       body: comment
     }
-  }
+  };
 };
 
 export const deleteModelComment = (commentId: Id) => {
   return {
     method: 'DELETE',
     url: `/api/models/comments/${commentId}`
-  }
+  };
 };

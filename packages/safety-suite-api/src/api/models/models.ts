@@ -43,7 +43,9 @@ export function getModelsCount(query: ModelFilterOptions) {
   };
 }
 
-export function getModels(query: ModelFilterOptions & ModelListOptions & ModelOutputOptions) {
+export function getModels(
+  query: ModelFilterOptions & ModelListOptions & ModelOutputOptions
+) {
   if (query.ids || query.orderBy) {
     return {
       method: 'POST',
@@ -120,4 +122,3 @@ export function recomputeModels(filterOptions: ModelFilterOptions) {
     options: {body: filterOptions}
   };
 }
-

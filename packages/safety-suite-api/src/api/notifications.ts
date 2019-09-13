@@ -17,12 +17,18 @@ export function createSubscription(
   notificationTypeId: Id,
   notificationSourceType: NotificationSourceType,
   notificationSourceId: Id,
-  option: NotificationOption) {
+  option: NotificationOption
+) {
   return {
     method: 'POST',
     url: '/api/notifications/subscriptions/',
     options: {
-      body: {notificationTypeId, notificationSourceType, notificationSourceId, option}
+      body: {
+        notificationTypeId,
+        notificationSourceType,
+        notificationSourceId,
+        option
+      }
     }
   };
 }
@@ -39,7 +45,14 @@ export function updateSubscription(
     method: 'PUT',
     url: '/api/notifications/subscriptions/',
     options: {
-      body: {id, userAccountId, notificationTypeId, notificationSourceType, notificationSourceId, option}
+      body: {
+        id,
+        userAccountId,
+        notificationTypeId,
+        notificationSourceType,
+        notificationSourceId,
+        option
+      }
     }
   };
 }
@@ -50,4 +63,3 @@ export function removeSubscription(subscriptionId: Id) {
     url: `/api/notifications/subscriptions/${subscriptionId}`
   };
 }
-

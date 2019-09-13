@@ -13,7 +13,11 @@ export default class ApiError extends Error {
   }
 
   static createErrorMessage(netError: NetError<any>): string {
-    if (netError.request.status >= 400 && netError.request.status < 600 && netError.response) {
+    if (
+      netError.request.status >= 400 &&
+      netError.request.status < 600 &&
+      netError.response
+    ) {
       if (typeof netError.response == 'string') {
         return netError.response;
       } else if (typeof netError.response.message == 'string') {
@@ -23,4 +27,3 @@ export default class ApiError extends Error {
     return netError.message;
   }
 }
-

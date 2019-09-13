@@ -12,4 +12,3 @@ export function saveUser(user: User) {
     options: {body: user}
   };
 }
-

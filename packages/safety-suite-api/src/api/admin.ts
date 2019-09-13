@@ -96,7 +96,11 @@ export function getRolePermissions(roleId: Id) {
   };
 }
 
-export function addRolePermission(roleId: Id, securableId: Id, permissionType: PermissionType) {
+export function addRolePermission(
+  roleId: Id,
+  securableId: Id,
+  permissionType: PermissionType
+) {
   return {
     method: 'POST',
     url: '/api/userRolePermission',
@@ -117,4 +121,3 @@ export function removeRolePermission(permissionId: Id) {
     url: `/api/userRolePermission/${permissionId}`
   };
 }
-

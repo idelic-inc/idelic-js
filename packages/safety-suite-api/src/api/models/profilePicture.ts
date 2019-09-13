@@ -14,7 +14,11 @@ export function getProfilePicture(modelId: Id) {
   };
 }
 
-export function uploadProfilePicture(modelId: Id, profilePicture: File, cropData: CropData) {
+export function uploadProfilePicture(
+  modelId: Id,
+  profilePicture: File,
+  cropData: CropData
+) {
   const form = new FormData();
   form.append('file', profilePicture);
   form.append('x', cropData.x.toString());
@@ -29,4 +33,3 @@ export function uploadProfilePicture(modelId: Id, profilePicture: File, cropData
     options: {body: form}
   };
 }
-

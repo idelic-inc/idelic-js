@@ -21,7 +21,11 @@ export function getMonitorModelsIdsParams(monitorId: Id, body: ModelQuery) {
   };
 }
 
-export function getMonitorsActionParams(monitorId: Id, query: ModelQuery, type: string) {
+export function getMonitorsActionParams(
+  monitorId: Id,
+  query: ModelQuery,
+  type: string
+) {
   return {
     method: 'POST',
     url: `/api/monitor/${monitorId}/action`,
@@ -31,4 +35,3 @@ export function getMonitorsActionParams(monitorId: Id, query: ModelQuery, type: 
     }
   };
 }
-
