@@ -5,8 +5,8 @@ import net, {
   RequestOptions
 } from 'idelic-safety-net';
 
-import {config} from 'src/config';
-import ApiError from 'src/error';
+import {config} from './config';
+import ApiError from './error';
 
 export interface Api {
   method: string;

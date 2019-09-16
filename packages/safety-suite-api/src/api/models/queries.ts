@@ -1,4 +1,4 @@
-import {Alias, Id} from 'src/baseTypes';
+import {Alias, Id} from '../../baseTypes';
 
 export type ModelQuery = {
   where: QueryNode;

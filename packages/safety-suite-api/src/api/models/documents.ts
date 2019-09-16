@@ -2,7 +2,7 @@ import {Request, RequestOptions} from 'idelic-safety-net';
 import {Set} from 'immutable';
 import {Moment} from 'moment';
 
-import {runCancellableApi} from 'src/runApi';
+import {runCancellableApi} from '../../runApi';
 
 export type ModelDocumentType = 'DOCUMENT' | 'PROFILE_PICTURE';
 export type ModelDocumentStorageType = 'DATABASE' | 'LOCAL_FILESYSTEM' | 'AWS';

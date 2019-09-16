@@ -1,6 +1,6 @@
 import momentTimezone from 'moment-timezone';
 
-import {Id} from 'src/baseTypes';
+import {Id} from '../baseTypes';
 
 export function getCorrectiveActionLetterParams(correctiveActionId: Id) {
   return {

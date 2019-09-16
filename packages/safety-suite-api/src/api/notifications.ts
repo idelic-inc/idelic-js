@@ -1,4 +1,4 @@
-import {Id} from 'src/baseTypes';
+import {Id} from '../baseTypes';
 
 export type NotificationOption = any;
 export type NotificationSourceType = string;

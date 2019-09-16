@@ -1,4 +1,4 @@
-import {Alias} from 'src/baseTypes';
+import {Alias} from '../baseTypes';
 
 export type Ixf = {
   comments: IxfComment[];

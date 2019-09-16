@@ -14,8 +14,8 @@
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "eslint --fix \"src/**/*.ts\"",
     "prepare": "npm run clean && npm run build",
-    "prepublishOnly": "npm test && npm run lint",
-    "preversion": "npm run lint",
+    "prepublishOnly": "npm run lint && npm test",
+    "preversion": "npm run lint && npm test",
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
   },
@@ -38,7 +38,7 @@
     "typescript": "^3.6.3"
   },
   "dependencies": {
-    "idelic-safety-net": "^1.0.4",
+    "idelic-safety-net": "^1.0.11",
     "immutable": "^4.0.0-rc.12",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.26",
