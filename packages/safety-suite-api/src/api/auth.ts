@@ -1,4 +1,5 @@
-import {User} from './user';
+import {Request, RequestOptions} from 'idelic-safety-net';
+import { runCancellableApi } from '../runApi';
 
 export type AuthToken = string;
 export type ChangePassword = any;
@@ -12,27 +13,41 @@ export const getPasswordPolicy = {
   noToken: true
 };
 
-export function register(user: User) {
-  return {
+export function register(
+  email: string,
+  password: string
+): Request<string> {
+  return runCancellableApi({
     method: 'POST',
-    url: '/api/signup',
-    options: {body: user}
-  };
+    url: '/api/1.0/authentication/register',
+    options: {body: {
+      email,
+      password
+    }}
+  }, undefined, 'loginUrlRoot');
 }
 
-export function login(user: User) {
-  return {
+export function login(
+  email: string,
+  password: string
+): Request<string> {
+  return runCancellableApi({
     method: 'POST',
-    url: '/api/signin',
-    options: {body: user}
-  };
+    url: '/api/1.0/authentication/login',
+    options: {body: {
+      email,
+      password
+    }}
+  }, undefined, 'loginUrlRoot');
 }
 
-export const logout = {
-  method: 'POST',
-  url: '/api/signout',
-  options: {body: {}}
-};
+export function logout(): Request<string> {
+  return runCancellableApi({
+    method: 'POST',
+    url: '/api/1.0/authentication/logout',
+    options: {body: {}}
+  }, undefined, 'loginUrlRoot');
+}
 
 export function activateAccount(token: AuthToken) {
   return {

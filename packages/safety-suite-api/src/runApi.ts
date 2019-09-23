@@ -22,7 +22,11 @@ export function runApi<T>(api: Api, authToken?: string): Promise<Response<T>> {
   return runCancellableApi<T>(api, authToken).on.complete;
 }
 
-export function runCancellableApi<T>(api: Api, authToken?: string): Request<T> {
+export function runCancellableApi<T>(
+  api: Api,
+  authToken?: string,
+  urlRoot: 'apiUrlRoot' | 'loginUrlRoot' = 'apiUrlRoot'
+): Request<T> {
   if (!config.initialized) {
     throw new Error(
       'Config was not properly initialized. Please call `initializeConfig` first.'
@@ -53,7 +57,7 @@ export function runCancellableApi<T>(api: Api, authToken?: string): Request<T> {
 
   apiBacklog[apiString] = net.request(
     api.method,
-    `${config['apiUrlRoot']}${api.url}`,
+    `${config[urlRoot]}${api.url}`,
     options
   );
   apiBacklog[apiString].on.complete.finally(() => delete apiBacklog[apiString]);
