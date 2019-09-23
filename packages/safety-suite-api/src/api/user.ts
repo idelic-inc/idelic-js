@@ -1,9 +1,14 @@
+import {runCancellableApi} from "../runApi";
+
 export type User = any;
 
-export const getUser = {
-  method: 'GET',
-  url: '/api/userAccount'
-};
+export function getUser() {
+  return runCancellableApi({
+    method: 'GET',
+    url: '/api/userAccount',
+    options: {body: {}}
+  });
+}
 
 export function saveUser(user: User) {
   return {
@@ -11,4 +16,12 @@ export function saveUser(user: User) {
     url: '/api/userAccount',
     options: {body: user}
   };
+}
+
+export function getCompanies() {
+  return runCancellableApi({
+    method: 'GET',
+    url: '/api/1.0/customers',
+    options: {body: {}}
+  }, undefined, 'loginUrlRoot');
 }
