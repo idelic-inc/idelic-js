@@ -13,40 +13,50 @@ export const getPasswordPolicy = {
   noToken: true
 };
 
-export function register(
-  email: string,
-  password: string
-): Request<string> {
-  return runCancellableApi({
-    method: 'POST',
-    url: '/api/1.0/authentication/register',
-    options: {body: {
-      email,
-      password
-    }}
-  }, undefined, 'loginUrlRoot');
+export function register(email: string, password: string): Request<string> {
+  return runCancellableApi(
+    {
+      method: 'POST',
+      url: '/api/1.0/authentication/register',
+      options: {
+        body: {
+          email,
+          password
+        }
+      }
+    },
+    undefined,
+    'loginUrlRoot'
+  );
 }
 
-export function login(
-  email: string,
-  password: string
-): Request<string> {
-  return runCancellableApi({
-    method: 'POST',
-    url: '/api/1.0/authentication/login',
-    options: {body: {
-      email,
-      password
-    }}
-  }, undefined, 'loginUrlRoot');
+export function login(email: string, password: string): Request<string> {
+  return runCancellableApi(
+    {
+      method: 'POST',
+      url: '/api/1.0/authentication/login',
+      options: {
+        body: {
+          email,
+          password
+        }
+      }
+    },
+    undefined,
+    'loginUrlRoot'
+  );
 }
 
 export function logout(): Request<string> {
-  return runCancellableApi({
-    method: 'POST',
-    url: '/api/1.0/authentication/logout',
-    options: {body: {}}
-  }, undefined, 'loginUrlRoot');
+  return runCancellableApi(
+    {
+      method: 'POST',
+      url: '/api/1.0/authentication/logout',
+      options: {body: {}}
+    },
+    undefined,
+    'loginUrlRoot'
+  );
 }
 
 export function activateAccount(token: AuthToken) {
