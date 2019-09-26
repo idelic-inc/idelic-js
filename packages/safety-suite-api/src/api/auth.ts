@@ -1,5 +1,5 @@
-import {Request, RequestOptions} from 'idelic-safety-net';
-import { runCancellableApi } from '../runApi';
+import {Request} from 'idelic-safety-net';
+import {runCancellableApi} from '../runApi';
 
 export type AuthToken = string;
 export type ChangePassword = any;

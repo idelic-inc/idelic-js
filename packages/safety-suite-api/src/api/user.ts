@@ -5,9 +5,9 @@ export type User = any;
 export function getUser() {
   return runCancellableApi({
     method: 'GET',
-    url: '/api/userAccount',
+    url: '/api/1.0/authentication/user',
     options: {body: {}}
-  });
+  }, undefined, 'loginUrlRoot');
 }
 
 export function saveUser(user: User) {
