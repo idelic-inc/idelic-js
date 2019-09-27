@@ -79,13 +79,15 @@ function setHeader(
   value: any
 ): RequestHeaders {
   if (Array.isArray(headers)) {
-    const header = headers.find(([headerName]) => name === headerName);
-    if (header) {
+    const headerIndex = headers.findIndex(
+      ([headerName]) => name === headerName
+    );
+    if (headerIndex >= 0) {
       const newHeaders = [...headers];
-      newHeaders[newHeaders.indexOf(header) + 1] = value;
+      newHeaders[headerIndex][1] = value;
       return newHeaders;
     }
-    return [...headers, name, value];
+    return [...headers, [name, value]];
   }
   return {
     ...headers,
