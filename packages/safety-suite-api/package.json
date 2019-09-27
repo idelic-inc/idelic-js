@@ -19,6 +19,11 @@
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run format && npm run lint"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/idelic-inc/safety-suite-api.git"
@@ -31,7 +36,13 @@
     "@typescript-eslint/eslint-plugin": "^2.2.0",
     "@typescript-eslint/parser": "^2.2.0",
     "eslint": "^6.3.0",
+    "eslint-config-airbnb-typescript": "^5.0.0",
     "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.14.3",
+    "husky": "^3.0.5",
     "jest": "^24.9.0",
     "prettier": "1.18.2",
     "ts-jest": "^24.0.2",
