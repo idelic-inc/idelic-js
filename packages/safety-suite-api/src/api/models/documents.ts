@@ -36,11 +36,11 @@ export type InputModelDocument = {
 export type ModelDocumentContent = Blob;
 
 export default {
-  ['get']: getModelDocuments,
+  get: getModelDocuments,
   download: downloadModelDocument,
   create: createModelDocument,
   update: updateModelDocument,
-  ['delete']: deleteModelDocument
+  delete: deleteModelDocument
 };
 
 export function getModelDocuments(

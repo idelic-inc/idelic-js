@@ -2,6 +2,7 @@ import {NetError} from 'idelic-safety-net';
 
 export default class ApiError extends Error {
   code?: number;
+
   status: number;
 
   constructor(netError: NetError<any>) {
@@ -18,9 +19,10 @@ export default class ApiError extends Error {
       netError.request.status < 600 &&
       netError.response
     ) {
-      if (typeof netError.response == 'string') {
+      if (typeof netError.response === 'string') {
         return netError.response;
-      } else if (typeof netError.response.message == 'string') {
+      }
+      if (typeof netError.response.message === 'string') {
         return netError.response.message;
       }
     }

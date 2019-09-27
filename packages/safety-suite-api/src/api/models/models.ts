@@ -52,13 +52,12 @@ export function getModels(
       url: '/api/models/get',
       options: {body: query}
     };
-  } else {
-    return {
-      method: 'GET',
-      url: '/api/models',
-      options: {query}
-    };
   }
+  return {
+    method: 'GET',
+    url: '/api/models',
+    options: {query}
+  };
 }
 
 export function getModel(modelId: Id, query: ModelOutputOptions) {

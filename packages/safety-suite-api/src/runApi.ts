@@ -46,8 +46,9 @@ export function runCancellableApi<T>(api: Api, authToken?: string): Request<T> {
   }
 
   if (api.noToken !== true) {
-    authToken = authToken || window.localStorage.getItem('authToken') || '';
-    setHeader(options.headers, 'X-Auth-Token', authToken);
+    const XAuthToken =
+      authToken || window.localStorage.getItem('authToken') || '';
+    setHeader(options.headers, 'X-Auth-Token', XAuthToken);
   }
 
   options.transformers = {
@@ -70,18 +71,22 @@ export function catchError(error: ApiError): void {
     );
   }
 
-  error.status === 401 ? config.onAuthError(error) : console.error(error);
+  if (error.status === 401) {
+    config.onAuthError(error);
+  } else {
+    console.error(error);
+  }
 }
 
 function setHeader(headers: RequestHeaders, name: string, value: any): void {
   if (Array.isArray(headers)) {
-    const header = headers.find(([headerName]) => name == headerName);
+    const header = headers.find(([headerName]) => name === headerName);
     if (header) {
-      header[1] = value;
+      header[1] = value; // eslint-disable-line
     } else {
       headers.push([name, value]);
     }
   } else {
-    headers[name] = value;
+    headers[name] = value; // eslint-disable-line
   }
 }

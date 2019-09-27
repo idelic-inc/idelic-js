@@ -4,19 +4,34 @@
     "commonjs": true
   },
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "prettier"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier",
-    "prettier/@typescript-eslint"
+    "prettier/@typescript-eslint",
+    "airbnb-typescript"
   ],
   "rules": {
     "@typescript-eslint/prefer-interface": "off",
     "@typescript-eslint/no-use-before-define": ["error", "nofunc"],
     "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/no-explicit-any": "off"
+    "@typescript-eslint/no-explicit-any": "off",
+    "object-curly-spacing": "off",
+    "comma-dangle": "off",
+    "react/prop-types": "off",
+    "import/no-cycle": "off",
+    "no-underscore-dangle": "off",
+    "import/prefer-default-export": "off",
+    "prettier/prettier": "error",
+    "operator-linebreak": "off",
+    "func-names": "off",
+    "generator-star-spacing": "off",
+    "@typescript-eslint/no-empty-interface": "off",
+    "object-curly-newline": "off",
+    "no-console": ["warn", {"allow": ["warn", "error"]}],
+    "import/no-mutable-exports": "off"
   },
   "overrides": [
     {
@@ -28,4 +43,3 @@
     }
   ]
 }
-
