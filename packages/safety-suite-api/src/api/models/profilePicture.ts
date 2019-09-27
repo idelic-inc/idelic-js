@@ -10,7 +10,7 @@ export type CropData = {
 export function getProfilePicture(modelId: Id) {
   return {
     method: 'GET',
-    url: `/api/models/${modelId}/profilePicture`
+    route: `/api/models/${modelId}/profilePicture`
   };
 }
 
@@ -28,7 +28,7 @@ export function uploadProfilePicture(
 
   return {
     method: 'POST',
-    url: `/api/models/${modelId}/profilePicture`,
+    route: `/api/models/${modelId}/profilePicture`,
     notJson: true,
     options: {body: form}
   };

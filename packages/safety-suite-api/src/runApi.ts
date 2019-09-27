@@ -1,9 +1,4 @@
-import net, {
-  Response,
-  Request,
-  RequestHeaders,
-  RequestOptions
-} from 'idelic-safety-net';
+import net, {Request, RequestHeaders, RequestOptions} from 'idelic-safety-net';
 
 import {config} from './config';
 import ApiError from './error';
@@ -21,18 +16,14 @@ export interface Api {
 
 const apiBacklog: Record<string, Request<any>> = {};
 
-export function runApi<T>(api: Api, authToken?: string): Promise<Response<T>> {
-  return runCancellableApi<T>(api, authToken).on.complete;
-}
-
-export function runCancellableApi<T>(api: Api, authToken?: string): Request<T> {
+export function runApi<T>(api: Api, authToken?: string): Request<T> {
   if (!config.initialized) {
     throw new Error(
       'Config was not properly initialized. Please call `initializeConfig` first.'
     );
   }
 
-  const options = api.options || {};
+  const options = {...api.options} || {};
 
   const apiString = JSON.stringify(api);
   if (typeof apiBacklog[apiString] !== 'undefined') {
@@ -42,13 +33,17 @@ export function runCancellableApi<T>(api: Api, authToken?: string): Request<T> {
   options.headers = options.headers || {};
 
   if (api.notJson !== true) {
-    setHeader(options.headers, 'Content-Type', 'application/json');
+    options.headers = setHeader(
+      options.headers,
+      'Content-Type',
+      'application/json'
+    );
   }
 
   if (api.noToken !== true) {
     const XAuthToken =
       authToken || window.localStorage.getItem('authToken') || '';
-    setHeader(options.headers, 'X-Auth-Token', XAuthToken);
+    options.headers = setHeader(options.headers, 'X-Auth-Token', XAuthToken);
   }
 
   options.transformers = {
@@ -78,15 +73,22 @@ export function catchError(error: ApiError): void {
   }
 }
 
-function setHeader(headers: RequestHeaders, name: string, value: any): void {
+function setHeader(
+  headers: RequestHeaders,
+  name: string,
+  value: any
+): RequestHeaders {
   if (Array.isArray(headers)) {
     const header = headers.find(([headerName]) => name === headerName);
     if (header) {
-      header[1] = value; // eslint-disable-line
-    } else {
-      headers.push([name, value]);
+      const newHeaders = [...headers];
+      newHeaders[newHeaders.indexOf(header) + 1] = value;
+      return newHeaders;
     }
-  } else {
-    headers[name] = value; // eslint-disable-line
+    return [...headers, name, value];
   }
+  return {
+    ...headers,
+    [name]: value
+  };
 }

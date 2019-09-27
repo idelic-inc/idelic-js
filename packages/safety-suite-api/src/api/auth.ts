@@ -1,5 +1,5 @@
 import {Request} from 'idelic-safety-net';
-import {runCancellableApi} from '../runApi';
+import {runApi} from '../runApi';
 
 export type AuthToken = string;
 export type ChangePassword = any;
@@ -9,7 +9,7 @@ export type UnlockAccountRequest = any;
 
 export const getPasswordPolicy = {
   method: 'GET',
-  url: '/api/customer/passwordPolicy',
+  route: '/api/customer/passwordPolicy',
   noToken: true
 };
 
@@ -17,8 +17,8 @@ export function register(
   email: string,
   password: string,
   confirmPassword: string
-): Request<string> {
-  return runCancellableApi({
+): Request<{}> {
+  return runApi({
     method: 'POST',
     urlRoot: 'loginUrlRoot',
     route: '/api/1.0/authentication/register',
@@ -32,8 +32,8 @@ export function register(
   });
 }
 
-export function login(email: string, password: string): Request<string> {
-  return runCancellableApi({
+export function login(email: string, password: string): Request<{}> {
+  return runApi({
     method: 'POST',
     urlRoot: 'loginUrlRoot',
     route: '/api/1.0/authentication/login',
@@ -46,8 +46,8 @@ export function login(email: string, password: string): Request<string> {
   });
 }
 
-export function logout(): Request<string> {
-  return runCancellableApi({
+export function logout(): Request<{}> {
+  return runApi({
     method: 'POST',
     urlRoot: 'loginUrlRoot',
     route: '/api/1.0/authentication/logout',
@@ -58,7 +58,7 @@ export function logout(): Request<string> {
 export function activateAccount(token: AuthToken) {
   return {
     method: 'POST',
-    url: '/api/account/activate',
+    route: '/api/account/activate',
     options: {
       body: {},
       query: [['token', token]]
@@ -69,7 +69,7 @@ export function activateAccount(token: AuthToken) {
 export function requestPasswordReset(body: PasswordResetRequest) {
   return {
     method: 'POST',
-    url: '/api/password/forgot',
+    route: '/api/password/forgot',
     options: {body}
   };
 }
@@ -77,7 +77,7 @@ export function requestPasswordReset(body: PasswordResetRequest) {
 export function requestUnlockAccount(body: UnlockAccountRequest) {
   return {
     method: 'POST',
-    url: '/api/account/unlock/send',
+    route: '/api/account/unlock/send',
     options: {body}
   };
 }
@@ -85,7 +85,7 @@ export function requestUnlockAccount(body: UnlockAccountRequest) {
 export function resetPassword(body: PasswordReset) {
   return {
     method: 'POST',
-    url: '/api/password/reset',
+    route: '/api/password/reset',
     options: {body}
   };
 }
@@ -93,7 +93,7 @@ export function resetPassword(body: PasswordReset) {
 export function changePassword(body: ChangePassword) {
   return {
     method: 'POST',
-    url: '/api/password/change',
+    route: '/api/password/change',
     options: {body}
   };
 }
@@ -101,7 +101,7 @@ export function changePassword(body: ChangePassword) {
 export function unlockAccount(token: AuthToken) {
   return {
     method: 'POST',
-    url: '/api/account/unlock',
+    route: '/api/account/unlock',
     options: {
       body: {},
       query: [['token', token]]

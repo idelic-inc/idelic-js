@@ -38,7 +38,7 @@ export type ModelOutputOptions = {
 export function getModelsCount(query: ModelFilterOptions) {
   return {
     method: 'GET',
-    url: '/api/models/count',
+    route: '/api/models/count',
     options: {query}
   };
 }
@@ -49,13 +49,13 @@ export function getModels(
   if (query.ids || query.orderBy) {
     return {
       method: 'POST',
-      url: '/api/models/get',
+      route: '/api/models/get',
       options: {body: query}
     };
   }
   return {
     method: 'GET',
-    url: '/api/models',
+    route: '/api/models',
     options: {query}
   };
 }
@@ -63,7 +63,7 @@ export function getModels(
 export function getModel(modelId: Id, query: ModelOutputOptions) {
   return {
     method: 'GET',
-    url: `/api/models/${modelId}`,
+    route: `/api/models/${modelId}`,
     options: {query}
   };
 }
@@ -71,7 +71,7 @@ export function getModel(modelId: Id, query: ModelOutputOptions) {
 export function createModel(body: InputModel, query: ModelOutputOptions) {
   return {
     method: 'POST',
-    url: '/api/models',
+    route: '/api/models',
     options: {
       body,
       query
@@ -82,7 +82,7 @@ export function createModel(body: InputModel, query: ModelOutputOptions) {
 export function updateModel(body: Model, query: ModelOutputOptions) {
   return {
     method: 'PUT',
-    url: '/api/models',
+    route: '/api/models',
     options: {
       body,
       query
@@ -93,31 +93,31 @@ export function updateModel(body: Model, query: ModelOutputOptions) {
 export function deleteModel(modelId: Id) {
   return {
     method: 'DELETE',
-    url: `/api/models/${modelId}`
+    route: `/api/models/${modelId}`
   };
 }
 
 export const getModelTemplates = {
   method: 'GET',
-  url: '/api/modelTemplate'
+  route: '/api/modelTemplate'
 };
 
 export const getModelGroups = {
   method: 'GET',
-  url: '/api/models/groups'
+  route: '/api/models/groups'
 };
 
 export function getHistory(modelId: Id) {
   return {
     method: 'GET',
-    url: `/api/model/${modelId}/histories`
+    route: `/api/model/${modelId}/histories`
   };
 }
 
 export function recomputeModels(filterOptions: ModelFilterOptions) {
   return {
     method: 'POST',
-    url: '/api/models/recompute',
+    route: '/api/models/recompute',
     options: {body: filterOptions}
   };
 }

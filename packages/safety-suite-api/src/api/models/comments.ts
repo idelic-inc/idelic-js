@@ -4,7 +4,7 @@ export type Comment = any;
 
 export const createModelComment = (modelId: Id, comment: Comment) => ({
   method: 'POST',
-  url: `/api/models/${modelId}/comments`,
+  route: `/api/models/${modelId}/comments`,
   options: {
     body: comment
   }
@@ -12,5 +12,5 @@ export const createModelComment = (modelId: Id, comment: Comment) => ({
 
 export const deleteModelComment = (commentId: Id) => ({
   method: 'DELETE',
-  url: `/api/models/comments/${commentId}`
+  route: `/api/models/comments/${commentId}`
 });

@@ -3,7 +3,7 @@ import {Id} from '../baseTypes';
 export function getProData(proNumber: string) {
   return {
     method: 'GET',
-    url: '/api/integrations/proData',
+    route: '/api/integrations/proData',
     options: {
       query: {proNumber}
     }
@@ -13,7 +13,7 @@ export function getProData(proNumber: string) {
 export function getCustomerStore(id: Id) {
   return {
     method: 'GET',
-    url: '/api/integrations/customerStore',
+    route: '/api/integrations/customerStore',
     options: {
       query: {id}
     }

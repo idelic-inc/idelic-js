@@ -58,7 +58,7 @@ export type IxfModelGroup = {
 export function importData(data: Ixf) {
   return {
     method: 'POST',
-    url: '/api/imports',
+    route: '/api/imports',
     options: {body: data}
   };
 }
@@ -66,7 +66,7 @@ export function importData(data: Ixf) {
 export function importEnums(enums: IxfEnum[]) {
   return {
     method: 'POST',
-    url: '/api/imports/enums',
+    route: '/api/imports/enums',
     options: {body: enums}
   };
 }
@@ -74,7 +74,7 @@ export function importEnums(enums: IxfEnum[]) {
 export function importEnumValues(enumValues: IxfEnumValue[]) {
   return {
     method: 'POST',
-    url: '/api/imports/enumValues',
+    route: '/api/imports/enumValues',
     options: {body: enumValues}
   };
 }
@@ -82,7 +82,7 @@ export function importEnumValues(enumValues: IxfEnumValue[]) {
 export function importModelGroups(modelGroups: IxfModelGroup[]) {
   return {
     method: 'POST',
-    url: '/api/imports/modelGroups',
+    route: '/api/imports/modelGroups',
     options: {body: modelGroups}
   };
 }
@@ -90,7 +90,7 @@ export function importModelGroups(modelGroups: IxfModelGroup[]) {
 export function importModels(models: IxfModel[]) {
   return {
     method: 'POST',
-    url: '/api/imports/models',
+    route: '/api/imports/models',
     options: {body: models}
   };
 }
@@ -98,7 +98,7 @@ export function importModels(models: IxfModel[]) {
 export function importDocuments(documents: IxfDocument[]) {
   return {
     method: 'POST',
-    url: '/api/imports/documents',
+    route: '/api/imports/documents',
     options: {body: documents}
   };
 }

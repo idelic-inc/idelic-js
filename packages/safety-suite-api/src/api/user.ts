@@ -1,5 +1,5 @@
 import {Request} from 'idelic-safety-net';
-import {runCancellableApi} from '../runApi';
+import {runApi} from '../runApi';
 
 export interface User {
   id: number;
@@ -20,7 +20,7 @@ export interface Company {
 }
 
 export function getUser(): Request<User> {
-  return runCancellableApi({
+  return runApi({
     method: 'GET',
     urlRoot: 'loginUrlRoot',
     route: '/api/1.0/authentication/user',
@@ -31,13 +31,13 @@ export function getUser(): Request<User> {
 export function saveUser(user: User) {
   return {
     method: 'PUT',
-    url: '/api/userAccount',
+    route: '/api/userAccount',
     options: {body: user}
   };
 }
 
 export function getCompanies(): Request<Company[]> {
-  return runCancellableApi({
+  return runApi({
     method: 'GET',
     urlRoot: 'loginUrlRoot',
     route: '/api/1.0/customers',

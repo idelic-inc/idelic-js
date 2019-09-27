@@ -6,13 +6,13 @@ export type Role = any;
 
 export const getAccounts = {
   method: 'GET',
-  url: '/api/admin/userAccount'
+  route: '/api/admin/userAccount'
 };
 
 export function inviteUser(email: string) {
   return {
     method: 'POST',
-    url: '/api/admin/userAccount',
+    route: '/api/admin/userAccount',
     options: {
       body: {email}
     }
@@ -22,20 +22,20 @@ export function inviteUser(email: string) {
 export function updateAccount(account: Account) {
   return {
     method: 'PUT',
-    url: '/api/admin/userAccount',
+    route: '/api/admin/userAccount',
     options: {body: account}
   };
 }
 
 export const getRoles = {
   method: 'GET',
-  url: '/api/admin/userRole'
+  route: '/api/admin/userRole'
 };
 
 export function createRole(name: string) {
   return {
     method: 'POST',
-    url: '/api/userRole',
+    route: '/api/userRole',
     options: {
       body: {
         id: -1,
@@ -53,7 +53,7 @@ export function createRole(name: string) {
 export function updateRole(role: Role) {
   return {
     method: 'PUT',
-    url: '/api/userRole',
+    route: '/api/userRole',
     options: {body: role}
   };
 }
@@ -61,14 +61,14 @@ export function updateRole(role: Role) {
 export function getAccountRoles(accountId: Id) {
   return {
     method: 'GET',
-    url: `/api/userAccount/${accountId}/role`
+    route: `/api/userAccount/${accountId}/role`
   };
 }
 
 export function addAccountRole(accountId: Id, roleId: Id) {
   return {
     method: 'POST',
-    url: '/api/userAccountRole',
+    route: '/api/userAccountRole',
     options: {
       body: {
         id: -1,
@@ -85,14 +85,14 @@ export function addAccountRole(accountId: Id, roleId: Id) {
 export function removeAccountRole(accountRoleId: Id) {
   return {
     method: 'DELETE',
-    url: `/api/userAccountRole/${accountRoleId}`
+    route: `/api/userAccountRole/${accountRoleId}`
   };
 }
 
 export function getRolePermissions(roleId: Id) {
   return {
     method: 'GET',
-    url: `/api/userRole/${roleId}/permission?objectType=model_group`
+    route: `/api/userRole/${roleId}/permission?objectType=model_group`
   };
 }
 
@@ -103,7 +103,7 @@ export function addRolePermission(
 ) {
   return {
     method: 'POST',
-    url: '/api/userRolePermission',
+    route: '/api/userRolePermission',
     options: {
       body: {
         id: -1,
@@ -118,6 +118,6 @@ export function addRolePermission(
 export function removeRolePermission(permissionId: Id) {
   return {
     method: 'DELETE',
-    url: `/api/userRolePermission/${permissionId}`
+    route: `/api/userRolePermission/${permissionId}`
   };
 }

@@ -2,7 +2,7 @@ import {Request, RequestOptions} from 'idelic-safety-net';
 import {Set} from 'immutable';
 import {Moment} from 'moment';
 
-import {runCancellableApi} from '../../runApi';
+import {runApi} from '../../runApi';
 
 export type ModelDocumentType = 'DOCUMENT' | 'PROFILE_PICTURE';
 export type ModelDocumentStorageType = 'DATABASE' | 'LOCAL_FILESYSTEM' | 'AWS';
@@ -47,7 +47,7 @@ export function getModelDocuments(
   modelId: number,
   options: RequestOptions
 ): Request<ModelDocument[]> {
-  return runCancellableApi({
+  return runApi({
     method: 'GET',
     route: `/api/models/${modelId}/documents`,
     options
@@ -58,7 +58,7 @@ export function downloadModelDocument(
   documentId: number,
   options: RequestOptions
 ): Request<ModelDocumentContent> {
-  return runCancellableApi({
+  return runApi({
     method: 'GET',
     route: `/api/models/documents/${documentId}/content`,
     options: {
@@ -81,7 +81,7 @@ export function createModelDocument(
   form.append('protected', input.protected.toString());
   form.append('archived', input.archived.toString());
 
-  return runCancellableApi({
+  return runApi({
     method: 'POST',
     route: `/api/models/${modelId}/documents`,
     notJson: true,
@@ -96,7 +96,7 @@ export function updateModelDocument(
   document: ModelDocument,
   options: RequestOptions
 ): Request<ModelDocument> {
-  return runCancellableApi({
+  return runApi({
     method: 'PUT',
     route: '/api/models/documents',
     options: {
@@ -110,7 +110,7 @@ export function deleteModelDocument(
   document: ModelDocument,
   options: RequestOptions
 ): Request<number> {
-  return runCancellableApi({
+  return runApi({
     method: 'DELETE',
     route: `/api/models/documents/${document.id}`,
     options

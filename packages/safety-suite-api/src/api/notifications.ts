@@ -5,12 +5,12 @@ export type NotificationSourceType = string;
 
 export const getNotificationsTypes = {
   method: 'GET',
-  url: '/api/notifications/types'
+  route: '/api/notifications/types'
 };
 
 export const getSubscriptions = {
   method: 'GET',
-  url: '/api/notifications/subscriptions'
+  route: '/api/notifications/subscriptions'
 };
 
 export function createSubscription(
@@ -21,7 +21,7 @@ export function createSubscription(
 ) {
   return {
     method: 'POST',
-    url: '/api/notifications/subscriptions/',
+    route: '/api/notifications/subscriptions/',
     options: {
       body: {
         notificationTypeId,
@@ -43,7 +43,7 @@ export function updateSubscription(
 ) {
   return {
     method: 'PUT',
-    url: '/api/notifications/subscriptions/',
+    route: '/api/notifications/subscriptions/',
     options: {
       body: {
         id,
@@ -60,6 +60,6 @@ export function updateSubscription(
 export function removeSubscription(subscriptionId: Id) {
   return {
     method: 'DELETE',
-    url: `/api/notifications/subscriptions/${subscriptionId}`
+    route: `/api/notifications/subscriptions/${subscriptionId}`
   };
 }
