@@ -8,9 +8,12 @@ import net, {
 import {config} from './config';
 import ApiError from './error';
 
+export type HTTPMethod = 'POST' | 'GET' | 'PUT' | 'PATCH' | 'DELETE';
+
 export interface Api {
-  method: string;
-  url: string;
+  method: HTTPMethod;
+  urlRoot?: 'apiUrlRoot' | 'loginUrlRoot';
+  route: string;
   notJson?: boolean;
   noToken?: boolean;
   options: RequestOptions;
@@ -22,11 +25,7 @@ export function runApi<T>(api: Api, authToken?: string): Promise<Response<T>> {
   return runCancellableApi<T>(api, authToken).on.complete;
 }
 
-export function runCancellableApi<T>(
-  api: Api,
-  authToken?: string,
-  urlRoot: 'apiUrlRoot' | 'loginUrlRoot' = 'apiUrlRoot'
-): Request<T> {
+export function runCancellableApi<T>(api: Api, authToken?: string): Request<T> {
   if (!config.initialized) {
     throw new Error(
       'Config was not properly initialized. Please call `initializeConfig` first.'
@@ -57,7 +56,7 @@ export function runCancellableApi<T>(
 
   apiBacklog[apiString] = net.request(
     api.method,
-    `${config[urlRoot]}${api.url}`,
+    `${config[api.urlRoot || 'apiUrlRoot']}${api.route}`,
     options
   );
   apiBacklog[apiString].on.complete.finally(() => delete apiBacklog[apiString]);

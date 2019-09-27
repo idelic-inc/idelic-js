@@ -3,15 +3,12 @@ import {runCancellableApi} from '../runApi';
 export type User = any;
 
 export function getUser() {
-  return runCancellableApi(
-    {
-      method: 'GET',
-      url: '/api/1.0/authentication/user',
-      options: {body: {}}
-    },
-    undefined,
-    'loginUrlRoot'
-  );
+  return runCancellableApi({
+    method: 'GET',
+    urlRoot: 'loginUrlRoot',
+    route: '/api/1.0/authentication/user',
+    options: {body: {}}
+  });
 }
 
 export function saveUser(user: User) {
@@ -23,13 +20,10 @@ export function saveUser(user: User) {
 }
 
 export function getCompanies() {
-  return runCancellableApi(
-    {
-      method: 'GET',
-      url: '/api/1.0/customers',
-      options: {body: {}}
-    },
-    undefined,
-    'loginUrlRoot'
-  );
+  return runCancellableApi({
+    method: 'GET',
+    urlRoot: 'loginUrlRoot',
+    route: '/api/1.0/customers',
+    options: {body: {}}
+  });
 }

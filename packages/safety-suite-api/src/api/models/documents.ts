@@ -49,7 +49,7 @@ export function getModelDocuments(
 ): Request<ModelDocument[]> {
   return runCancellableApi({
     method: 'GET',
-    url: `/api/models/${modelId}/documents`,
+    route: `/api/models/${modelId}/documents`,
     options
   });
 }
@@ -60,7 +60,7 @@ export function downloadModelDocument(
 ): Request<ModelDocumentContent> {
   return runCancellableApi({
     method: 'GET',
-    url: `/api/models/documents/${documentId}/content`,
+    route: `/api/models/documents/${documentId}/content`,
     options: {
       responseType: 'blob',
       ...options
@@ -83,7 +83,7 @@ export function createModelDocument(
 
   return runCancellableApi({
     method: 'POST',
-    url: `/api/models/${modelId}/documents`,
+    route: `/api/models/${modelId}/documents`,
     notJson: true,
     options: {
       body: form,
@@ -98,7 +98,7 @@ export function updateModelDocument(
 ): Request<ModelDocument> {
   return runCancellableApi({
     method: 'PUT',
-    url: '/api/models/documents',
+    route: '/api/models/documents',
     options: {
       body: document,
       ...options
@@ -112,7 +112,7 @@ export function deleteModelDocument(
 ): Request<number> {
   return runCancellableApi({
     method: 'DELETE',
-    url: `/api/models/documents/${document.id}`,
+    route: `/api/models/documents/${document.id}`,
     options
   });
 }
