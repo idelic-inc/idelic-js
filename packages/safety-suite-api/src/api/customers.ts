@@ -1,9 +1,12 @@
-import {Request, RequestOptions} from 'idelic-safety-net';
+import {Request} from 'idelic-safety-net';
 import {List, Record} from 'immutable';
 
-import {Alias, Id} from '../baseTypes';
+import {Alias, ApiOptions, Id} from '../types';
 import {runApi} from '../runApi';
-import {createListTransformers, createTransformers} from '../utils';
+import {
+  createRecordListResponseTransformer,
+  createRecordResponseTransformer
+} from '../utils';
 
 export type CustomerStatus =
   | 'DEV'
@@ -27,37 +30,43 @@ export const CustomerRecord = Record<Customer>({
   status: 'DEV'
 });
 
-export function get(options: RequestOptions<Customer[]>): Request<Customer[]>;
-export function get(
-  options: RequestOptions<List<Record<Customer>>>
-): Request<List<Record<Customer>>>;
-export function get(options: RequestOptions<any>): Request<any> {
-  const transformers = createListTransformers<Customer>(CustomerRecord);
+export function get(apiOptions: ApiOptions): Request<Customer[]>;
+export function get(apiOptions: ApiOptions): Request<List<Record<Customer>>>;
+export function get(apiOptions: ApiOptions): Request<any> {
+  const transformers = createRecordListResponseTransformer<Customer>(
+    apiOptions.useImmutable,
+    CustomerRecord
+  );
   return runApi({
     method: 'GET',
     urlRoot: 'loginUrlRoot',
     route: '/api/1.0/customers',
-    options: {transformers, ...options}
+    apiOptions,
+    requestOptions: {transformers}
   });
 }
 
 export function getByAlias(
   alias: Alias,
-  options: RequestOptions<Customer>
+  apiOptions: ApiOptions
 ): Request<Customer>;
 export function getByAlias(
   alias: Alias,
-  options: RequestOptions<Record<Customer>>
+  apiOptions: ApiOptions
 ): Request<Record<Customer>>;
 export function getByAlias(
   alias: Alias,
-  options: RequestOptions<any> = {}
+  apiOptions: ApiOptions = {}
 ): Request<any> {
-  const transformers = createTransformers<Customer>(CustomerRecord);
+  const transformers = createRecordResponseTransformer<Customer>(
+    apiOptions.useImmutable,
+    CustomerRecord
+  );
   return runApi({
     method: 'GET',
     urlRoot: 'loginUrlRoot',
     route: `/api/1.0/customers/${alias}`,
-    options: {transformers, ...options}
+    apiOptions,
+    requestOptions: {transformers}
   });
 }

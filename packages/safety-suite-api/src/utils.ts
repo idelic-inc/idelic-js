@@ -1,47 +1,59 @@
 import {List, Record} from 'immutable';
 
-export type ApiTransformers<T> = {
-  request?: (data: Record<T>) => T;
-  response?: (data: T) => Record<T>;
-};
-
-export type ListApiTransformers<T> = {
-  request?: (data: List<Record<T>>) => T[];
-  response?: (data: T[]) => List<Record<T>>;
-};
-
-export function createTransformers<T>(
-  Factory?: Record.Factory<T>,
-  requestBody?: T | Record<T>
-): ApiTransformers<T> {
-  const isImmtuable = Record.isRecord(requestBody);
+export function createRecordTransformers<R, T>(
+  useImmutable: boolean | undefined,
+  Factory: Record.Factory<T>
+) {
   return {
-    request:
-      requestBody === undefined || !isImmtuable
-        ? undefined
-        : (data: Record<T>) => data.toJS(),
-
-    response:
-      Factory === undefined || !isImmtuable
-        ? undefined
-        : (data: T) => Factory(data)
+    ...createRecordRequestTransformer<R>(useImmutable),
+    ...createRecordResponseTransformer<T>(useImmutable, Factory)
   };
 }
 
-export function createListTransformers<T>(
-  Factory?: Record.Factory<T>,
-  requestBody?: T[] | List<Record<T>>
-): ListApiTransformers<T> {
-  const isImmutable = List.isList(requestBody);
-  return {
-    request:
-      requestBody === undefined || !isImmutable
-        ? undefined
-        : (data: List<Record<T>>) => data.toJS() as T[],
+export function createRecordRequestTransformer<R>(
+  useImmutable: boolean | undefined
+) {
+  if (useImmutable) {
+    return {request: (data: Record<R>) => data.toJS()};
+  }
+  return {};
+}
 
-    response:
-      Factory === undefined || !isImmutable
-        ? undefined
-        : (data: T[]) => List(data).map(Factory)
+export function createRecordResponseTransformer<T>(
+  useImmutable: boolean | undefined,
+  Factory: Record.Factory<T>
+) {
+  if (useImmutable) {
+    return {response: (data: T) => Factory(data)};
+  }
+  return {};
+}
+
+export function createRecordsListTransformers<R, T>(
+  useImmutable: boolean | undefined,
+  Factory: Record.Factory<T>
+) {
+  return {
+    ...createRecordListRequestTransformer<R>(useImmutable),
+    ...createRecordListResponseTransformer<T>(useImmutable, Factory)
   };
+}
+
+export function createRecordListRequestTransformer<R>(
+  useImmutable: boolean | undefined
+) {
+  if (useImmutable) {
+    return {request: (data: List<Record<R>>) => data.toJS()};
+  }
+  return {};
+}
+
+export function createRecordListResponseTransformer<T>(
+  useImmutable: boolean | undefined,
+  Factory: Record.Factory<T>
+) {
+  if (useImmutable) {
+    return {response: (data: T[]) => List(data).map(Factory)};
+  }
+  return {};
 }

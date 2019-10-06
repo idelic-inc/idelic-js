@@ -1,4 +1,5 @@
-import {Alias, Id} from '../../baseTypes';
+import {Alias, Id} from '../../types';
+import {LegacyApi} from '../types';
 
 export type InputModel = any;
 export type Model = any;
@@ -35,89 +36,92 @@ export type ModelOutputOptions = {
   users?: boolean;
 };
 
-export function getModelsCount(query: ModelFilterOptions) {
+export function getModelsCount(query: ModelFilterOptions): LegacyApi {
   return {
     method: 'GET',
     route: '/api/models/count',
-    options: {query}
+    requestOptions: {query}
   };
 }
 
 export function getModels(
   query: ModelFilterOptions & ModelListOptions & ModelOutputOptions
-) {
+): LegacyApi {
   if (query.ids || query.orderBy) {
     return {
       method: 'POST',
       route: '/api/models/get',
-      options: {body: query}
+      requestOptions: {body: query}
     };
   }
   return {
     method: 'GET',
     route: '/api/models',
-    options: {query}
+    requestOptions: {query}
   };
 }
 
-export function getModel(modelId: Id, query: ModelOutputOptions) {
+export function getModel(modelId: Id, query: ModelOutputOptions): LegacyApi {
   return {
     method: 'GET',
     route: `/api/models/${modelId}`,
-    options: {query}
+    requestOptions: {query}
   };
 }
 
-export function createModel(body: InputModel, query: ModelOutputOptions) {
+export function createModel(
+  body: InputModel,
+  query: ModelOutputOptions
+): LegacyApi {
   return {
     method: 'POST',
     route: '/api/models',
-    options: {
+    requestOptions: {
       body,
       query
     }
   };
 }
 
-export function updateModel(body: Model, query: ModelOutputOptions) {
+export function updateModel(body: Model, query: ModelOutputOptions): LegacyApi {
   return {
     method: 'PUT',
     route: '/api/models',
-    options: {
+    requestOptions: {
       body,
       query
     }
   };
 }
 
-export function deleteModel(modelId: Id) {
+export function deleteModel(modelId: Id): LegacyApi {
   return {
     method: 'DELETE',
     route: `/api/models/${modelId}`
   };
 }
 
-export const getModelTemplates = {
+export const getModelTemplates: LegacyApi = {
   method: 'GET',
   route: '/api/modelTemplate'
 };
 
-export const getModelGroups = {
+export const getModelGroups: LegacyApi = {
   method: 'GET',
   route: '/api/models/groups'
 };
 
-export function getHistory(modelId: Id) {
+export function getHistory(modelId: Id): LegacyApi {
   return {
     method: 'GET',
     route: `/api/model/${modelId}/histories`
   };
 }
 
-export function recomputeModels(filterOptions: ModelFilterOptions) {
+export function recomputeModels(filterOptions: ModelFilterOptions): LegacyApi {
   return {
     method: 'POST',
     route: '/api/models/recompute',
-    options: {body: filterOptions}
+    requestOptions: {body: filterOptions}
   };
 }

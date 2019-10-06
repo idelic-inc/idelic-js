@@ -1,4 +1,5 @@
-import {Id} from '../../baseTypes';
+import {Id} from '../../types';
+import {LegacyApi} from '../types';
 
 export type CropData = {
   x: number;
@@ -7,7 +8,7 @@ export type CropData = {
   height: number;
 };
 
-export function getProfilePicture(modelId: Id) {
+export function getProfilePicture(modelId: Id): LegacyApi {
   return {
     method: 'GET',
     route: `/api/models/${modelId}/profilePicture`
@@ -18,7 +19,7 @@ export function uploadProfilePicture(
   modelId: Id,
   profilePicture: File,
   cropData: CropData
-) {
+): LegacyApi {
   const form = new FormData();
   form.append('file', profilePicture);
   form.append('x', cropData.x.toString());
@@ -30,6 +31,6 @@ export function uploadProfilePicture(
     method: 'POST',
     route: `/api/models/${modelId}/profilePicture`,
     notJson: true,
-    options: {body: form}
+    requestOptions: {body: form}
   };
 }

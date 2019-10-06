@@ -1,20 +1,21 @@
-import {Id} from '../baseTypes';
+import {Id} from '../types';
+import {LegacyApi} from './types';
 
-export function getProData(proNumber: string) {
+export function getProData(proNumber: string): LegacyApi {
   return {
     method: 'GET',
     route: '/api/integrations/proData',
-    options: {
+    requestOptions: {
       query: {proNumber}
     }
   };
 }
 
-export function getCustomerStore(id: Id) {
+export function getCustomerStore(id: Id): LegacyApi {
   return {
     method: 'GET',
     route: '/api/integrations/customerStore',
-    options: {
+    requestOptions: {
       query: {id}
     }
   };

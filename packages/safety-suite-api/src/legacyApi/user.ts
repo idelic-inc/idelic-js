@@ -1,9 +1,11 @@
+import {LegacyApi} from './types';
+
 export type UserAccount = any;
 
-export function save(user: UserAccount) {
+export function save(user: UserAccount): LegacyApi {
   return {
     method: 'PUT',
     route: '/api/userAccount',
-    options: {body: user}
+    requestOptions: {body: user}
   };
 }

@@ -1,16 +1,19 @@
 import momentTimezone from 'moment-timezone';
 
-import {Id} from '../baseTypes';
+import {Id} from '../types';
+import {LegacyApi} from './types';
 
-export function getCorrectiveActionLetterParams(correctiveActionId: Id) {
+export function getCorrectiveActionLetterParams(
+  correctiveActionId: Id
+): LegacyApi {
   return {
     method: 'GET',
     route: `/api/letters/correctiveActions/${correctiveActionId}?timezone=${momentTimezone.tz.guess()}`,
-    options: {responseType: 'text'}
+    requestOptions: {responseType: 'text'}
   };
 }
 
-export const getPasswordPolicy = {
+export const getPasswordPolicy: LegacyApi = {
   method: 'GET',
   route: '/api/customer/passwordPolicy',
   noToken: true

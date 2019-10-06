@@ -1,9 +1,13 @@
-import {Request, RequestOptions} from 'idelic-safety-net';
+import {Request} from 'idelic-safety-net';
 import {Record} from 'immutable';
 
-import {EmptyResponse} from '../baseTypes';
+import {ApiOptions, EmptyResponse} from '../types';
 import {runApi} from '../runApi';
-import {createTransformers} from '../utils';
+import {
+  createRecordTransformers,
+  createRecordRequestTransformer,
+  createRecordResponseTransformer
+} from '../utils';
 
 export interface InputUser {
   email: string;
@@ -71,154 +75,156 @@ export const ResetPasswordRecord = Record<ResetPassword>({
 
 export function createUser(
   user: InputUser,
-  options: RequestOptions<User>
+  apiOptions: ApiOptions
 ): Request<User>;
 export function createUser(
   user: Record<InputUser>,
-  options: RequestOptions<Record<User>>
+  apiOptions: ApiOptions
 ): Request<Record<User>>;
 export function createUser(
   user: any,
-  options: RequestOptions<any> = {}
+  apiOptions: ApiOptions = {}
 ): Request<any> {
-  const transformers = createTransformers<User>(UserRecord, user);
+  const transformers = createRecordTransformers<InputUser, User>(
+    apiOptions.useImmutable,
+    UserRecord
+  );
   return runApi({
     method: 'POST',
     urlRoot: 'loginUrlRoot',
     route: '/api/1.0/authentication/user',
-    options: {
-      transformers,
+    apiOptions,
+    requestOptions: {
       body: user,
-      ...options
+      transformers
     }
   });
 }
 
-export function getUser(options: RequestOptions<User>): Request<User>;
-export function getUser(
-  options: RequestOptions<Record<User>>
-): Request<Record<User>>;
-export function getUser(options: RequestOptions<any> = {}): Request<any> {
-  const transformers = createTransformers<User>(UserRecord);
+export function getUser(apiOptions: ApiOptions): Request<User>;
+export function getUser(apiOptions: ApiOptions): Request<Record<User>>;
+export function getUser(apiOptions: ApiOptions = {}): Request<any> {
+  const transformers = createRecordResponseTransformer<User>(
+    apiOptions.useImmutable,
+    UserRecord
+  );
   return runApi({
     method: 'GET',
     urlRoot: 'loginUrlRoot',
     route: '/api/1.0/authentication/user',
-    options: {
-      transformers,
-      ...options
-    }
+    apiOptions,
+    requestOptions: {transformers}
   });
 }
 
 export function register(
   user: RegisterUser,
-  options: RequestOptions<EmptyResponse>
+  apiOptions: ApiOptions
 ): Request<EmptyResponse>;
 export function register(
   user: Record<RegisterUser>,
-  options: RequestOptions<EmptyResponse>
+  apiOptions: ApiOptions
 ): Request<EmptyResponse>;
 export function register(
   user: any,
-  options: RequestOptions<EmptyResponse> = {}
+  apiOptions: ApiOptions = {}
 ): Request<EmptyResponse> {
-  const transformers = createTransformers<RegisterUser>(
-    RegisterUserRecord,
-    user
+  const transformers = createRecordRequestTransformer<RegisterUser>(
+    apiOptions.useImmutable
   );
   return runApi({
     method: 'POST',
     urlRoot: 'loginUrlRoot',
     route: '/api/1.0/authentication/register',
-    options: {
-      transformers,
+    apiOptions,
+    requestOptions: {
       body: user,
-      ...options
+      transformers
     }
   });
 }
 
 export function login(
   user: LoginUser,
-  options: RequestOptions<EmptyResponse>
+  apiOptions: ApiOptions
 ): Request<EmptyResponse>;
 export function login(
   user: Record<LoginUser>,
-  options: RequestOptions<EmptyResponse>
+  apiOptions: ApiOptions
 ): Request<EmptyResponse>;
 export function login(
   user: any,
-  options: RequestOptions<EmptyResponse> = {}
+  apiOptions: ApiOptions = {}
 ): Request<EmptyResponse> {
-  const transformers = createTransformers<LoginUser>(LoginUserRecord, user);
+  const transformers = createRecordRequestTransformer<LoginUser>(
+    apiOptions.useImmutable
+  );
   return runApi({
     method: 'POST',
     urlRoot: 'loginUrlRoot',
     route: '/api/1.0/authentication/login',
-    options: {
-      transformers,
+    apiOptions,
+    requestOptions: {
       body: user,
-      ...options
+      transformers
     }
   });
 }
 
-export function logout(
-  options: RequestOptions<EmptyResponse> = {}
-): Request<EmptyResponse> {
+export function logout(apiOptions: ApiOptions): Request<EmptyResponse> {
   return runApi({
     method: 'POST',
     urlRoot: 'loginUrlRoot',
     route: '/api/1.0/authentication/logout',
-    options: {
-      body: {},
-      ...options
-    }
+    apiOptions,
+    requestOptions: {body: {}}
   });
 }
 
 export function resetPasswordRequest(
   body: ResetPasswordRequest,
-  options: RequestOptions<EmptyResponse>
+  apiOptions: ApiOptions
 ): Request<EmptyResponse>;
 export function resetPasswordRequest(
   body: Record<ResetPasswordRequest>,
-  options: RequestOptions<EmptyResponse>
+  apiOptions: ApiOptions
 ): Request<EmptyResponse>;
 export function resetPasswordRequest(
   body: any,
-  options: RequestOptions<EmptyResponse> = {}
+  apiOptions: ApiOptions = {}
 ): Request<EmptyResponse> {
-  const transformers = createTransformers<ResetPasswordRequest>(
-    undefined,
-    body
+  const transformers = createRecordRequestTransformer<ResetPasswordRequest>(
+    apiOptions.useImmutable
   );
   return runApi({
     method: 'POST',
     urlRoot: 'loginUrlRoot',
     route: '/api/1.0/authentication/resetPasswordRequest',
-    options: {body, transformers, ...options}
+    apiOptions,
+    requestOptions: {body, transformers}
   });
 }
 
 export function resetPassword(
   body: ResetPassword,
-  options: RequestOptions<EmptyResponse>
+  apiOptions: ApiOptions
 ): Request<EmptyResponse>;
 export function resetPassword(
   body: Record<ResetPassword>,
-  options: RequestOptions<EmptyResponse>
+  apiOptions: ApiOptions
 ): Request<EmptyResponse>;
 export function resetPassword(
   body: any,
-  options: RequestOptions<EmptyResponse> = {}
+  apiOptions: ApiOptions
 ): Request<EmptyResponse> {
-  const transformers = createTransformers<ResetPassword>(undefined, body);
+  const transformers = createRecordRequestTransformer<ResetPassword>(
+    apiOptions.useImmutable
+  );
   return runApi({
     method: 'POST',
     urlRoot: 'loginUrlRoot',
     route: '/api/1.0/authentication/resetPassword',
-    options: {body, transformers, ...options}
+    apiOptions,
+    requestOptions: {body, transformers}
   });
 }

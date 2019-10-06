@@ -3,6 +3,7 @@ import {Set} from 'immutable';
 import {Moment} from 'moment';
 
 import {runApi} from '../../runApi';
+import {EmptyRequest} from '../../types';
 
 export type ModelDocumentType = 'DOCUMENT' | 'PROFILE_PICTURE';
 export type ModelDocumentStorageType = 'DATABASE' | 'LOCAL_FILESYSTEM' | 'AWS';
@@ -37,25 +38,25 @@ export type ModelDocumentContent = Blob;
 
 export function getModelDocuments(
   modelId: number,
-  options: RequestOptions<ModelDocument[]>
+  requestOptions: RequestOptions<EmptyRequest, ModelDocument[]>
 ): Request<ModelDocument[]> {
   return runApi({
     method: 'GET',
     route: `/api/models/${modelId}/documents`,
-    options
+    requestOptions
   });
 }
 
 export function downloadModelDocument(
   documentId: number,
-  options: RequestOptions<ModelDocumentContent>
+  requestOptions: RequestOptions<EmptyRequest, ModelDocumentContent>
 ): Request<ModelDocumentContent> {
   return runApi({
     method: 'GET',
     route: `/api/models/documents/${documentId}/content`,
-    options: {
+    requestOptions: {
       responseType: 'blob',
-      ...options
+      ...requestOptions
     }
   });
 }
@@ -64,7 +65,7 @@ export function createModelDocument(
   modelId: number,
   input: InputModelDocument,
   content: ModelDocumentContent,
-  options: RequestOptions<ModelDocument>
+  requestOptions: RequestOptions<any, ModelDocument>
 ): Request<ModelDocument> {
   const form = new FormData();
   form.append('file', content);
@@ -77,34 +78,34 @@ export function createModelDocument(
     method: 'POST',
     route: `/api/models/${modelId}/documents`,
     notJson: true,
-    options: {
+    requestOptions: {
       body: form,
-      ...options
+      ...requestOptions
     }
   });
 }
 
 export function updateModelDocument(
   document: ModelDocument,
-  options: RequestOptions<ModelDocument>
+  requestOptions: RequestOptions<ModelDocument, ModelDocument>
 ): Request<ModelDocument> {
   return runApi({
     method: 'PUT',
     route: '/api/models/documents',
-    options: {
+    requestOptions: {
       body: document,
-      ...options
+      ...requestOptions
     }
   });
 }
 
 export function deleteModelDocument(
   document: ModelDocument,
-  options: RequestOptions<number>
+  requestOptions: RequestOptions<EmptyRequest, number>
 ): Request<number> {
   return runApi({
     method: 'DELETE',
     route: `/api/models/documents/${document.id}`,
-    options
+    requestOptions
   });
 }

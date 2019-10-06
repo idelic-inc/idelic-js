@@ -1,14 +1,15 @@
-import {Id} from '../baseTypes';
+import {Id} from '../types';
+import {LegacyApi} from './types';
 
 export type NotificationOption = any;
 export type NotificationSourceType = string;
 
-export const getNotificationsTypes = {
+export const getNotificationsTypes: LegacyApi = {
   method: 'GET',
   route: '/api/notifications/types'
 };
 
-export const getSubscriptions = {
+export const getSubscriptions: LegacyApi = {
   method: 'GET',
   route: '/api/notifications/subscriptions'
 };
@@ -18,11 +19,11 @@ export function createSubscription(
   notificationSourceType: NotificationSourceType,
   notificationSourceId: Id,
   option: NotificationOption
-) {
+): LegacyApi {
   return {
     method: 'POST',
     route: '/api/notifications/subscriptions/',
-    options: {
+    requestOptions: {
       body: {
         notificationTypeId,
         notificationSourceType,
@@ -40,11 +41,11 @@ export function updateSubscription(
   notificationSourceType: NotificationSourceType,
   notificationSourceId: Id,
   option: NotificationOption
-) {
+): LegacyApi {
   return {
     method: 'PUT',
     route: '/api/notifications/subscriptions/',
-    options: {
+    requestOptions: {
       body: {
         id,
         userAccountId,
@@ -57,7 +58,7 @@ export function updateSubscription(
   };
 }
 
-export function removeSubscription(subscriptionId: Id) {
+export function removeSubscription(subscriptionId: Id): LegacyApi {
   return {
     method: 'DELETE',
     route: `/api/notifications/subscriptions/${subscriptionId}`

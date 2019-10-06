@@ -1,4 +1,5 @@
-import {Alias} from '../baseTypes';
+import {Alias} from '../types';
+import {LegacyApi} from './types';
 
 export type Ixf = {
   comments: IxfComment[];
@@ -55,50 +56,50 @@ export type IxfModelGroup = {
   fields?: any;
 };
 
-export function importData(data: Ixf) {
+export function importData(data: Ixf): LegacyApi {
   return {
     method: 'POST',
     route: '/api/imports',
-    options: {body: data}
+    requestOptions: {body: data}
   };
 }
 
-export function importEnums(enums: IxfEnum[]) {
+export function importEnums(enums: IxfEnum[]): LegacyApi {
   return {
     method: 'POST',
     route: '/api/imports/enums',
-    options: {body: enums}
+    requestOptions: {body: enums}
   };
 }
 
-export function importEnumValues(enumValues: IxfEnumValue[]) {
+export function importEnumValues(enumValues: IxfEnumValue[]): LegacyApi {
   return {
     method: 'POST',
     route: '/api/imports/enumValues',
-    options: {body: enumValues}
+    requestOptions: {body: enumValues}
   };
 }
 
-export function importModelGroups(modelGroups: IxfModelGroup[]) {
+export function importModelGroups(modelGroups: IxfModelGroup[]): LegacyApi {
   return {
     method: 'POST',
     route: '/api/imports/modelGroups',
-    options: {body: modelGroups}
+    requestOptions: {body: modelGroups}
   };
 }
 
-export function importModels(models: IxfModel[]) {
+export function importModels(models: IxfModel[]): LegacyApi {
   return {
     method: 'POST',
     route: '/api/imports/models',
-    options: {body: models}
+    requestOptions: {body: models}
   };
 }
 
-export function importDocuments(documents: IxfDocument[]) {
+export function importDocuments(documents: IxfDocument[]): LegacyApi {
   return {
     method: 'POST',
     route: '/api/imports/documents',
-    options: {body: documents}
+    requestOptions: {body: documents}
   };
 }

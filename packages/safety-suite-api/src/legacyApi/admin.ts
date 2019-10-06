@@ -1,42 +1,43 @@
-import {Id} from '../baseTypes';
+import {Id} from '../types';
+import {LegacyApi} from './types';
 
 export type Account = any;
 export type PermissionType = 'read' | 'write';
 export type Role = any;
 
-export const getAccounts = {
+export const getAccounts: LegacyApi = {
   method: 'GET',
   route: '/api/admin/userAccount'
 };
 
-export function inviteUser(email: string) {
+export function inviteUser(email: string): LegacyApi {
   return {
     method: 'POST',
     route: '/api/admin/userAccount',
-    options: {
+    requestOptions: {
       body: {email}
     }
   };
 }
 
-export function updateAccount(account: Account) {
+export function updateAccount(account: Account): LegacyApi {
   return {
     method: 'PUT',
     route: '/api/admin/userAccount',
-    options: {body: account}
+    requestOptions: {body: account}
   };
 }
 
-export const getRoles = {
+export const getRoles: LegacyApi = {
   method: 'GET',
   route: '/api/admin/userRole'
 };
 
-export function createRole(name: string) {
+export function createRole(name: string): LegacyApi {
   return {
     method: 'POST',
     route: '/api/userRole',
-    options: {
+    requestOptions: {
       body: {
         id: -1,
         name,
@@ -50,26 +51,26 @@ export function createRole(name: string) {
   };
 }
 
-export function updateRole(role: Role) {
+export function updateRole(role: Role): LegacyApi {
   return {
     method: 'PUT',
     route: '/api/userRole',
-    options: {body: role}
+    requestOptions: {body: role}
   };
 }
 
-export function getAccountRoles(accountId: Id) {
+export function getAccountRoles(accountId: Id): LegacyApi {
   return {
     method: 'GET',
     route: `/api/userAccount/${accountId}/role`
   };
 }
 
-export function addAccountRole(accountId: Id, roleId: Id) {
+export function addAccountRole(accountId: Id, roleId: Id): LegacyApi {
   return {
     method: 'POST',
     route: '/api/userAccountRole',
-    options: {
+    requestOptions: {
       body: {
         id: -1,
         userAccountId: accountId,
@@ -82,14 +83,14 @@ export function addAccountRole(accountId: Id, roleId: Id) {
   };
 }
 
-export function removeAccountRole(accountRoleId: Id) {
+export function removeAccountRole(accountRoleId: Id): LegacyApi {
   return {
     method: 'DELETE',
     route: `/api/userAccountRole/${accountRoleId}`
   };
 }
 
-export function getRolePermissions(roleId: Id) {
+export function getRolePermissions(roleId: Id): LegacyApi {
   return {
     method: 'GET',
     route: `/api/userRole/${roleId}/permission?objectType=model_group`
@@ -100,11 +101,11 @@ export function addRolePermission(
   roleId: Id,
   securableId: Id,
   permissionType: PermissionType
-) {
+): LegacyApi {
   return {
     method: 'POST',
     route: '/api/userRolePermission',
-    options: {
+    requestOptions: {
       body: {
         id: -1,
         userRoleId: roleId,
@@ -115,7 +116,7 @@ export function addRolePermission(
   };
 }
 
-export function removeRolePermission(permissionId: Id) {
+export function removeRolePermission(permissionId: Id): LegacyApi {
   return {
     method: 'DELETE',
     route: `/api/userRolePermission/${permissionId}`
