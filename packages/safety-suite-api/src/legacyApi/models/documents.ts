@@ -35,17 +35,9 @@ export type InputModelDocument = {
 
 export type ModelDocumentContent = Blob;
 
-export default {
-  get: getModelDocuments,
-  download: downloadModelDocument,
-  create: createModelDocument,
-  update: updateModelDocument,
-  delete: deleteModelDocument
-};
-
 export function getModelDocuments(
   modelId: number,
-  options: RequestOptions
+  options: RequestOptions<ModelDocument[]>
 ): Request<ModelDocument[]> {
   return runApi({
     method: 'GET',
@@ -56,7 +48,7 @@ export function getModelDocuments(
 
 export function downloadModelDocument(
   documentId: number,
-  options: RequestOptions
+  options: RequestOptions<ModelDocumentContent>
 ): Request<ModelDocumentContent> {
   return runApi({
     method: 'GET',
@@ -72,7 +64,7 @@ export function createModelDocument(
   modelId: number,
   input: InputModelDocument,
   content: ModelDocumentContent,
-  options: RequestOptions
+  options: RequestOptions<ModelDocument>
 ): Request<ModelDocument> {
   const form = new FormData();
   form.append('file', content);
@@ -94,7 +86,7 @@ export function createModelDocument(
 
 export function updateModelDocument(
   document: ModelDocument,
-  options: RequestOptions
+  options: RequestOptions<ModelDocument>
 ): Request<ModelDocument> {
   return runApi({
     method: 'PUT',
@@ -108,7 +100,7 @@ export function updateModelDocument(
 
 export function deleteModelDocument(
   document: ModelDocument,
-  options: RequestOptions
+  options: RequestOptions<number>
 ): Request<number> {
   return runApi({
     method: 'DELETE',

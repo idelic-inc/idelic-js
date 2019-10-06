@@ -9,3 +9,9 @@ export function getCorrectiveActionLetterParams(correctiveActionId: Id) {
     options: {responseType: 'text'}
   };
 }
+
+export const getPasswordPolicy = {
+  method: 'GET',
+  route: '/api/customer/passwordPolicy',
+  noToken: true
+};

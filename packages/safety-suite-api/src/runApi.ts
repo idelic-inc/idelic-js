@@ -5,18 +5,16 @@ import ApiError from './error';
 
 export type HTTPMethod = 'POST' | 'GET' | 'PUT' | 'PATCH' | 'DELETE';
 
-export interface Api {
+export interface Api<T> {
   method: HTTPMethod;
   urlRoot?: 'apiUrlRoot' | 'loginUrlRoot';
   route: string;
   notJson?: boolean;
   noToken?: boolean;
-  options: RequestOptions;
+  options?: RequestOptions<T>;
 }
 
-const apiBacklog: Record<string, Request<any>> = {};
-
-export function runApi<T>(api: Api, authToken?: string): Request<T> {
+export function runApi<T>(api: Api<T>): Request<T> {
   if (!config.initialized) {
     throw new Error(
       'Config was not properly initialized. Please call `initializeConfig` first.'
@@ -24,11 +22,6 @@ export function runApi<T>(api: Api, authToken?: string): Request<T> {
   }
 
   const options = {...api.options} || {};
-
-  const apiString = JSON.stringify(api);
-  if (typeof apiBacklog[apiString] !== 'undefined') {
-    return apiBacklog[apiString];
-  }
 
   options.headers = options.headers || {};
 
@@ -41,25 +34,25 @@ export function runApi<T>(api: Api, authToken?: string): Request<T> {
   }
 
   if (api.noToken !== true) {
-    const XAuthToken =
-      authToken || window.localStorage.getItem('authToken') || '';
-    options.headers = setHeader(options.headers, 'X-Auth-Token', XAuthToken);
+    const authToken = window.localStorage.getItem('authToken') || '';
+    options.headers = setHeader(options.headers, 'X-Auth-Token', authToken);
   }
 
   options.transformers = {
-    errors: netError => new ApiError(netError)
+    ...options.transformers,
+    error: netError => new ApiError(netError)
   };
 
-  apiBacklog[apiString] = net.request(
+  const request = net.request<T>(
     api.method,
     `${config[api.urlRoot || 'apiUrlRoot']}${api.route}`,
     options
   );
-  apiBacklog[apiString].on.complete.finally(() => delete apiBacklog[apiString]);
-  return apiBacklog[apiString];
+  request.on.complete.catch(catchError);
+  return request;
 }
 
-export function catchError(error: ApiError): void {
+function catchError(error: ApiError): void {
   if (!config.initialized) {
     throw new Error(
       'Config was not properly initialized. Please call `initializeConfig` first.'
@@ -68,8 +61,6 @@ export function catchError(error: ApiError): void {
 
   if (error.status === 401) {
     config.onAuthError(error);
-  } else {
-    console.error(error);
   }
 }
 
