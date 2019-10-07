@@ -7,6 +7,7 @@ export default class ApiError extends Error {
 
   constructor(netError: NetError<any>) {
     super(ApiError.createErrorMessage(netError));
+    Object.setPrototypeOf(this, ApiError.prototype);
     this.status = netError.request.status;
     if (netError.response && netError.response.code) {
       this.code = netError.response.code;

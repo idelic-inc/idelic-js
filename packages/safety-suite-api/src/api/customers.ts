@@ -30,9 +30,13 @@ export const CustomerRecord = Record<Customer>({
   status: 'DEV'
 });
 
-export function get(apiOptions: ApiOptions): Request<Customer[]>;
-export function get(apiOptions: ApiOptions): Request<List<Record<Customer>>>;
-export function get(apiOptions: ApiOptions): Request<Customer[] | List<Record<Customer>>> {
+export function getCustomers(apiOptions?: ApiOptions): Request<Customer[]>;
+export function getCustomers(
+  apiOptions?: ApiOptions
+): Request<List<Record<Customer>>>;
+export function getCustomers(
+  apiOptions: ApiOptions = {}
+): Request<Customer[] | List<Record<Customer>>> {
   const transformers = createRecordListResponseTransformer<Customer>(
     apiOptions.useImmutable,
     CustomerRecord
@@ -46,15 +50,15 @@ export function get(apiOptions: ApiOptions): Request<Customer[] | List<Record<Cu
   });
 }
 
-export function getByAlias(
+export function getCustomerByAlias(
   alias: Alias,
-  apiOptions: ApiOptions
+  apiOptions?: ApiOptions
 ): Request<Customer>;
-export function getByAlias(
+export function getCustomerByAlias(
   alias: Alias,
-  apiOptions: ApiOptions
+  apiOptions?: ApiOptions
 ): Request<Record<Customer>>;
-export function getByAlias(
+export function getCustomerByAlias(
   alias: Alias,
   apiOptions: ApiOptions = {}
 ): Request<Customer | Record<Customer>> {

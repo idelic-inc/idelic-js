@@ -82,7 +82,7 @@ export function createUser(
   apiOptions: ApiOptions
 ): Request<Record<User>>;
 export function createUser(
-  user: User | Record<InputUser>,
+  user: InputUser | Record<InputUser>,
   apiOptions: ApiOptions = {}
 ): Request<User | Record<User>> {
   const transformers = createRecordTransformers<InputUser, User>(
@@ -101,9 +101,11 @@ export function createUser(
   });
 }
 
-export function getUser(apiOptions: ApiOptions): Request<User>;
-export function getUser(apiOptions: ApiOptions): Request<Record<User>>;
-export function getUser(apiOptions: ApiOptions = {}): Request<User | Record<User>> {
+export function getUser(apiOptions?: ApiOptions): Request<User>;
+export function getUser(apiOptions?: ApiOptions): Request<Record<User>>;
+export function getUser(
+  apiOptions: ApiOptions = {}
+): Request<User | Record<User>> {
   const transformers = createRecordResponseTransformer<User>(
     apiOptions.useImmutable,
     UserRecord
@@ -119,11 +121,11 @@ export function getUser(apiOptions: ApiOptions = {}): Request<User | Record<User
 
 export function register(
   user: RegisterUser,
-  apiOptions: ApiOptions
+  apiOptions?: ApiOptions
 ): Request<EmptyResponse>;
 export function register(
   user: Record<RegisterUser>,
-  apiOptions: ApiOptions
+  apiOptions?: ApiOptions
 ): Request<EmptyResponse>;
 export function register(
   user: RegisterUser | Record<RegisterUser>,
@@ -146,11 +148,11 @@ export function register(
 
 export function login(
   user: LoginUser,
-  apiOptions: ApiOptions
+  apiOptions?: ApiOptions
 ): Request<EmptyResponse>;
 export function login(
   user: Record<LoginUser>,
-  apiOptions: ApiOptions
+  apiOptions?: ApiOptions
 ): Request<EmptyResponse>;
 export function login(
   user: LoginUser | Record<LoginUser>,
@@ -171,7 +173,7 @@ export function login(
   });
 }
 
-export function logout(apiOptions: ApiOptions): Request<EmptyResponse> {
+export function logout(apiOptions?: ApiOptions): Request<EmptyResponse> {
   return runApi({
     method: 'POST',
     urlRoot: 'loginUrlRoot',
@@ -183,11 +185,11 @@ export function logout(apiOptions: ApiOptions): Request<EmptyResponse> {
 
 export function resetPasswordRequest(
   body: ResetPasswordRequest,
-  apiOptions: ApiOptions
+  apiOptions?: ApiOptions
 ): Request<EmptyResponse>;
 export function resetPasswordRequest(
   body: Record<ResetPasswordRequest>,
-  apiOptions: ApiOptions
+  apiOptions?: ApiOptions
 ): Request<EmptyResponse>;
 export function resetPasswordRequest(
   body: ResetPasswordRequest | Record<ResetPasswordRequest>,
@@ -207,15 +209,15 @@ export function resetPasswordRequest(
 
 export function resetPassword(
   body: ResetPassword,
-  apiOptions: ApiOptions
+  apiOptions?: ApiOptions
 ): Request<EmptyResponse>;
 export function resetPassword(
   body: Record<ResetPassword>,
-  apiOptions: ApiOptions
+  apiOptions?: ApiOptions
 ): Request<EmptyResponse>;
 export function resetPassword(
   body: ResetPassword | Record<ResetPassword>,
-  apiOptions: ApiOptions
+  apiOptions: ApiOptions = {}
 ): Request<EmptyResponse> {
   const transformers = createRecordRequestTransformer<ResetPassword>(
     apiOptions.useImmutable

@@ -16,12 +16,19 @@ export function runApi<R, T>(api: Api<R, T>): Request<T> {
     : {};
 
   options.headers = options.headers || {};
+  options.on = options.on || {};
 
   if (api.apiOptions) {
     if (api.apiOptions.headers) {
       options.headers = mergeHeaders(options.headers, api.apiOptions.headers);
     }
-    options.on = api.apiOptions.on;
+
+    if (api.apiOptions.on) {
+      options.on = {
+        ...options.on,
+        ...api.apiOptions.on
+      };
+    }
   }
 
   if (api.notJson !== true) {
