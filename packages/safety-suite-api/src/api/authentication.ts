@@ -82,9 +82,9 @@ export function createUser(
   apiOptions: ApiOptions
 ): Request<Record<User>>;
 export function createUser(
-  user: any,
+  user: User | Record<InputUser>,
   apiOptions: ApiOptions = {}
-): Request<any> {
+): Request<User | Record<User>> {
   const transformers = createRecordTransformers<InputUser, User>(
     apiOptions.useImmutable,
     UserRecord
@@ -103,7 +103,7 @@ export function createUser(
 
 export function getUser(apiOptions: ApiOptions): Request<User>;
 export function getUser(apiOptions: ApiOptions): Request<Record<User>>;
-export function getUser(apiOptions: ApiOptions = {}): Request<any> {
+export function getUser(apiOptions: ApiOptions = {}): Request<User | Record<User>> {
   const transformers = createRecordResponseTransformer<User>(
     apiOptions.useImmutable,
     UserRecord
@@ -126,7 +126,7 @@ export function register(
   apiOptions: ApiOptions
 ): Request<EmptyResponse>;
 export function register(
-  user: any,
+  user: RegisterUser | Record<RegisterUser>,
   apiOptions: ApiOptions = {}
 ): Request<EmptyResponse> {
   const transformers = createRecordRequestTransformer<RegisterUser>(
@@ -153,7 +153,7 @@ export function login(
   apiOptions: ApiOptions
 ): Request<EmptyResponse>;
 export function login(
-  user: any,
+  user: LoginUser | Record<LoginUser>,
   apiOptions: ApiOptions = {}
 ): Request<EmptyResponse> {
   const transformers = createRecordRequestTransformer<LoginUser>(
@@ -190,7 +190,7 @@ export function resetPasswordRequest(
   apiOptions: ApiOptions
 ): Request<EmptyResponse>;
 export function resetPasswordRequest(
-  body: any,
+  body: ResetPasswordRequest | Record<ResetPasswordRequest>,
   apiOptions: ApiOptions = {}
 ): Request<EmptyResponse> {
   const transformers = createRecordRequestTransformer<ResetPasswordRequest>(
@@ -214,7 +214,7 @@ export function resetPassword(
   apiOptions: ApiOptions
 ): Request<EmptyResponse>;
 export function resetPassword(
-  body: any,
+  body: ResetPassword | Record<ResetPassword>,
   apiOptions: ApiOptions
 ): Request<EmptyResponse> {
   const transformers = createRecordRequestTransformer<ResetPassword>(
