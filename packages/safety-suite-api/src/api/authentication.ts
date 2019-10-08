@@ -25,6 +25,7 @@ export interface User {
 
 export interface RegisterUser {
   email: string;
+  token: string;
   password: string;
   passwordConfirm: string;
 }
@@ -59,6 +60,7 @@ export const UserRecord = Record<User>({
 });
 export const RegisterUserRecord = Record<RegisterUser>({
   email: '',
+  token: '',
   password: '',
   passwordConfirm: ''
 });
