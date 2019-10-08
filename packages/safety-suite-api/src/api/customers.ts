@@ -19,6 +19,7 @@ export interface Customer {
   id: Id;
   alias: Alias;
   name: string;
+  endpoint: string;
   status: CustomerStatus;
   logoUrl?: string;
 }
@@ -27,6 +28,7 @@ export const CustomerRecord = Record<Customer>({
   id: -1,
   alias: '',
   name: '',
+  endpoint: '',
   status: 'DEV'
 });
 
