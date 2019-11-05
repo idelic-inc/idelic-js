@@ -54,7 +54,7 @@ export function runApi<R, T>(api: Api<R, T>): Request<T> {
     `${config[api.urlRoot || 'apiUrlRoot']}${api.route}`,
     options
   );
-  request.on.complete.catch(catchAuthError);
+  request.response.catch(catchAuthError);
   return request;
 }
 
