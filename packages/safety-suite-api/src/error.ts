@@ -5,6 +5,8 @@ export default class ApiError extends Error {
 
   status: number;
 
+  wasCancelled: boolean;
+
   constructor(netError: NetError<any>) {
     super(ApiError.createErrorMessage(netError));
     Object.setPrototypeOf(this, ApiError.prototype);
@@ -12,6 +14,7 @@ export default class ApiError extends Error {
     if (netError.response && netError.response.code) {
       this.code = netError.response.code;
     }
+    this.wasCancelled = netError.request.readyState === 0;
   }
 
   static createErrorMessage(netError: NetError<any>): string {

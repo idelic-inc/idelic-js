@@ -54,20 +54,21 @@ export function runApi<R, T>(api: Api<R, T>): Request<T> {
     `${config[api.urlRoot || 'apiUrlRoot']}${api.route}`,
     options
   );
-  request.on.complete.catch(catchError);
+  request.on.complete.catch(catchAuthError);
   return request;
 }
 
-function catchError(error: ApiError): void {
-  if (!config.initialized) {
-    throw new Error(
-      'Config was not properly initialized. Please call `initializeConfig` first.'
-    );
-  }
-
+function catchAuthError(error: ApiError): void {
   if (error.status === 401) {
+    if (!config.initialized) {
+      throw new Error(
+        'Config was not properly initialized. Please call `initializeConfig` first.'
+      );
+    }
     config.onAuthError(error);
   }
+
+  throw error;
 }
 
 function mergeHeaders(
