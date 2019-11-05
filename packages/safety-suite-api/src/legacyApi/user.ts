@@ -4,7 +4,7 @@ export type UserAccount = any;
 
 export const getUserAccount: LegacyApi = {
   method: 'GET',
-  url: '/api/userAccount'
+  route: '/api/userAccount'
 };
 
 export function saveUserAccount(user: UserAccount): LegacyApi {
