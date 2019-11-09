@@ -3,6 +3,11 @@ import {LegacyApi} from '../types';
 
 export type Comment = any;
 
+export const getModelComments = (modelId: Id): LegacyApi => ({
+  method: 'GET',
+  route: `/api/models/${modelId}/comments`
+});
+
 export const createModelComment = (
   modelId: Id,
   comment: Comment

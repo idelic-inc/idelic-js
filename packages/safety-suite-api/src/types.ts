@@ -10,7 +10,6 @@ export interface Api<R, T> {
   urlRoot?: 'apiUrlRoot' | 'loginUrlRoot';
   route: string;
   notJson?: boolean;
-  noToken?: boolean;
   apiOptions?: ApiOptions;
   requestOptions?: RequestOptions<R, T>;
 }

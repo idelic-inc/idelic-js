@@ -13,8 +13,7 @@ export function getCorrectiveActionLetterParams(
   };
 }
 
-export const getPasswordPolicy: LegacyApi = {
+export const getCurrentCustomer: LegacyApi = {
   method: 'GET',
-  route: '/api/customer/passwordPolicy',
-  noToken: true
+  route: '/api/customer/configuration'
 };

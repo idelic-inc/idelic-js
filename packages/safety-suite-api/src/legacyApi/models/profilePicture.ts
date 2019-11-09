@@ -34,3 +34,10 @@ export function uploadProfilePicture(
     requestOptions: {body: form}
   };
 }
+
+export function deleteProfilePicture(modelId: Id): LegacyApi {
+  return {
+    method: 'DELETE',
+    route: `/api/models/${modelId}/profilePicture`
+  };
+}

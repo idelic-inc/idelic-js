@@ -44,6 +44,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.14.3",
     "husky": "^3.0.5",
+    "immutable": "^4.0.0-rc.12",
     "jest": "^24.9.0",
     "prettier": "1.18.2",
     "ts-jest": "^24.0.2",
@@ -51,9 +52,11 @@
   },
   "dependencies": {
     "idelic-safety-net": "^1.0.15",
-    "immutable": "^4.0.0-rc.12",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.26",
     "source-map-support": "^0.5.13"
+  },
+  "peerDependencies": {
+    "immutable": "4.x"
   }
 }

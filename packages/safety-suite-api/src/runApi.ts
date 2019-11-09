@@ -39,11 +39,6 @@ export function runApi<R, T>(api: Api<R, T>): Request<T> {
     );
   }
 
-  if (api.noToken !== true) {
-    const authToken = window.localStorage.getItem('authToken') || '';
-    options.headers = setHeader(options.headers, 'X-Auth-Token', authToken);
-  }
-
   options.transformers = {
     error: netError => new ApiError(netError),
     ...options.transformers
