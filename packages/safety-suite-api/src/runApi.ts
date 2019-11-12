@@ -61,9 +61,9 @@ function catchAuthError(error: ApiError): void {
       );
     }
     config.onAuthError(error);
+  } else {
+    throw error;
   }
-
-  throw error;
 }
 
 function mergeHeaders(
