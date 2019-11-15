@@ -31,7 +31,8 @@
     "@typescript-eslint/no-empty-interface": "off",
     "object-curly-newline": "off",
     "no-console": ["warn", {"allow": ["warn", "error"]}],
-    "import/no-mutable-exports": "off"
+    "import/no-mutable-exports": "off",
+    "implicit-arrow-linebreak": "off"
   },
   "overrides": [
     {

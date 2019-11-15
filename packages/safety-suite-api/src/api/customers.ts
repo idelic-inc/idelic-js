@@ -8,6 +8,10 @@ import {
   createRecordResponseTransformer
 } from '../utils';
 
+export type GetCustomersQuery = {
+  manageUsers?: boolean;
+};
+
 export type CustomerStatus =
   | 'DEV'
   | 'TESTING'
@@ -34,11 +38,16 @@ export const CustomerRecord = Record<Customer>({
   status: 'DEV'
 });
 
-export function getCustomers(apiOptions?: ApiOptions): Request<Customer[]>;
 export function getCustomers(
+  query?: GetCustomersQuery,
+  apiOptions?: ApiOptions
+): Request<Customer[]>;
+export function getCustomers(
+  query?: GetCustomersQuery,
   apiOptions?: ApiOptions
 ): Request<List<Record<Customer>>>;
 export function getCustomers(
+  query: GetCustomersQuery = {},
   apiOptions: ApiOptions = {}
 ): Request<Customer[] | List<Record<Customer>>> {
   const transformers = createRecordListResponseTransformer<Customer>(
@@ -50,7 +59,7 @@ export function getCustomers(
     urlRoot: 'loginUrlRoot',
     route: '/api/1.0/customers',
     apiOptions,
-    requestOptions: {transformers}
+    requestOptions: {transformers, query}
   });
 }
 

@@ -4,24 +4,10 @@ import {Record} from 'immutable';
 import {ApiOptions, EmptyResponse} from '../types';
 import {runApi} from '../runApi';
 import {
-  createRecordTransformers,
   createRecordRequestTransformer,
-  createRecordResponseTransformer
+  createRecordTransformers
 } from '../utils';
-
-export interface InputUser {
-  email: string;
-  firstName: string;
-  lastName: string;
-}
-
-export interface User {
-  id: number;
-  email: string;
-  firstName: string;
-  lastName: string;
-  admin: boolean;
-}
+import {InputUser, ImInputUser, ImUser, User, UserRecord} from './users';
 
 export interface RegisterUser {
   email: string;
@@ -46,18 +32,6 @@ export interface ResetPassword {
   passwordConfirm: string;
 }
 
-export const InputUserRecord = Record<InputUser>({
-  email: '',
-  firstName: '',
-  lastName: ''
-});
-export const UserRecord = Record<User>({
-  id: -1,
-  email: '',
-  firstName: '',
-  lastName: '',
-  admin: false
-});
 export const RegisterUserRecord = Record<RegisterUser>({
   email: '',
   token: '',
@@ -75,26 +49,23 @@ export const ResetPasswordRecord = Record<ResetPassword>({
   passwordConfirm: ''
 });
 
-export function createUser(
-  user: InputUser,
-  apiOptions: ApiOptions
-): Request<User>;
-export function createUser(
-  user: Record<InputUser>,
-  apiOptions: ApiOptions
-): Request<Record<User>>;
-export function createUser(
-  user: InputUser | Record<InputUser>,
+export function invite(user: InputUser, apiOptions?: ApiOptions): Request<User>;
+export function invite(
+  user: Record<ImInputUser>,
+  apiOptions?: ApiOptions
+): Request<Record<ImUser>>;
+export function invite(
+  user: InputUser | Record<ImInputUser>,
   apiOptions: ApiOptions = {}
-): Request<User | Record<User>> {
-  const transformers = createRecordTransformers<InputUser, User>(
+): Request<User | Record<ImUser>> {
+  const transformers = createRecordTransformers<ImInputUser, ImUser>(
     apiOptions.useImmutable,
     UserRecord
   );
   return runApi({
     method: 'POST',
     urlRoot: 'loginUrlRoot',
-    route: '/api/1.0/authentication/user',
+    route: '/api/1.0/authentication/invite',
     apiOptions,
     requestOptions: {
       body: user,
@@ -103,21 +74,27 @@ export function createUser(
   });
 }
 
-export function getUser(apiOptions?: ApiOptions): Request<User>;
-export function getUser(apiOptions?: ApiOptions): Request<Record<User>>;
-export function getUser(
+export function resendInvite(
+  body: User,
+  apiOptions?: ApiOptions
+): Request<EmptyResponse>;
+export function resendInvite(
+  body: Record<ImUser>,
+  apiOptions?: ApiOptions
+): Request<EmptyResponse>;
+export function resendInvite(
+  body: User | Record<ImUser>,
   apiOptions: ApiOptions = {}
-): Request<User | Record<User>> {
-  const transformers = createRecordResponseTransformer<User>(
-    apiOptions.useImmutable,
-    UserRecord
+): Request<EmptyResponse> {
+  const transformers = createRecordRequestTransformer<ImUser>(
+    apiOptions.useImmutable
   );
   return runApi({
-    method: 'GET',
+    method: 'POST',
     urlRoot: 'loginUrlRoot',
-    route: '/api/1.0/authentication/user',
+    route: '/api/1.0/authentication/resendInvite',
     apiOptions,
-    requestOptions: {transformers}
+    requestOptions: {body, transformers}
   });
 }
 
