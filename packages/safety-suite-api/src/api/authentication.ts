@@ -111,11 +111,11 @@ export function resendInvite(
 
 export function register(
   user: RegisterUser,
-  apiOptions: ApiOptions
+  apiOptions?: ApiOptions
 ): Request<EmptyResponse>;
 export function register(
   user: Record<RegisterUser>,
-  apiOptions: ApiOptions
+  apiOptions?: ApiOptions
 ): Request<EmptyResponse>;
 export function register(
   user: RegisterUser | Record<RegisterUser>,
@@ -138,11 +138,11 @@ export function register(
 
 export function login(
   user: LoginUser,
-  apiOptions: ApiOptions
+  apiOptions?: ApiOptions
 ): Request<EmptyResponse>;
 export function login(
   user: Record<LoginUser>,
-  apiOptions: ApiOptions
+  apiOptions?: ApiOptions
 ): Request<EmptyResponse>;
 export function login(
   user: LoginUser | Record<LoginUser>,
@@ -175,11 +175,11 @@ export function logout(apiOptions: ApiOptions = {}): Request<EmptyResponse> {
 
 export function changePassword(
   body: ChangePasswordRequest,
-  apiOptions: ApiOptions
+  apiOptions?: ApiOptions
 ): Request<EmptyResponse>;
 export function changePassword(
   body: Record<ChangePasswordRequest>,
-  apiOptions: ApiOptions
+  apiOptions?: ApiOptions
 ): Request<EmptyResponse>;
 export function changePassword(
   body: ChangePasswordRequest | Record<ChangePasswordRequest>,
@@ -199,11 +199,11 @@ export function changePassword(
 
 export function resetPasswordRequest(
   body: ResetPasswordRequest,
-  apiOptions: ApiOptions
+  apiOptions?: ApiOptions
 ): Request<EmptyResponse>;
 export function resetPasswordRequest(
   body: Record<ResetPasswordRequest>,
-  apiOptions: ApiOptions
+  apiOptions?: ApiOptions
 ): Request<EmptyResponse>;
 export function resetPasswordRequest(
   body: ResetPasswordRequest | Record<ResetPasswordRequest>,
@@ -223,11 +223,11 @@ export function resetPasswordRequest(
 
 export function resetPassword(
   body: ResetPassword,
-  apiOptions: ApiOptions
+  apiOptions?: ApiOptions
 ): Request<EmptyResponse>;
 export function resetPassword(
   body: Record<ResetPassword>,
-  apiOptions: ApiOptions
+  apiOptions?: ApiOptions
 ): Request<EmptyResponse>;
 export function resetPassword(
   body: ResetPassword | Record<ResetPassword>,
