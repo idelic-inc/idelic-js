@@ -21,6 +21,12 @@ export interface LoginUser {
   password: string;
 }
 
+export interface ChangePasswordRequest {
+  oldPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
 export interface ResetPasswordRequest {
   email: string;
 }
@@ -39,6 +45,11 @@ export const RegisterUserRecord = Record<RegisterUser>({
   passwordConfirm: ''
 });
 export const LoginUserRecord = Record<LoginUser>({email: '', password: ''});
+export const ChangePasswordRequestRecord = Record<ChangePasswordRequest>({
+  oldPassword: '',
+  newPassword: '',
+  confirmPassword: ''
+});
 export const ResetPasswordRequestRecord = Record<ResetPasswordRequest>({
   email: ''
 });
@@ -100,11 +111,11 @@ export function resendInvite(
 
 export function register(
   user: RegisterUser,
-  apiOptions?: ApiOptions
+  apiOptions: ApiOptions
 ): Request<EmptyResponse>;
 export function register(
   user: Record<RegisterUser>,
-  apiOptions?: ApiOptions
+  apiOptions: ApiOptions
 ): Request<EmptyResponse>;
 export function register(
   user: RegisterUser | Record<RegisterUser>,
@@ -127,11 +138,11 @@ export function register(
 
 export function login(
   user: LoginUser,
-  apiOptions?: ApiOptions
+  apiOptions: ApiOptions
 ): Request<EmptyResponse>;
 export function login(
   user: Record<LoginUser>,
-  apiOptions?: ApiOptions
+  apiOptions: ApiOptions
 ): Request<EmptyResponse>;
 export function login(
   user: LoginUser | Record<LoginUser>,
@@ -152,7 +163,7 @@ export function login(
   });
 }
 
-export function logout(apiOptions?: ApiOptions): Request<EmptyResponse> {
+export function logout(apiOptions: ApiOptions = {}): Request<EmptyResponse> {
   return runApi({
     method: 'POST',
     urlRoot: 'loginUrlRoot',
@@ -162,13 +173,37 @@ export function logout(apiOptions?: ApiOptions): Request<EmptyResponse> {
   });
 }
 
+export function changePassword(
+  body: ChangePasswordRequest,
+  apiOptions: ApiOptions
+): Request<EmptyResponse>;
+export function changePassword(
+  body: Record<ChangePasswordRequest>,
+  apiOptions: ApiOptions
+): Request<EmptyResponse>;
+export function changePassword(
+  body: ChangePasswordRequest | Record<ChangePasswordRequest>,
+  apiOptions: ApiOptions = {}
+): Request<EmptyResponse> {
+  const transformers = createRecordRequestTransformer<ChangePasswordRequest>(
+    apiOptions.useImmutable
+  );
+  return runApi({
+    method: 'POST',
+    urlRoot: 'loginUrlRoot',
+    route: '/api/1.0/authentication/changePassword',
+    apiOptions,
+    requestOptions: {body, transformers}
+  });
+}
+
 export function resetPasswordRequest(
   body: ResetPasswordRequest,
-  apiOptions?: ApiOptions
+  apiOptions: ApiOptions
 ): Request<EmptyResponse>;
 export function resetPasswordRequest(
   body: Record<ResetPasswordRequest>,
-  apiOptions?: ApiOptions
+  apiOptions: ApiOptions
 ): Request<EmptyResponse>;
 export function resetPasswordRequest(
   body: ResetPasswordRequest | Record<ResetPasswordRequest>,
@@ -188,11 +223,11 @@ export function resetPasswordRequest(
 
 export function resetPassword(
   body: ResetPassword,
-  apiOptions?: ApiOptions
+  apiOptions: ApiOptions
 ): Request<EmptyResponse>;
 export function resetPassword(
   body: Record<ResetPassword>,
-  apiOptions?: ApiOptions
+  apiOptions: ApiOptions
 ): Request<EmptyResponse>;
 export function resetPassword(
   body: ResetPassword | Record<ResetPassword>,
