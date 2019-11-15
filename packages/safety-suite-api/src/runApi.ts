@@ -11,6 +11,8 @@ export function runApi<R, T>(api: Api<R, T>): Request<T> {
     );
   }
 
+  const apiOptions = api.apiOptions || {};
+
   const options: RequestOptions<R, T> = api.requestOptions
     ? {...api.requestOptions}
     : {};
@@ -18,17 +20,15 @@ export function runApi<R, T>(api: Api<R, T>): Request<T> {
   options.headers = options.headers || {};
   options.on = options.on || {};
 
-  if (api.apiOptions) {
-    if (api.apiOptions.headers) {
-      options.headers = mergeHeaders(options.headers, api.apiOptions.headers);
-    }
+  if (apiOptions.headers) {
+    options.headers = mergeHeaders(options.headers, apiOptions.headers);
+  }
 
-    if (api.apiOptions.on) {
-      options.on = {
-        ...options.on,
-        ...api.apiOptions.on
-      };
-    }
+  if (apiOptions.on) {
+    options.on = {
+      ...options.on,
+      ...apiOptions.on
+    };
   }
 
   if (api.notJson !== true) {
@@ -44,9 +44,18 @@ export function runApi<R, T>(api: Api<R, T>): Request<T> {
     ...options.transformers
   };
 
+  const urlRoot =
+    apiOptions.customUrlRoot || config[api.urlRoot || 'apiUrlRoot'];
+
+  if (!urlRoot) {
+    throw new Error(
+      `Invalid URL '${urlRoot}' used for route '${api.route}'. Check your 'initializeConfig' call or make sure you are passing in a valid 'customUrlRoute'.`
+    );
+  }
+
   const request = net.request<R, T>(
     api.method,
-    `${config[api.urlRoot || 'apiUrlRoot']}${api.route}`,
+    `${urlRoot}${api.route}`,
     options
   );
   request.response.catch(catchAuthError);

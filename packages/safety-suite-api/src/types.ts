@@ -15,6 +15,7 @@ export interface Api<R, T> {
 }
 
 export interface ApiOptions {
+  customUrlRoot?: string;
   useImmutable?: boolean;
   headers?: RequestHeaders;
   on?: Events;
