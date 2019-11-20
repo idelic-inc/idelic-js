@@ -35,7 +35,8 @@ export const CustomerRecord = Record<Customer>({
   name: '',
   endpoint: '',
   frontendUrl: '',
-  status: 'DEV'
+  status: 'DEV',
+  logoUrl: ''
 });
 
 export function getCustomers(
