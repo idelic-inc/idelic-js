@@ -1,7 +1,7 @@
 import net, {Request, RequestHeaders, RequestOptions} from 'idelic-safety-net';
 
 import {config} from './config';
-import ApiError from './error';
+import {ApiError, ErrorResponse} from './error';
 import {Api} from './types';
 
 export function runApi<R, T>(api: Api<R, T>): Request<T> {
@@ -13,7 +13,7 @@ export function runApi<R, T>(api: Api<R, T>): Request<T> {
 
   const apiOptions = api.apiOptions || {};
 
-  const options: RequestOptions<R, T> = api.requestOptions
+  const options: RequestOptions<R, T, ErrorResponse> = api.requestOptions
     ? {...api.requestOptions}
     : {};
 
@@ -53,7 +53,7 @@ export function runApi<R, T>(api: Api<R, T>): Request<T> {
     );
   }
 
-  const request = net.request<R, T>(
+  const request = net.request<R, T, ErrorResponse>(
     api.method,
     `${urlRoot}${api.route}`,
     options
@@ -70,8 +70,6 @@ function catchAuthError(error: ApiError): void {
       );
     }
     config.onAuthError(error);
-  } else {
-    throw error;
   }
 }
 

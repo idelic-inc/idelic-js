@@ -1,4 +1,4 @@
-import ApiError from './error';
+import {ApiError} from './error';
 
 export type Config = {
   apiUrlRoot: string;

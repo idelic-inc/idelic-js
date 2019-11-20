@@ -94,7 +94,10 @@ export function createRecordListResponseTransformer<T>(
  * });
  * ```
  */
-function nestedRecordFromJS<T>(Factory: Record.Factory<T>, data: any) {
+function nestedRecordFromJS<T>(
+  Factory: Record.Factory<T>,
+  data: any
+): Record<T> {
   return fromJS(data, (key, value, path) => {
     if (!path || path.length === 0) {
       return Factory(value);
