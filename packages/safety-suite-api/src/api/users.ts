@@ -13,7 +13,19 @@ export interface UserPermission {
   customerId: number;
   viewData: boolean;
   manageUsers: boolean;
+  admin?: boolean;
+  allowProtected?: boolean;
+  readGroupPermissions?: number[];
+  writeGroupPermissions?: number[];
 }
+
+export type ImUserPermission = Omit<
+  UserPermission,
+  'readGroupPermissions' | 'writeGroupPermissions'
+> & {
+  readGroupPermissions?: List<number>;
+  writeGroupPermissions?: List<number>;
+};
 
 export interface InputUser {
   email: string;
@@ -23,7 +35,7 @@ export interface InputUser {
 }
 
 export type ImInputUser = Omit<InputUser, 'permissions'> & {
-  permissions: List<Record<UserPermission>>;
+  permissions: List<Record<ImUserPermission>>;
 };
 
 export interface User {
@@ -39,13 +51,17 @@ export interface User {
 }
 
 export type ImUser = Omit<User, 'permissions'> & {
-  permissions: List<Record<UserPermission>>;
+  permissions: List<Record<ImUserPermission>>;
 };
 
-export const UserPermissionRecord = Record<UserPermission>({
+export const UserPermissionRecord = Record<ImUserPermission>({
   customerId: -1,
   viewData: false,
-  manageUsers: false
+  manageUsers: false,
+  admin: undefined,
+  allowProtected: undefined,
+  readGroupPermissions: List(),
+  writeGroupPermissions: List()
 });
 
 export const InputUserRecord = Record<ImInputUser>({
@@ -102,6 +118,28 @@ export function getUsers(
     method: 'GET',
     urlRoot: 'loginUrlRoot',
     route: '/api/1.0/users',
+    apiOptions,
+    requestOptions: {transformers}
+  });
+}
+
+export function getUser(userId: number, apiOptions?: ApiOptions): Request<User>;
+export function getUser(
+  userId: number,
+  apiOptions?: ApiOptions
+): Request<Record<ImUser>>;
+export function getUser(
+  userId: number,
+  apiOptions: ApiOptions = {}
+): Request<User | Record<ImUser>> {
+  const transformers = createRecordResponseTransformer<ImUser>(
+    apiOptions.useImmutable,
+    UserRecord
+  );
+  return runApi({
+    method: 'GET',
+    urlRoot: 'loginUrlRoot',
+    route: `/api/1.0/users/${userId}`,
     apiOptions,
     requestOptions: {transformers}
   });

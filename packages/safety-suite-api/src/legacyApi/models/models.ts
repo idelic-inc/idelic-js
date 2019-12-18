@@ -106,11 +106,6 @@ export const getModelTemplates: LegacyApi = {
   route: '/api/modelTemplate'
 };
 
-export const getModelGroups: LegacyApi = {
-  method: 'GET',
-  route: '/api/models/groups'
-};
-
 export function getHistory(modelId: Id): LegacyApi {
   return {
     method: 'GET',
