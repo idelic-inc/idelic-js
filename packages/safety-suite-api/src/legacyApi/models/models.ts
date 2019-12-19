@@ -14,14 +14,16 @@ export type ModelFilterOptions = {
 };
 export type ModelListOptions = {
   orderBy?: {
-    type: 'byGroup' | 'byId' | 'byTemplate' | 'byRelation' | 'byField';
     direction: 'ASC' | 'DESC';
-    // Required for `type == 'byRelation' | 'byField'`.
-    name?: string;
-    // Required for `type == 'byRelation'`
-    isParent?: boolean;
-    // Optional for `type == 'byRelation'`
-    field?: string;
+    parameter: {
+      type: 'byGroup' | 'byId' | 'byTemplate' | 'byRelation' | 'byField';
+      // Required for `type == 'byRelation' | 'byField'`.
+      name?: string;
+      // Required for `type == 'byRelation'`
+      isParent?: boolean;
+      // Optional for `type == 'byRelation'`
+      field?: string;
+    };
   };
   start?: number;
   limit?: number;
