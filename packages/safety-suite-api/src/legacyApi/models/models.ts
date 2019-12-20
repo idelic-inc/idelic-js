@@ -12,19 +12,31 @@ export type ModelFilterOptions = {
   jsValueSearch?: any;
   protectedValueSearch?: any;
 };
+export type ByGroup = {
+  type: 'byGroup';
+};
+export type ById = {
+  type: 'byId';
+};
+export type ByTemplate = {
+  type: 'byTemplate';
+};
+export type ByRelation = {
+  type: 'byRelation';
+  name: string;
+  isParent: boolean;
+  field?: string;
+};
+export type ByField = {
+  type: 'byField';
+  name: string;
+};
+export type OrderBy = {
+  direction: 'ASC' | 'DESC';
+  parameter: ByGroup | ById | ByTemplate | ByRelation | ByField;
+};
 export type ModelListOptions = {
-  orderBy?: {
-    direction: 'ASC' | 'DESC';
-    parameter: {
-      type: 'byGroup' | 'byId' | 'byTemplate' | 'byRelation' | 'byField';
-      // Required for `type == 'byRelation' | 'byField'`.
-      name?: string;
-      // Required for `type == 'byRelation'`
-      isParent?: boolean;
-      // Optional for `type == 'byRelation'`
-      field?: string;
-    };
-  };
+  orderBy?: OrderBy;
   start?: number;
   limit?: number;
 };
