@@ -3,6 +3,7 @@ import {ApiError} from './error';
 export type Config = {
   apiUrlRoot: string;
   loginUrlRoot: string;
+  authToken?: string;
   onAuthError(error: ApiError): void;
 };
 
@@ -14,6 +15,7 @@ export let config: _Config = {
   initialized: false,
   apiUrlRoot: '',
   loginUrlRoot: '',
+  authToken: '',
   onAuthError: () => {}
 };
 

@@ -17,11 +17,17 @@ export function runApi<R, T>(api: Api<R, T>): Request<T> {
     ? {...api.requestOptions}
     : {};
 
-  options.headers = options.headers || {};
+  options.headers = options.headers || [];
   options.on = options.on || {};
 
   if (apiOptions.headers) {
     options.headers = mergeHeaders(options.headers, apiOptions.headers);
+  }
+
+  if (!getHeader(options.headers, 'Authorization') && config.authToken) {
+    options.headers = mergeHeaders(options.headers, [
+      ['Authorization', `Bearer ${config.authToken}`]
+    ]);
   }
 
   if (apiOptions.on) {
@@ -90,6 +96,13 @@ function mergeHeaders(
     ...headers1,
     ...headers2
   };
+}
+
+function getHeader(headers: RequestHeaders, name: string): any {
+  if (Array.isArray(headers)) {
+    return headers.find(header => header[0] === name);
+  }
+  return headers.get(name);
 }
 
 function convertObjectHeadersToArrayHeaders(
