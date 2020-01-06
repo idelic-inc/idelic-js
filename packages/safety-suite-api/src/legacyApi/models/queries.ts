@@ -101,6 +101,17 @@ export function exportEnforcementsReport(query: ModelQuery): LegacyApi {
   };
 }
 
+export function exportTurnoverReport(query: ModelQuery): LegacyApi {
+  return {
+    method: 'POST',
+    route: '/api/models/query/canned/turnover/xlsx',
+    requestOptions: {
+      body: query,
+      responseType: 'blob'
+    }
+  };
+}
+
 export function exportOshaReport(input: OshaInput): LegacyApi {
   return {
     method: 'POST',
