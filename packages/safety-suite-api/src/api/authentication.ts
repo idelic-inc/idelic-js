@@ -9,55 +9,20 @@ import {
 } from '../utils';
 import {InputUser, ImInputUser, ImUser, User, UserRecord} from './users';
 
-export interface RegisterUser {
-  email: string;
-  token: string;
-  password: string;
-  passwordConfirm: string;
-}
-
-export interface LoginUser {
-  email: string;
-  password: string;
-}
-
 export interface ChangePasswordRequest {
-  oldPassword: string;
-  newPassword: string;
-  confirmPassword: string;
-}
-
-export interface ResetPasswordRequest {
   email: string;
 }
-
-export interface ResetPassword {
-  email: string;
-  token: string;
-  password: string;
-  passwordConfirm: string;
+export interface ValidateTokenRequest {
+  customerAlias: string;
+  manageUsers: boolean;
 }
 
-export const RegisterUserRecord = Record<RegisterUser>({
-  email: '',
-  token: '',
-  password: '',
-  passwordConfirm: ''
-});
-export const LoginUserRecord = Record<LoginUser>({email: '', password: ''});
 export const ChangePasswordRequestRecord = Record<ChangePasswordRequest>({
-  oldPassword: '',
-  newPassword: '',
-  confirmPassword: ''
-});
-export const ResetPasswordRequestRecord = Record<ResetPasswordRequest>({
   email: ''
 });
-export const ResetPasswordRecord = Record<ResetPassword>({
-  email: '',
-  token: '',
-  password: '',
-  passwordConfirm: ''
+export const ValidateTokenRequestRecord = Record<ValidateTokenRequest>({
+  customerAlias: '',
+  manageUsers: false
 });
 
 export function invite(user: InputUser, apiOptions?: ApiOptions): Request<User>;
@@ -109,70 +74,6 @@ export function resendInvite(
   });
 }
 
-export function register(
-  user: RegisterUser,
-  apiOptions?: ApiOptions
-): Request<EmptyResponse>;
-export function register(
-  user: Record<RegisterUser>,
-  apiOptions?: ApiOptions
-): Request<EmptyResponse>;
-export function register(
-  user: RegisterUser | Record<RegisterUser>,
-  apiOptions: ApiOptions = {}
-): Request<EmptyResponse> {
-  const transformers = createRecordRequestTransformer<RegisterUser>(
-    apiOptions.useImmutable
-  );
-  return runApi({
-    method: 'POST',
-    urlRoot: 'loginUrlRoot',
-    route: '/api/1.0/authentication/register',
-    apiOptions,
-    requestOptions: {
-      body: user,
-      transformers
-    }
-  });
-}
-
-export function login(
-  user: LoginUser,
-  apiOptions?: ApiOptions
-): Request<EmptyResponse>;
-export function login(
-  user: Record<LoginUser>,
-  apiOptions?: ApiOptions
-): Request<EmptyResponse>;
-export function login(
-  user: LoginUser | Record<LoginUser>,
-  apiOptions: ApiOptions = {}
-): Request<EmptyResponse> {
-  const transformers = createRecordRequestTransformer<LoginUser>(
-    apiOptions.useImmutable
-  );
-  return runApi({
-    method: 'POST',
-    urlRoot: 'loginUrlRoot',
-    route: '/api/1.0/authentication/login',
-    apiOptions,
-    requestOptions: {
-      body: user,
-      transformers
-    }
-  });
-}
-
-export function logout(apiOptions: ApiOptions = {}): Request<EmptyResponse> {
-  return runApi({
-    method: 'POST',
-    urlRoot: 'loginUrlRoot',
-    route: '/api/1.0/authentication/logout',
-    apiOptions,
-    requestOptions: {body: {}}
-  });
-}
-
 export function changePassword(
   body: ChangePasswordRequest,
   apiOptions?: ApiOptions
@@ -197,49 +98,25 @@ export function changePassword(
   });
 }
 
-export function resetPasswordRequest(
-  body: ResetPasswordRequest,
+export function validateToken(
+  body: ValidateTokenRequest,
   apiOptions?: ApiOptions
-): Request<EmptyResponse>;
-export function resetPasswordRequest(
-  body: Record<ResetPasswordRequest>,
+): Request<number>;
+export function validateToken(
+  body: Record<ValidateTokenRequest>,
   apiOptions?: ApiOptions
-): Request<EmptyResponse>;
-export function resetPasswordRequest(
-  body: ResetPasswordRequest | Record<ResetPasswordRequest>,
+): Request<number>;
+export function validateToken(
+  body: ValidateTokenRequest | Record<ValidateTokenRequest>,
   apiOptions: ApiOptions = {}
-): Request<EmptyResponse> {
-  const transformers = createRecordRequestTransformer<ResetPasswordRequest>(
+): Request<number> {
+  const transformers = createRecordRequestTransformer<ValidateTokenRequest>(
     apiOptions.useImmutable
   );
   return runApi({
     method: 'POST',
     urlRoot: 'loginUrlRoot',
-    route: '/api/1.0/authentication/resetPasswordRequest',
-    apiOptions,
-    requestOptions: {body, transformers}
-  });
-}
-
-export function resetPassword(
-  body: ResetPassword,
-  apiOptions?: ApiOptions
-): Request<EmptyResponse>;
-export function resetPassword(
-  body: Record<ResetPassword>,
-  apiOptions?: ApiOptions
-): Request<EmptyResponse>;
-export function resetPassword(
-  body: ResetPassword | Record<ResetPassword>,
-  apiOptions: ApiOptions = {}
-): Request<EmptyResponse> {
-  const transformers = createRecordRequestTransformer<ResetPassword>(
-    apiOptions.useImmutable
-  );
-  return runApi({
-    method: 'POST',
-    urlRoot: 'loginUrlRoot',
-    route: '/api/1.0/authentication/resetPassword',
+    route: '/api/1.0/authentication/validateToken',
     apiOptions,
     requestOptions: {body, transformers}
   });
