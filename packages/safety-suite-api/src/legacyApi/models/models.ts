@@ -35,18 +35,23 @@ export type OrderBy = {
   direction: 'ASC' | 'DESC';
   parameter: ByGroup | ById | ByTemplate | ByRelation | ByField;
 };
+
+export type ModelOptions = ModelFilterOptions & ModelListOptions & ModelOutputOptions; 
+
 export type ModelListOptions = {
+  limit?: number;
   orderBy?: OrderBy;
   start?: number;
-  limit?: number;
 };
 export type ModelOutputOptions = {
+  profilePicture?: boolean;
   protectedFields?: boolean;
-  updateReadComputations?: boolean;
-  relationsLevel?: number;
   relationModels?: string;
   relationNames?: string[];
   relationTemplateIds?: Id[];
+  relationsLevel?: number;
+  restrictReadComputations?: string[];
+  updateReadComputations?: boolean;
   users?: boolean;
 };
 
@@ -59,7 +64,7 @@ export function getModelsCount(query: ModelFilterOptions): LegacyApi {
 }
 
 export function getModels(
-  query: ModelFilterOptions & ModelListOptions & ModelOutputOptions
+  query: ModelOptions
 ): LegacyApi {
   if (query.ids || query.orderBy) {
     return {
