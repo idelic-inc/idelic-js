@@ -36,7 +36,9 @@ export type OrderBy = {
   parameter: ByGroup | ById | ByTemplate | ByRelation | ByField;
 };
 
-export type ModelOptions = ModelFilterOptions & ModelListOptions & ModelOutputOptions; 
+export type ModelOptions = ModelFilterOptions &
+  ModelListOptions &
+  ModelOutputOptions;
 
 export type ModelListOptions = {
   limit?: number;
@@ -63,9 +65,7 @@ export function getModelsCount(query: ModelFilterOptions): LegacyApi {
   };
 }
 
-export function getModels(
-  query: ModelOptions
-): LegacyApi {
+export function getModels(query: ModelOptions): LegacyApi {
   if (query.ids || query.orderBy) {
     return {
       method: 'POST',
