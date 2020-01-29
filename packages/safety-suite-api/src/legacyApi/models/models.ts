@@ -8,7 +8,7 @@ export type ModelFilterOptions = {
   templateIds?: Id[];
   templateAliases?: Alias[];
   groupIds?: Id[];
-  textSearch?: any;
+  textSearch?: SearchText[];
   jsValueSearch?: any;
   protectedValueSearch?: any;
 };
@@ -57,6 +57,11 @@ export type ModelOutputOptions = {
   users?: boolean;
 };
 
+type SearchText = {
+  field: string;
+  value: string;
+};
+
 export function getModelsCount(query: ModelFilterOptions): LegacyApi {
   return {
     method: 'GET',
@@ -66,7 +71,7 @@ export function getModelsCount(query: ModelFilterOptions): LegacyApi {
 }
 
 export function getModels(query: ModelOptions): LegacyApi {
-  if (query.ids || query.orderBy) {
+  if (query.ids || query.orderBy || query.textSearch) {
     return {
       method: 'POST',
       route: '/api/models/get',
