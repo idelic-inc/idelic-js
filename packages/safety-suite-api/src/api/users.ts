@@ -13,6 +13,11 @@ export interface UserPermission {
   customerId: number;
   viewData: boolean;
   manageUsers: boolean;
+  viewDocuments?: boolean;
+  downloadDocuments?: boolean;
+  uploadDocuments?: boolean;
+  editDocuments?: boolean;
+  deleteDocuments?: boolean;
   admin?: boolean;
   allowProtected?: boolean;
   readGroupPermissions?: number[];
@@ -58,6 +63,11 @@ export const UserPermissionRecord = Record<ImUserPermission>({
   customerId: -1,
   viewData: false,
   manageUsers: false,
+  viewDocuments: false,
+  downloadDocuments: false,
+  uploadDocuments: false,
+  editDocuments: false,
+  deleteDocuments: false,
   admin: undefined,
   allowProtected: undefined,
   readGroupPermissions: List(),
