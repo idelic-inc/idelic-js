@@ -9,8 +9,11 @@ export type ErrorResponse = {
 
 export class ApiError extends Error {
   code?: number;
+
   status: number;
+
   errorBlob?: Blob;
+
   wasCancelled: boolean;
 
   constructor(netError: NetError<ErrorResponse>) {
