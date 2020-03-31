@@ -55,7 +55,7 @@ export function createRecordListResponseTransformer<T>(
   if (useImmutable) {
     return {
       response: (data: T[]) =>
-        List(data).map(item => nestedRecordFromJS(Factory, item))
+        List(data).map((item) => nestedRecordFromJS(Factory, item))
     };
   }
   return {};
@@ -94,7 +94,7 @@ export function createRecordListResponseTransformer<T>(
  * });
  * ```
  */
-function nestedRecordFromJS<T>(
+export function nestedRecordFromJS<T>(
   Factory: Record.Factory<T>,
   data: any
 ): Record<T> {
@@ -105,7 +105,7 @@ function nestedRecordFromJS<T>(
     const root = path[0];
     const subPath = path
       .slice(1)
-      .map(part => (typeof part === 'number' ? 0 : part));
+      .map((part) => (typeof part === 'number' ? 0 : part));
     const defaultValue = Factory.prototype._defaultValues[root].getIn(subPath);
     if (defaultValue instanceof Record) {
       return Object.getPrototypeOf(defaultValue).constructor(value);

@@ -70,7 +70,7 @@ export function createModelDocument(
   const form = new FormData();
   form.append('file', content);
   form.append('name', input.name + input.extension);
-  input.labels.forEach(label => form.append('labels', label));
+  input.labels.forEach((label) => form.append('labels', label));
   form.append('protected', input.protected.toString());
   form.append('archived', input.archived.toString());
 

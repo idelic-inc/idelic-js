@@ -1,66 +1,13 @@
-import {Alias, Id} from '../../types';
+import {Id} from '../../types';
 import {LegacyApi} from '../types';
 
-export type InputModel = any;
-export type Model = any;
-export type ModelFilterOptions = {
-  ids?: Id[];
-  templateIds?: Id[];
-  templateAliases?: Alias[];
-  groupIds?: Id[];
-  textSearch?: SearchText[];
-  jsValueSearch?: any;
-  protectedValueSearch?: any;
-};
-export type ByGroup = {
-  type: 'byGroup';
-};
-export type ById = {
-  type: 'byId';
-};
-export type ByTemplate = {
-  type: 'byTemplate';
-};
-export type ByRelation = {
-  type: 'byRelation';
-  name: string;
-  isParent: boolean;
-  field?: string;
-};
-export type ByField = {
-  type: 'byField';
-  name: string;
-};
-export type OrderBy = {
-  direction: 'ASC' | 'DESC';
-  parameter: ByGroup | ById | ByTemplate | ByRelation | ByField;
-};
-
-export type ModelOptions = ModelFilterOptions &
-  ModelListOptions &
-  ModelOutputOptions;
-
-export type ModelListOptions = {
-  limit?: number;
-  orderBy?: OrderBy;
-  start?: number;
-};
-export type ModelOutputOptions = {
-  profilePicture?: boolean;
-  protectedFields?: boolean;
-  relationModels?: string;
-  relationNames?: string[];
-  relationTemplateIds?: Id[];
-  relationsLevel?: number;
-  restrictReadComputations?: string[];
-  updateReadComputations?: boolean;
-  users?: boolean;
-};
-
-type SearchText = {
-  field: string;
-  value: string;
-};
+import {
+  InputModel,
+  Model,
+  ModelFilterOptions,
+  ModelOptions,
+  ModelOutputOptions
+} from '../../api';
 
 export function getModelsCount(query: ModelFilterOptions): LegacyApi {
   return {
@@ -93,8 +40,8 @@ export function getModel(modelId: Id, query: ModelOutputOptions): LegacyApi {
   };
 }
 
-export function createModel(
-  body: InputModel,
+export function createModel<F, R>(
+  body: InputModel<F, R>,
   query: ModelOutputOptions
 ): LegacyApi {
   return {
@@ -107,7 +54,10 @@ export function createModel(
   };
 }
 
-export function updateModel(body: Model, query: ModelOutputOptions): LegacyApi {
+export function updateModel<F, R, C>(
+  body: Model<F, R, C>,
+  query: ModelOutputOptions
+): LegacyApi {
   return {
     method: 'PUT',
     route: '/api/models',

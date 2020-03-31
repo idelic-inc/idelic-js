@@ -46,7 +46,7 @@ export function runApi<R, T>(api: Api<R, T>): Request<T> {
   }
 
   options.transformers = {
-    error: netError => new ApiError(netError),
+    error: (netError) => new ApiError(netError),
     ...options.transformers
   };
 
@@ -100,7 +100,7 @@ function mergeHeaders(
 
 function getHeader(headers: RequestHeaders, name: string): any {
   if (Array.isArray(headers)) {
-    return headers.find(header => header[0] === name);
+    return headers.find((header) => header[0] === name);
   }
   return headers.get(name);
 }
@@ -108,7 +108,7 @@ function getHeader(headers: RequestHeaders, name: string): any {
 function convertObjectHeadersToArrayHeaders(
   headers: Record<string, any>
 ): [string, any][] {
-  return Object.keys(headers).map(key => [key, headers[key]]);
+  return Object.keys(headers).map((key) => [key, headers[key]]);
 }
 
 function setHeader(
