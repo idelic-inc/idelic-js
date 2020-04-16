@@ -55,9 +55,20 @@ export interface User {
   permissions: UserPermission[];
 }
 
-export type ImUser = Omit<User, 'permissions'> & {
+export interface UserWithErrors {
+  user: User;
+  failedCustomers: number[];
+}
+
+export interface ImUser extends Omit<User, 'permissions'> {
   permissions: List<Record<ImUserPermission>>;
-};
+}
+
+export interface ImUserWithErrors
+  extends Omit<UserWithErrors, 'user' | 'failedCustomers'> {
+  user: Record<ImUser>;
+  failedCustomers: List<number>;
+}
 
 export const UserPermissionRecord = Record<ImUserPermission>({
   customerId: -1,
@@ -91,6 +102,11 @@ export const UserRecord = Record<ImUser>({
   registered: false,
   active: false,
   permissions: List([UserPermissionRecord()])
+});
+
+export const UserWithErrorsRecord = Record<ImUserWithErrors>({
+  user: UserRecord(),
+  failedCustomers: List<number>()
 });
 
 export function getCurrentUser(apiOptions?: ApiOptions): Request<User>;
@@ -133,18 +149,21 @@ export function getUsers(
   });
 }
 
-export function getUser(userId: number, apiOptions?: ApiOptions): Request<User>;
 export function getUser(
   userId: number,
   apiOptions?: ApiOptions
-): Request<Record<ImUser>>;
+): Request<UserWithErrors>;
+export function getUser(
+  userId: number,
+  apiOptions?: ApiOptions
+): Request<Record<ImUserWithErrors>>;
 export function getUser(
   userId: number,
   apiOptions: ApiOptions = {}
-): Request<User | Record<ImUser>> {
-  const transformers = createRecordResponseTransformer<ImUser>(
+): Request<UserWithErrors | Record<ImUserWithErrors>> {
+  const transformers = createRecordResponseTransformer<ImUserWithErrors>(
     apiOptions.useImmutable,
-    UserRecord
+    UserWithErrorsRecord
   );
   return runApi({
     method: 'GET',
@@ -155,18 +174,21 @@ export function getUser(
   });
 }
 
-export function updateUser(user: User, apiOptions?: ApiOptions): Request<User>;
+export function updateUser(
+  user: User,
+  apiOptions?: ApiOptions
+): Request<UserWithErrors>;
 export function updateUser(
   user: Record<ImUser>,
   apiOptions?: ApiOptions
-): Request<Record<ImUser>>;
+): Request<Record<ImUserWithErrors>>;
 export function updateUser(
   user: User | Record<ImUser>,
   apiOptions: ApiOptions = {}
-): Request<User | Record<ImUser>> {
-  const transformers = createRecordResponseTransformer<ImUser>(
+): Request<UserWithErrors | Record<ImUserWithErrors>> {
+  const transformers = createRecordResponseTransformer<ImUserWithErrors>(
     apiOptions.useImmutable,
-    UserRecord
+    UserWithErrorsRecord
   );
   return runApi({
     method: 'PUT',

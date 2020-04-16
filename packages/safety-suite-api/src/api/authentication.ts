@@ -7,7 +7,15 @@ import {
   createRecordRequestTransformer,
   createRecordTransformers
 } from '../utils';
-import {InputUser, ImInputUser, ImUser, User, UserRecord} from './users';
+import {
+  InputUser,
+  ImInputUser,
+  ImUser,
+  User,
+  ImUserWithErrors,
+  UserWithErrorsRecord,
+  UserWithErrors
+} from './users';
 
 export interface ChangePasswordRequest {
   email: string;
@@ -25,18 +33,21 @@ export const ValidateTokenRequestRecord = Record<ValidateTokenRequest>({
   manageUsers: false
 });
 
-export function invite(user: InputUser, apiOptions?: ApiOptions): Request<User>;
+export function invite(
+  user: InputUser,
+  apiOptions?: ApiOptions
+): Request<UserWithErrors>;
 export function invite(
   user: Record<ImInputUser>,
   apiOptions?: ApiOptions
-): Request<Record<ImUser>>;
+): Request<Record<ImUserWithErrors>>;
 export function invite(
   user: InputUser | Record<ImInputUser>,
   apiOptions: ApiOptions = {}
-): Request<User | Record<ImUser>> {
-  const transformers = createRecordTransformers<ImInputUser, ImUser>(
+): Request<UserWithErrors | Record<ImUserWithErrors>> {
+  const transformers = createRecordTransformers<ImInputUser, ImUserWithErrors>(
     apiOptions.useImmutable,
-    UserRecord
+    UserWithErrorsRecord
   );
   return runApi({
     method: 'POST',
