@@ -12,8 +12,6 @@ export class ApiError extends Error {
 
   status: number;
 
-  errorBlob?: Blob;
-
   wasCancelled: boolean;
 
   constructor(netError: NetError<ErrorResponse>) {
@@ -24,9 +22,6 @@ export class ApiError extends Error {
       this.code = netError.response.code;
     }
     this.wasCancelled = netError.request.readyState === 0;
-    if (netError.response instanceof Blob) {
-      this.errorBlob = netError.response;
-    }
   }
 
   static createErrorMessage(netError: NetError<ErrorResponse>): string {

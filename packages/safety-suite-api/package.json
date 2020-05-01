@@ -1,6 +1,6 @@
 {
   "name": "idelic-safety-suite-api",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "API helper library for Safety Suite",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -36,15 +36,14 @@
     "@types/jest": "^24.0.18",
     "@types/moment-timezone": "^0.5.12",
     "@types/node": "^13.9.3",
-    "@typescript-eslint/eslint-plugin": "^2.2.0",
-    "@typescript-eslint/parser": "^2.2.0",
+    "@typescript-eslint/eslint-plugin": "^2.19.2",
+    "@typescript-eslint/parser": "^2.19.2",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-typescript": "^5.0.0",
-    "eslint-config-prettier": "^6.7.0",
+    "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.2",
-    "eslint-plugin-react": "^7.14.3",
     "glob": "^7.1.6",
     "husky": "^3.0.5",
     "immutable": "^4.0.0-rc.12",
@@ -54,7 +53,7 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "idelic-safety-net": "^1.1.0",
+    "idelic-safety-net": "^1.2.0",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.26",
     "source-map-support": "^0.5.13"

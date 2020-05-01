@@ -9,7 +9,7 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "airbnb-typescript",
+    "airbnb-typescript/base",
     "prettier",
     "prettier/@typescript-eslint"
   ],
@@ -20,7 +20,6 @@
     "@typescript-eslint/no-explicit-any": "off",
     "object-curly-spacing": "off",
     "comma-dangle": "off",
-    "react/prop-types": "off",
     "import/no-cycle": "off",
     "no-underscore-dangle": "off",
     "import/prefer-default-export": "off",

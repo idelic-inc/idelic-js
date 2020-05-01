@@ -5,9 +5,11 @@ import {
   RequestOptions
 } from 'idelic-safety-net';
 
+export type UrlRoot = 'apiUrlRoot' | 'loginUrlRoot' | 'documentLibraryUrlRoot';
+
 export interface Api<R, T> {
   method: Methods;
-  urlRoot?: 'apiUrlRoot' | 'loginUrlRoot';
+  urlRoot?: UrlRoot;
   route: string;
   notJson?: boolean;
   apiOptions?: ApiOptions;
@@ -26,3 +28,8 @@ export type EmptyResponse = {};
 
 export type Alias = string;
 export type Id = number;
+export type UnixTime = number;
+
+export interface ApiResponse<T> {
+  response: T;
+}

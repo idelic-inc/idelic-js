@@ -1,5 +1,31 @@
 import {fromJS, isKeyed, List, Record} from 'immutable';
 
+import {ApiResponse} from './types';
+
+export function createRecordApiResponseFactory<T>(
+  responseFactory: Record.Factory<T>
+): Record.Factory<ApiResponse<Record<T>>> {
+  return Record<ApiResponse<Record<T>>>({
+    response: responseFactory()
+  });
+}
+
+export function createListApiResponseFactory<T>(): Record.Factory<
+  ApiResponse<List<T>>
+> {
+  return Record<ApiResponse<List<T>>>({
+    response: List<T>()
+  });
+}
+
+export function createRecordListApiResponseFactory<T>(
+  responseFactory: Record.Factory<T>
+): Record.Factory<ApiResponse<List<Record<T>>>> {
+  return Record<ApiResponse<List<Record<T>>>>({
+    response: List<Record<T>>([responseFactory()])
+  });
+}
+
 export function createRecordTransformers<R, T>(
   useImmutable: boolean | undefined,
   Factory: Record.Factory<T>

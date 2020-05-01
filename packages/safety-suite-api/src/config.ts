@@ -1,8 +1,7 @@
 import {ApiError} from './error';
+import {UrlRoot} from './types';
 
-export type Config = {
-  apiUrlRoot: string;
-  loginUrlRoot: string;
+export type Config = {[R in UrlRoot]: string} & {
   authToken?: string;
   onAuthError(error: ApiError): void;
 };
@@ -15,6 +14,7 @@ export let config: _Config = {
   initialized: false,
   apiUrlRoot: '',
   loginUrlRoot: '',
+  documentLibraryUrlRoot: '',
   authToken: '',
   onAuthError: () => {}
 };
