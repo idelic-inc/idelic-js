@@ -40,6 +40,16 @@ export interface DocumentProperty {
   uploadedByName?: string;
 }
 
+export interface DeletedDownloads {
+  deleteCount: number;
+}
+
+export interface DownloadStatus {
+  id: number;
+  fileName: string;
+  status: 'ready' | 'preparing';
+}
+
 export interface DocumentErrorMessage {
   id: number;
   message: string;
@@ -121,6 +131,16 @@ export interface RotateImageRequest {
   id: number;
 }
 
+export const DeletedDownloadsRecord = Record<DeletedDownloads>({
+  deleteCount: -1
+});
+
+export const DownloadStatusRecord = Record<DownloadStatus>({
+  id: -1,
+  fileName: '',
+  status: 'preparing'
+});
+
 export const RotateImageRequestRecord = Record<RotateImageRequest>({
   id: -1
 });
@@ -177,6 +197,14 @@ export const GetCommonLabelsResponseRecord = createListApiResponseFactory<
 export const BulkRequestRecord = Record<ImBulkRequest>({
   documentIds: List<number>()
 });
+
+export const DeletedDownloadsResponseRecord = createRecordApiResponseFactory<
+  DeletedDownloads
+>(DeletedDownloadsRecord);
+
+export const DownloadStatusResponseRecord = createRecordApiResponseFactory<
+  DownloadStatus
+>(DownloadStatusRecord);
 
 export const DocumentActionStatusResponseRecord = createRecordApiResponseFactory<
   ImDocumentActionStatus
@@ -426,34 +454,96 @@ export function deleteDocuments(
   });
 }
 
-export function downloadDocuments(
+export function prepareBulkDownload(
   body: BulkRequest,
   query: DocumentQuery,
   apiOptions?: ApiOptions
-): Request<Blob>;
-export function downloadDocuments(
+): Request<ApiResponse<DownloadStatus>>;
+export function prepareBulkDownload(
   body: Record<ImBulkRequest>,
   query: DocumentQuery,
   apiOptions?: ApiOptions
-): Request<Blob>;
-export function downloadDocuments(
+): Request<Record<ApiResponse<Record<DownloadStatus>>>>;
+export function prepareBulkDownload(
   body: BulkRequest | Record<ImBulkRequest>,
   query: DocumentQuery,
   apiOptions: ApiOptions = {}
-): Request<Blob> {
-  const transformers = createRecordRequestTransformer<ImBulkRequest>(
-    apiOptions.useImmutable
-  );
+): Request<
+  ApiResponse<DownloadStatus> | Record<ApiResponse<Record<DownloadStatus>>>
+> {
+  const transformers = createRecordTransformers<
+    ImBulkRequest,
+    ApiResponse<Record<DownloadStatus>>
+  >(apiOptions.useImmutable, DownloadStatusResponseRecord);
   return runApi({
     method: 'POST',
     urlRoot: 'documentLibraryUrlRoot',
-    route: '/api/documents/download',
+    route: '/api/documents/downloads',
     apiOptions,
     requestOptions: {
-      responseType: 'blob',
       body,
       query,
       transformers
+    }
+  });
+}
+
+export function deleteExpiredDownloads(
+  query: DocumentQuery,
+  apiOptions: ApiOptions = {}
+): Request<
+  ApiResponse<DeletedDownloads> | Record<ApiResponse<Record<DeletedDownloads>>>
+> {
+  const transformers = createRecordResponseTransformer<
+    ApiResponse<Record<DeletedDownloads>>
+  >(apiOptions.useImmutable, DeletedDownloadsResponseRecord);
+  return runApi({
+    method: 'DELETE',
+    urlRoot: 'documentLibraryUrlRoot',
+    route: '/api/documents/downloads/expired',
+    apiOptions,
+    requestOptions: {
+      query,
+      transformers
+    }
+  });
+}
+
+export function getDownloadStatus(
+  downloadId: number,
+  query: DocumentQuery,
+  apiOptions: ApiOptions = {}
+): Request<
+  ApiResponse<DownloadStatus> | Record<ApiResponse<Record<DownloadStatus>>>
+> {
+  const transformers = createRecordResponseTransformer<
+    ApiResponse<Record<DownloadStatus>>
+  >(apiOptions.useImmutable, DownloadStatusResponseRecord);
+  return runApi({
+    method: 'GET',
+    urlRoot: 'documentLibraryUrlRoot',
+    route: `/api/documents/downloads/status/${downloadId}`,
+    apiOptions,
+    requestOptions: {
+      query,
+      transformers
+    }
+  });
+}
+
+export function getReadyDownload(
+  downloadId: number,
+  query: DocumentQuery,
+  apiOptions: ApiOptions = {}
+): Request<Blob> {
+  return runApi({
+    method: 'GET',
+    urlRoot: 'documentLibraryUrlRoot',
+    route: `/api/documents/downloads/content/${downloadId}`,
+    apiOptions,
+    requestOptions: {
+      query,
+      responseType: 'blob'
     }
   });
 }
