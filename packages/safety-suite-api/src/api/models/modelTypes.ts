@@ -4,11 +4,12 @@
 // See `scripts/generateModelTypes/index.ts` for more details.
 import {InputModel, Model} from './types';
 
-// Type definitions for advancedAccidents / Accident (accident)
+// Type definitions for /advancedAccidents / Accident (accident)
 
 export interface AccidentFields {
   accidentType?: string | null;
   ataReportable?: boolean;
+  basicType?: string | null;
   citation?: string | null;
   citationCount?: string;
   citationDetails?: string;
@@ -95,7 +96,9 @@ export interface AccidentRelations {
   assets?: EquipmentModel[];
   claims?: ClaimModel[];
   correctiveAction?: CorrectiveActionModel | null;
+  fmcsaBasicReport?: FmcsaBasicReportModel | null;
   primaryModel?: EmployeeModel | null;
+  watchListReasons?: WatchListReasonModel | null;
   witnesses?: WitnessModel[];
 }
 
@@ -103,12 +106,15 @@ export interface AccidentInputRelations {
   assets?: EquipmentInputModel[];
   claims?: ClaimInputModel[];
   correctiveAction?: CorrectiveActionInputModel | null;
+  fmcsaBasicReport?: FmcsaBasicReportInputModel | null;
   primaryModel?: EmployeeInputModel | null;
+  watchListReasons?: WatchListReasonInputModel | null;
   witnesses?: WitnessInputModel[];
 }
 
 export interface AccidentComputations {
   assetsInvolved: any;
+  claimsCount: any;
   csaScore: number | null;
   fullAddress: any;
   hasClaim: boolean;
@@ -131,7 +137,7 @@ export type AccidentInputModel = InputModel<
   AccidentInputRelations
 >;
 
-// Type definitions for billOfLading / Bill of Lading Incident (bill_of_lading_violation)
+// Type definitions for /billOfLading / Bill of Lading Incident (bill_of_lading_violation)
 
 export interface BillOfLadingViolationFields {
   consigneeAddress?: string;
@@ -158,11 +164,13 @@ export interface BillOfLadingViolationFields {
 export interface BillOfLadingViolationRelations {
   correctiveAction?: CorrectiveActionModel | null;
   primaryModel?: EmployeeModel | null;
+  watchListReasons?: WatchListReasonModel | null;
 }
 
 export interface BillOfLadingViolationInputRelations {
   correctiveAction?: CorrectiveActionInputModel | null;
   primaryModel?: EmployeeInputModel | null;
+  watchListReasons?: WatchListReasonInputModel | null;
 }
 
 export interface BillOfLadingViolationComputations {}
@@ -178,7 +186,7 @@ export type BillOfLadingViolationInputModel = InputModel<
   BillOfLadingViolationInputRelations
 >;
 
-// Type definitions for default/awards / Award (award)
+// Type definitions for /default/awards / Award (award)
 
 export interface AwardFields {
   awardName?: string;
@@ -202,7 +210,7 @@ export type AwardModel = Model<AwardFields, AwardRelations, AwardComputations>;
 
 export type AwardInputModel = InputModel<AwardFields, AwardInputRelations>;
 
-// Type definitions for default/awards / Employee Award (employee_award)
+// Type definitions for /default/awards / Employee Award (employee_award)
 
 export interface EmployeeAwardFields {
   awardLevel?: number | null;
@@ -235,7 +243,7 @@ export type EmployeeAwardInputModel = InputModel<
   EmployeeAwardInputRelations
 >;
 
-// Type definitions for default/certifications / Certification (certification)
+// Type definitions for /default/certifications / Certification (certification)
 
 export interface CertificationFields {
   certificationCategory?: string | null;
@@ -264,7 +272,7 @@ export type CertificationInputModel = InputModel<
   CertificationInputRelations
 >;
 
-// Type definitions for default/certifications / Employee Certification (employee_certification)
+// Type definitions for /default/certifications / Employee Certification (employee_certification)
 
 export interface EmployeeCertificationFields {
   approved?: string | null;
@@ -298,7 +306,7 @@ export type EmployeeCertificationInputModel = InputModel<
   EmployeeCertificationInputRelations
 >;
 
-// Type definitions for default/drugTests / Test (employee_test)
+// Type definitions for /default/drugTests / Test (employee_test)
 
 export interface EmployeeTestFields {
   bacResult?: number | null;
@@ -345,7 +353,7 @@ export type EmployeeTestInputModel = InputModel<
   EmployeeTestInputRelations
 >;
 
-// Type definitions for default / Emergency Contact (emergency_contact)
+// Type definitions for /default / Emergency Contact (emergency_contact)
 
 export interface EmergencyContactFields {
   address?: string;
@@ -381,7 +389,7 @@ export type EmergencyContactInputModel = InputModel<
   EmergencyContactInputRelations
 >;
 
-// Type definitions for default/equipment / Equipment (equipment)
+// Type definitions for /default/equipment / Equipment (equipment)
 
 export interface EquipmentFields {
   amendDate?: number | null;
@@ -532,7 +540,7 @@ export type EquipmentInputModel = InputModel<
   EquipmentInputRelations
 >;
 
-// Type definitions for default/equipment / Equipment Toll Passes (equipment_toll_passes)
+// Type definitions for /default/equipment / Equipment Toll Passes (equipment_toll_passes)
 
 export interface EquipmentTollPassesFields {
   tollPassType?: string | null;
@@ -560,7 +568,7 @@ export type EquipmentTollPassesInputModel = InputModel<
   EquipmentTollPassesInputRelations
 >;
 
-// Type definitions for default/equipment / Maintenance (maintenance)
+// Type definitions for /default/equipment / Maintenance (maintenance)
 
 export interface MaintenanceFields {
   cost?: number | null;
@@ -593,7 +601,7 @@ export type MaintenanceInputModel = InputModel<
   MaintenanceInputRelations
 >;
 
-// Type definitions for default/equipment / Mileage (mileage)
+// Type definitions for /default/equipment / Mileage (mileage)
 
 export interface MileageFields {
   deliveryDate?: number | null;
@@ -621,7 +629,7 @@ export type MileageInputModel = InputModel<
   MileageInputRelations
 >;
 
-// Type definitions for default/events / Claim (claim)
+// Type definitions for /default/events / Claim (claim)
 
 export interface ClaimFields {
   address?: string;
@@ -692,7 +700,7 @@ export type ClaimModel = Model<ClaimFields, ClaimRelations, ClaimComputations>;
 
 export type ClaimInputModel = InputModel<ClaimFields, ClaimInputRelations>;
 
-// Type definitions for default/events / Corrective Action (corrective_action)
+// Type definitions for /default/events / Corrective Action (corrective_action)
 
 export interface CorrectiveActionFields {
   correctiveActionType?: string | null;
@@ -760,7 +768,7 @@ export type CorrectiveActionInputModel = InputModel<
   CorrectiveActionInputRelations
 >;
 
-// Type definitions for default/events / Cost (cost)
+// Type definitions for /default/events / Cost (cost)
 
 export interface CostFields {
   amount?: number | null;
@@ -784,7 +792,7 @@ export type CostModel = Model<CostFields, CostRelations, CostComputations>;
 
 export type CostInputModel = InputModel<CostFields, CostInputRelations>;
 
-// Type definitions for default/events / Improvement Plan Action (improvement_plan_action)
+// Type definitions for /default/events / Improvement Plan Action (improvement_plan_action)
 
 export interface ImprovementPlanActionFields {
   actualDate?: number | null;
@@ -816,7 +824,7 @@ export type ImprovementPlanActionInputModel = InputModel<
   ImprovementPlanActionInputRelations
 >;
 
-// Type definitions for default/events / Performance Improvement Plan (performance_improvement_plan)
+// Type definitions for /default/events / Performance Improvement Plan (performance_improvement_plan)
 
 export interface PerformanceImprovementPlanFields {
   startDate?: number | null;
@@ -848,7 +856,7 @@ export type PerformanceImprovementPlanInputModel = InputModel<
   PerformanceImprovementPlanInputRelations
 >;
 
-// Type definitions for default/events / Witness (witness)
+// Type definitions for /default/events / Witness (witness)
 
 export interface WitnessFields {
   address?: string;
@@ -884,7 +892,7 @@ export type WitnessInputModel = InputModel<
   WitnessInputRelations
 >;
 
-// Type definitions for default/expirations / A-CDL (a_cdl)
+// Type definitions for /default/expirations / A-CDL (a_cdl)
 
 export interface ACdlFields {
   current?: boolean;
@@ -917,7 +925,7 @@ export type ACdlModel = Model<ACdlFields, ACdlRelations, ACdlComputations>;
 
 export type ACdlInputModel = InputModel<ACdlFields, ACdlInputRelations>;
 
-// Type definitions for default/expirations / B-CDL (b_cdl)
+// Type definitions for /default/expirations / B-CDL (b_cdl)
 
 export interface BCdlFields {
   current?: boolean;
@@ -950,7 +958,7 @@ export type BCdlModel = Model<BCdlFields, BCdlRelations, BCdlComputations>;
 
 export type BCdlInputModel = InputModel<BCdlFields, BCdlInputRelations>;
 
-// Type definitions for default/expirations / Certificate of Violation (certificate_of_violation)
+// Type definitions for /default/expirations / Certificate of Violation (certificate_of_violation)
 
 export interface CertificateOfViolationFields {
   completedDate?: number | null;
@@ -983,7 +991,7 @@ export type CertificateOfViolationInputModel = InputModel<
   CertificateOfViolationInputRelations
 >;
 
-// Type definitions for default/expirations / Employer Pull Notice (CA Only) (employer_pull_notice)
+// Type definitions for /default/expirations / Employer Pull Notice (CA Only) (employer_pull_notice)
 
 export interface EmployerPullNoticeFields {
   completedDate?: number | null;
@@ -1016,7 +1024,7 @@ export type EmployerPullNoticeInputModel = InputModel<
   EmployerPullNoticeInputRelations
 >;
 
-// Type definitions for default/expirations / Employment Verification Form (employment_verification_form)
+// Type definitions for /default/expirations / Employment Verification Form (employment_verification_form)
 
 export interface EmploymentVerificationFormFields {
   eligibleForRehire?: boolean;
@@ -1054,7 +1062,7 @@ export type EmploymentVerificationFormInputModel = InputModel<
   EmploymentVerificationFormInputRelations
 >;
 
-// Type definitions for default/expirations / Employment Verification Form Request (employment_verification_form_request)
+// Type definitions for /default/expirations / Employment Verification Form Request (employment_verification_form_request)
 
 export interface EmploymentVerificationFormRequestFields {
   dateRequested?: number | null;
@@ -1083,7 +1091,7 @@ export type EmploymentVerificationFormRequestInputModel = InputModel<
   EmploymentVerificationFormRequestInputRelations
 >;
 
-// Type definitions for default/expirations / Federal Background Check (federal_background_check)
+// Type definitions for /default/expirations / Federal Background Check (federal_background_check)
 
 export interface FederalBackgroundCheckFields {
   current?: boolean;
@@ -1116,7 +1124,7 @@ export type FederalBackgroundCheckInputModel = InputModel<
   FederalBackgroundCheckInputRelations
 >;
 
-// Type definitions for default/expirations / Hazmat Endorsement (hazmat_endorsement)
+// Type definitions for /default/expirations / Hazmat Endorsement (hazmat_endorsement)
 
 export interface HazmatEndorsementFields {
   current?: boolean;
@@ -1148,7 +1156,7 @@ export type HazmatEndorsementInputModel = InputModel<
   HazmatEndorsementInputRelations
 >;
 
-// Type definitions for default/expirations / Medical Card (medical_card)
+// Type definitions for /default/expirations / Medical Card (medical_card)
 
 export interface MedicalCardFields {
   current?: boolean;
@@ -1185,7 +1193,7 @@ export type MedicalCardInputModel = InputModel<
   MedicalCardInputRelations
 >;
 
-// Type definitions for default/expirations / Medical Waiver (medical_waiver)
+// Type definitions for /default/expirations / Medical Waiver (medical_waiver)
 
 export interface MedicalWaiverFields {
   current?: boolean;
@@ -1219,7 +1227,7 @@ export type MedicalWaiverInputModel = InputModel<
   MedicalWaiverInputRelations
 >;
 
-// Type definitions for default/expirations / MVR (mvr)
+// Type definitions for /default/expirations / MVR (mvr)
 
 export interface MvrFields {
   completedDate?: number | null;
@@ -1245,7 +1253,7 @@ export type MvrModel = Model<MvrFields, MvrRelations, MvrComputations>;
 
 export type MvrInputModel = InputModel<MvrFields, MvrInputRelations>;
 
-// Type definitions for default/expirations / Non-CDL (non_cdl)
+// Type definitions for /default/expirations / Non-CDL (non_cdl)
 
 export interface NonCdlFields {
   current?: boolean;
@@ -1280,7 +1288,7 @@ export type NonCdlModel = Model<
 
 export type NonCdlInputModel = InputModel<NonCdlFields, NonCdlInputRelations>;
 
-// Type definitions for default/expirations / Passport (passport)
+// Type definitions for /default/expirations / Passport (passport)
 
 export interface PassportFields {
   current?: boolean;
@@ -1314,7 +1322,7 @@ export type PassportInputModel = InputModel<
   PassportInputRelations
 >;
 
-// Type definitions for default/expirations / Permit A-CDL (permit_a_cdl)
+// Type definitions for /default/expirations / Permit A-CDL (permit_a_cdl)
 
 export interface PermitACdlFields {
   current?: boolean;
@@ -1354,7 +1362,7 @@ export type PermitACdlInputModel = InputModel<
   PermitACdlInputRelations
 >;
 
-// Type definitions for default/expirations / Permit B-CDL (permit_b_cdl)
+// Type definitions for /default/expirations / Permit B-CDL (permit_b_cdl)
 
 export interface PermitBCdlFields {
   current?: boolean;
@@ -1394,7 +1402,7 @@ export type PermitBCdlInputModel = InputModel<
   PermitBCdlInputRelations
 >;
 
-// Type definitions for default/expirations / TSA (tsa)
+// Type definitions for /default/expirations / TSA (tsa)
 
 export interface TsaFields {
   current?: boolean;
@@ -1421,7 +1429,7 @@ export type TsaModel = Model<TsaFields, TsaRelations, TsaComputations>;
 
 export type TsaInputModel = InputModel<TsaFields, TsaInputRelations>;
 
-// Type definitions for default/expirations / TWIC (twic)
+// Type definitions for /default/expirations / TWIC (twic)
 
 export interface TwicFields {
   current?: boolean;
@@ -1448,7 +1456,7 @@ export type TwicModel = Model<TwicFields, TwicRelations, TwicComputations>;
 
 export type TwicInputModel = InputModel<TwicFields, TwicInputRelations>;
 
-// Type definitions for default/fmcsaBasics / FMCSA BASIC Report (fmcsa_basic_report)
+// Type definitions for /default/fmcsaBasics / FMCSA BASIC Report (fmcsa_basic_report)
 
 export interface FmcsaBasicReportFields {
   controlledSubstancePercentChange?: number | null;
@@ -1499,7 +1507,7 @@ export type FmcsaBasicReportInputModel = InputModel<
   FmcsaBasicReportInputRelations
 >;
 
-// Type definitions for default/probationaryData / Probationary Data (probationary_data)
+// Type definitions for /default/probationaryData / Probationary Data (probationary_data)
 
 export interface ProbationaryDataFields {
   actualEndDate?: number | null;
@@ -1532,7 +1540,7 @@ export type ProbationaryDataInputModel = InputModel<
   ProbationaryDataInputRelations
 >;
 
-// Type definitions for disciplines / Disciplinary Action (disciplinary_action)
+// Type definitions for /disciplines / Disciplinary Action (disciplinary_action)
 
 export interface DisciplinaryActionFields {
   date?: number | null;
@@ -1565,7 +1573,7 @@ export type DisciplinaryActionInputModel = InputModel<
   DisciplinaryActionInputRelations
 >;
 
-// Type definitions for editableEmployees / Employee (employee)
+// Type definitions for /editableEmployees / Employee (employee)
 
 export interface EmployeeFields {
   associatedDivision?: string;
@@ -1580,6 +1588,7 @@ export interface EmployeeFields {
   costCenter?: string | null;
   county?: string;
   effectiveDate?: number | null;
+  eligibleForRehire?: string | null;
   email?: string;
   employeeNumber: string;
   employeePay?: number | null;
@@ -1623,10 +1632,12 @@ export interface EmployeeRelations {
   classes?: TrainingAttendanceModel[];
   classesTrained?: TrainingClassModel[];
   correctiveActions?: CorrectiveActionModel[];
+  cpapViolationReviews?: CpapViolationModel[];
   cpapViolations?: CpapViolationModel[];
   currentCdl?:
     | (ACdlModel | BCdlModel | NonCdlModel | PermitACdlModel | PermitBCdlModel)
     | null;
+  currentWatchListPlan?: ImprovementPlanModel | null;
   customerObservations?: CustomerObservationModel[];
   disciplinaryActions?: DisciplinaryActionModel[];
   documentsWithExpirations?: (
@@ -1679,6 +1690,7 @@ export interface EmployeeInputRelations {
   classes?: TrainingAttendanceInputModel[];
   classesTrained?: TrainingClassInputModel[];
   correctiveActions?: CorrectiveActionInputModel[];
+  cpapViolationReviews?: CpapViolationInputModel[];
   cpapViolations?: CpapViolationInputModel[];
   currentCdl?:
     | (
@@ -1689,6 +1701,7 @@ export interface EmployeeInputRelations {
         | PermitBCdlInputModel
       )
     | null;
+  currentWatchListPlan?: ImprovementPlanInputModel | null;
   customerObservations?: CustomerObservationInputModel[];
   disciplinaryActions?: DisciplinaryActionInputModel[];
   documentsWithExpirations?: (
@@ -1738,6 +1751,7 @@ export interface EmployeeComputations {
   csaScore: number | null;
   currentCdlId: any;
   currentScore: number | null;
+  currentWatchListPlanId: any;
   dateOfLastAccident: number | null;
   dateOfLastBillOfLadingViolation: number | null;
   dateOfLastCPAPViolation: number | null;
@@ -1771,7 +1785,7 @@ export interface EmployeeComputations {
   hasPhysicalExam: any;
   hasPreEmploymentDrugTest: any;
   hasWorkersCompAuthorization: any;
-  label: any;
+  label: string;
   mostRecentPip: number | null;
   numberOfAccidents: any;
   onPlan: any;
@@ -1779,7 +1793,7 @@ export interface EmployeeComputations {
   serviceYears: number | null;
   serviceYearsYear: any;
   totalChecklistItemsNotCompleted: any;
-  trainingExpirations: any;
+  watchListPlanStatus: any;
 }
 
 export type EmployeeModel = Model<
@@ -1793,7 +1807,7 @@ export type EmployeeInputModel = InputModel<
   EmployeeInputRelations
 >;
 
-// Type definitions for employmentStatusHistory / Employment Status History (employment_status_history)
+// Type definitions for /employmentStatusHistory / Employment Status History (employment_status_history)
 
 export interface EmploymentStatusHistoryFields {
   anticipatedEndDate?: number | null;
@@ -1827,7 +1841,7 @@ export type EmploymentStatusHistoryInputModel = InputModel<
   EmploymentStatusHistoryInputRelations
 >;
 
-// Type definitions for enforcements / Enforcement Citation (enforcement_citation)
+// Type definitions for /enforcements / Enforcement Citation (enforcement_citation)
 
 export interface EnforcementCitationFields {
   appealed?: string | null;
@@ -1868,7 +1882,7 @@ export type EnforcementCitationInputModel = InputModel<
   EnforcementCitationInputRelations
 >;
 
-// Type definitions for enforcements / Enforcement (enforcement)
+// Type definitions for /enforcements / Enforcement (enforcement)
 
 export interface EnforcementFields {
   citationAppealDate?: number | null;
@@ -1884,6 +1898,7 @@ export interface EnforcementFields {
   performedBy?: string | null;
   proNumber?: string;
   scaleHouse?: string | null;
+  source?: string | null;
   startTime?: number | null;
   state?: string | null;
   storeId?: string;
@@ -1899,6 +1914,7 @@ export interface EnforcementRelations {
   enforcementViolations?: EnforcementViolationModel[];
   inspection?: InspectionModel | null;
   primaryModel?: EmployeeModel | null;
+  watchListReasons?: WatchListReasonModel | null;
 }
 
 export interface EnforcementInputRelations {
@@ -1909,18 +1925,22 @@ export interface EnforcementInputRelations {
   enforcementViolations?: EnforcementViolationInputModel[];
   inspection?: InspectionInputModel | null;
   primaryModel?: EmployeeInputModel | null;
+  watchListReasons?: WatchListReasonInputModel | null;
 }
 
 export interface EnforcementComputations {
   assetsInvolved: any;
+  citationCount: number | null;
   csaScore: number | null;
   hasCitationOrViolation: boolean;
   hasInspection: boolean;
+  hasOutOfService: boolean;
   inspectionReportNumber: any;
   severityWeight: number | null;
   timeSinceEnforcement: number | null;
   timeWeight: number | null;
   totalTime: number | null;
+  violationCount: number | null;
 }
 
 export type EnforcementModel = Model<
@@ -1934,7 +1954,7 @@ export type EnforcementInputModel = InputModel<
   EnforcementInputRelations
 >;
 
-// Type definitions for enforcements / Enforcement Asset (enforcement_asset)
+// Type definitions for /enforcements / Enforcement Asset (enforcement_asset)
 
 export interface EnforcementAssetFields {
   unitNo?: string | null;
@@ -1965,7 +1985,7 @@ export type EnforcementAssetInputModel = InputModel<
   EnforcementAssetInputRelations
 >;
 
-// Type definitions for enforcements / Roadside Inspection (inspection)
+// Type definitions for /enforcements / Roadside Inspection (inspection)
 
 export interface InspectionFields {
   destination?: number | null;
@@ -2004,7 +2024,7 @@ export type InspectionInputModel = InputModel<
   InspectionInputRelations
 >;
 
-// Type definitions for enforcements / Enforcement Violation (enforcement_violation)
+// Type definitions for /enforcements / Enforcement Violation (enforcement_violation)
 
 export interface EnforcementViolationFields {
   basicType?: string | null;
@@ -2050,7 +2070,7 @@ export type EnforcementViolationInputModel = InputModel<
   EnforcementViolationInputRelations
 >;
 
-// Type definitions for forklifts / Forklift Incident (forklift_incident)
+// Type definitions for /forklifts / Forklift Incident (forklift_incident)
 
 export interface ForkliftIncidentFields {
   accidentType?: string | null;
@@ -2071,6 +2091,7 @@ export interface ForkliftIncidentRelations {
   primaryModel?: EmployeeModel | null;
   shiftSupervisor?: EmployeeModel | null;
   unit?: EquipmentModel | null;
+  watchListReasons?: WatchListReasonModel | null;
 }
 
 export interface ForkliftIncidentInputRelations {
@@ -2080,6 +2101,7 @@ export interface ForkliftIncidentInputRelations {
   primaryModel?: EmployeeInputModel | null;
   shiftSupervisor?: EmployeeInputModel | null;
   unit?: EquipmentInputModel | null;
+  watchListReasons?: WatchListReasonInputModel | null;
 }
 
 export interface ForkliftIncidentComputations {
@@ -2105,7 +2127,7 @@ export type ForkliftIncidentInputModel = InputModel<
   ForkliftIncidentInputRelations
 >;
 
-// Type definitions for fuelTanks / Fuel Tank (fuel_tank)
+// Type definitions for /fuelTanks / Fuel Tank (fuel_tank)
 
 export interface FuelTankFields {
   capacity?: string;
@@ -2144,11 +2166,12 @@ export type FuelTankInputModel = InputModel<
   FuelTankInputRelations
 >;
 
-// Type definitions for improvementPlan / Professional Development Plan (improvement_plan)
+// Type definitions for /improvementPlan / Professional Development Plan (improvement_plan)
 
 export interface ImprovementPlanFields {
   acceptablePerformance?: string;
   category?: string | null;
+  closedDate?: number | null;
   description?: string;
   name?: string;
   startDate: number;
@@ -2159,25 +2182,61 @@ export interface ImprovementPlanRelations {
   improvementPlanTasks?: ImprovementPlanTaskModel[];
   improvementPlanTemplate: ImprovementPlanTemplateModel;
   improvementPlanWeeks?: ImprovementPlanWeekModel[];
+  negativeEvents?: (
+    | AccidentModel
+    | BillOfLadingViolationModel
+    | EnforcementModel
+    | TelematicsAlertModel
+    | InjuryIllnessModel
+    | ForkliftIncidentModel
+    | MaterialSpillModel
+    | HoursOfServiceObservationModel
+    | CpapViolationModel
+    | HighwayObservationModel
+    | CustomerObservationModel
+    | WorkplaceObservationModel
+  )[];
   primaryModel: EmployeeModel;
   progressUpdates?: ImprovementPlanProgressUpdateModel[];
+  watchlistPositiveContributor?: WatchListPositiveContributorModel | null;
+  watchlistReasons?: WatchListReasonModel[];
 }
 
 export interface ImprovementPlanInputRelations {
   improvementPlanTasks?: ImprovementPlanTaskInputModel[];
   improvementPlanTemplate: ImprovementPlanTemplateInputModel;
   improvementPlanWeeks?: ImprovementPlanWeekInputModel[];
+  negativeEvents?: (
+    | AccidentInputModel
+    | BillOfLadingViolationInputModel
+    | EnforcementInputModel
+    | TelematicsAlertInputModel
+    | InjuryIllnessInputModel
+    | ForkliftIncidentInputModel
+    | MaterialSpillInputModel
+    | HoursOfServiceObservationInputModel
+    | CpapViolationInputModel
+    | HighwayObservationInputModel
+    | CustomerObservationInputModel
+    | WorkplaceObservationInputModel
+  )[];
   primaryModel: EmployeeInputModel;
   progressUpdates?: ImprovementPlanProgressUpdateInputModel[];
+  watchlistPositiveContributor?: WatchListPositiveContributorInputModel | null;
+  watchlistReasons?: WatchListReasonInputModel[];
 }
 
 export interface ImprovementPlanComputations {
   associatedDivision: any;
   associatedRegion: any;
   associatedTerminal: any;
-  improvementPlanTemplateName: any;
   numberOfOverdueTasks: number | null;
   numberOfOverdueThisWeek: number | null;
+  planIsInProgress: boolean;
+  planIsOpenedAndHasNegativeEvents: boolean;
+  planStatus: any;
+  projectedEndDate: number | null;
+  totalComplete: number | null;
   totalIncomplete: number | null;
 }
 
@@ -2192,7 +2251,7 @@ export type ImprovementPlanInputModel = InputModel<
   ImprovementPlanInputRelations
 >;
 
-// Type definitions for improvementPlan / Development Plan Task (improvement_plan_task)
+// Type definitions for /improvementPlan / Development Plan Task (improvement_plan_task)
 
 export interface ImprovementPlanTaskFields {
   acceptablePerformance?: string;
@@ -2244,7 +2303,7 @@ export type ImprovementPlanTaskInputModel = InputModel<
   ImprovementPlanTaskInputRelations
 >;
 
-// Type definitions for improvementPlan / Development Plan Week (improvement_plan_week)
+// Type definitions for /improvementPlan / Development Plan Week (improvement_plan_week)
 
 export interface ImprovementPlanWeekFields {
   name?: string;
@@ -2278,7 +2337,7 @@ export type ImprovementPlanWeekInputModel = InputModel<
   ImprovementPlanWeekInputRelations
 >;
 
-// Type definitions for improvementPlan / Progress Update (improvement_plan_progress_update)
+// Type definitions for /improvementPlan / Progress Update (improvement_plan_progress_update)
 
 export interface ImprovementPlanProgressUpdateFields {
   meetingDate: number;
@@ -2311,7 +2370,7 @@ export type ImprovementPlanProgressUpdateInputModel = InputModel<
   ImprovementPlanProgressUpdateInputRelations
 >;
 
-// Type definitions for improvementPlan/templates / Development Plan Task Template (improvement_plan_task_template)
+// Type definitions for /improvementPlan/templates / Development Plan Task Template (improvement_plan_task_template)
 
 export interface ImprovementPlanTaskTemplateFields {
   daysDueAfterPlanStart?: number | null;
@@ -2348,7 +2407,7 @@ export type ImprovementPlanTaskTemplateInputModel = InputModel<
   ImprovementPlanTaskTemplateInputRelations
 >;
 
-// Type definitions for improvementPlan/templates / Professional Development Plan Template (improvement_plan_template)
+// Type definitions for /improvementPlan/templates / Professional Development Plan Template (improvement_plan_template)
 
 export interface ImprovementPlanTemplateFields {
   acceptablePerformance?: string;
@@ -2384,7 +2443,7 @@ export type ImprovementPlanTemplateInputModel = InputModel<
   ImprovementPlanTemplateInputRelations
 >;
 
-// Type definitions for improvementPlan/templates / Development Plan Week Template (improvement_plan_week_template)
+// Type definitions for /improvementPlan/templates / Development Plan Week Template (improvement_plan_week_template)
 
 export interface ImprovementPlanWeekTemplateFields {
   weekNum?: number | null;
@@ -2415,7 +2474,7 @@ export type ImprovementPlanWeekTemplateInputModel = InputModel<
   ImprovementPlanWeekTemplateInputRelations
 >;
 
-// Type definitions for improvementPlan/templates / Talking Point Template (talking_point_template)
+// Type definitions for /improvementPlan/templates / Talking Point Template (talking_point_template)
 
 export interface TalkingPointTemplateFields {
   description?: string;
@@ -2443,7 +2502,7 @@ export type TalkingPointTemplateInputModel = InputModel<
   TalkingPointTemplateInputRelations
 >;
 
-// Type definitions for injuries / Injury/Illness (injury_illness)
+// Type definitions for /injuries / Injury/Illness (injury_illness)
 
 export interface InjuryIllnessFields {
   autopsyPerformed?: string | null;
@@ -2536,6 +2595,7 @@ export interface InjuryIllnessRelations {
   otherEmployee?: EmployeeModel | null;
   primaryModel: EmployeeModel;
   supervisorNotified?: EmployeeModel | null;
+  watchListReasons?: WatchListReasonModel | null;
   witnesses?: WitnessModel[];
 }
 
@@ -2548,6 +2608,7 @@ export interface InjuryIllnessInputRelations {
   otherEmployee?: EmployeeInputModel | null;
   primaryModel: EmployeeInputModel;
   supervisorNotified?: EmployeeInputModel | null;
+  watchListReasons?: WatchListReasonInputModel | null;
   witnesses?: WitnessInputModel[];
 }
 
@@ -2592,7 +2653,7 @@ export type InjuryIllnessInputModel = InputModel<
   InjuryIllnessInputRelations
 >;
 
-// Type definitions for injuries / Injury/Illness Code (injury_illness_code)
+// Type definitions for /injuries / Injury/Illness Code (injury_illness_code)
 
 export interface InjuryIllnessCodeFields {
   natureOfInjury?: string | null;
@@ -2623,7 +2684,7 @@ export type InjuryIllnessCodeInputModel = InputModel<
   InjuryIllnessCodeInputRelations
 >;
 
-// Type definitions for injuries / Injury/Illness Contact (injury_illness_contact)
+// Type definitions for /injuries / Injury/Illness Contact (injury_illness_contact)
 
 export interface InjuryIllnessContactFields {
   address?: string;
@@ -2661,7 +2722,7 @@ export type InjuryIllnessContactInputModel = InputModel<
   InjuryIllnessContactInputRelations
 >;
 
-// Type definitions for injuries / Lost/Restricted Days (lost_restricted_days)
+// Type definitions for /injuries / Lost/Restricted Days (lost_restricted_days)
 
 export interface LostRestrictedDaysFields {
   endDate?: number | null;
@@ -2692,7 +2753,7 @@ export type LostRestrictedDaysInputModel = InputModel<
   LostRestrictedDaysInputRelations
 >;
 
-// Type definitions for materialSpills / Material Spill (material_spill)
+// Type definitions for /materialSpills / Material Spill (material_spill)
 
 export interface MaterialSpillFields {
   address?: string;
@@ -2743,6 +2804,7 @@ export interface MaterialSpillRelations {
   costs?: CostModel[];
   primaryModel?: EmployeeModel | null;
   unit?: EquipmentModel | null;
+  watchListReasons?: WatchListReasonModel | null;
 }
 
 export interface MaterialSpillInputRelations {
@@ -2750,6 +2812,7 @@ export interface MaterialSpillInputRelations {
   costs?: CostInputModel[];
   primaryModel?: EmployeeInputModel | null;
   unit?: EquipmentInputModel | null;
+  watchListReasons?: WatchListReasonInputModel | null;
 }
 
 export interface MaterialSpillComputations {
@@ -2772,7 +2835,7 @@ export type MaterialSpillInputModel = InputModel<
   MaterialSpillInputRelations
 >;
 
-// Type definitions for observations / Customer Observation (customer_observation)
+// Type definitions for /observations / Customer Observation (customer_observation)
 
 export interface CustomerObservationFields {
   actions?: string[];
@@ -2804,6 +2867,7 @@ export interface CustomerObservationRelations {
   performedBy?: EmployeeModel | null;
   primaryModel: EmployeeModel;
   telematicsAlert?: TelematicsAlertModel | null;
+  watchListReasons?: WatchListReasonModel | null;
 }
 
 export interface CustomerObservationInputRelations {
@@ -2812,6 +2876,7 @@ export interface CustomerObservationInputRelations {
   performedBy?: EmployeeInputModel | null;
   primaryModel: EmployeeInputModel;
   telematicsAlert?: TelematicsAlertInputModel | null;
+  watchListReasons?: WatchListReasonInputModel | null;
 }
 
 export interface CustomerObservationComputations {}
@@ -2827,7 +2892,7 @@ export type CustomerObservationInputModel = InputModel<
   CustomerObservationInputRelations
 >;
 
-// Type definitions for observations / Highway Observation (highway_observation)
+// Type definitions for /observations / Highway Observation (highway_observation)
 
 export interface HighwayObservationFields {
   actions?: string[];
@@ -2861,6 +2926,7 @@ export interface HighwayObservationRelations {
   performedBy?: EmployeeModel | null;
   primaryModel: EmployeeModel;
   telematicsAlert?: TelematicsAlertModel | null;
+  watchListReasons?: WatchListReasonModel | null;
 }
 
 export interface HighwayObservationInputRelations {
@@ -2869,6 +2935,7 @@ export interface HighwayObservationInputRelations {
   performedBy?: EmployeeInputModel | null;
   primaryModel: EmployeeInputModel;
   telematicsAlert?: TelematicsAlertInputModel | null;
+  watchListReasons?: WatchListReasonInputModel | null;
 }
 
 export interface HighwayObservationComputations {}
@@ -2884,7 +2951,7 @@ export type HighwayObservationInputModel = InputModel<
   HighwayObservationInputRelations
 >;
 
-// Type definitions for observations / Hours Of Service Observation (hours_of_service_observation)
+// Type definitions for /observations / Hours Of Service Observation (hours_of_service_observation)
 
 export interface HoursOfServiceObservationFields {
   date?: number | null;
@@ -2899,12 +2966,14 @@ export interface HoursOfServiceObservationRelations {
   correctiveAction?: CorrectiveActionModel | null;
   performedBy?: EmployeeModel | null;
   primaryModel: EmployeeModel;
+  watchListReasons?: WatchListReasonModel | null;
 }
 
 export interface HoursOfServiceObservationInputRelations {
   correctiveAction?: CorrectiveActionInputModel | null;
   performedBy?: EmployeeInputModel | null;
   primaryModel: EmployeeInputModel;
+  watchListReasons?: WatchListReasonInputModel | null;
 }
 
 export interface HoursOfServiceObservationComputations {}
@@ -2920,7 +2989,7 @@ export type HoursOfServiceObservationInputModel = InputModel<
   HoursOfServiceObservationInputRelations
 >;
 
-// Type definitions for observations / Workplace Observation (workplace_observation)
+// Type definitions for /observations / Workplace Observation (workplace_observation)
 
 export interface WorkplaceObservationFields {
   actions?: string[];
@@ -2953,6 +3022,7 @@ export interface WorkplaceObservationRelations {
   performedBy?: EmployeeModel | null;
   primaryModel: EmployeeModel;
   telematicsAlert?: TelematicsAlertModel | null;
+  watchListReasons?: WatchListReasonModel | null;
 }
 
 export interface WorkplaceObservationInputRelations {
@@ -2960,6 +3030,7 @@ export interface WorkplaceObservationInputRelations {
   performedBy?: EmployeeInputModel | null;
   primaryModel: EmployeeInputModel;
   telematicsAlert?: TelematicsAlertInputModel | null;
+  watchListReasons?: WatchListReasonInputModel | null;
 }
 
 export interface WorkplaceObservationComputations {}
@@ -2975,7 +3046,7 @@ export type WorkplaceObservationInputModel = InputModel<
   WorkplaceObservationInputRelations
 >;
 
-// Type definitions for permits / Alcohol Permit (alcohol_permit)
+// Type definitions for /permits / Alcohol Permit (alcohol_permit)
 
 export interface AlcoholPermitFields {
   dateComplete: number;
@@ -3004,7 +3075,7 @@ export type AlcoholPermitInputModel = InputModel<
   AlcoholPermitInputRelations
 >;
 
-// Type definitions for permits / Hazmat Permit (hazmat_permit)
+// Type definitions for /permits / Hazmat Permit (hazmat_permit)
 
 export interface HazmatPermitFields {
   dateIssued: number;
@@ -3033,7 +3104,7 @@ export type HazmatPermitInputModel = InputModel<
   HazmatPermitInputRelations
 >;
 
-// Type definitions for permits / Stormwater Permit (stormwater_permit)
+// Type definitions for /permits / Stormwater Permit (stormwater_permit)
 
 export interface StormwaterPermitFields {
   dateComplete: number;
@@ -3064,7 +3135,7 @@ export type StormwaterPermitInputModel = InputModel<
   StormwaterPermitInputRelations
 >;
 
-// Type definitions for sleepApnea / CPAP Machine Information (cpap_machine)
+// Type definitions for /sleepApnea / CPAP Machine Information (cpap_machine)
 
 export interface CpapMachineFields {
   current?: string | null;
@@ -3101,7 +3172,7 @@ export type CpapMachineInputModel = InputModel<
   CpapMachineInputRelations
 >;
 
-// Type definitions for sleepApnea / CPAP Violation (cpap_violation)
+// Type definitions for /sleepApnea / CPAP Violation (cpap_violation)
 
 export interface CpapViolationFields {
   date?: number | null;
@@ -3114,6 +3185,7 @@ export interface CpapViolationRelations {
   primaryModel: EmployeeModel;
   reviewer?: EmployeeModel | null;
   sleepApnea?: SleepApneaModel | null;
+  watchListReasons?: WatchListReasonModel | null;
 }
 
 export interface CpapViolationInputRelations {
@@ -3121,6 +3193,7 @@ export interface CpapViolationInputRelations {
   primaryModel: EmployeeInputModel;
   reviewer?: EmployeeInputModel | null;
   sleepApnea?: SleepApneaInputModel | null;
+  watchListReasons?: WatchListReasonInputModel | null;
 }
 
 export interface CpapViolationComputations {}
@@ -3136,7 +3209,7 @@ export type CpapViolationInputModel = InputModel<
   CpapViolationInputRelations
 >;
 
-// Type definitions for sleepApnea / Sleep Apnea & CPAP (sleep_apnea)
+// Type definitions for /sleepApnea / Sleep Apnea & CPAP (sleep_apnea)
 
 export interface SleepApneaFields {
   dotMedicalExamDate?: number | null;
@@ -3178,7 +3251,7 @@ export type SleepApneaInputModel = InputModel<
   SleepApneaInputRelations
 >;
 
-// Type definitions for telematics / Telematics Alert (telematics_alert)
+// Type definitions for /telematics / Telematics Alert (telematics_alert)
 
 export interface TelematicsAlertFields {
   actions?: string[];
@@ -3220,6 +3293,7 @@ export interface TelematicsAlertRelations {
   )[];
   performedBy?: EmployeeModel | null;
   primaryModel: EmployeeModel;
+  watchListReasons?: WatchListReasonModel | null;
 }
 
 export interface TelematicsAlertInputRelations {
@@ -3232,6 +3306,7 @@ export interface TelematicsAlertInputRelations {
   )[];
   performedBy?: EmployeeInputModel | null;
   primaryModel: EmployeeInputModel;
+  watchListReasons?: WatchListReasonInputModel | null;
 }
 
 export interface TelematicsAlertComputations {
@@ -3249,7 +3324,7 @@ export type TelematicsAlertInputModel = InputModel<
   TelematicsAlertInputRelations
 >;
 
-// Type definitions for training / Training Attendance (training_attendance)
+// Type definitions for /training / Training Attendance (training_attendance)
 
 export interface TrainingAttendanceFields {
   status?: string | null;
@@ -3278,7 +3353,7 @@ export type TrainingAttendanceInputModel = InputModel<
   TrainingAttendanceInputRelations
 >;
 
-// Type definitions for training / Training Class (training_class)
+// Type definitions for /training / Training Class (training_class)
 
 export interface TrainingClassFields {
   completed?: boolean;
@@ -3320,7 +3395,7 @@ export type TrainingClassInputModel = InputModel<
   TrainingClassInputRelations
 >;
 
-// Type definitions for training / Training Course (training_course)
+// Type definitions for /training / Training Course (training_course)
 
 export interface TrainingCourseFields {
   dayOffset?: number | null;
@@ -3340,11 +3415,8 @@ export interface TrainingCourseInputRelations {
 }
 
 export interface TrainingCourseComputations {
-  almostDue: any;
   dropdownLabel: any;
   label: any;
-  pastDue: any;
-  soonDue: any;
 }
 
 export type TrainingCourseModel = Model<
@@ -3358,9 +3430,12 @@ export type TrainingCourseInputModel = InputModel<
   TrainingCourseInputRelations
 >;
 
-// Type definitions for watchlist / Employee Watch List (employee_watch_list)
+// Type definitions for /watchlist / Employee Watch List (employee_watch_list)
 
 export interface EmployeeWatchListFields {
+  baselineScore?: number | null;
+  date?: number | null;
+  percentile?: number | null;
   scorePredictions?: (number | null)[];
   scores?: (number | null)[];
   trend14?: number | null;
@@ -3371,17 +3446,20 @@ export interface EmployeeWatchListFields {
 }
 
 export interface EmployeeWatchListRelations {
+  positiveContributors?: WatchListPositiveContributorModel[];
   primaryModel?: EmployeeModel | null;
   watchListReasons?: WatchListReasonModel[];
 }
 
 export interface EmployeeWatchListInputRelations {
+  positiveContributors?: WatchListPositiveContributorInputModel[];
   primaryModel?: EmployeeInputModel | null;
   watchListReasons?: WatchListReasonInputModel[];
 }
 
 export interface EmployeeWatchListComputations {
   currentScore: number | null;
+  scorePercent: number | null;
 }
 
 export type EmployeeWatchListModel = Model<
@@ -3395,11 +3473,45 @@ export type EmployeeWatchListInputModel = InputModel<
   EmployeeWatchListInputRelations
 >;
 
-// Type definitions for watchlist / Watch List Reason (watch_list_reason)
+// Type definitions for /watchlist / Watch List Positive Contributor (watch_list_positive_contributor)
+
+export interface WatchListPositiveContributorFields {
+  description?: string;
+  score?: number | null;
+  variancePortion?: number | null;
+}
+
+export interface WatchListPositiveContributorRelations {
+  event?: ImprovementPlanModel | null;
+  watchList?: EmployeeWatchListModel | null;
+}
+
+export interface WatchListPositiveContributorInputRelations {
+  event?: ImprovementPlanInputModel | null;
+  watchList?: EmployeeWatchListInputModel | null;
+}
+
+export interface WatchListPositiveContributorComputations {}
+
+export type WatchListPositiveContributorModel = Model<
+  WatchListPositiveContributorFields,
+  WatchListPositiveContributorRelations,
+  WatchListPositiveContributorComputations
+>;
+
+export type WatchListPositiveContributorInputModel = InputModel<
+  WatchListPositiveContributorFields,
+  WatchListPositiveContributorInputRelations
+>;
+
+// Type definitions for /watchlist / Watch List Reason (watch_list_reason)
 
 export interface WatchListReasonFields {
   name?: string;
+  score?: number | null;
   scorePercent?: number | null;
+  totalEventCount?: number | null;
+  variancePortion?: number | null;
 }
 
 export interface WatchListReasonRelations {
@@ -3417,6 +3529,7 @@ export interface WatchListReasonRelations {
     | CustomerObservationModel
     | WorkplaceObservationModel
   )[];
+  positiveEvent?: ImprovementPlanModel | null;
 }
 
 export interface WatchListReasonInputRelations {
@@ -3434,9 +3547,20 @@ export interface WatchListReasonInputRelations {
     | CustomerObservationInputModel
     | WorkplaceObservationInputModel
   )[];
+  positiveEvent?: ImprovementPlanInputModel | null;
 }
 
-export interface WatchListReasonComputations {}
+export interface WatchListReasonComputations {
+  actions: string;
+  correctiveActions: any;
+  dateRange: number | null;
+  eventsCount: number | null;
+  maxActual: number | null;
+  outsideSource: string;
+  templateName: any;
+  timeframe: any;
+  type: string;
+}
 
 export type WatchListReasonModel = Model<
   WatchListReasonFields,
