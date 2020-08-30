@@ -5,6 +5,36 @@ import {ApiOptions} from '../types';
 
 export type ConfigurationValue = string | number | boolean;
 export type Configuration = Record<string, ConfigurationValue>;
+export type NestedConfiguration = {
+  [property: string]: ConfigurationValue | NestedConfiguration;
+};
+
+export interface SetCustomerConfigBody {
+  value: ConfigurationValue;
+}
+
+export function getDefaultConfig(
+  apiOptions?: ApiOptions
+): Request<Configuration> {
+  return runApi<{}, Configuration>({
+    method: 'GET',
+    urlRoot: 'loginUrlRoot',
+    route: `/api/1.0/configuration/default`,
+    apiOptions
+  });
+}
+
+export function getDefaultNestedConfig(
+  alias: string,
+  apiOptions?: ApiOptions
+): Request<NestedConfiguration> {
+  return runApi<{}, Configuration>({
+    method: 'GET',
+    urlRoot: 'loginUrlRoot',
+    route: `/api/1.0/configuration/default/nested`,
+    apiOptions
+  });
+}
 
 export function getCustomerConfig(
   alias: string,
@@ -18,8 +48,16 @@ export function getCustomerConfig(
   });
 }
 
-export interface SetCustomerConfigBody {
-  value: ConfigurationValue;
+export function getCustomerNestedConfig(
+  alias: string,
+  apiOptions?: ApiOptions
+): Request<NestedConfiguration> {
+  return runApi<{}, Configuration>({
+    method: 'GET',
+    urlRoot: 'loginUrlRoot',
+    route: `/api/1.0/configuration/customers/${alias}/nested`,
+    apiOptions
+  });
 }
 
 export function setCustomerConfigItem(
