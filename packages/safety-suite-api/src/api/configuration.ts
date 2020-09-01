@@ -25,13 +25,28 @@ export function getDefaultConfig(
 }
 
 export function getDefaultNestedConfig(
-  alias: string,
   apiOptions?: ApiOptions
 ): Request<NestedConfiguration> {
   return runApi<{}, Configuration>({
     method: 'GET',
     urlRoot: 'loginUrlRoot',
     route: `/api/1.0/configuration/default/nested`,
+    apiOptions
+  });
+}
+
+export function setDefaultConfigItem(
+  key: string,
+  value: ConfigurationValue,
+  apiOptions?: ApiOptions
+): Request<{}> {
+  return runApi<SetCustomerConfigBody, {}>({
+    method: 'POST',
+    urlRoot: 'loginUrlRoot',
+    route: `/api/1.0/configuration/default/${key}`,
+    requestOptions: {
+      body: {value}
+    },
     apiOptions
   });
 }
@@ -65,14 +80,27 @@ export function setCustomerConfigItem(
   key: string,
   value: ConfigurationValue,
   apiOptions?: ApiOptions
-): Request<Configuration> {
-  return runApi<SetCustomerConfigBody, Configuration>({
+): Request<{}> {
+  return runApi<SetCustomerConfigBody, {}>({
     method: 'POST',
     urlRoot: 'loginUrlRoot',
     route: `/api/1.0/configuration/customers/${alias}/${key}`,
     requestOptions: {
       body: {value}
     },
+    apiOptions
+  });
+}
+
+export function resetCustomerConfigItem(
+  alias: string,
+  key: string,
+  apiOptions?: ApiOptions
+): Request<{}> {
+  return runApi<{}, {}>({
+    method: 'DELETE',
+    urlRoot: 'loginUrlRoot',
+    route: `/api/1.0/configuration/customers/${alias}/${key}`,
     apiOptions
   });
 }
