@@ -1,92 +1,97 @@
 import {Alias, Id} from '../types';
 import {LegacyApi} from './types';
 
-export type InputEnumSet = {
-  name: string;
-};
-
-export type EnumSet = {
-  id: Id;
-  name: string;
+export type InputEnum = {
+  alias: string;
+  display: string;
+  editable?: boolean;
   fields: any;
-  effectiveDate: number;
-  lastUpdatedBy: string;
 };
 
 export type InputEnumValue = {
-  setId: Id;
-  name: Alias;
+  alias: Alias;
+  disabled: boolean;
   display: string;
+  enumId: Id;
+  fields: any;
+};
+
+export type Enum = {
+  alias: string;
+  display: string;
+  editable?: boolean;
+  fields: any;
+  id?: Id;
+  lastUpdatedBy: string;
+  lastUpdatedDate: string;
 };
 
 export type EnumValue = {
-  id: Id;
-  setId: Id;
-  value: number;
-  name: Alias;
-  display: string;
-  fields: any;
-  effectiveDate: number;
-  lastUpdatedBy: string;
+  alias: Alias;
   disabled: boolean;
+  display: string;
+  enumId: Id;
+  fields: any;
+  id?: Id;
+  lastUpdatedBy: string;
+  lastUpdatedDate: string;
 };
 
-export const getEnumSets: LegacyApi = {
+export const getEnums: LegacyApi = {
   method: 'GET',
-  route: '/api/enumSet'
+  route: '/api/enums'
 };
 
 export const getEnumValues: LegacyApi = {
   method: 'GET',
-  route: '/api/enum'
+  route: '/api/enumValues'
 };
 
-export function createEnumSet(inputEnumSet: InputEnumSet): LegacyApi {
-  const enumSet: EnumSet = {
-    ...inputEnumSet,
+export function createEnum(inputEnum: InputEnum): LegacyApi {
+  const enums: Enum = {
+    ...inputEnum,
     id: -1,
     fields: {},
-    effectiveDate: 0,
-    lastUpdatedBy: ''
+    lastUpdatedBy: '',
+    lastUpdatedDate: ''
   };
 
   return {
     method: 'POST',
-    route: '/api/enumSet',
-    requestOptions: {body: enumSet}
+    route: '/api/enums',
+    requestOptions: {body: enums}
   };
 }
 
 export function createEnumValue(inputEnumValue: InputEnumValue): LegacyApi {
   const enumValue: EnumValue = {
     ...inputEnumValue,
-    id: -1,
-    value: -1,
+    disabled: false,
     fields: {},
-    effectiveDate: 0,
+    id: -1,
     lastUpdatedBy: '',
-    disabled: false
+    lastUpdatedDate: ''
   };
 
   return {
     method: 'POST',
-    route: '/api/enum',
+    route: '/api/enumValues',
     requestOptions: {body: enumValue}
   };
 }
 
-export function updateEnumSet(enumSet: EnumSet): LegacyApi {
+export function updateEnum(enums: Enum): LegacyApi {
   return {
     method: 'PUT',
-    route: '/api/enumSet',
-    requestOptions: {body: enumSet}
+    route: '/api/enums',
+    requestOptions: {body: enums}
   };
 }
 
 export function updateEnumValue(enumValue: EnumValue): LegacyApi {
   return {
     method: 'PUT',
-    route: '/api/enum',
+    route: '/api/enumValues',
     requestOptions: {body: enumValue}
   };
 }
