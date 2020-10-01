@@ -6,7 +6,7 @@ import {ApiOptions} from '../types';
 export type ConfigurationValue = string | number | boolean;
 export type Configuration = Record<string, ConfigurationValue>;
 export type NestedConfiguration = {
-  [property: string]: ConfigurationValue | NestedConfiguration;
+  [property: string]: ConfigurationValue | NestedConfiguration | undefined;
 };
 
 export interface SetCustomerConfigBody {
@@ -18,7 +18,7 @@ export function getDefaultConfig(
 ): Request<Configuration> {
   return runApi<{}, Configuration>({
     method: 'GET',
-    urlRoot: 'loginUrlRoot',
+    urlRoot: 'configUrlRoot',
     route: `/api/1.0/configuration/default`,
     apiOptions
   });
@@ -29,7 +29,7 @@ export function getDefaultNestedConfig(
 ): Request<NestedConfiguration> {
   return runApi<{}, Configuration>({
     method: 'GET',
-    urlRoot: 'loginUrlRoot',
+    urlRoot: 'configUrlRoot',
     route: `/api/1.0/configuration/default/nested`,
     apiOptions
   });
@@ -42,7 +42,7 @@ export function setDefaultConfigItem(
 ): Request<{}> {
   return runApi<SetCustomerConfigBody, {}>({
     method: 'POST',
-    urlRoot: 'loginUrlRoot',
+    urlRoot: 'configUrlRoot',
     route: `/api/1.0/configuration/default/${key}`,
     requestOptions: {
       body: {value}
@@ -57,7 +57,7 @@ export function getCustomerConfig(
 ): Request<Configuration> {
   return runApi<{}, Configuration>({
     method: 'GET',
-    urlRoot: 'loginUrlRoot',
+    urlRoot: 'configUrlRoot',
     route: `/api/1.0/configuration/customers/${alias}`,
     apiOptions
   });
@@ -69,7 +69,7 @@ export function getCustomerNestedConfig(
 ): Request<NestedConfiguration> {
   return runApi<{}, Configuration>({
     method: 'GET',
-    urlRoot: 'loginUrlRoot',
+    urlRoot: 'configUrlRoot',
     route: `/api/1.0/configuration/customers/${alias}/nested`,
     apiOptions
   });
@@ -83,7 +83,7 @@ export function setCustomerConfigItem(
 ): Request<{}> {
   return runApi<SetCustomerConfigBody, {}>({
     method: 'POST',
-    urlRoot: 'loginUrlRoot',
+    urlRoot: 'configUrlRoot',
     route: `/api/1.0/configuration/customers/${alias}/${key}`,
     requestOptions: {
       body: {value}
@@ -99,7 +99,7 @@ export function resetCustomerConfigItem(
 ): Request<{}> {
   return runApi<{}, {}>({
     method: 'DELETE',
-    urlRoot: 'loginUrlRoot',
+    urlRoot: 'configUrlRoot',
     route: `/api/1.0/configuration/customers/${alias}/${key}`,
     apiOptions
   });

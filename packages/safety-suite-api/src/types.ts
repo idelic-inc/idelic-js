@@ -5,7 +5,11 @@ import {
   RequestOptions
 } from 'idelic-safety-net';
 
-export type UrlRoot = 'apiUrlRoot' | 'loginUrlRoot' | 'documentLibraryUrlRoot';
+export type UrlRoot =
+  | 'apiUrlRoot'
+  | 'loginUrlRoot'
+  | 'documentLibraryUrlRoot'
+  | 'configUrlRoot';
 
 export interface Api<R, T> {
   method: Methods;
