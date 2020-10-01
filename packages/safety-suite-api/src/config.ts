@@ -1,5 +1,5 @@
 import {ApiError} from './error';
-import {UrlRoot} from './types';
+import {UrlRoot, ApiOptions} from './types';
 import {
   getCustomerNestedConfig,
   getDefaultNestedConfig,
@@ -165,17 +165,16 @@ export const setupApi = async (
   configUrl: string,
   customerAlias?: string
 ): Promise<NestedConfiguration> => {
-  try {
-    const configRequest = customerAlias
-      ? getCustomerNestedConfig(customerAlias)
-      : getDefaultNestedConfig();
-    const {data: nestedConfig} = await configRequest.response;
-    initializeConfig(configUrl, nestedConfig);
-    return nestedConfig;
-  } catch (e) {
-    config.initialized = false;
-    throw e;
-  }
+  const apiOptions: ApiOptions = {
+    bypassInitializeCheck: true,
+    customUrlRoot: configUrl
+  };
+  const configRequest = customerAlias
+    ? getCustomerNestedConfig(customerAlias, apiOptions)
+    : getDefaultNestedConfig(apiOptions);
+  const {data: nestedConfig} = await configRequest.response;
+  initializeConfig(configUrl, nestedConfig);
+  return nestedConfig;
 };
 
 /**

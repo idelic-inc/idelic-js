@@ -5,7 +5,7 @@ import {ApiError, ErrorResponse} from './error';
 import {Api} from './types';
 
 export function runApi<R, T>(api: Api<R, T>): Request<T> {
-  if (!config.initialized) {
+  if (!config.initialized && !api.apiOptions?.bypassInitializeCheck) {
     throw new Error(
       'Config was not properly initialized. Please call `initializeConfig` first.'
     );
