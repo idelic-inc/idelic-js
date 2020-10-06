@@ -1,5 +1,5 @@
 {
-  "name": "@idelic/formatron",
+  "name": "@idelic-js/formatron",
   "version": "0.0.0",
   "description": "> TODO: description",
   "author": "maxswa <mkswartwout@gmail.com>",
@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com:idelic-inc/idelic.git"
+    "url": "git+ssh://git@github.com:idelic-inc/idelic-js.git"
   },
   "scripts": {
     "format": "prettier --write \"src/**/*.ts\"",

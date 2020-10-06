@@ -1,8 +1,8 @@
 {
-  "name": "idelic",
+  "name": "idelic-js",
   "version": "1.0.0",
   "description": "Monorepo for Idelic JS Libraries",
-  "repository": "git@github.com:idelic-inc/idelic.git",
+  "repository": "git@github.com:idelic-inc/idelic-js.git",
   "author": "Idelic",
   "license": "MIT",
   "private": false,
