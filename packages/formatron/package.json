@@ -18,6 +18,7 @@
     "url": "git+ssh://git@github.com:idelic-inc/idelic.git"
   },
   "scripts": {
+    "format": "prettier --write \"src/**/*.ts\"",
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "bugs": {
@@ -29,6 +30,7 @@
     "moment": "^2.29.1"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.161"
+    "@types/lodash": "^4.14.161",
+    "prettier": "^2.1.2"
   }
 }

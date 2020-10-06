@@ -2,11 +2,15 @@
   "name": "idelic",
   "version": "1.0.0",
   "description": "Monorepo for Idelic JS Libraries",
-  "main": "index.js",
   "repository": "git@github.com:idelic-inc/idelic.git",
   "author": "Idelic",
   "license": "MIT",
   "private": false,
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "format": "lerna run format",
+    "publish": "lerna publish"
+  },
   "devDependencies": {
     "lerna": "^3.22.1"
   }
