@@ -1,8 +1,8 @@
-import { DATE_FORMAT } from 'src/utils/constants';
-import { formatCurrency } from 'src/utils/functions';
-import { DataType } from '../dataType';
+import {DATE_FORMAT} from 'src/utils/constants';
+import {formatCurrency} from 'src/utils/functions';
+import {DataType} from '../dataType';
 
-import { LABEL_FALSE, LABEL_TRUE } from './boolean';
+import {LABEL_FALSE, LABEL_TRUE} from './boolean';
 
 const TYPE_DATETIME = 'datetime';
 
@@ -36,7 +36,7 @@ export class ComputedType extends DataType<any> {
   }
 
   getFormattedValue(value: any): string {
-    const { formatType } = this;
+    const {formatType} = this;
     switch (formatType) {
       case 'currency':
         return formatCurrency(value);

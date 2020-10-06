@@ -1,4 +1,4 @@
-import { RelatedType } from './related';
+import {RelatedType} from './related';
 
 export class SingleModelType extends RelatedType {
   public static readonly typeName = 'singleModel';

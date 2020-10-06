@@ -1,4 +1,4 @@
-import { DataType } from '../dataType';
+import {DataType} from '../dataType';
 
 export class EnumType extends DataType {
   public static readonly typeName = 'enum';

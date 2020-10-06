@@ -1,5 +1,5 @@
-import { JsonData } from './types';
-import type { Formatron } from './formatron';
+import {JsonData} from './types';
+import type {Formatron} from './formatron';
 
 export abstract class DataType<
   T = any,
@@ -62,7 +62,7 @@ export abstract class DataType<
   }
 
   validate(value: T): string | null {
-    const { isRequired } = this;
+    const {isRequired} = this;
     return isRequired &&
       (value === undefined ||
         value === null ||

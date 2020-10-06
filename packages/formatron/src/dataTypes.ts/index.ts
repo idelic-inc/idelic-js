@@ -1,13 +1,13 @@
-import { ComputedType } from './computed';
-import { DateTimeType } from './dateTime';
-import { EnumType } from './enum';
-import { ItemsListType } from './itemsList';
-import { ListType } from './list';
-import { MultiModelType } from './multiModel';
-import { NumberType } from './number';
-import { SingleModelType } from './singleModel';
-import { TextType } from './text';
-import { BooleanType } from './boolean';
+import {ComputedType} from './computed';
+import {DateTimeType} from './dateTime';
+import {EnumType} from './enum';
+import {ItemsListType} from './itemsList';
+import {ListType} from './list';
+import {MultiModelType} from './multiModel';
+import {NumberType} from './number';
+import {SingleModelType} from './singleModel';
+import {TextType} from './text';
+import {BooleanType} from './boolean';
 
 const dataTypes = [
   ComputedType,
@@ -19,7 +19,7 @@ const dataTypes = [
   NumberType,
   SingleModelType,
   TextType,
-  BooleanType,
+  BooleanType
 ];
 
 export type DefaultDataTypeClasses = typeof dataTypes[number];

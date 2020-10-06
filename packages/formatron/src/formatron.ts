@@ -1,8 +1,8 @@
-import { Enum, EnumValue } from 'idelic-safety-suite-api';
-import { DataType } from './dataType';
-import { DefaultDataTypeClasses } from './dataTypes.ts';
-import { Model, NewModel } from './model';
-import { Template, ModelTemplate } from './template';
+import {Enum, EnumValue} from 'idelic-safety-suite-api';
+import {DataType} from './dataType';
+import {DefaultDataTypeClasses} from './dataTypes.ts';
+import {Model, NewModel} from './model';
+import {Template, ModelTemplate} from './template';
 
 export class Formatron<D extends typeof DataType> {
   #models: Record<number, Model<Formatron<D>> | undefined> = {};

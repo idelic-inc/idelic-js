@@ -1,4 +1,4 @@
-import { DataType } from '../dataType';
+import {DataType} from '../dataType';
 
 export class TextType extends DataType<string> {
   public static readonly typeName = 'text';

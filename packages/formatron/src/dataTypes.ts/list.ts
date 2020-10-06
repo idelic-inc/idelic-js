@@ -1,4 +1,4 @@
-import { DataType } from '../dataType';
+import {DataType} from '../dataType';
 
 export class ListType extends DataType<any[]> {
   public static readonly typeName = 'list';

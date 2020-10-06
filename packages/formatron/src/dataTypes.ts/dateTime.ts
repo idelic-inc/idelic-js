@@ -1,4 +1,4 @@
-import { DataType } from '../dataType';
+import {DataType} from '../dataType';
 import moment from 'moment';
 import {
   DATETIME_FORMAT,
@@ -6,7 +6,7 @@ import {
   DATE_FORMAT,
   DATE_MASK,
   TIME_FORMAT,
-  TIME_MASK,
+  TIME_MASK
 } from 'src/utils/constants';
 
 const TYPE_DATE = 'date';

@@ -1,5 +1,5 @@
-import { formatCurrency } from 'src/utils/functions';
-import { DataType } from '../dataType';
+import {formatCurrency} from 'src/utils/functions';
+import {DataType} from '../dataType';
 
 export class NumberType extends DataType {
   public static readonly typeName = 'number';

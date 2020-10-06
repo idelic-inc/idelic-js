@@ -1,5 +1,5 @@
-import { RelationModelsToIds } from 'idelic-safety-suite-api';
-import type { Formatron } from './formatron';
+import {RelationModelsToIds} from 'idelic-safety-suite-api';
+import type {Formatron} from './formatron';
 
 export interface NewModel<F = any, R = any, C = any> {
   id: number;
@@ -101,7 +101,7 @@ export class Model<F extends Formatron<any>, M extends NewModel = NewModel> {
    * The template associated with this model.
    */
   get template() {
-    const { templateId } = this.#model;
+    const {templateId} = this.#model;
     const template = this.#formatron.getTemplateById(templateId);
     if (!template) {
       throw new Error(`No template found with id ${templateId}`);

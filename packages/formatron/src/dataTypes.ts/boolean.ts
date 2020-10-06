@@ -1,4 +1,4 @@
-import { DataType } from '../dataType';
+import {DataType} from '../dataType';
 
 export const LABEL_TRUE = 'Yes';
 export const LABEL_FALSE = 'No';

@@ -1,5 +1,5 @@
-import { Formatron } from './formatron';
-import { JsonData, JsonDataComputation, JsonDataRelation } from './types';
+import {Formatron} from './formatron';
+import {JsonData, JsonDataComputation, JsonDataRelation} from './types';
 
 // TODO Update this type
 export interface ModelTemplate {
@@ -59,9 +59,9 @@ export class Template<F extends Formatron<any>> {
   getDataType = (
     fieldName: string
   ): ReturnType<F['getDataType']> | undefined => {
-    const { fields, computations } = this.#template.fields;
+    const {fields, computations} = this.#template.fields;
     const combined = [...fields, ...computations];
-    const { type } = combined.find(({ name }) => name === fieldName) ?? {};
+    const {type} = combined.find(({name}) => name === fieldName) ?? {};
     if (!type) {
       console.warn(`No field found with name "${fieldName}`);
       return undefined;
