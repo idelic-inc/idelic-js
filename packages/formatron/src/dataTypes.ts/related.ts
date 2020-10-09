@@ -1,7 +1,5 @@
 import {DataType} from '../dataType';
 
-export const REQUEST_LIMIT = 20;
-
 export abstract class RelatedType extends DataType {
   get templateIds(): number[] {
     return (

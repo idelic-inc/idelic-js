@@ -9,6 +9,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "format": "lerna run format",
+    "build": "lerna run build",
     "publish": "lerna publish"
   },
   "devDependencies": {
