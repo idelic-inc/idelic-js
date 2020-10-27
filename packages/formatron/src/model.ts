@@ -41,6 +41,10 @@ export class Model<F extends Formatron<any>, M extends NewModel = NewModel> {
     return this.#model.id;
   }
 
+  get fields() {
+    return this.#model.fields;
+  }
+
   /**
    * Get the value of a field, computation or a relation id.
    * @param key - string

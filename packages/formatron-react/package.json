@@ -1,0 +1,44 @@
+{
+  "name": "@idelic-js/formatron-react",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "maxswa <mkswartwout@gmail.com>",
+  "homepage": "https://github.com/idelic-inc/idelic-js#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idelic-inc/idelic-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/idelic-inc/idelic-js/issues"
+  },
+  "scripts": {
+    "format": "prettier --write \"src/**/*.ts\"",
+    "build": "tsc",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "@fluentui/react": "^7.145.0",
+    "@types/react": "^16.9.51",
+    "formik": "^2.2.0",
+    "lodash": "^4.17.20"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.162",
+    "@types/react-dom": "^16.9.8",
+    "typescript": "^4.0.3"
+  },
+  "peerDependencies": {
+    "@idelic-js/formatron": "file:../formatron",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
