@@ -1,8 +1,8 @@
 {
   "name": "@idelic-js/formatron",
   "version": "0.0.0",
-  "description": "> TODO: description",
-  "author": "maxswa <mkswartwout@gmail.com>",
+  "description": "A library that generates and validates data given a JSON schema.",
+  "author": "Idelic",
   "homepage": "https://github.com/idelic-inc/idelic#readme",
   "license": "MIT",
   "main": "lib/index.js",
@@ -19,9 +19,10 @@
     "url": "git+ssh://git@github.com:idelic-inc/idelic-js.git"
   },
   "scripts": {
-    "format": "prettier --write \"src/**/*.ts\"",
+    "start": "tsc --watch",
+    "test": "echo \"tests not set up yet\" && exit 0",
     "build": "tsc",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "clean": "rm -rf lib"
   },
   "bugs": {
     "url": "https://github.com/idelic-inc/idelic/issues"

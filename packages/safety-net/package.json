@@ -8,15 +8,10 @@
     "lib/**/*"
   ],
   "scripts": {
+    "start": "tsc --watch",
     "test": "jest --config jestconfig.json",
     "build": "tsc",
-    "start": "tsc --watch",
-    "clean": "rm -rf lib",
-    "prepare": "yarn clean && yarn build",
-    "prepublishOnly": "yarn test",
-    "preversion": "yarn test",
-    "version": "git add -A src",
-    "postversion": "git push && git push --tags"
+    "clean": "rm -rf lib"
   },
   "repository": {
     "type": "git",

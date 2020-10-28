@@ -8,10 +8,16 @@
   "private": false,
   "scripts": {
     "bootstrap": "lerna bootstrap",
+    "clean": "lerna run clean",
     "build": "lerna run build",
-    "publish": "lerna publish",
     "format": "prettier --write \"**/src/**/*.ts*\" \"**/scripts/**/*.ts*\"",
-    "lint": "eslint --fix \"**/src/**/*.ts*\""
+    "lint": "eslint --fix \"**/src/**/*.ts*\"",
+    "test": "lerna run test",
+    "publish": "lerna publish",
+    "preversion": "yarn lint && yarn test",
+    "version": "yarn format && git add .",
+    "postversion": "git push && git push --tags",
+    "prepack": "yarn lint && yarn test && yarn clean && yarn build"
   },
   "husky": {
     "hooks": {

@@ -1,8 +1,8 @@
 {
   "name": "@idelic-js/formatron-react",
   "version": "0.0.0",
-  "description": "> TODO: description",
-  "author": "maxswa <mkswartwout@gmail.com>",
+  "description": "React components to render formatron data.",
+  "author": "Idelic",
   "homepage": "https://github.com/idelic-inc/idelic-js#readme",
   "license": "MIT",
   "main": "lib/index.js",
@@ -21,9 +21,10 @@
     "url": "https://github.com/idelic-inc/idelic-js/issues"
   },
   "scripts": {
-    "format": "prettier --write \"src/**/*.ts\"",
+    "start": "tsc --watch",
+    "test": "echo \"tests not set up yet\" && exit 0",
     "build": "tsc",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "clean": "rm -rf lib"
   },
   "dependencies": {
     "@fluentui/react": "^7.145.0",
