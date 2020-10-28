@@ -1,3 +1,3 @@
-# `@idelic-js/formatron-react`
+# `@idelic/formatron-react`
 
 > TODO: description

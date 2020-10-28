@@ -1,5 +1,5 @@
 {
-  "name": "@idelic-js/formatron-react",
+  "name": "@idelic/formatron-react",
   "version": "0.0.0",
   "description": "React components to render formatron data.",
   "author": "Idelic",
@@ -33,7 +33,7 @@
     "lodash": "^4.17.20"
   },
   "peerDependencies": {
-    "@idelic-js/formatron": "file:../formatron",
+    "@idelic/formatron": "file:../formatron",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   }

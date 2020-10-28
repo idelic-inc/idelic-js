@@ -1,5 +1,5 @@
 {
-  "name": "idelic-js",
+  "name": "idelic",
   "version": "1.0.0",
   "description": "Monorepo for Idelic JS Libraries",
   "repository": "git@github.com:idelic-inc/idelic-js.git",
@@ -24,7 +24,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
+    "*.{ts,tsx}": [
       "eslint --fix",
       "prettier --write",
       "git add"
@@ -57,9 +57,9 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "@idelic-js/formatron": "file:packages/formatron",
-    "@idelic-js/formatron-react": "file:packages/formatron-react",
-    "@idelic-js/safety-net": "file:packages/safety-net",
-    "@idelic-js/safety-suite-api": "file:packages/safety-suite-api"
+    "@idelic/formatron": "file:packages/formatron",
+    "@idelic/formatron-react": "file:packages/formatron-react",
+    "@idelic/safety-net": "file:packages/safety-net",
+    "@idelic/safety-suite-api": "file:packages/safety-suite-api"
   }
 }

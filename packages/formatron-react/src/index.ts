@@ -1,4 +1,4 @@
-import {DataType, Model} from '@idelic-js/formatron';
+import {DataType, Model} from '@idelic/formatron';
 import {isEqual} from 'lodash';
 import {useMemo, useState} from 'react';
 

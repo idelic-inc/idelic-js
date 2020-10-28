@@ -1,4 +1,4 @@
-import {Formatron} from '@idelic-js/formatron';
+import {Formatron} from '@idelic/formatron';
 import React, {
   ComponentType,
   createContext,

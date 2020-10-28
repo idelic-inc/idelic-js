@@ -1,5 +1,5 @@
 {
-  "name": "@idelic-js/formatron",
+  "name": "@idelic/formatron",
   "version": "0.0.0",
   "description": "A library that generates and validates data given a JSON schema.",
   "author": "Idelic",

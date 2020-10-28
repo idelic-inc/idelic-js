@@ -1,3 +1,3 @@
-# `@idelic-js/formatron`
+# `@idelic/formatron`
 
 > TODO: description

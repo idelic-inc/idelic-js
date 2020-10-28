@@ -1,5 +1,5 @@
 {
-  "name": "@idelic-js/safety-net",
+  "name": "@idelic/safety-net",
   "version": "1.3.1",
   "description": "Lightweight networking library for browsers",
   "main": "lib/index.js",

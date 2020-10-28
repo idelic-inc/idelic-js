@@ -4,7 +4,7 @@ import ts from 'typescript';
 import {FieldType, ModelType, RelationType} from './types';
 import {toCamelCase} from './utils';
 
-// Sshhh, don't tell anyonre about this global state 👀
+// Sshhh, don't tell anyone about this global state 👀
 export let anyTypeCounter = 0; // eslint-disable-line import/no-mutable-exports
 
 const nameSort = (a, b) => (a.name < b.name ? -1 : 1);

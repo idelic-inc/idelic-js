@@ -364,7 +364,7 @@
     "@uifabric/utilities" "^7.33.1"
     tslib "^1.10.0"
 
-"@idelic-js/formatron-react@file:packages/formatron-react":
+"@idelic/formatron-react@file:packages/formatron-react":
   version "0.0.0"
   dependencies:
     "@fluentui/react" "^7.145.0"
@@ -372,7 +372,7 @@
     formik "^2.2.0"
     lodash "^4.17.20"
 
-"@idelic-js/formatron@file:packages/formatron":
+"@idelic/formatron@file:packages/formatron":
   version "0.0.0"
   dependencies:
     idelic-safety-suite-api "^7.0.1"
@@ -380,12 +380,12 @@
     lodash "^4.17.20"
     moment "^2.29.1"
 
-"@idelic-js/safety-net@file:packages/safety-net":
+"@idelic/safety-net@file:packages/safety-net":
   version "1.3.1"
   dependencies:
     source-map-support "^0.5.13"
 
-"@idelic-js/safety-suite-api@file:packages/safety-suite-api":
+"@idelic/safety-suite-api@file:packages/safety-suite-api":
   version "8.0.0"
   dependencies:
     idelic-safety-net "^1.3.1"
