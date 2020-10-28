@@ -32,6 +32,9 @@
     "formik": "^2.2.0",
     "lodash": "^4.17.20"
   },
+  "devDependencies": {
+    "@idelic/formatron": "file:../formatron"
+  },
   "peerDependencies": {
     "@idelic/formatron": "file:../formatron",
     "react": "^16.13.1",
