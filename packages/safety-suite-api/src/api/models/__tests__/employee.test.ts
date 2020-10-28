@@ -1,4 +1,4 @@
-import {EmployeeModel, EmployeeComputations} from '..';
+import {EmployeeComputations, EmployeeModel} from '..';
 
 const employeeJson = {
   id: 1,

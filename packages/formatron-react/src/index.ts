@@ -1,6 +1,6 @@
-import {DataType, Model, Template} from '@idelic-js/formatron';
-import {useCallback, useMemo, useState} from 'react';
+import {DataType, Model} from '@idelic-js/formatron';
 import {isEqual} from 'lodash';
+import {useMemo, useState} from 'react';
 
 export type TouchedMap<F> = {
   [K in keyof F]: boolean;

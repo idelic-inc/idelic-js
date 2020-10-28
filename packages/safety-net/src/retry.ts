@@ -32,7 +32,7 @@ if (detectOnlineStatus()) {
 }
 
 export function handleLoadEnd<T, E>(
-  request: XMLHttpRequest,
+  xhrRequest: XMLHttpRequest,
   method: string,
   url: string,
   options: RequestOptions<any, any>,
@@ -49,9 +49,9 @@ export function handleLoadEnd<T, E>(
       resolve,
       reject
     });
-  } else if (request.status >= 200 && request.status < 400) {
-    resolve(createResponse<T>(request, options.transformers?.response));
+  } else if (xhrRequest.status >= 200 && xhrRequest.status < 400) {
+    resolve(createResponse<T>(xhrRequest, options.transformers?.response));
   } else {
-    reject(createError<E>(request, options.transformers));
+    reject(createError<E>(xhrRequest, options.transformers));
   }
 }

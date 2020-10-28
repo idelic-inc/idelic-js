@@ -1,4 +1,5 @@
 import {formatCurrency} from 'src/utils/functions';
+
 import {DataType} from '../dataType';
 
 export class NumberType extends DataType {
@@ -9,7 +10,7 @@ export class NumberType extends DataType {
   }
 
   getFormattedValue(value: string | number) {
-    const formatType = this.formatType;
+    const {formatType} = this;
 
     switch (formatType) {
       case 'currency':

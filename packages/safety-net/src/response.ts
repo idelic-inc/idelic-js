@@ -25,17 +25,19 @@ export function addEventListeners<T, E>(
         );
       });
     },
-    reject => {
+    (reject) => {
       request.abort();
       reject(createError<E>(request, options.transformers));
     }
   );
 
   cancellable._promise.then(on.complete, on.error || defaultErrorHandler);
-  on.downloadProgress &&
+  if (on.downloadProgress) {
     request.addEventListener('progress', on.downloadProgress);
-  on.uploadProgress &&
+  }
+  if (on.uploadProgress) {
     request.upload.addEventListener('progress', on.uploadProgress);
+  }
 
   return cancellable;
 }
@@ -80,7 +82,7 @@ function isJsonResponse(request: XMLHttpRequest): boolean {
   if (request.getResponseHeader) {
     const contentType = request.getResponseHeader('Content-Type') || '';
     return (
-      typeof request.response == 'string' &&
+      typeof request.response === 'string' &&
       contentType.includes('application/json')
     );
   }

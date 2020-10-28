@@ -1,21 +1,21 @@
-import {ApiError} from './error';
-import {UrlRoot, ApiOptions} from './types';
 import {
   getCustomerNestedConfig,
   getDefaultNestedConfig,
   NestedConfiguration
 } from './api';
+import {ApiError} from './error';
+import {ApiOptions, UrlRoot} from './types';
 
 export type Config = {[R in UrlRoot]: string} & {
   authToken?: string;
   onAuthError(error: ApiError): void;
 };
 
-export type _Config = Config & {
+export type InitConfig = Config & {
   initialized: boolean;
 };
 
-export const config: _Config = {
+export const config: InitConfig = {
   initialized: false,
   apiUrlRoot: '',
   loginUrlRoot: '',

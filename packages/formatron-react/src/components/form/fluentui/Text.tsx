@@ -1,5 +1,5 @@
-import React from 'react';
 import {ITextFieldProps, TextField} from '@fluentui/react/lib/TextField';
+import React from 'react';
 
 import {FormatronFormItem} from '../../..';
 

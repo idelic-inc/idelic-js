@@ -28,18 +28,18 @@ export function request<R, T, E = any>(
   resolve?: Resolver<T>,
   reject?: Rejector
 ): Request<T> {
-  const request = new XMLHttpRequest();
-  request.open(method, parseUrl(url, options.query));
+  const xhrRequest = new XMLHttpRequest();
+  xhrRequest.open(method, parseUrl(url, options.query));
 
   const headers = parseHeaders(options.headers);
-  headers.forEach(header =>
-    request.setRequestHeader(header.name, header.value)
+  headers.forEach((header) =>
+    xhrRequest.setRequestHeader(header.name, header.value)
   );
 
-  request.withCredentials = true;
-  request.responseType = options.responseType || 'json';
+  xhrRequest.withCredentials = true;
+  xhrRequest.responseType = options.responseType || 'json';
 
-  request.onreadystatechange = function() {
+  xhrRequest.onreadystatechange = function () {
     if (this.readyState === XMLHttpRequest.HEADERS_RECEIVED) {
       const contentType = this.getResponseHeader('Content-Type') || '';
       if (contentType.includes('application/json')) {
@@ -48,25 +48,24 @@ export function request<R, T, E = any>(
     }
   };
 
-  const _cancellable = cancellable
-    ? cancellable
-    : addEventListeners<T, E>(request, options, method, url);
+  const cancellablePromise =
+    cancellable || addEventListeners<T, E>(xhrRequest, options, method, url);
 
   const body: any =
     options.transformers && options.transformers.request && options.body
       ? options.transformers.request(options.body)
       : options.body;
-  request.send(parseRequestBody(body, headers));
+  xhrRequest.send(parseRequestBody(body, headers));
 
   // This is a retry request for offline detection.
   if (resolve && reject) {
-    request.addEventListener('loadend', () => {
+    xhrRequest.addEventListener('loadend', () => {
       handleLoadEnd(
-        request,
+        xhrRequest,
         method,
         url,
         options,
-        _cancellable,
+        cancellablePromise,
         resolve,
         reject
       );
@@ -74,42 +73,42 @@ export function request<R, T, E = any>(
   }
 
   return {
-    request,
+    request: xhrRequest,
     on: {
-      complete: _cancellable._promise
+      complete: cancellablePromise._promise
     },
-    response: _cancellable._promise,
-    cancel: _cancellable.cancel
+    response: cancellablePromise._promise,
+    cancel: cancellablePromise.cancel
   };
 }
 
 export function parseUrl(url: string, query?: QueryParams): string {
   if (query) {
     const queryString = parseQuery(query);
-    return url.includes('?')
-      ? url.endsWith('&')
+    if (url.includes('?')) {
+      return url.endsWith('&')
         ? `${url}${queryString}`
-        : `${url}&${queryString}`
-      : `${url}?${queryString}`;
-  } else {
-    return url;
+        : `${url}&${queryString}`;
+    }
+    return `${url}?${queryString}`;
   }
+  return url;
 }
 
 export function parseHeaders(headers?: RequestHeaders): ParsedHeader[] {
   if (!headers) {
     return [];
-  } else if (Array.isArray(headers)) {
+  }
+  if (Array.isArray(headers)) {
     return headers.map(([name, value]) => ({
       name: normalizeHeaderName(name),
       value: `${value}`
     }));
-  } else {
-    return Object.keys(headers).map(name => ({
-      name: normalizeHeaderName(name),
-      value: `${headers[name]}`
-    }));
   }
+  return Object.keys(headers).map((name) => ({
+    name: normalizeHeaderName(name),
+    value: `${headers[name]}`
+  }));
 }
 
 export function parseRequestBody(
@@ -118,45 +117,43 @@ export function parseRequestBody(
 ): any | null {
   if (body) {
     const contentType = headers
-      .filter(header => header.name == 'Content-Type')
-      .map(header => header.value)[0];
-    if (contentType == 'application/json' && typeof body != 'string') {
+      .filter((header) => header.name === 'Content-Type')
+      .map((header) => header.value)[0];
+    if (contentType === 'application/json' && typeof body !== 'string') {
       return JSON.stringify(body);
-    } else {
-      return body;
     }
-  } else {
-    return null;
+    return body;
   }
+  return null;
 }
 
 function parseQuery(query: QueryParams): string {
-  if (typeof query == 'string') {
+  if (typeof query === 'string') {
     return query;
-  } else if (Array.isArray(query)) {
-    return query.map(pair => parseQueryOption(pair[0], pair[1])).join('&');
-  } else {
-    return Object.keys(query)
-      .filter(queryKey => typeof query[queryKey] != 'undefined')
-      .map(queryKey => parseQueryOption(queryKey, query[queryKey]))
-      .join('&');
   }
+  if (Array.isArray(query)) {
+    return query.map((pair) => parseQueryOption(pair[0], pair[1])).join('&');
+  }
+  return Object.keys(query)
+    .filter((queryKey) => typeof query[queryKey] !== 'undefined')
+    .map((queryKey) => parseQueryOption(queryKey, query[queryKey]))
+    .join('&');
 }
 
 function parseQueryOption(key: string, value: any): string {
   if (Array.isArray(value)) {
-    return value.map(item => `${key}=${item}`).join('&');
-  } else if (typeof value == 'undefined' || value === null) {
-    return key;
-  } else {
-    return `${key}=${value}`;
+    return value.map((item) => `${key}=${item}`).join('&');
   }
+  if (typeof value === 'undefined' || value === null) {
+    return key;
+  }
+  return `${key}=${value}`;
 }
 
 function normalizeHeaderName(name: string): string {
   return name
     .split('-')
-    .map(namePart => {
+    .map((namePart) => {
       const lowerName = namePart.toLowerCase();
       return lowerName[0].toUpperCase() + lowerName.slice(1);
     })

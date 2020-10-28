@@ -1,7 +1,7 @@
 import {DATE_FORMAT} from 'src/utils/constants';
 import {formatCurrency} from 'src/utils/functions';
-import {DataType} from '../dataType';
 
+import {DataType} from '../dataType';
 import {LABEL_FALSE, LABEL_TRUE} from './boolean';
 
 const TYPE_DATETIME = 'datetime';
@@ -23,8 +23,8 @@ export class ComputedType extends DataType<any> {
   }
 
   get resultDataType(): DataType {
-    const dataType = this.formatron.getDataType(this.type);
-    return new dataType(this.field);
+    const ResultDataType = this.formatron.getDataType(this.type);
+    return new ResultDataType(this.field);
   }
 
   get dateType(): string {

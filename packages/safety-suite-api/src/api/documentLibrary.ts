@@ -7,9 +7,9 @@ import {
   createListApiResponseFactory,
   createRecordApiResponseFactory,
   createRecordListApiResponseFactory,
-  createRecordTransformers,
+  createRecordRequestTransformer,
   createRecordResponseTransformer,
-  createRecordRequestTransformer
+  createRecordTransformers
 } from '../utils';
 
 export interface DocumentQuery {

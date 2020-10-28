@@ -7,8 +7,8 @@ export {NetError};
 
 export default {
   request,
-  ['delete']: createRequest('DELETE'),
-  ['get']: createRequest('GET'),
+  delete: createRequest('DELETE'),
+  get: createRequest('GET'),
   head: createRequest('HEAD'),
   options: createRequest('OPTIONS'),
   patch: createRequest('PATCH'),

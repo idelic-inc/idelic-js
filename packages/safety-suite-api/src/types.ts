@@ -44,8 +44,8 @@ export interface ApiOptions {
   on?: Events;
 }
 
-export type EmptyRequest = undefined;
-export type EmptyResponse = {};
+export type EmptyRequest = never;
+export type EmptyResponse = {}; // eslint-disable-line @typescript-eslint/ban-types
 
 export type Alias = string;
 export type Id = number;

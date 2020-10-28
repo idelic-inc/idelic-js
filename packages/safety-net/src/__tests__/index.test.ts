@@ -1,6 +1,6 @@
 import createXhr from 'test/xhrMock';
 
-import net from '../';
+import net from '..';
 
 jest.useFakeTimers();
 
@@ -16,7 +16,7 @@ describe('net', () => {
     const xhr = createXhr();
     const promise = net
       .get('/test')
-      .response.then(response => expect(response.data).toEqual({a: 1}));
+      .response.then((response) => expect(response.data).toEqual({a: 1}));
 
     jest.runAllTimers();
 
@@ -38,7 +38,7 @@ describe('net', () => {
     };
     const promise = net
       .post('/test', options)
-      .response.then(response => expect(response.data).toEqual({a: 1}));
+      .response.then((response) => expect(response.data).toEqual({a: 1}));
 
     jest.runAllTimers();
 
@@ -56,7 +56,7 @@ describe('net', () => {
     const xhr = createXhr();
     const promise = net
       .delete('/test/1')
-      .response.then(response => expect(response.data).not.toBeDefined());
+      .response.then((response) => expect(response.data).not.toBeDefined());
 
     jest.runAllTimers();
 
@@ -91,7 +91,7 @@ describe('net', () => {
       .response.then(() => {
         throw new Error('GET request should fail');
       })
-      .catch(err => expect(err).toBeDefined());
+      .catch((err) => expect(err).toBeDefined());
 
     jest.runAllTimers();
 
@@ -108,7 +108,7 @@ describe('net', () => {
       .response.then(() => {
         throw Error('GET request should fail');
       })
-      .catch(err => expect(err).toBeDefined());
+      .catch((err) => expect(err).toBeDefined());
 
     jest.runAllTimers();
 
@@ -125,7 +125,7 @@ describe('net', () => {
       .response.then(() => {
         throw Error('GET request should fail');
       })
-      .catch(err => expect(err).toBeDefined());
+      .catch((err) => expect(err).toBeDefined());
 
     jest.runAllTimers();
 
@@ -142,7 +142,7 @@ describe('net', () => {
       .response.then(() => {
         throw Error('GET request should fail');
       })
-      .catch(err => expect(err).toBeDefined());
+      .catch((err) => expect(err).toBeDefined());
 
     jest.runAllTimers();
 

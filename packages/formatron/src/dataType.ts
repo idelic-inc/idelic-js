@@ -1,5 +1,5 @@
-import {JsonData} from './types';
 import type {Formatron} from './formatron';
+import {JsonData} from './types';
 
 export abstract class DataType<
   T = any,
@@ -8,6 +8,7 @@ export abstract class DataType<
   public static readonly typeName: string = '';
 
   protected field: JsonData;
+
   protected formatron: F;
 
   constructor(formatron: F, field: JsonData) {

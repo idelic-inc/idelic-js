@@ -5,9 +5,13 @@ type Canceller = (rejector: Rejector) => void;
 
 export class CancellablePromise<T> {
   _executor: Executor<T>;
+
   _canceller: Canceller;
+
   _promise: Promise<T>;
+
   _rejector: Rejector = () => {};
+
   _completed = false;
 
   constructor(executor: Executor<T>, canceller: Canceller) {

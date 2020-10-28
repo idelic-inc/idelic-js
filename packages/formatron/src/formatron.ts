@@ -1,17 +1,25 @@
 import {Enum, EnumValue} from 'idelic-safety-suite-api';
+
 import {DataType} from './dataType';
 import {DefaultDataTypeClasses} from './dataTypes.ts';
 import {Model, NewModel} from './model';
-import {Template, ModelTemplate} from './template';
+import {ModelTemplate, Template} from './template';
 
 export class Formatron<D extends typeof DataType> {
   #models: Record<number, Model<Formatron<D>> | undefined> = {};
+
   #templates: Record<number, Template<Formatron<D>> | undefined> = {};
+
   #templateAliasMap: Record<string, number | undefined> = {};
+
   #enums: Record<number, Enum | undefined> = {};
+
   #enumAliasMap: Record<string, number | undefined> = {};
+
   #enumValues: Record<number, EnumValue | undefined> = {};
+
   #dataTypes: Record<string, D | DefaultDataTypeClasses | undefined> = {};
+
   #fetchModel: (id: number) => NewModel | Promise<NewModel>;
 
   constructor(
@@ -34,6 +42,7 @@ export class Formatron<D extends typeof DataType> {
       this.#dataTypes[dataType.typeName] = dataType;
     });
   }
+
   getEnumById(id: number) {
     return this.#templates[id];
   }
@@ -60,10 +69,7 @@ export class Formatron<D extends typeof DataType> {
     return this.#dataTypes[name];
   }
 
-  async getModel(
-    id: number,
-    noCache: boolean = false
-  ): Promise<Model<Formatron<D>>> {
+  async getModel(id: number, noCache = false): Promise<Model<Formatron<D>>> {
     const model = this.#models[id];
     if (model && !noCache) {
       return model;

@@ -1,6 +1,3 @@
-import {Id} from '../../types';
-import {LegacyApi} from '../types';
-
 import {
   InputModel,
   Model,
@@ -8,6 +5,8 @@ import {
   ModelOptions,
   ModelOutputOptions
 } from '../../api';
+import {Id} from '../../types';
+import {LegacyApi} from '../types';
 
 export function getModelsCount(query: ModelFilterOptions): LegacyApi {
   return {

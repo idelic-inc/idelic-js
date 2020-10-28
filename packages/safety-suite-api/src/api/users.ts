@@ -1,13 +1,12 @@
 import {Request} from 'idelic-safety-net';
 import {List, Record} from 'immutable';
+
 import {runApi} from '../runApi';
-
-import {
-  createRecordResponseTransformer,
-  createRecordListResponseTransformer
-} from '../utils';
-
 import {ApiOptions} from '../types';
+import {
+  createRecordListResponseTransformer,
+  createRecordResponseTransformer
+} from '../utils';
 
 export interface UserPermission {
   customerId: number;

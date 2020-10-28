@@ -1,7 +1,7 @@
 import {Request} from 'idelic-safety-net';
 
 import {runApi} from '../runApi';
-import {ApiOptions} from '../types';
+import {ApiOptions, EmptyRequest, EmptyResponse} from '../types';
 
 export type ConfigurationValue = string | number | boolean;
 export type Configuration = Record<string, ConfigurationValue>;
@@ -16,7 +16,7 @@ export interface SetCustomerConfigBody {
 export function getDefaultConfig(
   apiOptions?: ApiOptions
 ): Request<Configuration> {
-  return runApi<{}, Configuration>({
+  return runApi<EmptyRequest, Configuration>({
     method: 'GET',
     urlRoot: 'configUrlRoot',
     route: `/api/1.0/configuration/default`,
@@ -27,7 +27,7 @@ export function getDefaultConfig(
 export function getDefaultNestedConfig(
   apiOptions?: ApiOptions
 ): Request<NestedConfiguration> {
-  return runApi<{}, Configuration>({
+  return runApi<EmptyRequest, Configuration>({
     method: 'GET',
     urlRoot: 'configUrlRoot',
     route: `/api/1.0/configuration/default/nested`,
@@ -39,8 +39,8 @@ export function setDefaultConfigItem(
   key: string,
   value: ConfigurationValue,
   apiOptions?: ApiOptions
-): Request<{}> {
-  return runApi<SetCustomerConfigBody, {}>({
+): Request<EmptyResponse> {
+  return runApi<SetCustomerConfigBody, EmptyResponse>({
     method: 'POST',
     urlRoot: 'configUrlRoot',
     route: `/api/1.0/configuration/default/${key}`,
@@ -55,7 +55,7 @@ export function getCustomerConfig(
   alias: string,
   apiOptions?: ApiOptions
 ): Request<Configuration> {
-  return runApi<{}, Configuration>({
+  return runApi<EmptyRequest, Configuration>({
     method: 'GET',
     urlRoot: 'configUrlRoot',
     route: `/api/1.0/configuration/customers/${alias}`,
@@ -67,7 +67,7 @@ export function getCustomerNestedConfig(
   alias: string,
   apiOptions?: ApiOptions
 ): Request<NestedConfiguration> {
-  return runApi<{}, Configuration>({
+  return runApi<EmptyRequest, Configuration>({
     method: 'GET',
     urlRoot: 'configUrlRoot',
     route: `/api/1.0/configuration/customers/${alias}/nested`,
@@ -80,8 +80,8 @@ export function setCustomerConfigItem(
   key: string,
   value: ConfigurationValue,
   apiOptions?: ApiOptions
-): Request<{}> {
-  return runApi<SetCustomerConfigBody, {}>({
+): Request<EmptyResponse> {
+  return runApi<SetCustomerConfigBody, EmptyResponse>({
     method: 'POST',
     urlRoot: 'configUrlRoot',
     route: `/api/1.0/configuration/customers/${alias}/${key}`,
@@ -96,8 +96,8 @@ export function resetCustomerConfigItem(
   alias: string,
   key: string,
   apiOptions?: ApiOptions
-): Request<{}> {
-  return runApi<{}, {}>({
+): Request<EmptyResponse> {
+  return runApi<EmptyRequest, EmptyResponse>({
     method: 'DELETE',
     urlRoot: 'configUrlRoot',
     route: `/api/1.0/configuration/customers/${alias}/${key}`,

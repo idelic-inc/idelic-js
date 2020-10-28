@@ -1,3 +1,4 @@
+import {BooleanType} from './boolean';
 import {ComputedType} from './computed';
 import {DateTimeType} from './dateTime';
 import {EnumType} from './enum';
@@ -7,7 +8,6 @@ import {MultiModelType} from './multiModel';
 import {NumberType} from './number';
 import {SingleModelType} from './singleModel';
 import {TextType} from './text';
-import {BooleanType} from './boolean';
 
 const dataTypes = [
   ComputedType,

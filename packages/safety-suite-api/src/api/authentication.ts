@@ -1,20 +1,20 @@
 import {Request} from 'idelic-safety-net';
 import {Record} from 'immutable';
 
-import {ApiOptions, EmptyResponse} from '../types';
 import {runApi} from '../runApi';
+import {ApiOptions, EmptyResponse} from '../types';
 import {
   createRecordRequestTransformer,
   createRecordTransformers
 } from '../utils';
 import {
-  InputUser,
   ImInputUser,
   ImUser,
-  User,
   ImUserWithErrors,
-  UserWithErrorsRecord,
-  UserWithErrors
+  InputUser,
+  User,
+  UserWithErrors,
+  UserWithErrorsRecord
 } from './users';
 
 export interface ChangePasswordRequest {

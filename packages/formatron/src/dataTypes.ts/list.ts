@@ -5,9 +5,9 @@ export class ListType extends DataType<any[]> {
 
   isOfType(value: unknown): value is any[] {
     const itemType: string = this.field.options?.itemType?.type ?? '';
-    const itemDataType = this.formatron.getDataType(itemType);
+    const ItemDataType = this.formatron.getDataType(itemType);
     return Array.isArray(value)
-      ? value.every((item) => new itemDataType(this.field).isOfType(item))
+      ? value.every((item) => new ItemDataType(this.field).isOfType(item))
       : false;
   }
 

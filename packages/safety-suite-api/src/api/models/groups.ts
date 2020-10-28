@@ -1,5 +1,5 @@
 import {Request} from 'idelic-safety-net';
-import {List, Map, Record} from 'immutable';
+import {List, Map, Record as ImRecord} from 'immutable';
 
 import {runApi} from '../../runApi';
 import {ApiOptions} from '../../types';
@@ -14,14 +14,14 @@ export interface ModelGroup {
   securableId: number;
   lastUpdatedDate: string;
   lastUpdatedBy: string;
-  fields: object;
+  fields: Record<string, unknown>;
 }
 
 export type ImModelGroup = Omit<ModelGroup, 'fields'> & {
   fields: Map<string, any>;
 };
 
-export const ModelGroupRecord = Record<ImModelGroup>({
+export const ModelGroupRecord = ImRecord<ImModelGroup>({
   id: -1,
   alias: '',
   display: '',
@@ -36,10 +36,10 @@ export const ModelGroupRecord = Record<ImModelGroup>({
 export function getModelGroups(apiOptions?: ApiOptions): Request<ModelGroup[]>;
 export function getModelGroups(
   apiOptions?: ApiOptions
-): Request<List<Record<ImModelGroup>>>;
+): Request<List<ImRecord<ImModelGroup>>>;
 export function getModelGroups(
   apiOptions: ApiOptions = {}
-): Request<ModelGroup[] | List<Record<ImModelGroup>>> {
+): Request<ModelGroup[] | List<ImRecord<ImModelGroup>>> {
   const transformers = createRecordListResponseTransformer<ImModelGroup>(
     apiOptions.useImmutable,
     ModelGroupRecord

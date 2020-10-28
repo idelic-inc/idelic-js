@@ -1,6 +1,5 @@
 import {Formatron} from '@idelic-js/formatron';
 import React, {
-  Component,
   ComponentType,
   createContext,
   useContext,
@@ -8,9 +7,10 @@ import React, {
   useMemo,
   useState
 } from 'react';
-import {fieldComponents as vanillaFieldComponents} from './components/form/vanilla';
+
 import {fieldComponents as fluentuiFieldComponents} from './components/form/fluentui';
 import {fieldComponents as materialuiFieldComponents} from './components/form/materialui';
+import {fieldComponents as vanillaFieldComponents} from './components/form/vanilla';
 
 export type FieldComponents = Record<string, ComponentType<any>>;
 
@@ -31,6 +31,9 @@ export const useFormatron = (): FormatronContext =>
 
 export interface FormatronProviderProps {
   formatron: Formatron<any> | Promise<Formatron<any>>;
+  /**
+   * Custom components for rendering form fields
+   */
   fieldComponents?: FieldComponents;
   /**
    * Which UI framework to use to render the inputs

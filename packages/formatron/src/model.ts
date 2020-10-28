@@ -1,4 +1,5 @@
 import {RelationModelsToIds} from 'idelic-safety-suite-api';
+
 import type {Formatron} from './formatron';
 
 export interface NewModel<F = any, R = any, C = any> {
@@ -24,6 +25,7 @@ export type Full<T> = {
 
 export class Model<F extends Formatron<any>, M extends NewModel = NewModel> {
   readonly #model: M;
+
   #formatron: F;
 
   /**
@@ -96,7 +98,7 @@ export class Model<F extends Formatron<any>, M extends NewModel = NewModel> {
     const modelId = typeof ids === 'number' ? ids : ids[second as number];
     const model = await this.#formatron.getModel(modelId);
     if (rest) {
-      return await model.getIn(rest);
+      return model.getIn(rest);
     }
     return model.get(second);
   }

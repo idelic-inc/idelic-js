@@ -26,6 +26,7 @@ export type ModelTemplateFieldKeys = Extract<
 
 export class Template<F extends Formatron<any>> {
   #formatron: F;
+
   #template: ModelTemplate;
 
   constructor(formatron: F, template: ModelTemplate) {
@@ -36,18 +37,23 @@ export class Template<F extends Formatron<any>> {
   get id() {
     return this.#template.id;
   }
+
   get name() {
     return this.#template.name;
   }
+
   get alias() {
     return this.#template.alias;
   }
+
   get lastUpdatedBy() {
     return this.#template.lastUpdatedBy;
   }
+
   get lastUpdatedDate() {
     return this.#template.lastUpdatedDate;
   }
+
   get securableId() {
     return this.#template.securableId;
   }

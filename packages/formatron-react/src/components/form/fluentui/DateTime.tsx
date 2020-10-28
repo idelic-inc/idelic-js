@@ -1,5 +1,5 @@
+import {DatePicker, getTheme, IDatePickerProps} from '@fluentui/react';
 import React from 'react';
-import {DatePicker, getTheme, IDatePickerProps, Text} from '@fluentui/react';
 
 import {FormatronFormItem} from '../../..';
 import {ErrorText} from './extras/ErrorText';
@@ -27,7 +27,7 @@ export const DateTime: React.FC<DateTimeProps> = ({
         label={dataType.label}
         isRequired={dataType.isRequired}
         textField={
-          !!error
+          error
             ? {
                 styles: {
                   fieldGroup: {

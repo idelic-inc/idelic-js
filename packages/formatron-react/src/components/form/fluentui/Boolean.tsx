@@ -1,5 +1,5 @@
-import React from 'react';
 import {IToggleProps, Toggle} from '@fluentui/react';
+import React from 'react';
 
 import {FormatronFormItem} from '../../..';
 

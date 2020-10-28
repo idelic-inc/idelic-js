@@ -1,8 +1,7 @@
 import fs from 'fs';
-
 import ts from 'typescript';
 
-import {FieldType, RelationType, ModelType} from './types';
+import {FieldType, ModelType, RelationType} from './types';
 import {toCamelCase} from './utils';
 
 // Sshhh, don't tell anyonre about this global state 👀

@@ -1,8 +1,8 @@
 import {Request} from 'idelic-safety-net';
 import {List, Record} from 'immutable';
 
-import {Alias, ApiOptions, Id} from '../types';
 import {runApi} from '../runApi';
+import {Alias, ApiOptions, Id} from '../types';
 import {
   createRecordListResponseTransformer,
   createRecordResponseTransformer

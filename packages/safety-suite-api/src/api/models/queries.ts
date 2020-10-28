@@ -1,8 +1,8 @@
 import {Request} from 'idelic-safety-net';
 import {Record} from 'immutable';
 
-import {ApiOptions} from '../../types';
 import {runApi} from '../../runApi';
+import {ApiOptions} from '../../types';
 
 export type EmployeeReviewTypes = 'EMPLOYEE' | 'TERMINAL';
 
