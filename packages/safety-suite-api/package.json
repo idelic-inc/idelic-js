@@ -1,5 +1,5 @@
 {
-  "name": "idelic-safety-suite-api",
+  "name": "@idelic-js/safety-suite-api",
   "version": "8.0.0",
   "description": "API helper library for Safety Suite",
   "main": "lib/index.js",
@@ -12,19 +12,12 @@
     "start": "tsc --watch",
     "build": "tsc",
     "clean": "rm -r lib/*",
-    "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.ts\"",
-    "lint": "eslint --fix \"src/**/*.ts\" \"scripts/**/*.ts\"",
-    "prepare": "npm run clean && npm run build",
-    "prepublishOnly": "npm run lint && npm test",
-    "preversion": "npm run lint && npm test",
-    "version": "npm run format && git add -A src scripts",
+    "prepare": "yarn clean && yarn build",
+    "prepublishOnly": "yarn test",
+    "preversion": "yarn test",
+    "version": "git add -A src scripts",
     "postversion": "git push && git push --tags",
     "generateTypes": "tsc ./scripts/generateModelTypes/index.ts --lib es7,dom --esModuleInterop --outDir ./bin/generateModelTypes && node ./bin/generateModelTypes/index.js \"$SCHEMA_PATH\" src/api/models/modelTypes.ts"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint && npm run format"
-    }
   },
   "repository": {
     "type": "git",
@@ -36,19 +29,9 @@
     "@types/jest": "^24.0.18",
     "@types/moment-timezone": "^0.5.12",
     "@types/node": "^13.9.3",
-    "@typescript-eslint/eslint-plugin": "^2.19.2",
-    "@typescript-eslint/parser": "^2.19.2",
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb-typescript": "^5.0.0",
-    "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-prettier": "^3.1.2",
     "glob": "^7.1.6",
-    "husky": "^3.0.5",
     "immutable": "^4.0.0-rc.12",
     "jest": "^24.9.0",
-    "prettier": "^2.0.2",
     "ts-jest": "^24.0.2",
     "typescript": "^3.8.3"
   },

@@ -16,6 +16,7 @@ coverage
 # Node Modules
 lib/
 node_modules/
+bin/
 
 # Parcel cache and distribution folders
 
@@ -24,3 +25,4 @@ node_modules/
 dist/
 
 .vscode
+.idea/
