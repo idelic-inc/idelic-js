@@ -1,0 +1,64 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.eslint.json"
+  },
+  "plugins": ["@typescript-eslint", "prettier", "simple-import-sort"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "airbnb-typescript",
+    "prettier",
+    "prettier/@typescript-eslint",
+    "prettier/react"
+  ],
+  "rules": {
+    "@typescript-eslint/explicit-member-accessibility": "off",
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-use-before-define": ["error", "nofunc"],
+    "@typescript-eslint/prefer-interface": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/ban-types": ["error", {"types": {}}],
+    "import/no-extraneous-dependencies": "off",
+    "class-methods-use-this": "off",
+    "func-names": "off",
+    "import/first": "error",
+    "import/no-duplicates": "error",
+    "import/no-cycle": "off",
+    "import/prefer-default-export": "off",
+    "no-console": ["warn", {"allow": ["warn", "error"]}],
+    "no-debugger": "warn",
+    "no-underscore-dangle": "off",
+    "prettier/prettier": "warn",
+    "react/jsx-props-no-spreading": "off",
+    "react/prop-types": "off",
+    "simple-import-sort/sort": "error",
+    "sort-imports": "off"
+  },
+  "overrides": [
+    {
+      "files": ["*.test.*"],
+      "env": {
+        "browser": false,
+        "jest": true
+      }
+    }
+  ],
+  "globals": {
+    "window": true
+  }
+}

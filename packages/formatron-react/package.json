@@ -1,0 +1,40 @@
+{
+  "name": "@idelic/formatron-react",
+  "version": "0.0.0",
+  "description": "React components to render formatron data.",
+  "author": "Idelic",
+  "homepage": "https://github.com/idelic-inc/idelic-js#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idelic-inc/idelic-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/idelic-inc/idelic-js/issues"
+  },
+  "scripts": {
+    "start": "tsc --watch",
+    "test": "echo \"tests not set up yet\" && exit 0",
+    "build": "tsc",
+    "clean": "rm -rf lib"
+  },
+  "dependencies": {
+    "@fluentui/react": "^7.145.0",
+    "@types/react": "^16.9.51",
+    "formik": "^2.2.0",
+    "lodash": "^4.17.20"
+  },
+  "peerDependencies": {
+    "@idelic/formatron": "file:../formatron",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "name": "idelic",
+  "version": "1.0.0",
+  "description": "Monorepo for Idelic JS Libraries",
+  "repository": "git@github.com:idelic-inc/idelic-js.git",
+  "author": "Idelic",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "clean": "lerna run clean",
+    "build": "lerna run build",
+    "format": "prettier --write \"**/src/**/*.ts*\" \"**/scripts/**/*.ts*\"",
+    "lint": "eslint --fix \"**/src/**/*.ts*\" \"**/scripts/**/*.ts*\"",
+    "test": "lerna run test",
+    "preversion": "yarn lint && yarn test",
+    "version": "yarn format && git add -A packages/*/src packages/*/scripts",
+    "postversion": "git push && git push --tags",
+    "prepack": "yarn lint && yarn test && yarn clean && yarn build"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "@types/lodash": "^4.14.161",
+    "@types/moment-timezone": "^0.5.12",
+    "@types/node": "^13.9.3",
+    "@types/react-dom": "^16.9.8",
+    "@typescript-eslint/eslint-plugin": "^4.6.0",
+    "@typescript-eslint/parser": "^4.6.0",
+    "eslint": "^7.12.1",
+    "eslint-config-airbnb-typescript": "^12.0.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-simple-import-sort": "^5.0.3",
+    "glob": "^7.1.6",
+    "husky": "^4.3.0",
+    "immutable": "^4.0.0-rc.12",
+    "jest": "^24.9.0",
+    "lerna": "^3.22.1",
+    "lint-staged": "^10.5.0",
+    "prettier": "^2.1.2",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "@idelic/formatron": "file:packages/formatron",
+    "@idelic/formatron-react": "file:packages/formatron-react",
+    "@idelic/safety-net": "file:packages/safety-net",
+    "@idelic/safety-suite-api": "file:packages/safety-suite-api"
+  }
+}

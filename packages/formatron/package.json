@@ -1,0 +1,36 @@
+{
+  "name": "@idelic/formatron",
+  "version": "0.0.0",
+  "description": "A library that generates and validates data given a JSON schema.",
+  "author": "Idelic",
+  "homepage": "https://github.com/idelic-inc/idelic#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:idelic-inc/idelic-js.git"
+  },
+  "scripts": {
+    "start": "tsc --watch",
+    "test": "echo \"tests not set up yet\" && exit 0",
+    "build": "tsc",
+    "clean": "rm -rf lib"
+  },
+  "bugs": {
+    "url": "https://github.com/idelic-inc/idelic/issues"
+  },
+  "dependencies": {
+    "idelic-safety-suite-api": "^7.0.1",
+    "immutable": "^4.0.0-rc.12",
+    "lodash": "^4.17.20",
+    "moment": "^2.29.1"
+  }
+}
