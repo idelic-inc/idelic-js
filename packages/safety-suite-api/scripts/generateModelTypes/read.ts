@@ -17,7 +17,7 @@ const configurationsRegexp = new RegExp(
 
 function createTemplate(
   directory: string,
-  parsedTemplate: object
+  parsedTemplate: Record<string, unknown>
 ): ModelTemplate {
   return {
     ...parsedTemplate,
