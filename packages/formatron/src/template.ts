@@ -1,3 +1,4 @@
+import {DataType} from './dataType';
 import {Formatron} from './formatron';
 import {JsonData, JsonDataComputation, JsonDataRelation} from './types';
 
@@ -24,12 +25,12 @@ export type ModelTemplateFieldKeys = Extract<
   'fields' | 'computations' | 'listItemTemplates' | 'relations'
 >;
 
-export class Template<F extends Formatron<any>> {
-  #formatron: F;
+export class Template {
+  #formatron: Formatron;
 
   #template: ModelTemplate;
 
-  constructor(formatron: F, template: ModelTemplate) {
+  constructor(formatron: Formatron, template: ModelTemplate) {
     this.#formatron = formatron;
     this.#template = template;
   }
@@ -62,20 +63,19 @@ export class Template<F extends Formatron<any>> {
    * Retrieves the dataType for a specific field.
    * @param fieldName - Name of a field or computation.
    */
-  getDataType = (
-    fieldName: string
-  ): ReturnType<F['getDataType']> | undefined => {
+  getDataType = <D extends DataType>(fieldName: string): D | undefined => {
     const {fields, computations} = this.#template.fields;
     const combined = [...fields, ...computations];
-    const {type} = combined.find(({name}) => name === fieldName) ?? {};
-    if (!type) {
+    const field = combined.find(({name}) => name === fieldName);
+    if (!field) {
       console.warn(`No field found with name "${fieldName}`);
       return undefined;
     }
-    const item = this.#formatron.getDataType(type);
-    if (!item) {
-      console.warn(`No dataType found with name "${type}"`);
+    const MaybeDataType = this.#formatron.getDataType(field.type);
+    if (!MaybeDataType) {
+      console.warn(`No dataType found with name "${field.type}"`);
+      return undefined;
     }
-    return item;
+    return new (MaybeDataType as any)(this.#formatron, field) as D;
   };
 }

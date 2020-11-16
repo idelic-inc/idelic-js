@@ -1,15 +1,15 @@
 import {ITextFieldProps, TextField} from '@fluentui/react/lib/TextField';
 import React from 'react';
 
-import {FormatronFormItem} from '../../..';
+import {FieldObjectDataType} from '../ModelForm';
 
 export interface TextProps {
-  item: FormatronFormItem<string>;
+  field: FieldObjectDataType;
   textFieldProps?: ITextFieldProps;
 }
 
-export const Text: React.FC<TextProps> = ({item, textFieldProps = {}}) => {
-  const {value, setValue, error, dataType} = item;
+export const Text: React.FC<TextProps> = ({field, textFieldProps = {}}) => {
+  const {value, setValue, error, dataType} = field;
 
   return (
     <TextField

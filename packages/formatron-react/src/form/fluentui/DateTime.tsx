@@ -1,7 +1,7 @@
 import {DatePicker, getTheme, IDatePickerProps} from '@fluentui/react';
 import React from 'react';
 
-import {FormatronFormItem} from '../../..';
+import {FieldObjectDataType} from '../ModelForm';
 import {ErrorText} from './extras/ErrorText';
 
 const {
@@ -9,15 +9,15 @@ const {
 } = getTheme();
 
 export interface DateTimeProps {
-  item: FormatronFormItem<number>;
+  field: FieldObjectDataType;
   datePickerProps?: IDatePickerProps;
 }
 
 export const DateTime: React.FC<DateTimeProps> = ({
-  item,
+  field,
   datePickerProps = {}
 }) => {
-  const {value, setValue, error, dataType} = item;
+  const {value, setValue, error, dataType} = field;
 
   return (
     <div>

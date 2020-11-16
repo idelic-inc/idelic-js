@@ -1,36 +1,27 @@
-import {Formatron} from '@idelic/formatron';
-import React, {
-  ComponentType,
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState
-} from 'react';
+import {DataInterface, DataType, Formatron} from '@idelic/formatron';
+import React, {ComponentType, createContext, useContext, useMemo} from 'react';
 
-import {fieldComponents as fluentuiFieldComponents} from './components/form/fluentui';
-import {fieldComponents as materialuiFieldComponents} from './components/form/materialui';
-import {fieldComponents as vanillaFieldComponents} from './components/form/vanilla';
+import {fieldComponents as fluentuiFieldComponents} from './form/fluentui';
+import {fieldComponents as materialuiFieldComponents} from './form/materialui';
+import {fieldComponents as vanillaFieldComponents} from './form/vanilla';
 
 export type FieldComponents = Record<string, ComponentType<any>>;
 
 export interface FormatronContext {
-  formatron: Formatron<any> | undefined;
+  formatron: Formatron;
   fieldComponents: FieldComponents;
-  isReady: boolean;
 }
 
 const formatronContext = createContext<FormatronContext>({
-  formatron: undefined,
-  fieldComponents: {},
-  isReady: false
-});
+  fieldComponents: {}
+} as FormatronContext);
 
 export const useFormatron = (): FormatronContext =>
   useContext(formatronContext);
 
 export interface FormatronProviderProps {
-  formatron: Formatron<any> | Promise<Formatron<any>>;
+  dataInterface: DataInterface;
+  dataTypes?: typeof DataType[];
   /**
    * Custom components for rendering form fields
    */
@@ -42,12 +33,16 @@ export interface FormatronProviderProps {
   framework?: 'vanilla' | 'fluentui' | 'materialui';
 }
 export const FormatronProvider: React.FC<FormatronProviderProps> = ({
-  formatron,
+  dataInterface,
+  dataTypes,
   children,
   fieldComponents = {},
   framework = 'vanilla'
 }) => {
-  const [client, setClient] = useState<Formatron<any> | undefined>();
+  const formatron = useMemo(() => new Formatron(dataInterface, dataTypes), [
+    dataInterface,
+    dataTypes
+  ]);
 
   const defaultFieldComponents = useMemo<FieldComponents>(() => {
     switch (framework) {
@@ -64,21 +59,14 @@ export const FormatronProvider: React.FC<FormatronProviderProps> = ({
     }
   }, [framework]);
 
-  useEffect(() => {
-    (async () => {
-      setClient(formatron instanceof Promise ? await formatron : formatron);
-    })();
-  }, [formatron, setClient]);
-
   return (
     <formatronContext.Provider
       value={{
-        formatron: client,
+        formatron,
         fieldComponents: {
           ...defaultFieldComponents,
           ...fieldComponents
-        },
-        isReady: !!client
+        }
       }}
     >
       {children}

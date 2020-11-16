@@ -1,17 +1,14 @@
 import type {Formatron} from './formatron';
 import {JsonData} from './types';
 
-export abstract class DataType<
-  T = any,
-  F extends Formatron<any> = Formatron<any>
-> {
+export abstract class DataType<T = any> {
   public static readonly typeName: string = '';
 
   protected field: JsonData;
 
-  protected formatron: F;
+  protected formatron: Formatron;
 
-  constructor(formatron: F, field: JsonData) {
+  constructor(formatron: Formatron, field: JsonData) {
     this.formatron = formatron;
     this.field = field;
   }
