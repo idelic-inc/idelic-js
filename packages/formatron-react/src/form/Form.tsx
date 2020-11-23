@@ -24,7 +24,10 @@ import {useFormatron} from '../context';
 
 type FormValues<M extends AnyModel = AnyModel> = M['fields'];
 type FormTouchMap<M extends AnyModel = AnyModel> = {
-  [K in keyof M['fields'] | keyof M['relations']]: boolean;
+  [K in keyof M['fields']]: boolean;
+};
+type FormErrorMap<M extends AnyModel = AnyModel> = {
+  [K in keyof M['fields']]: string | undefined;
 };
 
 const getInitialValues = <M extends AnyModel = AnyModel>(
@@ -45,6 +48,15 @@ const getInitialTouchMap = <M extends AnyModel = AnyModel>(
   });
   return map;
 };
+const getInitialErrorMap = <M extends AnyModel = AnyModel>(
+  initialValues: FormValues<M>
+): FormErrorMap<M> => {
+  const map = {} as FormErrorMap<M>;
+  Object.keys(initialValues).forEach((key: keyof FormErrorMap<M>) => {
+    map[key] = undefined;
+  });
+  return map;
+};
 
 export interface FormObject<M extends AnyModel = AnyModel> {
   model: Model<M> | undefined;
@@ -53,9 +65,13 @@ export interface FormObject<M extends AnyModel = AnyModel> {
   setValue: (key: string) => (value: any) => void;
   touched: FormTouchMap<M> | undefined;
   setValueTouched: (key: string) => (isTouched: boolean) => void;
+  errors: FormErrorMap<M> | undefined;
+  setValueError: (key: string) => (error: string | undefined) => void;
   resetForm: () => void;
   isLoading: boolean;
+  isValid: boolean;
   isDirty: boolean;
+  validationModel?: M;
 }
 
 export interface ModelOptions {
@@ -73,7 +89,11 @@ export const useForm = <M extends AnyModel = AnyModel>(
   /**
    * Object containing the id or alias of the template
    */
-  options: ModelOrTemplateOptions
+  options: ModelOrTemplateOptions,
+  /**
+   * Optional model to be used with a template form for async validation
+   */
+  validationModel?: M
 ): FormObject<M> => {
   const {formatron} = useFormatron();
   const [model, setModel] = useState<Model<M>>();
@@ -84,6 +104,7 @@ export const useForm = <M extends AnyModel = AnyModel>(
   ] = useBoolean(false);
   const [values, setValues] = useState<FormValues<M>>();
   const [touched, setTouched] = useState<FormTouchMap<M>>();
+  const [errors, setErrors] = useState<FormErrorMap<M>>();
   const resetForm = useCallback(() => {
     if (template) {
       const initialValues = merge(
@@ -91,10 +112,12 @@ export const useForm = <M extends AnyModel = AnyModel>(
         getInitialValues<M>(template)
       );
       const initialTouchMap = getInitialTouchMap<M>(initialValues);
+      const initialErrorMap = getInitialErrorMap<M>(initialValues);
       setValues(initialValues);
       setTouched(initialTouchMap);
+      setErrors(initialErrorMap);
     }
-  }, [template, model, setValues, setTouched]);
+  }, [template, model, setValues, setTouched, setErrors]);
   const setValue = useCallback(
     (key: string) => (value: any) =>
       setValues((currentValues) => {
@@ -108,6 +131,7 @@ export const useForm = <M extends AnyModel = AnyModel>(
           console.error(
             `Cannot update field! Template with id "${template?.id}" has no such field "${key}".`
           );
+          return currentValues;
         }
         console.warn(
           'Wait until the form has finished loading before updating fields.'
@@ -129,18 +153,48 @@ export const useForm = <M extends AnyModel = AnyModel>(
           console.error(
             `Cannot touch field! Template with id "${template?.id}" has no such field "${key}".`
           );
+          return currentTouched;
         }
         console.warn(
           'Wait until the form has finished loading before touching fields.'
         );
         return currentTouched;
       }),
-    [setValues]
+    [setTouched]
+  );
+  const setValueError = useCallback(
+    (key: string) => (error: string | undefined) =>
+      setErrors((currentErrors) => {
+        if (currentErrors) {
+          if (Object.keys(currentErrors).includes(key)) {
+            return {
+              ...currentErrors,
+              [key]: error
+            };
+          }
+          console.error(
+            `Cannot set error for field! Template with id "${template?.id}" has no such field "${key}".`
+          );
+          return currentErrors;
+        }
+        console.warn(
+          'Wait until the form has finished loading before setting errors on fields.'
+        );
+        return currentErrors;
+      }),
+    [setErrors]
   );
   const isDirty = useMemo(
     () =>
       template && values ? !isEqual(values, getInitialValues(template)) : false,
     [template, values]
+  );
+  const isValid = useMemo(
+    () =>
+      errors
+        ? !Object.values(errors).some((error) => typeof error === 'string')
+        : false,
+    [errors]
   );
 
   // Fetch template and optional model
@@ -175,12 +229,16 @@ export const useForm = <M extends AnyModel = AnyModel>(
     model,
     template,
     values,
+    errors,
+    setValueError,
     isLoading,
     resetForm,
     setValue,
     touched,
     setValueTouched,
-    isDirty
+    isDirty,
+    validationModel,
+    isValid
   };
 };
 
@@ -201,7 +259,10 @@ const formContext = createContext<FormObject>({
   setValue: () => () => {},
   touched: undefined,
   setValueTouched: () => () => {},
-  isDirty: false
+  errors: undefined,
+  setValueError: () => () => {},
+  isDirty: false,
+  isValid: false
 });
 
 export const useFormContext = <M extends AnyModel = AnyModel>(): FormObject<
@@ -218,7 +279,10 @@ export interface FieldObject {
   value: any;
   setValue: (value: any) => void;
   dataType: DataType | undefined;
-  error: any;
+  isTouched: boolean;
+  setTouched: (touched: boolean) => void;
+  isRequired: boolean;
+  error: string | undefined;
 }
 export interface FieldObjectDataType<D extends DataType = DataType>
   extends Omit<FieldObject, 'dataType'> {
@@ -226,10 +290,39 @@ export interface FieldObjectDataType<D extends DataType = DataType>
 }
 
 export const useField = (key: string): FieldObject => {
-  const {values, setValue: createSetValue, template} = useFormContext();
+  const {
+    values,
+    setValue: createSetValue,
+    template,
+    setValueTouched,
+    touched,
+    errors,
+    setValueError,
+    model,
+    isLoading,
+    validationModel
+  } = useFormContext();
   const value: any = useMemo(() => values?.[key], [values]);
+  const isTouched = useMemo(() => touched?.[key] ?? false, [touched]);
+  const error = useMemo(() => errors?.[key], [errors]);
   const setValue = useCallback(createSetValue(key), [createSetValue]);
+  const setTouched = useCallback(setValueTouched(key), [setValueTouched]);
   const dataType = useMemo(() => template?.getDataType(key), [template]);
+  const isRequired = useMemo(
+    () =>
+      isLoading
+        ? false
+        : dataType?.isRequired(model?.model ?? validationModel) ?? false,
+    [model, isLoading, dataType, validationModel]
+  );
 
-  return {value, setValue, dataType, error: undefined};
+  useEffect(() => {
+    if (dataType) {
+      setValueError(key)(
+        dataType.validate(value, model?.model ?? validationModel) ?? undefined
+      );
+    }
+  }, [value, setValueError, dataType, model, validationModel]);
+
+  return {value, setValue, dataType, setTouched, isTouched, error, isRequired};
 };

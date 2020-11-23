@@ -6,7 +6,7 @@ import {FieldObjectDataType} from '../Form';
 import {ErrorText} from './extras/ErrorText';
 
 const {
-  semanticColors: {errorBackground: errorColor}
+  semanticColors: {errorText: errorColor}
 } = getTheme();
 
 export interface DateTimeProps {
@@ -18,7 +18,15 @@ export const DateTime: React.FC<DateTimeProps> = ({
   field,
   datePickerProps = {}
 }) => {
-  const {value, setValue, error, dataType} = field;
+  const {
+    value,
+    setValue,
+    error,
+    dataType,
+    setTouched,
+    isTouched,
+    isRequired
+  } = field;
 
   return (
     <div>
@@ -26,9 +34,11 @@ export const DateTime: React.FC<DateTimeProps> = ({
         value={value ? unix(value).toDate() : undefined}
         onSelectDate={(date) => setValue(date ? date.getTime() / 1000 : null)}
         label={dataType.label}
-        isRequired={dataType.isRequired}
+        isRequired={isRequired}
+        allowTextInput
+        onBlur={() => setTouched(true)}
         textField={
-          error
+          error && isTouched
             ? {
                 styles: {
                   fieldGroup: {
@@ -42,7 +52,7 @@ export const DateTime: React.FC<DateTimeProps> = ({
         }
         {...datePickerProps}
       />
-      {error && <ErrorText>{error}</ErrorText>}
+      {error && isTouched && <ErrorText>{error}</ErrorText>}
     </div>
   );
 };
