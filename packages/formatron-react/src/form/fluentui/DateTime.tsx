@@ -1,7 +1,8 @@
 import {DatePicker, getTheme, IDatePickerProps} from '@fluentui/react';
+import {unix} from 'moment';
 import React from 'react';
 
-import {FieldObjectDataType} from '../ModelForm';
+import {FieldObjectDataType} from '../Form';
 import {ErrorText} from './extras/ErrorText';
 
 const {
@@ -22,8 +23,8 @@ export const DateTime: React.FC<DateTimeProps> = ({
   return (
     <div>
       <DatePicker
-        value={new Date(value)}
-        onSelectDate={(val) => setValue((val?.getTime() ?? 0) / 1000)}
+        value={value ? unix(value).toDate() : undefined}
+        onSelectDate={(date) => setValue(date ? date.getTime() / 1000 : null)}
         label={dataType.label}
         isRequired={dataType.isRequired}
         textField={

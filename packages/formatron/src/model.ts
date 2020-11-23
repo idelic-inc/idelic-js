@@ -30,6 +30,10 @@ export class Model<M extends AnyModel = AnyModel> {
     this.#formatron = formatron;
   }
 
+  get model() {
+    return this.#model;
+  }
+
   get id() {
     return this.#model.id;
   }

@@ -1,7 +1,7 @@
 import {ITextFieldProps, TextField} from '@fluentui/react/lib/TextField';
 import React from 'react';
 
-import {FieldObjectDataType} from '../ModelForm';
+import {FieldObjectDataType} from '../Form';
 
 export interface TextProps {
   field: FieldObjectDataType;

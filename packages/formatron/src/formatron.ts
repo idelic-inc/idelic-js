@@ -1,5 +1,5 @@
 import {DataType} from './dataType';
-import {DefaultDataTypeClasses} from './dataTypes';
+import defaultDataTypes, {DefaultDataTypeClasses} from './dataTypes';
 import {Enum} from './enum';
 import {Model} from './model';
 import {Template} from './template';
@@ -24,6 +24,9 @@ export class Formatron {
 
   constructor(dataInterface: DataInterface, dataTypes: typeof DataType[] = []) {
     this.#dataInterface = dataInterface;
+    defaultDataTypes.forEach((dataType) => {
+      this.#dataTypes[dataType.typeName] = dataType;
+    });
     dataTypes.forEach((dataType) => {
       this.#dataTypes[dataType.typeName] = dataType;
     });

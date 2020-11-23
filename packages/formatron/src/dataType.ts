@@ -21,7 +21,15 @@ export abstract class DataType<T = any> {
   abstract isOfType(value: unknown): value is T;
 
   get isRequired(): boolean {
-    return this.field.options?.required ?? false;
+    const required = this.field.options?.required;
+    switch (typeof required) {
+      case 'object':
+        return false; // TODO Support conditional required
+      case 'boolean':
+        return required;
+      default:
+        return false;
+    }
   }
 
   get isProtected(): boolean {

@@ -9,7 +9,7 @@ import {EnumType} from '@idelic/formatron/lib/dataTypes/enum';
 import React from 'react';
 
 import {useEnum} from '../../hooks/useEnum';
-import {FieldObjectDataType} from '../ModelForm';
+import {FieldObjectDataType} from '../Form';
 
 const enumValuesToDropdownOptions = (
   values: EnumValueType[]

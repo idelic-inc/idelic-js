@@ -1,7 +1,7 @@
 import {IToggleProps, Toggle} from '@fluentui/react';
 import React from 'react';
 
-import {FieldObjectDataType} from '../ModelForm';
+import {FieldObjectDataType} from '../Form';
 
 export interface BooleanProps {
   field: FieldObjectDataType;

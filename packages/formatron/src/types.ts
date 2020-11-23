@@ -104,8 +104,19 @@ export declare type ModelOptions = ModelFilterOptions &
   ModelListOptions &
   ModelOutputOptions;
 
+export interface RequiredCase {
+  pattern: string;
+  result: boolean;
+}
+export type Required =
+  | boolean
+  | {
+      path: string[];
+      cases: RequiredCase[];
+      default: boolean;
+    };
 export interface BaseDataOptions extends Record<string, any> {
-  required: boolean;
+  required: Required;
 }
 
 export interface JsonData {

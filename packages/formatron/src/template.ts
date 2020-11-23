@@ -35,6 +35,10 @@ export class Template {
     this.#template = template;
   }
 
+  get template() {
+    return this.#template;
+  }
+
   get id() {
     return this.#template.id;
   }
