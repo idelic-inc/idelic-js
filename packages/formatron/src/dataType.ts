@@ -1,5 +1,7 @@
+import getIn from 'lodash/get';
+
 import type {Formatron} from './formatron';
-import {JsonData} from './types';
+import {AnyModel, JsonData} from './types';
 
 export abstract class DataType<T = any> {
   public static readonly typeName: string = '';
@@ -20,11 +22,23 @@ export abstract class DataType<T = any> {
    */
   abstract isOfType(value: unknown): value is T;
 
-  get isRequired(): boolean {
+  isRequired(model?: AnyModel): boolean {
     const required = this.field.options?.required;
     switch (typeof required) {
-      case 'object':
-        return false; // TODO Support conditional required
+      case 'object': {
+        if (!model) {
+          console.warn(
+            `Model is needed to validate if field '${this.field.name}' is required`
+          );
+          return false;
+        }
+        const path = required.path.map((item) =>
+          item === 'relations' ? 'relationModels' : item
+        );
+        const value = getIn(model, path);
+        const thisCase = required.cases.find(({pattern}) => pattern === value);
+        return thisCase?.result ?? false;
+      }
       case 'boolean':
         return required;
       default:
@@ -67,9 +81,8 @@ export abstract class DataType<T = any> {
     return this.field.name;
   }
 
-  validate(value: T): string | null {
-    const {isRequired} = this;
-    return isRequired &&
+  validate(value: T, model?: AnyModel): string | null {
+    return this.isRequired(model) &&
       (value === undefined ||
         value === null ||
         (typeof value === 'string' && !value.trim()))
