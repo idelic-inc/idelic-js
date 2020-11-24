@@ -41,7 +41,12 @@ export abstract class DataType<T = any> {
       }
       case 'boolean':
         return required;
+      case 'undefined':
+        return false;
       default:
+        console.warn(
+          `'${required}' is not a valid value for the \`required\` option. Expected boolean or object.`
+        );
         return false;
     }
   }
