@@ -345,6 +345,14 @@
     "@uifabric/set-version" "^7.0.23"
     tslib "^1.10.0"
 
+"@fluentui/react-window-provider@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@fluentui/react-window-provider/-/react-window-provider-1.0.1.tgz#8ec71db8cfd57e11f00ed42c5c1377ef4dfe5f6b"
+  integrity sha512-5hvruDyF0uE8+6YN6Y+d2sEzexBadxUNxUjDcDreTPsmtHPwF5FPBYLhoD7T84L5U4YNvKxKh25tYJm6E0GE2w==
+  dependencies:
+    "@uifabric/set-version" "^7.0.23"
+    tslib "^1.10.0"
+
 "@fluentui/react@^7.145.0":
   version "7.148.2"
   resolved "https://registry.yarnpkg.com/@fluentui/react/-/react-7.148.2.tgz#11b21c63ab9a0c34de621c903bdc1bc4d88e1eac"
@@ -365,15 +373,17 @@
     tslib "^1.10.0"
 
 "@idelic/formatron-react@file:packages/formatron-react":
-  version "0.0.0"
+  version "0.0.1-alpha.0"
   dependencies:
     "@fluentui/react" "^7.145.0"
     "@types/react" "^16.9.51"
+    "@uifabric/react-hooks" "^7.13.9"
     formik "^2.2.0"
     lodash "^4.17.20"
+    moment "^2.29.1"
 
 "@idelic/formatron@file:packages/formatron":
-  version "0.0.0"
+  version "0.0.1-alpha.0"
   dependencies:
     idelic-safety-suite-api "^7.0.1"
     immutable "^4.0.0-rc.12"
@@ -381,12 +391,12 @@
     moment "^2.29.1"
 
 "@idelic/safety-net@file:packages/safety-net":
-  version "1.3.1"
+  version "2.0.0"
   dependencies:
     source-map-support "^0.5.13"
 
 "@idelic/safety-suite-api@file:packages/safety-suite-api":
-  version "8.0.0"
+  version "9.0.0"
   dependencies:
     idelic-safety-net "^1.3.1"
     moment "^2.24.0"
@@ -1684,6 +1694,16 @@
     "@uifabric/utilities" "^7.33.1"
     tslib "^1.10.0"
 
+"@uifabric/react-hooks@^7.13.9":
+  version "7.13.9"
+  resolved "https://registry.yarnpkg.com/@uifabric/react-hooks/-/react-hooks-7.13.9.tgz#82373cdfbccc81b6fa00586dd8994bb47c97e99b"
+  integrity sha512-VtDg2b3ypYXX7MLp1STk1Fj6ZIeZktXnm0hu1Os/pGvq6xkuLRly5XP6ZSHitm8K7ZcMo48CcNL8smmiXprBQg==
+  dependencies:
+    "@fluentui/react-window-provider" "^1.0.1"
+    "@uifabric/set-version" "^7.0.23"
+    "@uifabric/utilities" "^7.33.2"
+    tslib "^1.10.0"
+
 "@uifabric/set-version@^7.0.23":
   version "7.0.23"
   resolved "https://registry.yarnpkg.com/@uifabric/set-version/-/set-version-7.0.23.tgz#bfe10b6ba17a2518704cca856bdba8adbc11ffb0"
@@ -1707,6 +1727,17 @@
   version "7.33.1"
   resolved "https://registry.yarnpkg.com/@uifabric/utilities/-/utilities-7.33.1.tgz#3a6180029f05d5a8965ac9b185ba7511ed7dc6ca"
   integrity sha512-QDdl5JE2FQd/vX4enjdu5NM3hhbyD2FNEFyLoth9wJCR8sAHOaaT8TLeO9uEboWM0xEYhtHMLuYnnZPLJrEZsw==
+  dependencies:
+    "@fluentui/dom-utilities" "^1.1.1"
+    "@uifabric/merge-styles" "^7.19.1"
+    "@uifabric/set-version" "^7.0.23"
+    prop-types "^15.7.2"
+    tslib "^1.10.0"
+
+"@uifabric/utilities@^7.33.2":
+  version "7.33.2"
+  resolved "https://registry.yarnpkg.com/@uifabric/utilities/-/utilities-7.33.2.tgz#426f9a8d1f9f7738e65abe4a9e36b65583476d81"
+  integrity sha512-v2c3IUJdpru/hoGNOwIW549O5D4XBAc5sLpB7RREGI5ywoWuIJlNyYtBEGOwhAY62J2blj11qi86Ep+oZDM/Kw==
   dependencies:
     "@fluentui/dom-utilities" "^1.1.1"
     "@uifabric/merge-styles" "^7.19.1"
@@ -7947,10 +7978,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@^3.8.3:
-  version "3.9.7"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.7.tgz#98d600a5ebdc38f40cb277522f12dc800e9e25fa"
-  integrity sha512-BLbiRkiBzAwsjut4x/dsibSTB6yWpwT5qWmC2OfuCg3GgVQCSgMs4vEctYPhsaGtd0AeuuHMkjZ2h2WG8MSzRw==
+typescript@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.1.2.tgz#6369ef22516fe5e10304aae5a5c4862db55380e9"
+  integrity sha512-thGloWsGH3SOxv1SoY7QojKi0tc+8FnOmiarEGMbd/lar7QOEd3hvlx3Fp5y6FlDUGl9L+pd4n2e+oToGMmhRQ==
 
 uglify-js@^3.1.4:
   version "3.11.1"

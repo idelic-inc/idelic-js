@@ -35,8 +35,7 @@
     "moment": "^2.29.1"
   },
   "devDependencies": {
-    "@idelic/formatron": "file:../formatron",
-    "typescript": "^4.1.2"
+    "@idelic/formatron": "file:../formatron"
   },
   "peerDependencies": {
     "@idelic/formatron": "file:../formatron",
