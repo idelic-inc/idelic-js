@@ -1,84 +1,63 @@
-import {Enum, EnumValue} from 'idelic-safety-suite-api';
-
 import {DataType} from './dataType';
-import {DefaultDataTypeClasses} from './dataTypes.ts';
-import {Model, NewModel} from './model';
-import {ModelTemplate, Template} from './template';
+import defaultDataTypes, {DefaultDataTypeClasses} from './dataTypes';
+import {Enum} from './enum';
+import {Model} from './model';
+import {Template} from './template';
+import {AnyModel, DataInterface, IdOptions, IdOrAliasOptions} from './types';
 
-export class Formatron<D extends typeof DataType> {
-  #models: Record<number, Model<Formatron<D>> | undefined> = {};
+export interface TemplateCacheItem {
+  ids: Record<number, Template | undefined>;
+  aliases: Record<string, number | undefined>;
+}
+export interface TemplateCache {
+  models: TemplateCacheItem;
+  monitors: TemplateCacheItem;
+}
 
-  #templates: Record<number, Template<Formatron<D>> | undefined> = {};
+export class Formatron {
+  #dataTypes: Record<
+    string,
+    DefaultDataTypeClasses | typeof DataType | undefined
+  > = {};
 
-  #templateAliasMap: Record<string, number | undefined> = {};
+  #dataInterface: DataInterface;
 
-  #enums: Record<number, Enum | undefined> = {};
-
-  #enumAliasMap: Record<string, number | undefined> = {};
-
-  #enumValues: Record<number, EnumValue | undefined> = {};
-
-  #dataTypes: Record<string, D | DefaultDataTypeClasses | undefined> = {};
-
-  #fetchModel: (id: number) => NewModel | Promise<NewModel>;
-
-  constructor(
-    templates: ModelTemplate[],
-    enums: Enum[],
-    enumValues: EnumValue[],
-    fetchModel: (id: number) => NewModel | Promise<NewModel>,
-    dataTypes: D[] = []
-  ) {
-    this.#fetchModel = fetchModel;
-    templates.forEach((template) => {
-      this.#templates[template.id] = new Template(this, template);
-      this.#templateAliasMap[template.alias] = template.id;
-    });
-    enums.forEach((e) => {
-      this.#enums[e.id as number] = e;
-      this.#enumAliasMap[e.alias] = e.id;
+  constructor(dataInterface: DataInterface, dataTypes: typeof DataType[] = []) {
+    this.#dataInterface = dataInterface;
+    defaultDataTypes.forEach((dataType) => {
+      this.#dataTypes[dataType.typeName] = dataType;
     });
     dataTypes.forEach((dataType) => {
       this.#dataTypes[dataType.typeName] = dataType;
     });
   }
 
-  getEnumById(id: number) {
-    return this.#templates[id];
+  getDataType<D extends typeof DataType>(name: string): D | undefined {
+    return this.#dataTypes[name] as D;
   }
 
-  getEnumByAlias(alias: string) {
-    const id = this.#templateAliasMap[alias];
-    return id ? this.getTemplateById(id) : undefined;
+  async getEnum(options: IdOrAliasOptions) {
+    const rawEnum = await this.#dataInterface.getEnum(options);
+    return new Enum(this, rawEnum);
   }
 
-  getTemplateById(id: number) {
-    return this.#templates[id];
+  async getModelTemplate(options: IdOrAliasOptions) {
+    const rawTemplate = await this.#dataInterface.getModelTemplate(options);
+    return new Template(this, rawTemplate);
   }
 
-  getTemplateByAlias(alias: string) {
-    const id = this.#templateAliasMap[alias];
-    return id ? this.getTemplateById(id) : undefined;
+  async getMonitorTemplate(options: IdOrAliasOptions) {
+    const rawTemplate = await this.#dataInterface.getMonitorTemplate(options);
+    return new Template(this, rawTemplate);
   }
 
-  parseModel<M extends NewModel>(model: M): Model<Formatron<D>, M> {
-    return new Model(this, model);
+  async getModel<M extends AnyModel = AnyModel>(options: IdOptions) {
+    const rawModel = await this.#dataInterface.getModel<M>(options);
+    return new Model<M>(this, rawModel);
   }
 
-  getDataType(name: string): D | DefaultDataTypeClasses | undefined {
-    return this.#dataTypes[name];
-  }
-
-  async getModel(id: number, noCache = false): Promise<Model<Formatron<D>>> {
-    const model = this.#models[id];
-    if (model && !noCache) {
-      return model;
-    }
-    const maybePromise = this.#fetchModel(id);
-    const fetchedModel =
-      maybePromise instanceof Promise ? await maybePromise : maybePromise;
-    const newModel = this.parseModel(fetchedModel);
-    this.#models[id] = newModel;
-    return newModel;
-  }
+  // async getMonitor(options: IdOptions) {
+  //   const rawMonitor = await this.#dataInterface.getMonitor(options);
+  //   return new Monitor(this, rawMonitor);
+  // }
 }

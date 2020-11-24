@@ -2,20 +2,25 @@ import {DataType} from '../dataType';
 
 export abstract class RelatedType extends DataType {
   get templateIds(): number[] {
-    return (
+    const ids =
       this.field.options?.templatesId.filterNot(
         (templateId: number) => templateId === -1
-      ) ?? []
-    );
+      ) ?? [];
+    if (ids.length === 0) {
+      throw new Error(
+        'The related dataType requires at least one id in `templatesId`'
+      );
+    }
+    return ids;
   }
 
   get relatedTo() {
     return this.field.options?.relatedTo;
   }
 
-  get firstRelationTemplate() {
-    const [firstId] = this.templateIds ?? [];
-    return firstId ? this.formatron.getTemplateById(firstId) : undefined;
+  getFirstRelationTemplate() {
+    const [firstId] = this.templateIds;
+    return this.formatron.getModelTemplate({id: firstId});
   }
 
   getRelationTemplateById(templateId: number) {
@@ -25,13 +30,13 @@ export abstract class RelatedType extends DataType {
       );
     }
 
-    return this.formatron.getTemplateById(templateId);
+    return this.formatron.getModelTemplate({id: templateId});
   }
 
-  get relationTemplates() {
+  getRelationTemplates() {
     const templatesId = this.templateIds;
-    return templatesId.flatMap(
-      (id) => this.formatron.getTemplateById(id) ?? []
+    return Promise.all(
+      templatesId.map((id) => this.formatron.getModelTemplate({id}))
     );
   }
 

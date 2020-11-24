@@ -2037,6 +2037,7 @@ export interface EnforcementViolationFields {
   reviewed?: boolean;
   sectionNo?: string | null;
   severityWeight?: number | null;
+  source?: string | null;
   unitNo?: string | null;
 }
 
@@ -2391,10 +2392,7 @@ export interface ImprovementPlanTaskTemplateInputRelations {
   improvementPlanWeek?: ImprovementPlanWeekTemplateInputModel | null;
 }
 
-export interface ImprovementPlanTaskTemplateComputations {
-  acceptablePerformance: any;
-  category: any;
-}
+export interface ImprovementPlanTaskTemplateComputations {}
 
 export type ImprovementPlanTaskTemplateModel = Model<
   ImprovementPlanTaskTemplateFields,
@@ -3327,6 +3325,7 @@ export type TelematicsAlertInputModel = InputModel<
 // Type definitions for /training / Training Attendance (training_attendance)
 
 export interface TrainingAttendanceFields {
+  grade?: number | null;
   status?: string | null;
 }
 
@@ -3356,21 +3355,26 @@ export type TrainingAttendanceInputModel = InputModel<
 // Type definitions for /training / Training Class (training_class)
 
 export interface TrainingClassFields {
+  assignedDate?: number | null;
   completed?: boolean;
-  date: number;
+  date?: number | null;
+  description?: string;
+  dueDate?: number | null;
   endTime?: number | null;
+  name?: string;
+  startDate?: number | null;
   startTime?: number | null;
 }
 
 export interface TrainingClassRelations {
   attendees: TrainingAttendanceModel[];
-  trainer: EmployeeModel;
+  trainer?: EmployeeModel | null;
   trainingCourse: TrainingCourseModel;
 }
 
 export interface TrainingClassInputRelations {
   attendees: TrainingAttendanceInputModel[];
-  trainer: EmployeeInputModel;
+  trainer?: EmployeeInputModel | null;
   trainingCourse: TrainingCourseInputModel;
 }
 
@@ -3404,6 +3408,7 @@ export interface TrainingCourseFields {
   expirationValue?: number | null;
   name?: string;
   positionsRequired?: string[];
+  source?: string | null;
 }
 
 export interface TrainingCourseRelations {

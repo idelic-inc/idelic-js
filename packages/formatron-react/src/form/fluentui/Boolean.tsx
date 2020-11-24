@@ -1,15 +1,15 @@
 import {IToggleProps, Toggle} from '@fluentui/react';
 import React from 'react';
 
-import {FormatronFormItem} from '../../..';
+import {FieldObjectDataType} from '../Form';
 
 export interface BooleanProps {
-  item: FormatronFormItem<boolean>;
+  field: FieldObjectDataType;
   toggleProps?: IToggleProps;
 }
 
-export const Boolean: React.FC<BooleanProps> = ({item, toggleProps = {}}) => {
-  const {value, setValue, dataType} = item;
+export const Boolean: React.FC<BooleanProps> = ({field, toggleProps = {}}) => {
+  const {value, setValue, dataType} = field;
 
   return (
     <Toggle

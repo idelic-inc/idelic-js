@@ -19,13 +19,13 @@ export class SingleModelType extends RelatedType {
     return this.field.options?.multi ?? false;
   }
 
-  getRelationTemplateById(templateId: number): any {
+  getRelationTemplateById(templateId: number) {
     if (!this.templateIds.includes(templateId)) {
       throw new Error(
         `Get singleModel template error: template with id: ${templateId} didn't include into options list`
       );
     }
 
-    return this.formatron.getTemplateById(templateId);
+    return this.formatron.getModelTemplate({id: templateId});
   }
 }

@@ -11,11 +11,9 @@ export class EnumType extends DataType {
     return this.field.options?.multi ?? false;
   }
 
-  // TODO Figure out best way to implement:
-
-  // getOption(value: any): Map<string, any> | undefined {
-  //   return this.getOptions().find((option) => option.get('value') === value);
-  // }
+  get id(): number {
+    return this.field.options?.enumSetId;
+  }
 
   // getOptions(): List<Map<string, any>> {
   //   return selectListValues(

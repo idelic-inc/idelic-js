@@ -1,17 +1,16 @@
-import type {Formatron} from './formatron';
-import {JsonData} from './types';
+import getIn from 'lodash/get';
 
-export abstract class DataType<
-  T = any,
-  F extends Formatron<any> = Formatron<any>
-> {
+import type {Formatron} from './formatron';
+import {AnyModel, JsonData} from './types';
+
+export abstract class DataType<T = any> {
   public static readonly typeName: string = '';
 
   protected field: JsonData;
 
-  protected formatron: F;
+  protected formatron: Formatron;
 
-  constructor(formatron: F, field: JsonData) {
+  constructor(formatron: Formatron, field: JsonData) {
     this.formatron = formatron;
     this.field = field;
   }
@@ -23,8 +22,33 @@ export abstract class DataType<
    */
   abstract isOfType(value: unknown): value is T;
 
-  get isRequired(): boolean {
-    return this.field.options?.required ?? false;
+  isRequired(model?: AnyModel): boolean {
+    const required = this.field.options?.required;
+    switch (typeof required) {
+      case 'object': {
+        if (!model) {
+          console.warn(
+            `Model is needed to validate if field '${this.field.name}' is required`
+          );
+          return false;
+        }
+        const path = required.path.map((item) =>
+          item === 'relations' ? 'relationModels' : item
+        );
+        const value = getIn(model, path);
+        const thisCase = required.cases.find(({pattern}) => pattern === value);
+        return thisCase?.result ?? false;
+      }
+      case 'boolean':
+        return required;
+      case 'undefined':
+        return false;
+      default:
+        console.warn(
+          `'${required}' is not a valid value for the \`required\` option. Expected boolean or object.`
+        );
+        return false;
+    }
   }
 
   get isProtected(): boolean {
@@ -62,9 +86,8 @@ export abstract class DataType<
     return this.field.name;
   }
 
-  validate(value: T): string | null {
-    const {isRequired} = this;
-    return isRequired &&
+  validate(value: T, model?: AnyModel): string | null {
+    return this.isRequired(model) &&
       (value === undefined ||
         value === null ||
         (typeof value === 'string' && !value.trim()))

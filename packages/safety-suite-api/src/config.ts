@@ -44,6 +44,10 @@ export interface BasicConfig extends NestedConfiguration {
       frontendUrl: string;
       url: string;
     };
+    training: {
+      enabled: boolean;
+      frontendUrl: string;
+    };
   };
   env: {
     sentry: {dsn: string};
@@ -66,7 +70,8 @@ const exampleConfig: BasicConfig = {
     },
     saf: {proDataIrv: '', url: ''},
     documentLibrary: {url: '', maxUploadSize: 0},
-    app: {frontendUrl: '', url: ''}
+    app: {frontendUrl: '', url: ''},
+    training: {frontendUrl: '', enabled: false}
   },
   env: {
     sentry: {dsn: ''},

@@ -1,17 +1,8 @@
-import {RelationModelsToIds} from 'idelic-safety-suite-api';
-
+import {DataType} from './dataType';
 import type {Formatron} from './formatron';
+import {AnyModel} from './types';
 
-export interface NewModel<F = any, R = any, C = any> {
-  id: number;
-  templateId: number;
-  fields: F;
-  relations: RelationModelsToIds<R>;
-  relationModels: R; // Fetch relation model via custom interface
-  computations: C; // Possibly fetched via custom interface
-}
-
-export type CombinedFields<M extends NewModel> = M['fields'] &
+export type CombinedFields<M extends AnyModel> = M['fields'] &
   M['computations'] &
   M['relationModels'];
 
@@ -23,10 +14,10 @@ export type Full<T> = {
 // changes object = partial model object
 // validation map to fields?
 
-export class Model<F extends Formatron<any>, M extends NewModel = NewModel> {
+export class Model<M extends AnyModel = AnyModel> {
   readonly #model: M;
 
-  #formatron: F;
+  #formatron: Formatron;
 
   /**
    * Model object used to access dataTypes, relations
@@ -34,9 +25,13 @@ export class Model<F extends Formatron<any>, M extends NewModel = NewModel> {
    * @param formatron - The formatron client.
    * @param model - JSON model data.
    */
-  constructor(formatron: F, model: M) {
+  constructor(formatron: Formatron, model: M) {
     this.#model = model;
     this.#formatron = formatron;
+  }
+
+  get model() {
+    return this.#model;
   }
 
   get id() {
@@ -47,14 +42,19 @@ export class Model<F extends Formatron<any>, M extends NewModel = NewModel> {
     return this.#model.fields;
   }
 
+  get relations() {
+    return this.#model.relations;
+  }
+
   /**
    * Get the value of a field, computation or a relation id.
    * @param key - string
    */
-  getDataType<K extends keyof M['fields'] | keyof M['computations']>(
-    key: K
-  ): ReturnType<F['getDataType']> {
-    return this.template.getDataType(key as string);
+  async getDataType<D extends DataType>(
+    key: keyof M['fields'] | keyof M['computations']
+  ): Promise<D | undefined> {
+    const template = await this.getTemplate();
+    return template.getDataType<D>(key as string);
   }
 
   /**
@@ -91,12 +91,12 @@ export class Model<F extends Formatron<any>, M extends NewModel = NewModel> {
   >;
   getIn(path: (string | number)[]): Promise<any>; // TODO Add more type overloads
   async getIn([first, second, ...rest]: (string | number)[]): Promise<any> {
-    const ids = this.#model.relations[first] ?? -1;
+    const ids = this.#model.relations?.[first] ?? -1;
     if (ids === -1) {
       return undefined;
     }
     const modelId = typeof ids === 'number' ? ids : ids[second as number];
-    const model = await this.#formatron.getModel(modelId);
+    const model = await this.#formatron.getModel({id: modelId});
     if (rest) {
       return model.getIn(rest);
     }
@@ -104,14 +104,10 @@ export class Model<F extends Formatron<any>, M extends NewModel = NewModel> {
   }
 
   /**
-   * The template associated with this model.
+   * Get the template associated with this model.
    */
-  get template() {
+  getTemplate() {
     const {templateId} = this.#model;
-    const template = this.#formatron.getTemplateById(templateId);
-    if (!template) {
-      throw new Error(`No template found with id ${templateId}`);
-    }
-    return template;
+    return this.#formatron.getModelTemplate({id: templateId});
   }
 }
