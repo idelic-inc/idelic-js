@@ -21,6 +21,7 @@ export const config: InitConfig = {
   loginUrlRoot: '',
   configUrlRoot: '',
   documentLibraryUrlRoot: '',
+  eFormsUrlRoot: '',
   onAuthError: () => {}
 };
 
@@ -148,7 +149,12 @@ export const initializeConfig = (
 ): void => {
   if (
     !matchesConfig(nestedConfig, {
-      services: {app: {url: ''}, documentLibrary: {url: ''}, saf: {url: ''}}
+      services: {
+        app: {url: ''},
+        documentLibrary: {url: ''},
+        eForms: {url: ''},
+        saf: {url: ''}
+      }
     })
   ) {
     throw new Error("Config doesn't match!");
@@ -157,6 +163,7 @@ export const initializeConfig = (
   config.apiUrlRoot = nestedConfig.services.saf.url;
   config.loginUrlRoot = nestedConfig.services.app.url;
   config.documentLibraryUrlRoot = nestedConfig.services.documentLibrary.url;
+  config.eFormsUrlRoot = nestedConfig.services.eForms.url;
   config.initialized = true;
 };
 
