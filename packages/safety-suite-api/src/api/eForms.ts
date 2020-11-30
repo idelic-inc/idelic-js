@@ -162,7 +162,7 @@ export function getSignatureFile(
   signatureId: number,
   query: GetSignatureFileQuery,
   apiOptions: ApiOptions = {}
-): Request<ApiResponse<Blob>> {
+): Request<Blob> {
   return runApi({
     method: 'GET',
     urlRoot: 'eformsUrlRoot',
