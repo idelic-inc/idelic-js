@@ -72,6 +72,9 @@ export interface FormObject<M extends AnyModel = AnyModel> {
   isValid: boolean;
   isDirty: boolean;
   validationModel?: M;
+  isSubmitting: boolean;
+  startSubmitting: () => void;
+  stopSubmitting: () => void;
 }
 
 export interface ModelOptions {
@@ -101,6 +104,10 @@ export const useForm = <M extends AnyModel = AnyModel>(
   const [
     isLoading,
     {setTrue: startLoading, setFalse: stopLoading}
+  ] = useBoolean(false);
+  const [
+    isSubmitting,
+    {setTrue: startSubmitting, setFalse: stopSubmitting}
   ] = useBoolean(false);
   const [values, setValues] = useState<FormValues<M>>();
   const [touched, setTouched] = useState<FormTouchMap<M>>();
@@ -238,7 +245,10 @@ export const useForm = <M extends AnyModel = AnyModel>(
     setValueTouched,
     isDirty,
     validationModel,
-    isValid
+    isValid,
+    isSubmitting,
+    startSubmitting,
+    stopSubmitting
   };
 };
 
@@ -248,6 +258,7 @@ export interface FormProps {
     React.FormHTMLAttributes<HTMLFormElement>,
     HTMLFormElement
   >;
+  onSubmit?: () => void | Promise<any>;
 }
 
 const formContext = createContext<FormObject>({
@@ -262,18 +273,44 @@ const formContext = createContext<FormObject>({
   errors: undefined,
   setValueError: () => () => {},
   isDirty: false,
-  isValid: false
+  isValid: false,
+  isSubmitting: false,
+  startSubmitting: () => {},
+  stopSubmitting: () => {}
 });
 
 export const useFormContext = <M extends AnyModel = AnyModel>(): FormObject<
   M
 > => useContext(formContext as Context<FormObject<M>>);
 
-export const Form: React.FC<FormProps> = ({form, children, formProps}) => (
-  <formContext.Provider value={form}>
-    <form {...formProps}>{children}</form>
-  </formContext.Provider>
-);
+export const Form: React.FC<FormProps> = ({
+  form,
+  children,
+  formProps,
+  onSubmit
+}) => {
+  const {startSubmitting, stopSubmitting} = form;
+  const onFormSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      startSubmitting();
+      const result = onSubmit?.();
+      if (result instanceof Promise) {
+        result.finally(stopSubmitting);
+      } else {
+        stopSubmitting();
+      }
+    },
+    [onSubmit, startSubmitting, stopSubmitting]
+  );
+  return (
+    <formContext.Provider value={form}>
+      <form {...formProps} onSubmit={onFormSubmit}>
+        {children}
+      </form>
+    </formContext.Provider>
+  );
+};
 
 export interface FieldObject {
   value: any;
