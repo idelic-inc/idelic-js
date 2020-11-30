@@ -21,7 +21,7 @@ export const config: InitConfig = {
   loginUrlRoot: '',
   configUrlRoot: '',
   documentLibraryUrlRoot: '',
-  eFormsUrlRoot: '',
+  eformsUrlRoot: '',
   onAuthError: () => {}
 };
 
@@ -49,6 +49,12 @@ export interface BasicConfig extends NestedConfiguration {
       enabled: boolean;
       frontendUrl: string;
     };
+    eforms: {
+      frontendUrl: string;
+      maxUploadSize: number;
+      url: string;
+      hellosignClientId: string;
+    };
   };
   env: {
     sentry: {dsn: string};
@@ -72,7 +78,8 @@ const exampleConfig: BasicConfig = {
     saf: {proDataIrv: '', url: ''},
     documentLibrary: {url: '', maxUploadSize: 0},
     app: {frontendUrl: '', url: ''},
-    training: {frontendUrl: '', enabled: false}
+    training: {frontendUrl: '', enabled: false},
+    eforms: {frontendUrl: '', maxUploadSize: 0, url: '', hellosignClientId: ''}
   },
   env: {
     sentry: {dsn: ''},
@@ -152,7 +159,7 @@ export const initializeConfig = (
       services: {
         app: {url: ''},
         documentLibrary: {url: ''},
-        eForms: {url: ''},
+        eforms: {url: ''},
         saf: {url: ''}
       }
     })
@@ -163,7 +170,7 @@ export const initializeConfig = (
   config.apiUrlRoot = nestedConfig.services.saf.url;
   config.loginUrlRoot = nestedConfig.services.app.url;
   config.documentLibraryUrlRoot = nestedConfig.services.documentLibrary.url;
-  config.eFormsUrlRoot = nestedConfig.services.eForms.url;
+  config.eformsUrlRoot = nestedConfig.services.eforms.url;
   config.initialized = true;
 };
 

@@ -47,7 +47,7 @@ export interface CreateFormTemplateRequest {
 }
 
 export interface CreateSignatureRequestRequest {
-  hellosignTemplateIds: [string];
+  hellosignTemplateIds: string[];
   driverId: number;
 }
 
@@ -68,12 +68,16 @@ export function createTemplateUrl(
   request: CreateTemplateUrlRequest,
   apiOptions: ApiOptions = {}
 ): Request<ApiResponse<HelloSignFormTemplate>> {
+  const form = new FormData();
+  form.append('file', request.file);
+  form.append('title', request.title);
   return runApi({
     method: 'POST',
-    urlRoot: 'eFormsUrlRoot',
+    urlRoot: 'eformsUrlRoot',
     route: '/api/1.0/vendors/hellosign/createTemplateUrl',
+    notJson: true,
     apiOptions,
-    requestOptions: {body: request}
+    requestOptions: {body: form}
   });
 }
 
@@ -83,7 +87,7 @@ export function getTemplateEditUrl(
 ): Request<ApiResponse<SignatureRequestUrl>> {
   return runApi({
     method: 'GET',
-    urlRoot: 'eFormsUrlRoot',
+    urlRoot: 'eformsUrlRoot',
     route: `/api/1.0/vendors/hellosign/editTemplateUrl/${formTemplateId}`,
     apiOptions
   });
@@ -95,7 +99,7 @@ export function getFormTemplates(
 ): Request<ApiResponse<FormTemplate[]>> {
   return runApi({
     method: 'GET',
-    urlRoot: 'eFormsUrlRoot',
+    urlRoot: 'eformsUrlRoot',
     route: '/api/1.0/formTemplates',
     apiOptions
   });
@@ -107,7 +111,7 @@ export function getFormTemplateById(
 ): Request<ApiResponse<FormTemplate>> {
   return runApi({
     method: 'GET',
-    urlRoot: 'eFormsUrlRoot',
+    urlRoot: 'eformsUrlRoot',
     route: '/api/1.0/formTemplates',
     apiOptions,
     requestOptions: {query}
@@ -120,7 +124,7 @@ export function createFormTemplates(
 ): Request<ApiResponse<FormTemplate>> {
   return runApi({
     method: 'POST',
-    urlRoot: 'eFormsUrlRoot',
+    urlRoot: 'eformsUrlRoot',
     route: '/api/1.0/formTemplates',
     apiOptions,
     requestOptions: {body: request}
@@ -134,7 +138,7 @@ export function getSignatures(
 ): Request<ApiResponse<SignatureRequest[]>> {
   return runApi({
     method: 'GET',
-    urlRoot: 'eFormsUrlRoot',
+    urlRoot: 'eformsUrlRoot',
     route: '/api/1.0/signatures',
     apiOptions,
     requestOptions: {query}
@@ -147,7 +151,7 @@ export function createSignature(
 ): Request<ApiResponse<SignatureRequest>> {
   return runApi({
     method: 'POST',
-    urlRoot: 'eFormsUrlRoot',
+    urlRoot: 'eformsUrlRoot',
     route: '/api/1.0/signatures',
     apiOptions,
     requestOptions: {body: request}
@@ -161,10 +165,10 @@ export function getSignatureFile(
 ): Request<ApiResponse<Blob>> {
   return runApi({
     method: 'GET',
-    urlRoot: 'eFormsUrlRoot',
+    urlRoot: 'eformsUrlRoot',
     route: `/api/1.0/signatures/${signatureId}/file`,
     apiOptions,
-    requestOptions: {query}
+    requestOptions: {query, responseType: 'blob'}
   });
 }
 
@@ -174,7 +178,7 @@ export function getSignatureSignUrl(
 ): Request<ApiResponse<SignatureRequestUrl>> {
   return runApi({
     method: 'GET',
-    urlRoot: 'eFormsUrlRoot',
+    urlRoot: 'eformsUrlRoot',
     route: `/api/1.0/signatures/${signatureId}/signUrl`,
     apiOptions
   });

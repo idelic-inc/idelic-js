@@ -10,7 +10,7 @@ export type UrlRoot =
   | 'loginUrlRoot'
   | 'documentLibraryUrlRoot'
   | 'configUrlRoot'
-  | 'eFormsUrlRoot';
+  | 'eformsUrlRoot';
 
 export interface Api<R, T> {
   method: Methods;
