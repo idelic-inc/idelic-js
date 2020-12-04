@@ -1,4 +1,4 @@
-import net, {Request, RequestHeaders, RequestOptions} from 'idelic-safety-net';
+import net, {Request, RequestHeaders, RequestOptions} from '@idelic/safety-net';
 
 import {config} from './config';
 import {ApiError, ErrorResponse} from './error';

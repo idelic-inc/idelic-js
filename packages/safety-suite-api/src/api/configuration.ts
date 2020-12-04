@@ -1,4 +1,4 @@
-import {Request} from 'idelic-safety-net';
+import {Request} from '@idelic/safety-net';
 
 import {runApi} from '../runApi';
 import {ApiOptions, EmptyRequest, EmptyResponse} from '../types';
