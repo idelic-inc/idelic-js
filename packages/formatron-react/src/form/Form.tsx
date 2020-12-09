@@ -68,6 +68,11 @@ export interface FormObject<M extends AnyModel = AnyModel> {
   errors: FormErrorMap<M> | undefined;
   setValueError: (key: string) => (error: string | undefined) => void;
   resetForm: () => void;
+  /**
+   * Reloads the template and model, resets form.
+   */
+  reloadForm: () => void;
+  loadingError: any;
   isLoading: boolean;
   isValid: boolean;
   isDirty: boolean;
@@ -101,6 +106,7 @@ export const useForm = <M extends AnyModel = AnyModel>(
   const {formatron} = useFormatron();
   const [model, setModel] = useState<Model<M>>();
   const [template, setTemplate] = useState<Template>();
+  const [loadingError, setLoadingError] = useState<any>();
   const [
     isLoading,
     {setTrue: startLoading, setFalse: stopLoading}
@@ -112,6 +118,25 @@ export const useForm = <M extends AnyModel = AnyModel>(
   const [values, setValues] = useState<FormValues<M>>();
   const [touched, setTouched] = useState<FormTouchMap<M>>();
   const [errors, setErrors] = useState<FormErrorMap<M>>();
+  const hardReset = useCallback(() => {
+    stopLoading();
+    stopSubmitting();
+    setLoadingError(undefined);
+    setModel(undefined);
+    setTemplate(undefined);
+    setValues(undefined);
+    setTouched(undefined);
+    setErrors(undefined);
+  }, [
+    stopLoading,
+    stopSubmitting,
+    setLoadingError,
+    setModel,
+    setTemplate,
+    setValues,
+    setTouched,
+    setErrors
+  ]);
   const resetForm = useCallback(() => {
     if (template) {
       const initialValues = merge(
@@ -203,10 +228,9 @@ export const useForm = <M extends AnyModel = AnyModel>(
         : false,
     [errors]
   );
-
-  // Fetch template and optional model
-  useEffect(() => {
+  const loadForm = useCallback(() => {
     startLoading();
+    setLoadingError(undefined);
     if (isModelOptions(options)) {
       formatron
         .getModel<M>(options.model)
@@ -215,16 +239,32 @@ export const useForm = <M extends AnyModel = AnyModel>(
           return m.getTemplate();
         })
         .then(setTemplate)
-        .catch(console.error)
+        .catch(setLoadingError)
         .finally(stopLoading);
     } else {
       formatron
         .getModelTemplate(options.template)
         .then(setTemplate)
-        .catch(console.error)
+        .catch(setLoadingError)
         .finally(stopLoading);
     }
-  }, [formatron, setTemplate, setModel, startLoading, stopLoading]);
+  }, [
+    formatron,
+    setTemplate,
+    setModel,
+    startLoading,
+    stopLoading,
+    setLoadingError
+  ]);
+  const reloadForm = useCallback(() => {
+    hardReset();
+    loadForm();
+  }, [loadForm, hardReset]);
+
+  // Fetch template and optional model
+  useEffect(() => {
+    loadForm();
+  }, [loadForm]);
   // Initialize form
   useEffect(() => {
     if (!isLoading && !values) {
@@ -240,12 +280,14 @@ export const useForm = <M extends AnyModel = AnyModel>(
     setValueError,
     isLoading,
     resetForm,
+    reloadForm,
     setValue,
     touched,
     setValueTouched,
     isDirty,
     validationModel,
     isValid,
+    loadingError,
     isSubmitting,
     startSubmitting,
     stopSubmitting
@@ -267,6 +309,8 @@ const formContext = createContext<FormObject>({
   values: undefined,
   isLoading: false,
   resetForm: () => {},
+  loadingError: undefined,
+  reloadForm: () => {},
   setValue: () => () => {},
   touched: undefined,
   setValueTouched: () => () => {},
@@ -320,6 +364,7 @@ export interface FieldObject {
   setTouched: (touched: boolean) => void;
   isRequired: boolean;
   error: string | undefined;
+  isSubmitting: boolean;
 }
 export interface FieldObjectDataType<D extends DataType = DataType>
   extends Omit<FieldObject, 'dataType'> {
@@ -337,7 +382,8 @@ export const useField = (key: string): FieldObject => {
     setValueError,
     model,
     isLoading,
-    validationModel
+    validationModel,
+    isSubmitting
   } = useFormContext();
   const value: any = useMemo(() => values?.[key], [values]);
   const isTouched = useMemo(() => touched?.[key] ?? false, [touched]);
@@ -361,5 +407,14 @@ export const useField = (key: string): FieldObject => {
     }
   }, [value, setValueError, dataType, model, validationModel]);
 
-  return {value, setValue, dataType, setTouched, isTouched, error, isRequired};
+  return {
+    value,
+    setValue,
+    dataType,
+    setTouched,
+    isTouched,
+    error,
+    isRequired,
+    isSubmitting
+  };
 };

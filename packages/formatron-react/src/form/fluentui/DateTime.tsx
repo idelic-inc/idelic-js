@@ -25,7 +25,8 @@ export const DateTime: React.FC<DateTimeProps> = ({
     dataType,
     setTouched,
     isTouched,
-    isRequired
+    isRequired,
+    isSubmitting
   } = field;
 
   return (
@@ -35,6 +36,7 @@ export const DateTime: React.FC<DateTimeProps> = ({
         onSelectDate={(date) => setValue(date ? date.getTime() / 1000 : null)}
         label={dataType.label}
         isRequired={isRequired}
+        disabled={isSubmitting}
         allowTextInput
         onBlur={() => setTouched(true)}
         textField={

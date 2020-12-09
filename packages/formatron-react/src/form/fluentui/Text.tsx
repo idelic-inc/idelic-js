@@ -16,7 +16,8 @@ export const Text: React.FC<TextProps> = ({field, textFieldProps = {}}) => {
     dataType,
     setTouched,
     isTouched,
-    isRequired
+    isRequired,
+    isSubmitting
   } = field;
 
   return (
@@ -24,6 +25,7 @@ export const Text: React.FC<TextProps> = ({field, textFieldProps = {}}) => {
       value={value}
       onChange={(_, val) => setValue(val ?? '')}
       label={dataType.label}
+      disabled={isSubmitting}
       required={isRequired}
       onBlur={() => setTouched(true)}
       errorMessage={isTouched ? error : undefined}
