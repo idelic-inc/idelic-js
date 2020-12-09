@@ -1,4 +1,4 @@
-import {Request, RequestOptions} from 'idelic-safety-net';
+import {Request, RequestOptions} from '@idelic/safety-net';
 import {Set} from 'immutable';
 import {Moment} from 'moment';
 

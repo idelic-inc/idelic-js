@@ -3,7 +3,7 @@ import {
   Methods,
   RequestHeaders,
   RequestOptions
-} from 'idelic-safety-net';
+} from '@idelic/safety-net';
 
 export type UrlRoot =
   | 'apiUrlRoot'

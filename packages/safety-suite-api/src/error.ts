@@ -1,4 +1,4 @@
-import {NetError} from 'idelic-safety-net';
+import {NetError} from '@idelic/safety-net';
 
 export type ErrorResponse = {
   status: 'error';

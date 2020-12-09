@@ -1,4 +1,4 @@
-import {Request} from 'idelic-safety-net';
+import {Request} from '@idelic/safety-net';
 import {Record} from 'immutable';
 
 import {runApi} from '../runApi';
