@@ -9,13 +9,14 @@ export interface BooleanProps {
 }
 
 export const Boolean: React.FC<BooleanProps> = ({field, toggleProps = {}}) => {
-  const {value, setValue, dataType} = field;
+  const {value, setValue, dataType, isSubmitting} = field;
 
   return (
     <Toggle
       checked={value}
       onChange={(_, checked) => setValue(checked ?? false)}
       label={dataType.label}
+      disabled={isSubmitting}
       {...toggleProps}
     />
   );

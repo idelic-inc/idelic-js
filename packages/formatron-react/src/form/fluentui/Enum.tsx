@@ -33,7 +33,8 @@ export const Enum: React.FC<EnumProps> = ({field, dropDownProps = {}}) => {
     dataType,
     setTouched,
     isTouched,
-    isRequired
+    isRequired,
+    isSubmitting
   } = field;
   const [enumItem, {isLoading, error}] = useEnum({id: dataType.id});
 
@@ -58,7 +59,7 @@ export const Enum: React.FC<EnumProps> = ({field, dropDownProps = {}}) => {
       }}
       required={isRequired}
       onBlur={() => setTouched(true)}
-      disabled={isLoading || !!error}
+      disabled={isLoading || !!error || isSubmitting}
       errorMessage={error?.message ?? isTouched ? errorMessage : undefined}
       {...dropDownProps}
     />
