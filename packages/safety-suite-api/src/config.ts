@@ -50,10 +50,14 @@ export interface BasicConfig extends NestedConfiguration {
       frontendUrl: string;
     };
     eforms: {
+      enabled: boolean;
       frontendUrl: string;
       maxUploadSize: number;
       url: string;
-      hellosignClientId: string;
+      hellosign: {
+        clientId: string;
+        testMode: boolean;
+      };
     };
   };
   env: {
@@ -79,7 +83,16 @@ const exampleConfig: BasicConfig = {
     documentLibrary: {url: '', maxUploadSize: 0},
     app: {frontendUrl: '', url: ''},
     training: {frontendUrl: '', enabled: false},
-    eforms: {frontendUrl: '', maxUploadSize: 0, url: '', hellosignClientId: ''}
+    eforms: {
+      enabled: false,
+      frontendUrl: '',
+      maxUploadSize: 0,
+      url: '',
+      hellosign: {
+        clientId: '',
+        testMode: false
+      }
+    }
   },
   env: {
     sentry: {dsn: ''},
