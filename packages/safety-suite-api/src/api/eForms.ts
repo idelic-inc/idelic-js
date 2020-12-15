@@ -52,7 +52,8 @@ export interface CreateSignatureRequestRequest {
 }
 
 export interface GetSignaturesQuery {
-  statusCode: string;
+  driverId?: number;
+  statusCode?: string;
 }
 
 export interface GetFormTemplateByIdQuery {
