@@ -5,6 +5,7 @@ import {ApiOptions, ApiResponse} from '../types';
 
 export interface Integration {
   integrationAlias: string;
+  integrationLabels: string[];
   lastUpdatedDate: string | null;
 }
 
