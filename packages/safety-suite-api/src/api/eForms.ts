@@ -184,3 +184,15 @@ export function getSignatureSignUrl(
     apiOptions
   });
 }
+
+export function getDriverByEmployeeId(
+  employeeId: string,
+  apiOptions: ApiOptions = {}
+): Request<User> {
+  return runApi({
+    method: 'GET',
+    urlRoot: 'loginUrlRoot',
+    route: `/api/1.0/users/employees/${employeeId}`,
+    apiOptions
+  });
+}
