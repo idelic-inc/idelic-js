@@ -2,6 +2,7 @@ import {Request} from '@idelic/safety-net';
 
 import {runApi} from '../runApi';
 import {ApiOptions, ApiResponse} from '../types';
+import {User} from './users';
 
 export interface HelloSignFormTemplate {
   templateId: string;
