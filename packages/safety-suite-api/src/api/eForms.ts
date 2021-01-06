@@ -22,6 +22,7 @@ export interface FormTemplate {
   createdByUserId: number;
   creationDate: string;
   active: boolean;
+  customerId: number;
 }
 
 export interface SignatureRequest {
@@ -34,6 +35,7 @@ export interface SignatureRequest {
   driverId: number;
   createdByUserId: number;
   creationDate: string;
+  customerId: number;
 }
 
 export interface CreateTemplateUrlRequest {
@@ -44,16 +46,19 @@ export interface CreateTemplateUrlRequest {
 export interface CreateFormTemplateRequest {
   hellosignId: string;
   title: string;
+  customerId: number;
 }
 
 export interface CreateSignatureRequestRequest {
-  hellosignTemplateIds: string[];
+  templateIds: string[];
   driverId: number;
+  customerId: number;
 }
 
 export interface GetSignaturesQuery {
   driverId?: number;
   statusCode?: string;
+  customerId?: number;
 }
 
 export interface GetFormTemplateByIdQuery {
@@ -96,12 +101,14 @@ export function getTemplateEditUrl(
 
 // Form Templates
 export function getFormTemplates(
+  customerId?: number,
   apiOptions: ApiOptions = {}
 ): Request<ApiResponse<FormTemplate[]>> {
+  const customerIdQuery = customerId ? `?customerId=${customerId}` : '';
   return runApi({
     method: 'GET',
     urlRoot: 'eformsUrlRoot',
-    route: '/api/1.0/formTemplates',
+    route: `/api/1.0/formTemplates/${customerIdQuery}`,
     apiOptions
   });
 }
