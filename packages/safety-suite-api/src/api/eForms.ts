@@ -2,6 +2,7 @@ import {Request} from '@idelic/safety-net';
 
 import {runApi} from '../runApi';
 import {ApiOptions, ApiResponse} from '../types';
+import {User} from './users';
 
 export interface HelloSignFormTemplate {
   templateId: string;
@@ -188,6 +189,18 @@ export function getSignatureSignUrl(
     method: 'GET',
     urlRoot: 'eformsUrlRoot',
     route: `/api/1.0/signatures/${signatureId}/signUrl`,
+    apiOptions
+  });
+}
+
+export function getDriverByEmployeeId(
+  employeeId: string,
+  apiOptions: ApiOptions = {}
+): Request<User> {
+  return runApi({
+    method: 'GET',
+    urlRoot: 'loginUrlRoot',
+    route: `/api/1.0/users/employees/${employeeId}`,
     apiOptions
   });
 }
