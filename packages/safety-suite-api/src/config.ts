@@ -67,6 +67,7 @@ export interface BasicConfig extends NestedConfiguration {
       internal: {clientId: string};
       domain: string;
       audience: string;
+      cacheLocation: string;
     };
     gtm: {containerId: string};
   };
@@ -100,7 +101,8 @@ const exampleConfig: BasicConfig = {
       clientId: '',
       internal: {clientId: ''},
       domain: '',
-      audience: ''
+      audience: '',
+      cacheLocation: ''
     },
     gtm: {containerId: ''}
   }
