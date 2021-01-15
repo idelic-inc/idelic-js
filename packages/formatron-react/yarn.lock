@@ -72,8 +72,10 @@
     "@uifabric/utilities" "^7.32.4"
     tslib "^1.10.0"
 
-"@idelic/formatron@file:../formatron":
-  version "0.0.1-alpha.0"
+"@idelic/formatron@^1.0.0-alpha.0":
+  version "1.0.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/@idelic/formatron/-/formatron-1.0.0-alpha.0.tgz#f352f11686a3b5effe5487074e7be466dfb0f50f"
+  integrity sha512-HL0ocSJcuu7zkrvjbEDcmYZlUbsaTp41omxrZI5b27GKS0OIxrVKmlW5AXFK+tlAw2aKR6icGYpHGaBGocj/hw==
   dependencies:
     idelic-safety-suite-api "^7.0.1"
     immutable "^4.0.0-rc.12"
