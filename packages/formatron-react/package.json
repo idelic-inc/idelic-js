@@ -35,10 +35,10 @@
     "moment": "^2.29.1"
   },
   "devDependencies": {
-    "@idelic/formatron": "file:../formatron"
+    "@idelic/formatron": "^1.0.0-alpha.0"
   },
   "peerDependencies": {
-    "@idelic/formatron": "file:../formatron",
+    "@idelic/formatron": "1.0.0-alpha.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   }
