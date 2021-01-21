@@ -1,3 +1,4 @@
+import {OrderBy} from '../../api/models/types';
 import {Alias, Id} from '../../types';
 import {LegacyApi} from '../types';
 
@@ -5,13 +6,14 @@ export type AggregationQuery = any;
 export type QueryNode = any;
 
 export type ModelQuery = {
-  where: QueryNode;
-  groupId?: Id;
-  templateId?: Id;
-  templateAlias?: Alias;
-  modelsIds?: Id[];
-  limit?: number;
   aggregation: AggregationQuery;
+  groupId?: Id;
+  limit?: number;
+  modelsIds?: Id[];
+  orderBy?: OrderBy;
+  templateAlias?: Alias;
+  templateId?: Id;
+  where: QueryNode;
 };
 
 export type ModelExportTypes = 'xlsx' | 'csv';

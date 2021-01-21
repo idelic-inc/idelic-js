@@ -67,6 +67,17 @@ export type ById = {
   type: 'byId';
 };
 
+export type ByIdsInFilter = {
+  /**
+   * Using `byIdsInFilter` will return models relative to
+   * the order of the ids in the request body.
+   *
+   * Using the `ASC` direction will return them in
+   * the same order, while `DESC` will reverse them.
+   */
+  type: 'byIdsInFilter';
+};
+
 export type ByTemplate = {
   type: 'byTemplate';
 };
@@ -85,7 +96,7 @@ export type ByField = {
 
 export type OrderBy = {
   direction: 'ASC' | 'DESC';
-  parameter: ByGroup | ById | ByTemplate | ByRelation | ByField;
+  parameter: ByGroup | ById | ByTemplate | ByRelation | ByField | ByIdsInFilter;
 };
 
 export type ModelListOptions = {
