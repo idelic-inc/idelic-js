@@ -82,6 +82,14 @@ export type ByTemplate = {
   type: 'byTemplate';
 };
 
+export type ByCreatedBy = {
+  /**
+   * Using `byCreatedBy` will return models sorted by
+   * the full name of the user who created the model.
+   */
+  type: 'byCreatedBy';
+};
+
 export type ByRelation = {
   type: 'byRelation';
   name: string;
@@ -96,7 +104,14 @@ export type ByField = {
 
 export type OrderBy = {
   direction: 'ASC' | 'DESC';
-  parameter: ByGroup | ById | ByTemplate | ByRelation | ByField | ByIdsInFilter;
+  parameter:
+    | ByGroup
+    | ById
+    | ByTemplate
+    | ByRelation
+    | ByField
+    | ByIdsInFilter
+    | ByCreatedBy;
 };
 
 export type ModelListOptions = {
