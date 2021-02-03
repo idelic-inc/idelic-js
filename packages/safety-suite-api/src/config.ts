@@ -25,6 +25,20 @@ export const config: InitConfig = {
   onAuthError: () => {}
 };
 
+export interface CrudOptions extends NestedConfiguration {
+  create: boolean;
+  delete: boolean;
+  update: boolean;
+}
+
+export interface TrainingIntegrationConfig extends NestedConfiguration {
+  attendee: CrudOptions;
+  class: CrudOptions & {
+    addAttendee: boolean;
+  };
+  course: CrudOptions;
+}
+
 export interface BasicConfig extends NestedConfiguration {
   services: {
     saf: {
@@ -60,6 +74,9 @@ export interface BasicConfig extends NestedConfiguration {
       };
     };
   };
+  integrations: {
+    training: Record<string, TrainingIntegrationConfig | undefined>;
+  };
   env: {
     sentry: {dsn: string};
     auth0: {
@@ -94,6 +111,9 @@ const exampleConfig: BasicConfig = {
         testMode: false
       }
     }
+  },
+  integrations: {
+    training: {}
   },
   env: {
     sentry: {dsn: ''},

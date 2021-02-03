@@ -9,20 +9,22 @@ import moment from 'moment';
 import React from 'react';
 
 import {FieldObjectDataType} from '../Form';
+import {CommonFieldProps} from '../types';
 import {ErrorText} from './extras/ErrorText';
 
 const {
   semanticColors: {errorText: errorColor}
 } = getTheme();
 
-export interface DateTimeProps {
+export interface DateTimeProps extends CommonFieldProps {
   field: FieldObjectDataType<DateTimeType>;
   datePickerProps?: IDatePickerProps;
 }
 
 export const DateTime: React.FC<DateTimeProps> = ({
   field,
-  datePickerProps = {}
+  datePickerProps = {},
+  disabled = false
 }) => {
   const {
     value,
@@ -41,7 +43,7 @@ export const DateTime: React.FC<DateTimeProps> = ({
       value={value ? moment.unix(value).format('HH:mm') : undefined}
       label={dataType.label}
       required={isRequired}
-      disabled={isSubmitting}
+      disabled={disabled || isSubmitting}
       onBlur={() => setTouched(true)}
       errorMessage={isTouched ? error : ''}
       type="time"
@@ -53,7 +55,7 @@ export const DateTime: React.FC<DateTimeProps> = ({
         onSelectDate={(date) => setValue(date ? date.getTime() / 1000 : null)}
         label={dataType.label}
         isRequired={isRequired}
-        disabled={isSubmitting}
+        disabled={disabled || isSubmitting}
         allowTextInput
         onBlur={() => setTouched(true)}
         textField={

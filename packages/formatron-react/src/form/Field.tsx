@@ -3,13 +3,18 @@ import React, {ReactElement, useMemo} from 'react';
 
 import {useFormatron} from '../context';
 import {useField, useFormContext} from './Form';
+import {CommonFieldProps} from './types';
 
-export interface FieldProps {
+export interface FieldProps extends CommonFieldProps {
   field: string;
   renderLoadingState?: () => ReactElement;
 }
 
-export const Field: React.FC<FieldProps> = ({field, renderLoadingState}) => {
+export const Field: React.FC<FieldProps> = ({
+  field,
+  renderLoadingState,
+  ...commonProps
+}) => {
   const {fieldComponents} = useFormatron();
   const {isLoading} = useFormContext();
   const item = useField(field);
@@ -45,5 +50,5 @@ export const Field: React.FC<FieldProps> = ({field, renderLoadingState}) => {
       </div>
     );
   }
-  return <FieldComponent field={item} />;
+  return <FieldComponent field={item} {...commonProps} />;
 };

@@ -10,6 +10,7 @@ import React from 'react';
 
 import {useEnum} from '../../hooks/useEnum';
 import {FieldObjectDataType} from '../Form';
+import {CommonFieldProps} from '../types';
 
 const enumValuesToDropdownOptions = (
   values: EnumValueType[]
@@ -20,12 +21,16 @@ const enumValuesToDropdownOptions = (
     disabled: value.disabled
   }));
 
-export interface EnumProps {
+export interface EnumProps extends CommonFieldProps {
   field: FieldObjectDataType<EnumType>;
   dropDownProps?: Partial<IDropdownProps>;
 }
 
-export const Enum: React.FC<EnumProps> = ({field, dropDownProps = {}}) => {
+export const Enum: React.FC<EnumProps> = ({
+  field,
+  dropDownProps = {},
+  disabled = false
+}) => {
   const {
     value,
     setValue,
@@ -59,7 +64,7 @@ export const Enum: React.FC<EnumProps> = ({field, dropDownProps = {}}) => {
       }}
       required={isRequired}
       onBlur={() => setTouched(true)}
-      disabled={isLoading || !!error || isSubmitting}
+      disabled={disabled || isLoading || !!error || isSubmitting}
       errorMessage={error?.message ?? isTouched ? errorMessage : undefined}
       {...dropDownProps}
     />
