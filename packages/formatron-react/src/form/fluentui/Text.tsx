@@ -2,13 +2,18 @@ import {ITextFieldProps, TextField} from '@fluentui/react/lib/TextField';
 import React from 'react';
 
 import {FieldObjectDataType} from '../Form';
+import {CommonFieldProps} from '../types';
 
-export interface TextProps {
+export interface TextProps extends CommonFieldProps {
   field: FieldObjectDataType;
   textFieldProps?: ITextFieldProps;
 }
 
-export const Text: React.FC<TextProps> = ({field, textFieldProps = {}}) => {
+export const Text: React.FC<TextProps> = ({
+  field,
+  textFieldProps = {},
+  disabled = false
+}) => {
   const {
     value,
     setValue,
@@ -25,7 +30,7 @@ export const Text: React.FC<TextProps> = ({field, textFieldProps = {}}) => {
       value={value}
       onChange={(_, val) => setValue(val ?? '')}
       label={dataType.label}
-      disabled={isSubmitting}
+      disabled={disabled || isSubmitting}
       required={isRequired}
       onBlur={() => setTouched(true)}
       errorMessage={isTouched ? error : undefined}
