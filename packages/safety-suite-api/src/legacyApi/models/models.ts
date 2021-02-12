@@ -67,30 +67,6 @@ export function updateModel<F, R, C>(
   };
 }
 
-/**
- * `updateModels` is used to bulk update multiple models in one request.
- *
- * @param ids - Array of model ids to update.
- * @param fields - An object containing shared fields to be updated.
- */
-export function updateModels<CommonFields>(
-  ids: number[],
-  fields: CommonFields
-): LegacyApi {
-  return {
-    method: 'PUT',
-    route: '/api/models/bulk',
-    requestOptions: {
-      body: {
-        ids,
-        data: {
-          fields
-        }
-      }
-    }
-  };
-}
-
 export function deleteModel(modelId: Id): LegacyApi {
   return {
     method: 'DELETE',
