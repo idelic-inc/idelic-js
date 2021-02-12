@@ -9,6 +9,7 @@ import {Model} from './types';
  *
  * @param ids - Array of model ids to update.
  * @param fields - An object containing shared fields to be updated.
+ * @param apiOptions - Optional options for runApi.
  */
 export function updateModels<CommonFields, ModelType = Model<any, any, any>>(
   ids: number[],
