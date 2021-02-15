@@ -1,5 +1,5 @@
 import fs from 'fs';
-import ts from 'typescript';
+import ts, {factory} from 'typescript';
 
 import {FieldType, ModelType, RelationType} from './types';
 import {toCamelCase} from './utils';
@@ -7,39 +7,44 @@ import {toCamelCase} from './utils';
 // Sshhh, don't tell anyone about this global state 👀
 export let anyTypeCounter = 0; // eslint-disable-line import/no-mutable-exports
 
-const nameSort = (a, b) => (a.name < b.name ? -1 : 1);
+const nameSort = (a: {name: string}, b: {name: string}) =>
+  a.name < b.name ? -1 : 1;
 
 const makeNullableMaker = (required: boolean) =>
   required
     ? (node: ts.TypeNode) => node
     : (node: ts.TypeNode) =>
-        ts.createUnionTypeNode([
+        factory.createUnionTypeNode([
           node,
-          ts.createKeywordTypeNode(ts.SyntaxKind.NullKeyword)
+          factory.createKeywordTypeNode(ts.SyntaxKind.NullKeyword as any)
         ]);
 
 function parseType(type: string, field: FieldType): ts.TypeNode {
   const makeNullable = makeNullableMaker(field.required);
   switch (type) {
     case 'text':
-      return ts.createKeywordTypeNode(ts.SyntaxKind.StringKeyword);
+      return factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword);
     case 'dateTime':
     case 'number':
     case 'group':
     case 'interval':
       return makeNullable(
-        ts.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword)
+        factory.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword)
       );
     case 'boolean':
-      return ts.createKeywordTypeNode(ts.SyntaxKind.BooleanKeyword);
+      return factory.createKeywordTypeNode(ts.SyntaxKind.BooleanKeyword);
     case 'enum': {
-      const enumType = ts.createKeywordTypeNode(ts.SyntaxKind.StringKeyword);
+      const enumType = factory.createKeywordTypeNode(
+        ts.SyntaxKind.StringKeyword
+      );
       return field.options.multi
-        ? ts.createArrayTypeNode(enumType)
+        ? factory.createArrayTypeNode(enumType)
         : makeNullable(enumType);
     }
     case 'list':
-      return ts.createArrayTypeNode(parseType(field.options.itemType, field));
+      return factory.createArrayTypeNode(
+        parseType(field.options.itemType, field)
+      );
     default:
   }
 
@@ -52,7 +57,7 @@ function parseType(type: string, field: FieldType): ts.TypeNode {
   }
 
   anyTypeCounter += 1;
-  return ts.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword);
+  return factory.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword);
 }
 
 function parseRelationsType(
@@ -61,15 +66,15 @@ function parseRelationsType(
   nameModifier: string
 ): ts.TypeNode {
   const makeNullable = makeNullableMaker(relation.required);
-  const relationType = ts.createUnionTypeNode(
+  const relationType = factory.createUnionTypeNode(
     types
       .map(toCamelCase)
       .map((name) => `${name}${nameModifier}Model`)
-      .map((type) => ts.createTypeReferenceNode(type, undefined))
+      .map((type) => factory.createTypeReferenceNode(type, undefined))
   );
 
   return relation.multi
-    ? ts.createArrayTypeNode(relationType)
+    ? factory.createArrayTypeNode(relationType)
     : makeNullable(relationType);
 }
 
@@ -93,20 +98,24 @@ const FILE_START: ts.Statement[] = [
       ' Yes, that means you.',
       ' See `scripts/generateModelTypes/index.ts` for more details.'
     ],
-    ts.createImportDeclaration(
+    factory.createImportDeclaration(
       [],
       [],
-      ts.createImportClause(
+      factory.createImportClause(
         undefined,
-        ts.createNamedImports([
-          ts.createImportSpecifier(
+        undefined,
+        factory.createNamedImports([
+          factory.createImportSpecifier(
             undefined,
-            ts.createIdentifier('InputModel')
+            factory.createIdentifier('InputModel')
           ),
-          ts.createImportSpecifier(undefined, ts.createIdentifier('Model'))
+          factory.createImportSpecifier(
+            undefined,
+            factory.createIdentifier('Model')
+          )
         ])
       ),
-      ts.createStringLiteral('./types')
+      factory.createStringLiteral('./types')
     )
   )
 ];
@@ -115,23 +124,22 @@ function generateFieldsInterface(
   name: string,
   fields: FieldType[]
 ): ts.Statement {
-  return ts.createInterfaceDeclaration(
+  return factory.createInterfaceDeclaration(
     undefined,
-    [ts.createModifier(ts.SyntaxKind.ExportKeyword)],
+    [factory.createModifier(ts.SyntaxKind.ExportKeyword)],
     name,
     undefined,
     undefined,
     fields
       .sort(nameSort)
       .map((field) =>
-        ts.createPropertySignature(
+        factory.createPropertySignature(
           undefined,
-          ts.createIdentifier(field.name),
+          factory.createIdentifier(field.name),
           field.present
             ? undefined
-            : ts.createToken(ts.SyntaxKind.QuestionToken),
-          parseType(field.type, field),
-          undefined
+            : factory.createToken(ts.SyntaxKind.QuestionToken),
+          parseType(field.type, field)
         )
       )
   );
@@ -142,23 +150,22 @@ function generateRelationsInterface(
   relations: RelationType[],
   nameModifier = ''
 ): ts.Statement {
-  return ts.createInterfaceDeclaration(
+  return factory.createInterfaceDeclaration(
     undefined,
-    [ts.createModifier(ts.SyntaxKind.ExportKeyword)],
+    [factory.createModifier(ts.SyntaxKind.ExportKeyword)],
     name,
     undefined,
     undefined,
     relations
       .sort(nameSort)
       .map((relation) =>
-        ts.createPropertySignature(
+        factory.createPropertySignature(
           undefined,
-          ts.createIdentifier(relation.name),
+          factory.createIdentifier(relation.name),
           relation.required
             ? undefined
-            : ts.createToken(ts.SyntaxKind.QuestionToken),
-          parseRelationsType(relation.types, relation, nameModifier),
-          undefined
+            : factory.createToken(ts.SyntaxKind.QuestionToken),
+          parseRelationsType(relation.types, relation, nameModifier)
         )
       )
   );
@@ -169,15 +176,15 @@ function generateTypeAlias(
   typeName: string,
   parameters: string[]
 ): ts.Statement {
-  return ts.createTypeAliasDeclaration(
+  return factory.createTypeAliasDeclaration(
     undefined,
-    [ts.createModifier(ts.SyntaxKind.ExportKeyword)],
+    [factory.createModifier(ts.SyntaxKind.ExportKeyword)],
     name + typeName,
     [],
-    ts.createTypeReferenceNode(
+    factory.createTypeReferenceNode(
       typeName,
       parameters.map((parameter) =>
-        ts.createTypeReferenceNode(name + parameter, undefined)
+        factory.createTypeReferenceNode(name + parameter, undefined)
       )
     )
   );
@@ -245,7 +252,13 @@ export function writeModelTypes(
     .map((modelType) => generateTypescriptTypes(modelType))
     .reduce((allNodes, nodes) => allNodes.concat(nodes), []);
 
-  sourceFile.statements = ts.createNodeArray([...FILE_START, ...typeNodes]);
+  // 🤠
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  sourceFile.statements = factory.createNodeArray([
+    ...FILE_START,
+    ...typeNodes
+  ]);
 
   const fileContent = printer.printFile(sourceFile);
 
