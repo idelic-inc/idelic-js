@@ -7,7 +7,7 @@ const theme = getTheme();
 
 export const ErrorText: React.FC<ITextProps & CommonFieldProps> = (props) => (
   <Text
-    variant="small"
+    variant='small'
     styles={{root: {color: theme.semanticColors.errorText}}}
     {...props}
   />

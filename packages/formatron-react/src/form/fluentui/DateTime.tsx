@@ -47,7 +47,7 @@ export const DateTime: React.FC<DateTimeProps> = ({
       disabled={disabled || isSubmitting}
       onBlur={() => setTouched(true)}
       errorMessage={isTouched ? error : ''}
-      type="time"
+      type='time'
     />
   ) : (
     <div>

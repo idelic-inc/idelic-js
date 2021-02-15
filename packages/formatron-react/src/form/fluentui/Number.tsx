@@ -30,7 +30,7 @@ export const Number: React.FC<NumberProps> = ({
   return (
     <TextField
       value={value ?? ''}
-      type="number"
+      type='number'
       onChange={(_, val) => setValue(val ? global.Number(val) : undefined)}
       label={label ?? dataType.label}
       disabled={disabled || isSubmitting}
