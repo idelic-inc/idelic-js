@@ -36,7 +36,7 @@ export interface EnumProps extends CommonFieldProps {
   /**
    * Displays the enum values as radio buttons instead of a dropdown.
    */
-  radio?: boolean;
+  isRadioGroup?: boolean;
   dropDownProps?: Partial<IDropdownProps>;
 }
 
@@ -44,7 +44,7 @@ export const Enum: React.FC<EnumProps> = ({
   field,
   dropDownProps = {},
   disabled = false,
-  radio = false,
+  isRadioGroup = false,
   label
 }) => {
   const {
@@ -59,7 +59,7 @@ export const Enum: React.FC<EnumProps> = ({
   } = field;
   const [enumItem, {isLoading, error}] = useEnum({id: dataType.id});
 
-  return radio ? (
+  return isRadioGroup ? (
     <ChoiceGroup
       label={label ?? dataType.label ?? enumItem?.display}
       options={enumItem ? enumValuesToChoiceGroupOptions(enumItem.values) : []}
