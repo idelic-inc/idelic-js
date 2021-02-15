@@ -24,7 +24,8 @@ export interface DateTimeProps extends CommonFieldProps {
 export const DateTime: React.FC<DateTimeProps> = ({
   field,
   datePickerProps = {},
-  disabled = false
+  disabled = false,
+  label
 }) => {
   const {
     value,
@@ -41,7 +42,7 @@ export const DateTime: React.FC<DateTimeProps> = ({
     <TextField
       onChange={(_, val) => setValue(moment(val, ['h:m', 'H:m']).unix())}
       value={value ? moment.unix(value).format('HH:mm') : undefined}
-      label={dataType.label}
+      label={label ?? dataType.label}
       required={isRequired}
       disabled={disabled || isSubmitting}
       onBlur={() => setTouched(true)}
@@ -53,7 +54,7 @@ export const DateTime: React.FC<DateTimeProps> = ({
       <DatePicker
         value={value ? moment.unix(value).toDate() : undefined}
         onSelectDate={(date) => setValue(date ? date.getTime() / 1000 : null)}
-        label={dataType.label}
+        label={label ?? dataType.label}
         isRequired={isRequired}
         disabled={disabled || isSubmitting}
         allowTextInput

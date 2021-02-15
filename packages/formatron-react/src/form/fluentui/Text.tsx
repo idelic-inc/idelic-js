@@ -12,7 +12,8 @@ export interface TextProps extends CommonFieldProps {
 export const Text: React.FC<TextProps> = ({
   field,
   textFieldProps = {},
-  disabled = false
+  disabled = false,
+  label
 }) => {
   const {
     value,
@@ -29,7 +30,7 @@ export const Text: React.FC<TextProps> = ({
     <TextField
       value={value}
       onChange={(_, val) => setValue(val ?? '')}
-      label={dataType.label}
+      label={label ?? dataType.label}
       disabled={disabled || isSubmitting}
       required={isRequired}
       onBlur={() => setTouched(true)}

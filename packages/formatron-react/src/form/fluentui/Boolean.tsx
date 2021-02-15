@@ -12,7 +12,8 @@ export interface BooleanProps extends CommonFieldProps {
 export const Boolean: React.FC<BooleanProps> = ({
   field,
   toggleProps = {},
-  disabled = false
+  disabled = false,
+  label
 }) => {
   const {value, setValue, dataType, isSubmitting} = field;
 
@@ -20,7 +21,7 @@ export const Boolean: React.FC<BooleanProps> = ({
     <Toggle
       checked={value}
       onChange={(_, checked) => setValue(checked ?? false)}
-      label={dataType.label}
+      label={label ?? dataType.label}
       disabled={disabled || isSubmitting}
       {...toggleProps}
     />
