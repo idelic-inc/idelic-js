@@ -16,7 +16,9 @@ const makeNullableMaker = (required: boolean) =>
     : (node: ts.TypeNode) =>
         factory.createUnionTypeNode([
           node,
-          factory.createKeywordTypeNode(ts.SyntaxKind.NullKeyword as any)
+          factory.createLiteralTypeNode(
+            factory.createToken(ts.SyntaxKind.NullKeyword)
+          )
         ]);
 
 function parseType(type: string, field: FieldType): ts.TypeNode {
