@@ -1,0 +1,9 @@
+version: '3.4'
+
+services:
+  idelic-js:
+    image: '465133313964.dkr.ecr.us-east-1.amazonaws.com/idelic-js'
+    build:
+      context: .
+      args:
+        NODE_OPTIONS: --max_old_space_size=2048
