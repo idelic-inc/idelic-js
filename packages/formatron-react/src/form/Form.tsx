@@ -395,17 +395,22 @@ export const useField = (key: string): FieldObject => {
     () =>
       isLoading
         ? false
-        : dataType?.isRequired(model?.model ?? validationModel) ?? false,
-    [model, isLoading, dataType, validationModel]
+        : dataType?.isRequired(
+            model?.model ?? merge({fields: values}, validationModel)
+          ) ?? false,
+    [model, isLoading, dataType, validationModel, values]
   );
 
   useEffect(() => {
     if (dataType) {
       setValueError(key)(
-        dataType.validate(value, model?.model ?? validationModel) ?? undefined
+        dataType.validate(
+          value,
+          model?.model ?? merge({fields: values}, validationModel)
+        ) ?? undefined
       );
     }
-  }, [value, setValueError, dataType, model, validationModel]);
+  }, [value, setValueError, dataType, model, validationModel, values]);
 
   return {
     value,

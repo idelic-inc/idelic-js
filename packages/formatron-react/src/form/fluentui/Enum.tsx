@@ -1,5 +1,7 @@
 import {
+  ChoiceGroup,
   Dropdown,
+  IChoiceGroupOption,
   IDropdownOption,
   IDropdownProps,
   Shimmer
@@ -20,16 +22,30 @@ const enumValuesToDropdownOptions = (
     text: value.display,
     disabled: value.disabled
   }));
+const enumValuesToChoiceGroupOptions = (
+  values: EnumValueType[]
+): IChoiceGroupOption[] =>
+  values.map((value) => ({
+    key: value.alias,
+    text: value.display,
+    disabled: value.disabled
+  }));
 
 export interface EnumProps extends CommonFieldProps {
   field: FieldObjectDataType<EnumType>;
+  /**
+   * Displays the enum values as radio buttons instead of a dropdown.
+   */
+  isRadioGroup?: boolean;
   dropDownProps?: Partial<IDropdownProps>;
 }
 
 export const Enum: React.FC<EnumProps> = ({
   field,
   dropDownProps = {},
-  disabled = false
+  disabled = false,
+  isRadioGroup = false,
+  label
 }) => {
   const {
     value,
@@ -43,9 +59,21 @@ export const Enum: React.FC<EnumProps> = ({
   } = field;
   const [enumItem, {isLoading, error}] = useEnum({id: dataType.id});
 
-  return (
+  return isRadioGroup ? (
+    <ChoiceGroup
+      label={label ?? dataType.label ?? enumItem?.display}
+      options={enumItem ? enumValuesToChoiceGroupOptions(enumItem.values) : []}
+      selectedKey={value}
+      onChange={(_, option) => {
+        setValue(option?.key);
+      }}
+      required={isRequired}
+      onBlur={() => setTouched(true)}
+      disabled={disabled || isLoading || !!error || isSubmitting}
+    />
+  ) : (
     <Dropdown
-      label={enumItem?.display}
+      label={label ?? dataType.label ?? enumItem?.display}
       options={enumItem ? enumValuesToDropdownOptions(enumItem.values) : []}
       selectedKey={[value]}
       onRenderLabel={

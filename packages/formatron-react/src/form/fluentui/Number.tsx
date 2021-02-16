@@ -1,15 +1,16 @@
 import {ITextFieldProps, TextField} from '@fluentui/react/lib/TextField';
+import {NumberType} from '@idelic/formatron/lib/dataTypes/number';
 import React from 'react';
 
 import {FieldObjectDataType} from '../Form';
 import {CommonFieldProps} from '../types';
 
-export interface TextProps extends CommonFieldProps {
-  field: FieldObjectDataType;
+export interface NumberProps extends CommonFieldProps {
+  field: FieldObjectDataType<NumberType>;
   textFieldProps?: ITextFieldProps;
 }
 
-export const Text: React.FC<TextProps> = ({
+export const Number: React.FC<NumberProps> = ({
   field,
   textFieldProps = {},
   disabled = false,
@@ -28,8 +29,9 @@ export const Text: React.FC<TextProps> = ({
 
   return (
     <TextField
-      value={value}
-      onChange={(_, val) => setValue(val ?? '')}
+      value={value ?? ''}
+      type='number'
+      onChange={(_, val) => setValue(val ? global.Number(val) : undefined)}
       label={label ?? dataType.label}
       disabled={disabled || isSubmitting}
       required={isRequired}
