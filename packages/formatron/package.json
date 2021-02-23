@@ -1,6 +1,6 @@
 {
   "name": "@idelic/formatron",
-  "version": "1.0.0-alpha.0",
+  "version": "1.1.0-alpha.0",
   "description": "A library that generates and validates data given a JSON schema.",
   "author": "Idelic",
   "homepage": "https://github.com/idelic-inc/idelic#readme",
