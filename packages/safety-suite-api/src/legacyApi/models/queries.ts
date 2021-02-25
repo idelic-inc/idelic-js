@@ -6,14 +6,14 @@ export type AggregationQuery = any;
 export type QueryNode = any;
 
 export type ModelQuery = {
-  aggregation: AggregationQuery;
+  aggregation?: AggregationQuery;
   groupId?: Id;
   limit?: number;
   modelsIds?: Id[];
   orderBy?: OrderBy;
   templateAlias?: Alias;
   templateId?: Id;
-  where: QueryNode;
+  where?: QueryNode;
 };
 
 export type Aggregation = {

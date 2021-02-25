@@ -46,14 +46,19 @@ export function exportEmployeeReviewReport(
   });
 }
 
+export type ExpiringTrainingReportQuery = Omit<
+  ModelQuery,
+  'aggregation' | 'modelsIds'
+>;
+
 /**
  * Returns an aggregation of TrainingAttendanceModel ids.
  *
- * @param query - Similar to `runModelsQuery` argument, but aggregation is ignored.
+ * @param query - Similar to `runModelsQuery` argument, but without `aggregation` or `modelsIds` options.
  * @param apiOptions - Optional options for runApi.
  */
 export function runExpiringTrainingReport(
-  query: ModelQuery,
+  query: ExpiringTrainingReportQuery,
   apiOptions?: ApiOptions
 ): Request<[Aggregation]> {
   return runApi({
@@ -69,11 +74,11 @@ export function runExpiringTrainingReport(
 /**
  * Returns a Blob of an XLSX file.
  *
- * @param query - Similar to `runModelsQuery` argument, but aggregation is ignored.
+ * @param query - Similar to `runModelsQuery` argument, but without `aggregation` or `modelsIds` options.
  * @param apiOptions - Optional options for runApi.
  */
 export function exportExpiringTrainingReport(
-  query: ModelQuery,
+  query: ExpiringTrainingReportQuery,
   apiOptions?: ApiOptions
 ): Request<Blob> {
   return runApi({
