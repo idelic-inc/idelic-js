@@ -16,6 +16,11 @@ export type ModelQuery = {
   where: QueryNode;
 };
 
+export type Aggregation = {
+  groupKey: string | null;
+  groupIds: number[];
+};
+
 export type ModelExportTypes = 'xlsx' | 'csv';
 
 export type ExportColumn = {
