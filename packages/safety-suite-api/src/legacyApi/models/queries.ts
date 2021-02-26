@@ -19,7 +19,7 @@ export type ModelQuery = {
 export type ModelExportTypes = 'xlsx' | 'csv';
 
 export type ExportColumn = {
-  field: string;
+  field: string | string[];
   label: string;
 };
 
