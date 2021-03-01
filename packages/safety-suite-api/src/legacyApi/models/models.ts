@@ -16,6 +16,10 @@ export function getModelsCount(query: ModelFilterOptions): LegacyApi {
   };
 }
 
+/**
+ * @deprecated Use `fetchModels` instead.
+ * @param query - Model options object.
+ */
 export function getModels(query: ModelOptions): LegacyApi {
   if (query.ids || query.orderBy || query.textSearch) {
     return {
