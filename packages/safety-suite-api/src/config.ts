@@ -37,6 +37,7 @@ export interface TrainingIntegrationConfig extends NestedConfiguration {
     addAttendee: boolean;
   };
   course: CrudOptions;
+  sourceKey: string;
 }
 
 export interface BasicConfig extends NestedConfiguration {
