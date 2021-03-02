@@ -309,10 +309,12 @@ export enum QueryPathType {
    *
    * Example:
    * ```ts
+   * operation: {type: OperationType.equals},
    * queryPath: {
    *   pathType: QueryPathType.id,
    *   path: ['id']
-   * }
+   * },
+   * queryValue: {value: '1'} // Model id converted to a string
    * ```
    */
   id = 'ID',
@@ -394,17 +396,71 @@ export type QueryNodeOperationLiteral = 'AND' | 'EMPTY' | 'OR';
  * Determines how `queryValue.value` will be evaluated.
  */
 export enum OperationType {
+  /**
+   * Used for array includes or partial match,
+   * depending on the `OperationOption` used.
+   * Not compatible with `QueryPathType.relation`
+   */
   contains = 'CONTAINS',
+  /**
+   * Used to compare dates. Only compatible with:
+   * - `QueryPathType.path`
+   */
   dateComparison = 'DATE_COMPARISON',
+  /**
+   * Used to match a date within a range. Only compatible with:
+   * - `QueryPathType.path`
+   */
   dayOfYearInRange = 'DAY_OF_YEAR_IN_RANGE',
+  /**
+   * Used for strict equals match. Only compatible with:
+   * - `QueryPathType.path`
+   * - `QueryPathType.relation`
+   * - `QueryPathType.id`
+   */
   equals = 'EQUALS',
+  /**
+   * Only compatible with:
+   * - `QueryPathType.path`
+   */
   greaterThan = 'GREATER_THAN',
+  /**
+   * Only compatible with:
+   * - `QueryPathType.path`
+   */
   greaterThanEqual = 'GREATER_THAN_EQUAL',
+  /**
+   * Only compatible with:
+   * - `QueryPathType.path`
+   * - `QueryPathType.relationPath`
+   */
   hasValue = 'HAS_VALUE',
+  /**
+   * Matches a number value within a given range. Only compatible with:
+   * - `QueryPathType.path`
+   * - `QueryPathType.relationPath`
+   */
   inRange = 'IN_RANGE',
+  /**
+   * Only compatible with:
+   * - `QueryPathType.path`
+   */
   isDistinctFrom = 'IS_DISTINCT_FROM',
+  /**
+   * Only compatible with:
+   * - `QueryPathType.path`
+   */
   lessThan = 'LESS_THAN',
+  /**
+   * Only compatible with:
+   * - `QueryPathType.path`
+   */
   lessThanEqual = 'LESS_THAN_EQUAL',
+  /**
+   * Only compatible with:
+   * - `QueryPathType.path`
+   * - `QueryPathType.relationPath`
+   */
   notEquals = 'NOT_EQUALS'
 }
 export type OperationTypeLiteral =
@@ -511,15 +567,276 @@ export interface AggregationQuery {
   groupBy?: Grouping | null;
   displayType?: DisplayType | DisplayTypeLiteral | null;
 }
+
+export interface RangeValue {
+  min?: number;
+  max?: number;
+}
+export interface DateRange {
+  min: number;
+  max: number;
+}
+export enum ComparisonType {
+  before = 'BEFORE',
+  after = 'AFTER'
+}
+export type ComparisonTypeLiteral = 'BEFORE' | 'AFTER';
+export enum ComparisonDateType {
+  day = 'DAY',
+  year = 'YEAR'
+}
+export type ComparisonDateTypeLiteral = 'DAY' | 'YEAR';
+export interface DateComparison {
+  comparisonType: ComparisonType | ComparisonTypeLiteral;
+  count: number;
+  dateType: ComparisonDateType | ComparisonDateTypeLiteral;
+}
+
+/*
+  Below is a list of type definitions for valid query conditions.
+  A matrix containing all of the valid Path / Operation / Value combinations can be found in Notion:
+  https://www.notion.so/idelic/78f3fabf57914f0ba50935144a63e4d1?v=0adba7af48de49dfbdca70bc1b6cef7b
+*/
+
+export interface RelationCondition extends QueryCondition {
+  operation: {
+    type: OperationType.equals | 'EQUALS';
+  };
+  queryPath: QueryPath & {
+    pathType: QueryPathType.relation | 'RELATION';
+  };
+  queryValue: {
+    value: number;
+  };
+}
+export interface PathConditionAny extends QueryCondition {
+  operation: {
+    type:
+      | OperationType.equals
+      | OperationType.greaterThanEqual
+      | OperationType.greaterThan
+      | OperationType.isDistinctFrom
+      | OperationType.lessThanEqual
+      | OperationType.lessThan
+      | OperationType.notEquals
+      | 'EQUALS'
+      | 'GREATER_THAN_EQUAL'
+      | 'GREATER_THAN'
+      | 'IS_DISTINCT_FROM'
+      | 'LESS_THAN_EQUAL'
+      | 'LESS_THAN'
+      | 'NOT_EQUALS';
+  };
+  queryPath: QueryPath & {
+    pathType: QueryPathType.path | 'PATH';
+  };
+}
+export interface RelationPathConditionAny extends QueryCondition {
+  operation: {
+    type: OperationType.notEquals | 'NOT_EQUALS';
+  };
+  queryPath: QueryPath & {
+    pathType: QueryPathType.relationPath | 'RELATION_PATH';
+  };
+}
+export interface BooleanCondition extends QueryCondition {
+  operation: {
+    type: OperationType.hasValue | 'HAS_VALUE';
+  };
+  queryPath: QueryPath & {
+    pathType:
+      | QueryPathType.path
+      | QueryPathType.relationPath
+      | 'PATH'
+      | 'RELATION_PATH';
+  };
+  queryValue: {
+    value: boolean;
+  };
+}
+export interface PathConditionString extends QueryCondition {
+  operation: {
+    type: OperationType.contains | 'CONTAINS';
+    option?:
+      | OperationOption.startsWith
+      | OperationOption.defaultOption
+      | 'STARTS_WITH'
+      | 'DEFAULT_OPTION';
+  };
+  queryPath: QueryPath & {
+    pathType: QueryPathType.path | 'PATH';
+  };
+  queryValue: {
+    value: string;
+  };
+}
+export interface RelationPathConditionString extends QueryCondition {
+  operation: {
+    type: OperationType.contains | 'CONTAINS';
+    option?: OperationOption.defaultOption | 'DEFAULT_OPTION';
+  };
+  queryPath: QueryPath & {
+    pathType: QueryPathType.relationPath | 'RELATION_PATH';
+  };
+}
+export interface PathConditionStringArray extends QueryCondition {
+  operation: {
+    type: OperationType.contains | 'CONTAINS';
+    option: OperationOption.any | OperationOption.all | 'ANY' | 'ALL';
+  };
+  queryPath: QueryPath & {
+    pathType: QueryPathType.path | 'PATH';
+  };
+  queryValue: {
+    value: string[];
+  };
+}
+export interface RelationPathConditionStringArray extends QueryCondition {
+  operation: {
+    type: OperationType.contains | 'CONTAINS';
+    option: OperationOption.any | OperationOption.all | 'ANY' | 'ALL';
+  };
+  queryPath: QueryPath & {
+    pathType: QueryPathType.relationPath | 'RELATION_PATH';
+  };
+  queryValue: {
+    value: string[];
+  };
+}
+export interface RangeValueCondition extends QueryCondition {
+  operation: {
+    type: OperationType.inRange | 'IN_RANGE';
+  };
+  queryPath: QueryPath & {
+    pathType:
+      | QueryPathType.path
+      | QueryPathType.relationPath
+      | 'PATH'
+      | 'RELATION_PATH';
+  };
+  queryValue: {
+    value: RangeValue;
+  };
+}
+export interface DateComparisonCondition extends QueryCondition {
+  operation: {
+    type: OperationType.dateComparison | 'DATE_COMPARISON';
+  };
+  queryPath: QueryPath & {
+    pathType: QueryPathType.path | 'PATH';
+  };
+  queryValue: {
+    value: DateComparison;
+  };
+}
+export interface DateRangeCondition extends QueryCondition {
+  operation: {
+    type: OperationType.dayOfYearInRange | 'DAY_OF_YEAR_IN_RANGE';
+  };
+  queryPath: QueryPath & {
+    pathType: QueryPathType.path | 'PATH';
+  };
+  queryValue: {
+    value: DateRange;
+  };
+}
+export interface GroupOrTemplateCondition extends QueryCondition {
+  operation: {
+    type: OperationType.contains | 'CONTAINS';
+  };
+  queryPath: QueryPath & {
+    pathType:
+      | QueryPathType.group
+      | QueryPathType.template
+      | 'GROUP'
+      | 'TEMPLATE';
+  };
+  queryValue: {
+    value: number[];
+  };
+}
+export interface UserNameOrSourceCondition extends QueryCondition {
+  operation: {
+    type: OperationType.contains | 'CONTAINS';
+  };
+  queryPath: QueryPath & {
+    pathType:
+      | QueryPathType.userName
+      | QueryPathType.source
+      | 'USER_NAME'
+      | 'SOURCE';
+  };
+  queryValue: {
+    value: string;
+  };
+}
+export interface IdEqualsCondition extends QueryCondition {
+  operation: {
+    type: OperationType.equals | 'EQUALS';
+  };
+  queryPath: QueryPath & {
+    pathType: QueryPathType.id | 'ID';
+  };
+  queryValue: {
+    /**
+     * Model id converted to a string
+     */
+    value: string;
+  };
+}
+export interface IdContainsCondition extends QueryCondition {
+  operation: {
+    type: OperationType.contains | 'CONTAINS';
+  };
+  queryPath: QueryPath & {
+    pathType: QueryPathType.id | 'ID';
+  };
+  queryValue: {
+    value: number[];
+  };
+}
+export interface IdStartsWithCondition extends QueryCondition {
+  operation: {
+    type: OperationType.contains | 'CONTAINS';
+    option: OperationOption.startsWith | 'STARTS_WITH';
+  };
+  queryPath: QueryPath & {
+    pathType: QueryPathType.id | 'ID';
+  };
+  queryValue: {
+    value: string;
+  };
+}
+
+export type ValidQueryCondition =
+  | RelationCondition
+  | PathConditionAny
+  | RelationPathConditionAny
+  | BooleanCondition
+  | PathConditionString
+  | RelationPathConditionString
+  | PathConditionStringArray
+  | RelationPathConditionStringArray
+  | RangeValueCondition
+  | DateComparisonCondition
+  | DateRangeCondition
+  | GroupOrTemplateCondition
+  | UserNameOrSourceCondition
+  | IdEqualsCondition
+  | IdContainsCondition
+  | IdStartsWithCondition;
+
 export interface QueryNode {
   /**
    * Determines how the `conditions` will applied.
    */
   operation: QueryNodeOperation | QueryNodeOperationLiteral;
   /**
-   * List of `QueryCondition`s to use for filtering model ids.
+   * List of `ValidQueryCondition`s to use for filtering model ids.
+   *
+   * Use this matrix for reference: [Path - Operation - Value matrix](https://www.notion.so/idelic/78f3fabf57914f0ba50935144a63e4d1?v=0adba7af48de49dfbdca70bc1b6cef7b)
    */
-  conditions: QueryCondition[];
+  conditions: ValidQueryCondition[];
 }
 
 export interface ModelQuery {
