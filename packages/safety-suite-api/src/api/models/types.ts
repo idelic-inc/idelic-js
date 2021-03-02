@@ -45,18 +45,47 @@ export interface Model<F, R, C> {
 }
 
 export type SearchText = {
+  /**
+   * Field or computation name.
+   */
   field: string;
+  /**
+   * Value that will be partially matched.
+   */
   value: string;
 };
 
 export type ModelFilterOptions = {
+  /**
+   * Will return models that have one of the following `id`s.
+   */
   ids?: Id[];
+  /**
+   * Will return models that are of any of the following templates.
+   */
   templateIds?: Id[];
+  /**
+   * Will return models that are of any of the following templates.
+   */
   templateAliases?: Alias[];
+  /**
+   * Will return models that have one of the following `groupId`s.
+   */
   groupIds?: Id[];
+  /**
+   * Will return models that match any of the key value pairs in this array.
+   */
   textSearch?: SearchText[];
-  jsValueSearch?: any;
-  protectedValueSearch?: any;
+  /**
+   * Key value map. Keys are field / computation names,
+   * values are matched strictly.
+   */
+  jsValueSearch?: Record<string, any>;
+  /**
+   * Key value map. Keys are protected field names,
+   * values are matched strictly.
+   */
+  protectedValueSearch?: Record<string, any>;
 };
 
 export type ByGroup = {
@@ -124,10 +153,32 @@ export type ModelListOptions = {
    */
   orderBy?: OrderBy;
   /**
-   * Index in the array of returned models.
+   * Omits any models before this index.
    */
   start?: number;
 };
+
+/**
+ * Type of related models to return.
+ */
+export enum RelationModels {
+  /**
+   * Will return all types of related models.
+   */
+  all = 'all',
+  /**
+   * Will return all child relations as models.
+   */
+  children = 'children',
+  /**
+   * Will return only models with a multiModel relation.
+   */
+  multiModel = 'multiModel',
+  /**
+   * Will return only models with a singleModel relation.
+   */
+  singleModel = 'singleModel'
+}
 
 export type ModelOutputOptions = {
   /**
@@ -140,12 +191,10 @@ export type ModelOutputOptions = {
   protectedFields?: boolean;
   /**
    * Will include related models in returned models.
-   * `singleModel` will return only models with a singleModel relation.
-   * `all` will return all types of relations.
    *
    * Depth is set by `relationsLevel`.
    */
-  relationModels?: string;
+  relationModels?: RelationModels;
   relationNames?: string[];
   relationTemplateIds?: Id[];
   /**
@@ -171,15 +220,15 @@ export type ModelOutputOptions = {
    */
   relationsLevel?: number;
   /**
-   * Array of names of computations with `computeOn === 'read'` to skip computation.
+   * Array of names of computations with `computeOn === 'read'` to compute, others will be skipped.
    */
   restrictReadComputations?: string[];
   /**
-   * Array of names of computations with `computeOn === 'read'` to force computation.
+   * Will force computation of all computations with `computeOn === 'read'`.
    */
   updateReadComputations?: boolean;
   /**
-   * Will include `createdByUser` in returned models.
+   * Will include `createdByUser` and `lastUpdatedByUser` in returned models.
    */
   users?: boolean;
 };
@@ -218,10 +267,48 @@ export enum QueryPathType {
    * ```
    */
   path = 'PATH',
+  /**
+   * Used to match group ids.
+   *
+   * Only `OperationType.contains` is supported here.
+   *
+   * Example:
+   * ```ts
+   * operation: {type: OperationType.contains},
+   * queryPath: {
+   *   pathType: QueryPathType.group,
+   *   path: ['id']
+   * },
+   * queryValue: {value: [1]} // Array of group ids
+   * ```
+   */
   group = 'GROUP',
+  /**
+   * Used to match template ids. (Aliases not supported)
+   *
+   * Only `OperationType.contains` is supported here.
+   *
+   * Example:
+   * ```ts
+   * operation: {type: OperationType.contains},
+   * queryPath: {
+   *   pathType: QueryPathType.template,
+   *   path: ['id']
+   * },
+   * queryValue: {value: [1]} // Array of template ids
+   * ```
+   */
   template = 'TEMPLATE',
   /**
    * Used to match model ids.
+   *
+   * Example:
+   * ```ts
+   * queryPath: {
+   *   pathType: QueryPathType.id,
+   *   path: ['id']
+   * }
+   * ```
    */
   id = 'ID',
   /**
@@ -237,11 +324,35 @@ export enum QueryPathType {
    */
   relationPath = 'RELATION_PATH',
   /**
-   * Used to match the name of the `createdBy` user.
+   * Used to match name of `createdBy` or `lastUpdatedBy` users.
+   *
+   * Only `OperationType.contains` is supported here.
+   *
+   * Example:
+   * ```ts
+   * operation: {type: OperationType.contains},
+   * queryPath: {
+   *   pathType: QueryPathType.userName,
+   *   path: ['createdBy']
+   * },
+   * queryValue: {value: 'Idelic User'} // Name of user to partial match
+   * ```
    */
   userName = 'USER_NAME',
   /**
    * Used to match the integration source.
+   *
+   * Only `OperationType.contains` is supported here.
+   *
+   * Example:
+   * ```ts
+   * operation: {type: OperationType.contains},
+   * queryPath: {
+   *   pathType: QueryPathType.source,
+   *   path: ['key']
+   * },
+   * queryValue: {value: 'luma:luma_id'} // Key of a source to exact match
+   * ```
    */
   source = 'SOURCE'
 }
