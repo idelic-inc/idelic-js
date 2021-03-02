@@ -179,6 +179,11 @@ export enum RelationModels {
    */
   singleModel = 'singleModel'
 }
+export type RelationModelsLiteral =
+  | 'all'
+  | 'children'
+  | 'multiModel'
+  | 'singleModel';
 
 export type ModelOutputOptions = {
   /**
@@ -194,7 +199,7 @@ export type ModelOutputOptions = {
    *
    * Depth is set by `relationsLevel`.
    */
-  relationModels?: RelationModels;
+  relationModels?: RelationModels | RelationModelsLiteral;
   relationNames?: string[];
   relationTemplateIds?: Id[];
   /**
@@ -356,6 +361,16 @@ export enum QueryPathType {
    */
   source = 'SOURCE'
 }
+export type QueryPathTypeLiteral =
+  | 'GROUP'
+  | 'ID'
+  | 'PATH'
+  | 'RELATION_PATH'
+  | 'RELATION'
+  | 'SOURCE'
+  | 'TEMPLATE'
+  | 'USER_NAME';
+
 /**
  * Determines how the `conditions` will applied.
  */
@@ -365,66 +380,109 @@ export enum QueryNodeOperation {
    */
   and = 'AND',
   /**
-   * Will return models that match any of the `conditions`.
-   */
-  or = 'OR',
-  /**
    * Will ignore any `conditions`.
    */
-  empty = 'EMPTY'
+  empty = 'EMPTY',
+  /**
+   * Will return models that match any of the `conditions`.
+   */
+  or = 'OR'
 }
+export type QueryNodeOperationLiteral = 'AND' | 'EMPTY' | 'OR';
+
 /**
  * Determines how `queryValue.value` will be evaluated.
  */
 export enum OperationType {
+  contains = 'CONTAINS',
+  dateComparison = 'DATE_COMPARISON',
+  dayOfYearInRange = 'DAY_OF_YEAR_IN_RANGE',
   equals = 'EQUALS',
-  notEquals = 'NOT_EQUALS',
-  isDistinctFrom = 'IS_DISTINCT_FROM',
-  lessThan = 'LESS_THAN',
   greaterThan = 'GREATER_THAN',
-  lessThanEqual = 'LESS_THAN_EQUAL',
   greaterThanEqual = 'GREATER_THAN_EQUAL',
   hasValue = 'HAS_VALUE',
   inRange = 'IN_RANGE',
-  contains = 'CONTAINS',
-  dateComparison = 'DATE_COMPARISON',
-  dayOfYearInRange = 'DAY_OF_YEAR_IN_RANGE'
+  isDistinctFrom = 'IS_DISTINCT_FROM',
+  lessThan = 'LESS_THAN',
+  lessThanEqual = 'LESS_THAN_EQUAL',
+  notEquals = 'NOT_EQUALS'
 }
+export type OperationTypeLiteral =
+  | 'CONTAINS'
+  | 'DATE_COMPARISON'
+  | 'DAY_OF_YEAR_IN_RANGE'
+  | 'EQUALS'
+  | 'GREATER_THAN_EQUAL'
+  | 'GREATER_THAN'
+  | 'HAS_VALUE'
+  | 'IN_RANGE'
+  | 'IS_DISTINCT_FROM'
+  | 'LESS_THAN_EQUAL'
+  | 'LESS_THAN'
+  | 'NOT_EQUALS';
+
 export enum OperationOption {
-  any = 'ANY',
   all = 'ALL',
+  any = 'ANY',
   defaultOption = 'DEFAULT_OPTION',
   startsWith = 'STARTS_WITH'
 }
+export type OperationOptionLiteral =
+  | 'ALL'
+  | 'ANY'
+  | 'DEFAULT_OPTION'
+  | 'STARTS_WITH';
+
 export enum AggregateFunction {
   arrayAgg = 'ARRAY_AGG',
+  avg = 'AVG',
   count = 'COUNT',
-  sum = 'SUM',
-  min = 'MIN',
   max = 'MAX',
-  avg = 'AVG'
+  min = 'MIN',
+  sum = 'SUM'
 }
+export type AggregateFunctionLiteral =
+  | 'ARRAY_AGG'
+  | 'AVG'
+  | 'COUNT'
+  | 'MAX'
+  | 'MIN'
+  | 'SUM';
+
 export enum DisplayType {
-  reportDisplayTypeTable = 'REPORT_DISPLAY_TYPE_TABLE',
-  reportDisplayTypeLineGraph = 'REPORT_DISPLAY_TYPE_LINE_GRAPH',
   reportDisplayTypeBarGraph = 'REPORT_DISPLAY_TYPE_BAR_GRAPH',
-  reportDisplayTypeOther = 'REPORT_DISPLAY_TYPE_OTHER'
+  reportDisplayTypeLineGraph = 'REPORT_DISPLAY_TYPE_LINE_GRAPH',
+  reportDisplayTypeOther = 'REPORT_DISPLAY_TYPE_OTHER',
+  reportDisplayTypeTable = 'REPORT_DISPLAY_TYPE_TABLE'
 }
+export type DisplayTypeLiteral =
+  | 'REPORT_DISPLAY_TYPE_BAR_GRAPH'
+  | 'REPORT_DISPLAY_TYPE_LINE_GRAPH'
+  | 'REPORT_DISPLAY_TYPE_OTHER'
+  | 'REPORT_DISPLAY_TYPE_TABLE';
+
 export enum GroupingType {
   date = 'DATE',
-  value = 'VALUE',
   enum = 'ENUM',
-  relation = 'RELATION',
   modelGroup = 'MODEL_GROUP',
+  relation = 'RELATION',
+  value = 'VALUE',
   valuePresence = 'VALUE_PRESENCE'
 }
+export type GroupingTypeLiteral =
+  | 'DATE'
+  | 'ENUM'
+  | 'MODEL_GROUP'
+  | 'RELATION'
+  | 'VALUE'
+  | 'VALUE_PRESENCE';
 
 export interface QueryConditionOperation {
-  type: OperationType;
-  option?: OperationOption;
+  type: OperationType | OperationTypeLiteral;
+  option?: OperationOption | OperationOptionLiteral;
 }
 export interface QueryPath {
-  pathType: QueryPathType;
+  pathType: QueryPathType | QueryPathTypeLiteral;
   path: string[];
 }
 export interface QueryValue {
@@ -441,23 +499,23 @@ export interface GroupingValue {
   groupingTimezone?: string | null;
 }
 export interface Grouping {
-  groupingType: GroupingType;
+  groupingType: GroupingType | GroupingTypeLiteral;
   groupingValue: GroupingValue;
 }
 export interface AggregationQuery {
   /**
    * @defaultvalue AggregateFunction.arrayAgg
    */
-  func?: AggregateFunction | null;
+  func?: AggregateFunction | AggregateFunctionLiteral | null;
   aggregateField?: string | null;
   groupBy?: Grouping | null;
-  displayType?: DisplayType | null;
+  displayType?: DisplayType | DisplayTypeLiteral | null;
 }
 export interface QueryNode {
   /**
    * Determines how the `conditions` will applied.
    */
-  operation: QueryNodeOperation;
+  operation: QueryNodeOperation | QueryNodeOperationLiteral;
   /**
    * List of `QueryCondition`s to use for filtering model ids.
    */
