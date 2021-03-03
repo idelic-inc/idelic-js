@@ -1,6 +1,6 @@
 {
   "name": "@idelic/formatron-react",
-  "version": "3.2.1-alpha.0",
+  "version": "3.3.0-alpha.0",
   "description": "React components to render formatron data.",
   "author": "Idelic",
   "homepage": "https://github.com/idelic-inc/idelic-js#readme",
