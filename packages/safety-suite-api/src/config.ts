@@ -73,6 +73,10 @@ export interface BasicConfig extends NestedConfiguration {
         testMode: boolean;
       };
     };
+    performanceDashboard: {
+      enabled: boolean;
+      frontendUrl: string;
+    };
   };
   integrations: {
     training: Record<string, TrainingIntegrationConfig | undefined>;
@@ -110,6 +114,10 @@ const exampleConfig: BasicConfig = {
         clientId: '',
         testMode: false
       }
+    },
+    performanceDashboard: {
+      frontendUrl: '',
+      enabled: false
     }
   },
   integrations: {
