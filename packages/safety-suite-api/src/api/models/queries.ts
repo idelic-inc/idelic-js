@@ -14,7 +14,7 @@ import {Aggregation, ModelQuery} from './types';
 export function queryModels<GroupValue = unknown>(
   modelQuery: ModelQuery,
   apiOptions?: ApiOptions
-): Request<Aggregation<GroupValue>> {
+): Request<Aggregation<GroupValue>[]> {
   return runApi({
     method: 'POST',
     route: '/api/models/query',
