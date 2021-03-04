@@ -1,9 +1,27 @@
 import {Request} from '@idelic/safety-net';
 import {Record} from 'immutable';
 
-import {Aggregation, ModelQuery} from '../../legacyApi/models/queries';
 import {runApi} from '../../runApi';
 import {ApiOptions} from '../../types';
+import {Aggregation, ModelQuery} from './types';
+
+/**
+ * Runs a query against the models table and returns an aggregation.
+ *
+ * @param modelQuery - Model query object.
+ * @param apiOptions - Optional options for runApi.
+ */
+export function queryModels<GroupValue = unknown>(
+  modelQuery: ModelQuery,
+  apiOptions?: ApiOptions
+): Request<Aggregation<GroupValue>[]> {
+  return runApi({
+    method: 'POST',
+    route: '/api/models/query',
+    apiOptions,
+    requestOptions: {body: modelQuery}
+  });
+}
 
 export type EmployeeReviewTypes = 'EMPLOYEE' | 'TERMINAL';
 

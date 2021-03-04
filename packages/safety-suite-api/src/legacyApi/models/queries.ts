@@ -1,25 +1,6 @@
-import {OrderBy} from '../../api/models/types';
-import {Alias, Id} from '../../types';
+import {ModelQuery} from '../../api/models/types';
+import {Id} from '../../types';
 import {LegacyApi} from '../types';
-
-export type AggregationQuery = any;
-export type QueryNode = any;
-
-export type ModelQuery = {
-  aggregation?: AggregationQuery;
-  groupId?: Id;
-  limit?: number;
-  modelsIds?: Id[];
-  orderBy?: OrderBy;
-  templateAlias?: Alias;
-  templateId?: Id;
-  where?: QueryNode;
-};
-
-export type Aggregation = {
-  groupKey: string | null;
-  groupIds: number[];
-};
 
 export type ModelExportTypes = 'xlsx' | 'csv';
 
@@ -64,6 +45,10 @@ export type OshaInput = {
   lostRestrictedDays: LostRestrictedInput[];
 };
 
+/**
+ * @deprecated Use `queryModels` instead.
+ * @param modelQuery - Model query object.
+ */
 export function runModelsQuery(modelQuery: ModelQuery): LegacyApi {
   return {
     method: 'POST',

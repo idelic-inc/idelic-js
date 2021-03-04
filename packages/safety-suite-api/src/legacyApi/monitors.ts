@@ -1,7 +1,7 @@
 import momentTimezone from 'moment-timezone';
 
+import {ModelQuery} from '../api/models/types';
 import {Id} from '../types';
-import {ModelQuery} from './models';
 import {LegacyApi} from './types';
 
 export function getMonitorsParams(): LegacyApi {
