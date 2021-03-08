@@ -52,7 +52,7 @@ export interface User {
   registered: boolean;
   active: boolean;
   permissions: UserPermission[];
-  termsOfServiceVersion: string;
+  termsOfServiceVersion?: string;
 }
 
 export interface UserWithErrors {
@@ -101,8 +101,7 @@ export const UserRecord = Record<ImUser>({
   lockout: false,
   registered: false,
   active: false,
-  permissions: List([UserPermissionRecord()]),
-  termsOfServiceVersion: ''
+  permissions: List([UserPermissionRecord()])
 });
 
 export const UserWithErrorsRecord = Record<ImUserWithErrors>({
