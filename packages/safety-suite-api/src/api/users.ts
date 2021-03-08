@@ -52,6 +52,7 @@ export interface User {
   registered: boolean;
   active: boolean;
   permissions: UserPermission[];
+  termsOfServiceVersion: string;
 }
 
 export interface UserWithErrors {
@@ -100,7 +101,8 @@ export const UserRecord = Record<ImUser>({
   lockout: false,
   registered: false,
   active: false,
-  permissions: List([UserPermissionRecord()])
+  permissions: List([UserPermissionRecord()]),
+  termsOfServiceVersion: ''
 });
 
 export const UserWithErrorsRecord = Record<ImUserWithErrors>({
@@ -197,6 +199,24 @@ export function updateUser(
     requestOptions: {
       body: user,
       transformers
+    }
+  });
+}
+
+export function updateTermsOfServiceVersion(
+  userId: number,
+  version: string,
+  apiOptions?: ApiOptions
+): Request<number> {
+  return runApi({
+    method: 'PUT',
+    urlRoot: 'loginUrlRoot',
+    route: `/api/1.0/users/${userId}`,
+    apiOptions,
+    requestOptions: {
+      body: {
+        termsOfServiceVersion: version
+      }
     }
   });
 }
