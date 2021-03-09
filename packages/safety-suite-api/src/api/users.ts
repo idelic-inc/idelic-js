@@ -101,7 +101,8 @@ export const UserRecord = Record<ImUser>({
   lockout: false,
   registered: false,
   active: false,
-  permissions: List([UserPermissionRecord()])
+  permissions: List([UserPermissionRecord()]),
+  termsOfServiceVersion: undefined
 });
 
 export const UserWithErrorsRecord = Record<ImUserWithErrors>({
