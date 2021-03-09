@@ -92,6 +92,11 @@ export interface BasicConfig extends NestedConfiguration {
       cacheLocation: string;
     };
     gtm: {containerId: string};
+    termsOfService: {
+      enabled: boolean;
+      link: string;
+      version: string;
+    };
   };
 }
 const exampleConfig: BasicConfig = {
@@ -133,7 +138,12 @@ const exampleConfig: BasicConfig = {
       audience: '',
       cacheLocation: ''
     },
-    gtm: {containerId: ''}
+    gtm: {containerId: ''},
+    termsOfService: {
+      enabled: false,
+      link: '',
+      version: ''
+    }
   }
 };
 
