@@ -64,39 +64,100 @@ export function exportEmployeeReviewReport(
   });
 }
 
-export type ExpiringTrainingReportQuery = Omit<
-  ModelQuery,
-  'aggregation' | 'modelsIds'
->;
+export interface CommonTrainingReportFilters {
+  /**
+   * List of `employee` model ids.
+   */
+  employeeIds?: number[];
+  /**
+   * List of `employee_positions` enum value aliases.
+   */
+  employeePositions?: string[];
+  /**
+   * List of `terminal` group ids.
+   */
+  employeeTerminals?: number[];
+  /**
+   * List of `training_course` model ids.
+   */
+  courseIds?: number[];
+}
 
 /**
- * Returns an aggregation of TrainingAttendanceModel ids.
+ * Returns an array of TrainingAttendanceModel ids.
  *
- * @param query - Similar to `runModelsQuery` argument, but without `aggregation` or `modelsIds` options.
+ * @param filters - Object containing various filters for the report.
+ * @param apiOptions - Optional options for runApi.
+ */
+export function runIncompleteTrainingReport(
+  filters: CommonTrainingReportFilters,
+  apiOptions?: ApiOptions
+): Request<number[]> {
+  return runApi({
+    method: 'POST',
+    route: '/api/models/query/canned/notCompletedTrainings',
+    apiOptions,
+    requestOptions: {
+      body: filters
+    }
+  });
+}
+/**
+ * Returns a Blob of an XLSX file.
+ *
+ * @param filters - Object containing various filters for the report.
+ * @param apiOptions - Optional options for runApi.
+ */
+export function exportIncompleteTrainingReport(
+  filters: CommonTrainingReportFilters,
+  apiOptions?: ApiOptions
+): Request<Blob> {
+  return runApi({
+    method: 'POST',
+    route: '/api/models/query/canned/notCompletedTrainings/xlsx',
+    apiOptions,
+    requestOptions: {
+      body: filters,
+      responseType: 'blob'
+    }
+  });
+}
+
+export interface ExpiringTrainingReportFilters
+  extends CommonTrainingReportFilters {
+  expirationDateFrom?: number;
+  /**
+   * @defaultvalue - Current date plus 120 days.
+   */
+  expirationDateTo?: number;
+}
+/**
+ * Returns an array of TrainingAttendanceModel ids.
+ *
+ * @param filters - Object containing various filters for the report.
  * @param apiOptions - Optional options for runApi.
  */
 export function runExpiringTrainingReport(
-  query: ExpiringTrainingReportQuery,
+  filters: ExpiringTrainingReportFilters,
   apiOptions?: ApiOptions
-): Request<[Aggregation]> {
+): Request<number[]> {
   return runApi({
     method: 'POST',
     route: '/api/models/query/canned/expiringTrainings',
     apiOptions,
     requestOptions: {
-      body: query
+      body: filters
     }
   });
 }
-
 /**
  * Returns a Blob of an XLSX file.
  *
- * @param query - Similar to `runModelsQuery` argument, but without `aggregation` or `modelsIds` options.
+ * @param filters - Object containing various filters for the report.
  * @param apiOptions - Optional options for runApi.
  */
 export function exportExpiringTrainingReport(
-  query: ExpiringTrainingReportQuery,
+  filters: ExpiringTrainingReportFilters,
   apiOptions?: ApiOptions
 ): Request<Blob> {
   return runApi({
@@ -104,7 +165,54 @@ export function exportExpiringTrainingReport(
     route: '/api/models/query/canned/expiringTrainings/xlsx',
     apiOptions,
     requestOptions: {
-      body: query,
+      body: filters,
+      responseType: 'blob'
+    }
+  });
+}
+
+export interface DueTrainingReportFilters extends CommonTrainingReportFilters {
+  dueDateFrom?: number;
+  /**
+   * @defaultvalue - Current date plus 120 days.
+   */
+  dueDateTo?: number;
+}
+/**
+ * Returns an array of TrainingAttendanceModel ids.
+ *
+ * @param filters - Object containing various filters for the report.
+ * @param apiOptions - Optional options for runApi.
+ */
+export function runDueTrainingReport(
+  filters: DueTrainingReportFilters,
+  apiOptions?: ApiOptions
+): Request<number[]> {
+  return runApi({
+    method: 'POST',
+    route: '/api/models/query/canned/dueTrainings',
+    apiOptions,
+    requestOptions: {
+      body: filters
+    }
+  });
+}
+/**
+ * Returns a Blob of an XLSX file.
+ *
+ * @param filters - Object containing various filters for the report.
+ * @param apiOptions - Optional options for runApi.
+ */
+export function exportDueTrainingReport(
+  filters: DueTrainingReportFilters,
+  apiOptions?: ApiOptions
+): Request<Blob> {
+  return runApi({
+    method: 'POST',
+    route: '/api/models/query/canned/dueTrainings/xlsx',
+    apiOptions,
+    requestOptions: {
+      body: filters,
       responseType: 'blob'
     }
   });
