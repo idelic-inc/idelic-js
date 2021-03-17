@@ -41,22 +41,95 @@ export interface TrainingIntegrationConfig extends NestedConfiguration {
 }
 
 export interface BasicConfig extends NestedConfiguration {
-  services: {
-    saf: {
-      proDataIrv: string;
-      url: string;
+  env: {
+    auth0: {
+      audience: string;
+      cacheLocation: string;
+      clientId: string;
+      domain: string;
+      internal: {clientId: string};
+      namespace: string;
     };
-    embeddedReporting: {
-      defaultDashboardId: string;
-      url: string;
+    gtm: {containerId: string};
+    sentry: {dsn: string};
+    smtp: {
+      mock: {
+        enabled: boolean;
+      };
+    };
+    termsOfService: {
       enabled: boolean;
-      watchlist: {dashboardId: string; enabled: boolean};
+      link: string;
+      version: string;
+    };
+  };
+  integrations: {
+    training: Record<string, TrainingIntegrationConfig | undefined>;
+  };
+  services: {
+    adminPanel: {
+      enabled: boolean;
+      frontendUrl: string;
+    };
+    app: {
+      frontendUrl: string;
+      url: string;
     };
     documentLibrary: {
       url: string;
       maxUploadSize: number;
     };
-    app: {
+    eforms: {
+      auth0: {
+        clientId: string;
+      };
+      email: {
+        sender: {
+          address: string;
+        };
+      };
+      enabled: boolean;
+      frontendUrl: string;
+      hellosign: {
+        clientId: string;
+        testMode: boolean;
+      };
+      maxUploadSize: number;
+      url: string;
+    };
+    embeddedReporting: {
+      defaultDashboardId: string;
+      enabled: boolean;
+      url: string;
+      watchlist: {dashboardId: string; enabled: boolean};
+    };
+    legacySaf: {
+      frontendUrl: string;
+    };
+    performanceDashboard: {
+      enabled: boolean;
+      frontendUrl: string;
+      watchlist: {enabled: boolean};
+    };
+    saf: {
+      auth0: {
+        clientId: string;
+      };
+      frontendUrl: string;
+      proDataIrv: string;
+      url: string;
+      watchlist: {
+        notifications: {
+          minimumThreshold: number;
+          percentIncrease: number;
+          pointIncrease: number;
+        };
+      };
+    };
+    testingUi: {
+      auth0: {
+        clientId: string;
+      };
       frontendUrl: string;
       url: string;
     };
@@ -64,55 +137,52 @@ export interface BasicConfig extends NestedConfiguration {
       enabled: boolean;
       frontendUrl: string;
     };
-    eforms: {
-      enabled: boolean;
-      frontendUrl: string;
-      maxUploadSize: number;
-      url: string;
-      hellosign: {
-        clientId: string;
-        testMode: boolean;
-      };
-    };
-    performanceDashboard: {
-      enabled: boolean;
-      frontendUrl: string;
-      watchlist: {enabled: boolean};
-    };
-  };
-  integrations: {
-    training: Record<string, TrainingIntegrationConfig | undefined>;
-  };
-  env: {
-    sentry: {dsn: string};
-    auth0: {
-      clientId: string;
-      internal: {clientId: string};
-      domain: string;
-      audience: string;
-      cacheLocation: string;
-    };
-    gtm: {containerId: string};
-    termsOfService: {
-      enabled: boolean;
-      link: string;
-      version: string;
-    };
   };
 }
 const exampleConfig: BasicConfig = {
   services: {
+    adminPanel: {frontendUrl: '', enabled: false},
     embeddedReporting: {
       watchlist: {dashboardId: '', enabled: false},
       defaultDashboardId: '',
       url: '',
       enabled: false
     },
-    saf: {proDataIrv: '', url: ''},
+    saf: {
+      auth0: {
+        clientId: ''
+      },
+      frontendUrl: '',
+      proDataIrv: '',
+      url: '',
+      watchlist: {
+        notifications: {
+          minimumThreshold: 0,
+          percentIncrease: 0,
+          pointIncrease: 0
+        }
+      }
+    },
     documentLibrary: {url: '', maxUploadSize: 0},
+    legacySaf: {frontendUrl: ''},
     app: {frontendUrl: '', url: ''},
+    testingUi: {
+      auth0: {
+        clientId: ''
+      },
+      frontendUrl: '',
+      url: ''
+    },
     training: {frontendUrl: '', enabled: false},
     eforms: {
+      auth0: {
+        clientId: ''
+      },
+      email: {
+        sender: {
+          address: ''
+        }
+      },
       enabled: false,
       frontendUrl: '',
       maxUploadSize: 0,
@@ -134,17 +204,23 @@ const exampleConfig: BasicConfig = {
   env: {
     sentry: {dsn: ''},
     auth0: {
-      clientId: '',
-      internal: {clientId: ''},
-      domain: '',
       audience: '',
-      cacheLocation: ''
+      cacheLocation: '',
+      clientId: '',
+      domain: '',
+      internal: {clientId: ''},
+      namespace: ''
     },
     gtm: {containerId: ''},
     termsOfService: {
       enabled: false,
       link: '',
       version: ''
+    },
+    smtp: {
+      mock: {
+        enabled: false
+      }
     }
   }
 };
