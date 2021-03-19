@@ -874,6 +874,13 @@ export interface ModelQuery {
   where?: QueryNode;
 }
 
+export interface ModelQueryParams {
+  /**
+   * Used when we want to use the read replica database on a request.
+   */
+  readReplica?: boolean;
+}
+
 export interface Aggregation<GroupValue = unknown> {
   groupKey: string | null;
   groupIds: number[];

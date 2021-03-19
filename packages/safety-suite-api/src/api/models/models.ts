@@ -2,7 +2,7 @@ import {Request} from '@idelic/safety-net';
 
 import {runApi} from '../../runApi';
 import {Api, ApiOptions} from '../../types';
-import {Model, ModelOptions} from './types';
+import {Model, ModelOptions, ModelQueryParams} from './types';
 
 /**
  * Returns an array of models based on a set of options.
@@ -12,19 +12,23 @@ import {Model, ModelOptions} from './types';
  */
 export function fetchModels<
   Models extends Model<any, any, any> = Model<any, any, any>
->(modelOptions: ModelOptions, apiOptions?: ApiOptions): Request<Models[]> {
+>(
+  modelOptions: ModelOptions,
+  modelQueryParams?: ModelQueryParams,
+  apiOptions?: ApiOptions
+): Request<Models[]> {
   const {ids, orderBy, textSearch} = modelOptions;
   const baseApi: Api<ModelOptions, Models[]> =
     ids || orderBy || textSearch
       ? {
           method: 'POST',
           route: '/api/models/get',
-          requestOptions: {body: modelOptions}
+          requestOptions: {body: modelOptions, query: modelQueryParams}
         }
       : {
           method: 'GET',
           route: '/api/models',
-          requestOptions: {query: modelOptions}
+          requestOptions: {query: {...modelOptions, ...modelQueryParams}}
         };
   return runApi({...baseApi, apiOptions});
 }
