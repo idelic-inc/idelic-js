@@ -3,7 +3,7 @@ import {Record} from 'immutable';
 
 import {runApi} from '../../runApi';
 import {ApiOptions} from '../../types';
-import {Aggregation, ModelQuery} from './types';
+import {Aggregation, ModelQuery, ModelQueryParams} from './types';
 
 /**
  * Runs a query against the models table and returns an aggregation.
@@ -13,13 +13,14 @@ import {Aggregation, ModelQuery} from './types';
  */
 export function queryModels<GroupValue = unknown>(
   modelQuery: ModelQuery,
+  modelQueryParams?: ModelQueryParams,
   apiOptions?: ApiOptions
 ): Request<Aggregation<GroupValue>[]> {
   return runApi({
     method: 'POST',
     route: '/api/models/query',
     apiOptions,
-    requestOptions: {body: modelQuery}
+    requestOptions: {body: modelQuery, query: modelQueryParams}
   });
 }
 
