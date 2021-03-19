@@ -109,7 +109,7 @@ export interface BasicConfig extends NestedConfiguration {
     performanceDashboard: {
       enabled: boolean;
       frontendUrl: string;
-      newHotness: boolean;
+      newHotness: {enabled: boolean};
       watchlist: {enabled: boolean};
     };
     saf: {
@@ -196,7 +196,7 @@ const exampleConfig: BasicConfig = {
     performanceDashboard: {
       frontendUrl: '',
       enabled: false,
-      newHotness: false,
+      newHotness: {enabled: false},
       watchlist: {enabled: false}
     }
   },
