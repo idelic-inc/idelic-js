@@ -50,6 +50,9 @@ export interface BasicConfig extends NestedConfiguration {
       internal: {clientId: string};
       namespace: string;
     };
+    datadog: {
+      clientToken: string;
+    };
     gtm: {containerId: string};
     sentry: {dsn: string};
     smtp: {
@@ -72,6 +75,11 @@ export interface BasicConfig extends NestedConfiguration {
       frontendUrl: string;
     };
     app: {
+      datadog: {
+        applicationId: string;
+        enabled: boolean;
+        env: string;
+      };
       frontendUrl: string;
       url: string;
     };
@@ -116,6 +124,11 @@ export interface BasicConfig extends NestedConfiguration {
       auth0: {
         clientId: string;
       };
+      datadog: {
+        applicationId: string;
+        enabled: boolean;
+        env: string;
+      };
       frontendUrl: string;
       proDataIrv: string;
       url: string;
@@ -153,6 +166,11 @@ const exampleConfig: BasicConfig = {
       auth0: {
         clientId: ''
       },
+      datadog: {
+        applicationId: '',
+        enabled: false,
+        env: ''
+      },
       frontendUrl: '',
       proDataIrv: '',
       url: '',
@@ -166,7 +184,15 @@ const exampleConfig: BasicConfig = {
     },
     documentLibrary: {url: '', maxUploadSize: 0},
     legacySaf: {frontendUrl: ''},
-    app: {frontendUrl: '', url: ''},
+    app: {
+      datadog: {
+        applicationId: '',
+        enabled: false,
+        env: ''
+      },
+      frontendUrl: '',
+      url: ''
+    },
     testingUi: {
       auth0: {
         clientId: ''
@@ -212,6 +238,9 @@ const exampleConfig: BasicConfig = {
       domain: '',
       internal: {clientId: ''},
       namespace: ''
+    },
+    datadog: {
+      clientToken: ''
     },
     gtm: {containerId: ''},
     termsOfService: {
