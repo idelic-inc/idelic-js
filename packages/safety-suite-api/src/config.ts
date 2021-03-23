@@ -50,9 +50,6 @@ export interface BasicConfig extends NestedConfiguration {
       internal: {clientId: string};
       namespace: string;
     };
-    datadog: {
-      clientToken: string;
-    };
     gtm: {containerId: string};
     sentry: {dsn: string};
     smtp: {
@@ -77,6 +74,7 @@ export interface BasicConfig extends NestedConfiguration {
     app: {
       datadog: {
         applicationId: string;
+        clientToken: string;
         enabled: boolean;
         env: string;
       };
@@ -126,6 +124,7 @@ export interface BasicConfig extends NestedConfiguration {
       };
       datadog: {
         applicationId: string;
+        clientToken: string;
         enabled: boolean;
         env: string;
       };
@@ -168,6 +167,7 @@ const exampleConfig: BasicConfig = {
       },
       datadog: {
         applicationId: '',
+        clientToken: '',
         enabled: false,
         env: ''
       },
@@ -187,6 +187,7 @@ const exampleConfig: BasicConfig = {
     app: {
       datadog: {
         applicationId: '',
+        clientToken: '',
         enabled: false,
         env: ''
       },
@@ -238,9 +239,6 @@ const exampleConfig: BasicConfig = {
       domain: '',
       internal: {clientId: ''},
       namespace: ''
-    },
-    datadog: {
-      clientToken: ''
     },
     gtm: {containerId: ''},
     termsOfService: {
