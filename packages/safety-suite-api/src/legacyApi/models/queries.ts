@@ -1,13 +1,8 @@
-import {ModelQuery} from '../../api/models/types';
+import {ExportColumn, ModelQuery} from '../../api/models/types';
 import {Id} from '../../types';
 import {LegacyApi} from '../types';
 
 export type ModelExportTypes = 'xlsx' | 'csv';
-
-export type ExportColumn = {
-  field: string | string[];
-  label: string;
-};
 
 export type ModelExport = {
   query: ModelQuery;

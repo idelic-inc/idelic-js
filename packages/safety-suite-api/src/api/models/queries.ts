@@ -229,57 +229,61 @@ export function exportDueTrainingReport(
 /**
  * Starts asynchronous query export.
  *
- * @returns Query export job object.
+ * @param queryExport - Models query and columns for export with timezone adjusting.
+ * @param exportType - Type of resulted export file.
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Query export job object.
  */
-
 export function runQueryExport(
   queryExport: QueryExport,
   exportType: QueryExportTypes,
   apiOptions?: ApiOptions
 ): Request<QueryExportJob> {
-  return {
+  return runApi({
     method: 'POST',
     route: `/api/query/export/${exportType}`,
     apiOptions,
     requestOptions: {
       body: queryExport
     }
-  };
+  });
 }
 
 /**
  * Gets query export job by it's Id.
  *
- * @returns Query export job object.
+ * @param queryExportJobId - Id of desired query export job.
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Query export job object.
  */
-
 export function getQueryExportStatus(
   queryExportJobId: number,
   apiOptions?: ApiOptions
 ): Request<QueryExportJob> {
-  return {
+  return runApi({
     method: 'GET',
     route: `/api/query/export/status/${queryExportJobId}`,
     apiOptions
-  };
+  });
 }
 
 /**
  * Get export raw file by export query job Id.
  *
- * @returns Export raw file contents.
+ * @param queryExportJobId - Id of desired query export job.
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Export raw file contents.
  */
-
 export function getQueryExportContent(
   queryExportJobId: number,
   apiOptions?: ApiOptions
 ): Request<Blob> {
-  return {
+  return runApi({
     method: 'GET',
     route: `/api/query/export/content/${queryExportJobId}`,
     apiOptions,
     requestOptions: {
       responseType: 'blob'
     }
-  };
+  });
 }
