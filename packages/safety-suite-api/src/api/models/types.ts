@@ -886,3 +886,30 @@ export interface Aggregation<GroupValue = unknown> {
   groupIds: number[];
   groupValue?: GroupValue;
 }
+
+export type ExportColumn = {
+  field: string | string[];
+  label: string;
+};
+
+export type QueryExportTypes = 'xlsx' | 'csv';
+
+export type QueryExport = {
+  query: ModelQuery;
+  columns: ExportColumn[];
+  options: {
+    timezone: string;
+  };
+};
+
+export type QueryExportJobStatus = 'Proccesing' | 'Ready' | 'Error';
+
+export type QueryExportJob = {
+  id: number;
+  status: QueryExportJobStatus;
+  progress: number;
+  createdDate: string;
+  createdBy: number;
+  fileName: number;
+  errorMessage?: string;
+};

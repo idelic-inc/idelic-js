@@ -3,7 +3,14 @@ import {Record} from 'immutable';
 
 import {runApi} from '../../runApi';
 import {ApiOptions} from '../../types';
-import {Aggregation, ModelQuery, ModelQueryParams} from './types';
+import {
+  Aggregation,
+  ModelQuery,
+  ModelQueryParams,
+  QueryExport,
+  QueryExportJob,
+  QueryExportTypes
+} from './types';
 
 /**
  * Runs a query against the models table and returns an aggregation.
@@ -217,4 +224,62 @@ export function exportDueTrainingReport(
       responseType: 'blob'
     }
   });
+}
+
+/**
+ * Starts asynchronous query export.
+ *
+ * @returns Query export job object.
+ */
+
+export function runQueryExport(
+  queryExport: QueryExport,
+  exportType: QueryExportTypes,
+  apiOptions?: ApiOptions
+): Request<QueryExportJob> {
+  return {
+    method: 'POST',
+    route: `/api/query/export/${exportType}`,
+    apiOptions,
+    requestOptions: {
+      body: queryExport
+    }
+  };
+}
+
+/**
+ * Gets query export job by it's Id.
+ *
+ * @returns Query export job object.
+ */
+
+export function getQueryExportStatus(
+  queryExportJobId: number,
+  apiOptions?: ApiOptions
+): Request<QueryExportJob> {
+  return {
+    method: 'GET',
+    route: `/api/query/export/status/${queryExportJobId}`,
+    apiOptions
+  };
+}
+
+/**
+ * Get export raw file by export query job Id.
+ *
+ * @returns Export raw file contents.
+ */
+
+export function getQueryExportContent(
+  queryExportJobId: number,
+  apiOptions?: ApiOptions
+): Request<Blob> {
+  return {
+    method: 'GET',
+    route: `/api/query/export/content/${queryExportJobId}`,
+    apiOptions,
+    requestOptions: {
+      responseType: 'blob'
+    }
+  };
 }
