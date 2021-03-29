@@ -241,7 +241,7 @@ export function runQueryExport(
 ): Request<QueryExportJob> {
   return runApi({
     method: 'POST',
-    route: `/api/query/export/${exportType}`,
+    route: `/api/models/query/export/${exportType}`,
     apiOptions,
     requestOptions: {
       body: queryExport
@@ -262,7 +262,7 @@ export function getQueryExportStatus(
 ): Request<QueryExportJob> {
   return runApi({
     method: 'GET',
-    route: `/api/query/export/status/${queryExportJobId}`,
+    route: `/api/models/query/export/status/${queryExportJobId}`,
     apiOptions
   });
 }
@@ -280,7 +280,7 @@ export function getQueryExportContent(
 ): Request<Blob> {
   return runApi({
     method: 'GET',
-    route: `/api/query/export/content/${queryExportJobId}`,
+    route: `/api/models/query/export/content/${queryExportJobId}`,
     apiOptions,
     requestOptions: {
       responseType: 'blob'
