@@ -910,6 +910,6 @@ export type QueryExportJob = {
   progress: number;
   createdDate: string;
   createdBy: number;
-  fileName: number;
+  fileName: string;
   errorMessage?: string;
 };
