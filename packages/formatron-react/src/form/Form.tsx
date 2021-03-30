@@ -236,7 +236,7 @@ export const useForm = <M extends AnyModel = AnyModel>(
         .getModel<M>(options.model)
         .then((m) => {
           setModel(m);
-          return m.getTemplate();
+          return m?.getTemplate();
         })
         .then(setTemplate)
         .catch(setLoadingError)

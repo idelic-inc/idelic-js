@@ -38,22 +38,22 @@ export class Formatron {
 
   async getEnum(options: IdOrAliasOptions) {
     const rawEnum = await this.#dataInterface.getEnum(options);
-    return new Enum(this, rawEnum);
+    return rawEnum ? new Enum(this, rawEnum) : undefined;
   }
 
   async getModelTemplate(options: IdOrAliasOptions) {
     const rawTemplate = await this.#dataInterface.getModelTemplate(options);
-    return new Template(this, rawTemplate);
+    return rawTemplate ? new Template(this, rawTemplate) : undefined;
   }
 
   async getMonitorTemplate(options: IdOrAliasOptions) {
     const rawTemplate = await this.#dataInterface.getMonitorTemplate(options);
-    return new Template(this, rawTemplate);
+    return rawTemplate ? new Template(this, rawTemplate) : undefined;
   }
 
   async getModel<M extends AnyModel = AnyModel>(options: IdOptions) {
     const rawModel = await this.#dataInterface.getModel<M>(options);
-    return new Model<M>(this, rawModel);
+    return rawModel ? new Model<M>(this, rawModel) : undefined;
   }
 
   // async getMonitor(options: IdOptions) {

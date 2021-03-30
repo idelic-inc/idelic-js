@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "bootstrap": "lerna bootstrap && lerna exec yarn install",
+    "bootstrap": "lerna bootstrap && lerna exec -- yarn install --pure-lockfile",
     "clean": "lerna run clean",
     "build": "lerna run build",
     "format": "prettier --write \"**/src/**/*.ts*\" \"**/scripts/**/*.ts*\"",
