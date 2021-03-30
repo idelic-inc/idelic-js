@@ -54,7 +54,7 @@ export class Model<M extends AnyModel = AnyModel> {
     key: keyof M['fields'] | keyof M['computations']
   ): Promise<D | undefined> {
     const template = await this.getTemplate();
-    return template.getDataType<D>(key as string);
+    return template?.getDataType<D>(key as string);
   }
 
   /**
@@ -98,9 +98,9 @@ export class Model<M extends AnyModel = AnyModel> {
     const modelId = typeof ids === 'number' ? ids : ids[second as number];
     const model = await this.#formatron.getModel({id: modelId});
     if (rest) {
-      return model.getIn(rest);
+      return model?.getIn(rest);
     }
-    return model.get(second);
+    return model?.get(second);
   }
 
   /**
