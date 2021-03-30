@@ -1,13 +1,16 @@
-import {IdOrAliasOptions} from '@idelic/formatron';
+import {IdOrAliasOptions, Template} from '@idelic/formatron';
 
 import {useFormatron} from '../context';
-import {usePromise} from './usePromise';
+import {PromiseInfo, usePromise} from './usePromise';
 
-export const useMonitorTemplate = (options: IdOrAliasOptions) => {
+export const useMonitorTemplate = (
+  options: IdOrAliasOptions
+): [Template | undefined, PromiseInfo] => {
   const {formatron} = useFormatron();
-  const result = usePromise(() => formatron.getMonitorTemplate(options), [
-    formatron
-  ]);
+  const [result, {isLoading, error}] = usePromise(
+    () => formatron.getMonitorTemplate(options),
+    [formatron]
+  );
 
-  return result;
+  return [result, {isLoading, error}];
 };
