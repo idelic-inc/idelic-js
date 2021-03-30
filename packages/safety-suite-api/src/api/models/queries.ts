@@ -3,7 +3,14 @@ import {Record} from 'immutable';
 
 import {runApi} from '../../runApi';
 import {ApiOptions} from '../../types';
-import {Aggregation, ModelQuery, ModelQueryParams} from './types';
+import {
+  Aggregation,
+  ModelQuery,
+  ModelQueryParams,
+  QueryExport,
+  QueryExportJob,
+  QueryExportTypes
+} from './types';
 
 /**
  * Runs a query against the models table and returns an aggregation.
@@ -214,6 +221,68 @@ export function exportDueTrainingReport(
     apiOptions,
     requestOptions: {
       body: filters,
+      responseType: 'blob'
+    }
+  });
+}
+
+/**
+ * Starts asynchronous query export.
+ *
+ * @param queryExport - Models query and columns for export with timezone adjusting.
+ * @param exportType - Type of resulted export file.
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Query export job object.
+ */
+export function runQueryExport(
+  queryExport: QueryExport,
+  exportType: QueryExportTypes,
+  apiOptions?: ApiOptions
+): Request<QueryExportJob> {
+  return runApi({
+    method: 'POST',
+    route: `/api/models/query/export/${exportType}`,
+    apiOptions,
+    requestOptions: {
+      body: queryExport
+    }
+  });
+}
+
+/**
+ * Gets query export job by it's Id.
+ *
+ * @param queryExportJobId - Id of desired query export job.
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Query export job object.
+ */
+export function getQueryExportStatus(
+  queryExportJobId: number,
+  apiOptions?: ApiOptions
+): Request<QueryExportJob> {
+  return runApi({
+    method: 'GET',
+    route: `/api/models/query/export/status/${queryExportJobId}`,
+    apiOptions
+  });
+}
+
+/**
+ * Get export raw file by export query job Id.
+ *
+ * @param queryExportJobId - Id of desired query export job.
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Export raw file contents.
+ */
+export function getQueryExportContent(
+  queryExportJobId: number,
+  apiOptions?: ApiOptions
+): Request<Blob> {
+  return runApi({
+    method: 'GET',
+    route: `/api/models/query/export/content/${queryExportJobId}`,
+    apiOptions,
+    requestOptions: {
       responseType: 'blob'
     }
   });
