@@ -6,6 +6,7 @@ export type ModelExportTypes = 'xlsx' | 'csv';
 
 export type ModelExport = {
   query: ModelQuery;
+  columnsTemplateId?: Id;
   columns: ExportColumn[];
   options: {
     timezone: string;
