@@ -1,6 +1,6 @@
 import momentTimezone from 'moment-timezone';
 
-import {ModelQuery} from '../api/models/types';
+import {ModelQuery, ModelQueryParams} from '../api/models/types';
 import {Id} from '../types';
 import {LegacyApi} from './types';
 
@@ -13,13 +13,15 @@ export function getMonitorsParams(): LegacyApi {
 
 export function getMonitorModelsIdsParams(
   monitorId: Id,
-  body: ModelQuery
+  body: ModelQuery,
+  modelQueryParams?: ModelQueryParams
 ): LegacyApi {
   return {
     method: 'POST',
     route: `/api/monitor/${monitorId}/run`,
     requestOptions: {
-      body
+      body,
+      query: modelQueryParams
     }
   };
 }
