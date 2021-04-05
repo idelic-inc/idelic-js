@@ -250,6 +250,22 @@ export function runQueryExport(
 }
 
 /**
+ * Gets all non expired query export jobs.
+ *
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Array of query export jobs.
+ */
+export function getAllQueryExportStatuses(
+  apiOptions?: ApiOptions
+): Request<QueryExportJob[]> {
+  return runApi({
+    method: 'GET',
+    route: `/api/models/query/export/status`,
+    apiOptions
+  });
+}
+
+/**
  * Gets query export job by it's Id.
  *
  * @param queryExportJobId - Id of desired query export job.
