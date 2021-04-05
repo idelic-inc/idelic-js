@@ -255,7 +255,7 @@ export function runQueryExport(
  * @param apiOptions - Optional options for runApi.
  * @returns - Array of query export jobs.
  */
-export function getAllQueryExportStatus(
+export function getAllQueryExportStatuses(
   apiOptions?: ApiOptions
 ): Request<QueryExportJob[]> {
   return runApi({
