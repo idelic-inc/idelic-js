@@ -3,18 +3,20 @@ import {Set} from 'immutable';
 import {Moment} from 'moment';
 
 import {runApi} from '../../runApi';
-import {EmptyRequest} from '../../types';
+import {CreatedBy, EmptyRequest, LastUpdatedBy} from '../../types';
 
 export type ModelDocumentType = 'DOCUMENT' | 'PROFILE_PICTURE';
 export type ModelDocumentStorageType = 'DATABASE' | 'LOCAL_FILESYSTEM' | 'AWS';
 
-export type ModelDocument = {
+export interface ModelDocument extends LastUpdatedBy, CreatedBy {
   id: number;
   documentType: ModelDocumentType;
   storageType: ModelDocumentStorageType;
-  createdBy: string;
+  /**
+   * Full name of the user who created this record.
+   */
+  createdByUserName?: string;
   createdDate: Moment;
-  lastUpdatedBy: string;
   lastUpdatedDate: Moment;
   mimeType: string;
   uri: string;
@@ -23,7 +25,7 @@ export type ModelDocument = {
   name: string;
   protected: boolean;
   archived: boolean;
-};
+}
 
 export type InputModelDocument = {
   file: ModelDocumentContent;

@@ -36,7 +36,7 @@ export function createSubscription(
 
 export function updateSubscription(
   id: Id,
-  userAccountId: Id,
+  userId: Id,
   notificationTypeId: Id,
   notificationSourceType: NotificationSourceType,
   notificationSourceId: Id,
@@ -48,7 +48,7 @@ export function updateSubscription(
     requestOptions: {
       body: {
         id,
-        userAccountId,
+        userId,
         notificationTypeId,
         notificationSourceType,
         notificationSourceId,

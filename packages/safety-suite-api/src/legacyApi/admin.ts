@@ -43,7 +43,7 @@ export function createRole(name: string): LegacyApi {
         name,
         identifier: '',
         effectiveDate: 0,
-        lastUpdatedBy: '',
+        lastUpdatedBy: -1,
         fields: {},
         fieldsHashCode: 0
       }
@@ -76,7 +76,7 @@ export function addAccountRole(accountId: Id, roleId: Id): LegacyApi {
         userAccountId: accountId,
         roleId,
         effectiveDate: 0,
-        lastUpdatedBy: '',
+        lastUpdatedBy: -1,
         admin: false
       }
     }

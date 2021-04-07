@@ -22,9 +22,9 @@ const employeeJson = {
     fullName: 'Test User'
     // Let's not waste time filling out a billion fields...
   } as EmployeeComputations,
-  createdBy: '',
+  createdBy: 4,
   createdDate: '',
-  lastUpdatedBy: '',
+  lastUpdatedBy: 4,
   lastUpdatedDate: ''
 };
 
