@@ -1,4 +1,4 @@
-import {Alias, Id} from '../../types';
+import {Alias, CreatedBy, Id, LastUpdatedBy} from '../../types';
 
 export interface ModelUser {
   id: Id;
@@ -25,7 +25,7 @@ export interface InputModel<F, R> {
   relationModels?: R;
 }
 
-export interface Model<F, R, C> {
+export interface Model<F, R, C> extends LastUpdatedBy, CreatedBy {
   id: Id;
   templateId: Id;
   groupId: Id;
@@ -37,10 +37,8 @@ export interface Model<F, R, C> {
   computations: C;
   profilePictureUrl?: string;
   createdDate: string;
-  createdBy: string;
   createdByUser?: ModelUser;
   lastUpdatedDate: string;
-  lastUpdatedBy: string;
   lastUpdatedByUser?: ModelUser;
 }
 

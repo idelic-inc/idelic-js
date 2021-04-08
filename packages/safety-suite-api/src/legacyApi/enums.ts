@@ -1,17 +1,16 @@
-import {Alias, Id} from '../types';
+import {Alias, Id, LastUpdatedBy} from '../types';
 import {LegacyApi} from './types';
 
 export type InputEnumSet = {
   name: string;
 };
 
-export type EnumSet = {
+export interface EnumSet extends LastUpdatedBy {
   id: Id;
   name: string;
   fields: any;
   effectiveDate: number;
-  lastUpdatedBy: string;
-};
+}
 
 export type InputEnumValue = {
   setId: Id;
@@ -19,7 +18,7 @@ export type InputEnumValue = {
   display: string;
 };
 
-export type EnumValue = {
+export interface EnumValue extends LastUpdatedBy {
   id: Id;
   setId: Id;
   value: number;
@@ -27,9 +26,8 @@ export type EnumValue = {
   display: string;
   fields: any;
   effectiveDate: number;
-  lastUpdatedBy: string;
   disabled: boolean;
-};
+}
 
 export const getEnumSets: LegacyApi = {
   method: 'GET',
@@ -47,7 +45,7 @@ export function createEnumSet(inputEnumSet: InputEnumSet): LegacyApi {
     id: -1,
     fields: {},
     effectiveDate: 0,
-    lastUpdatedBy: ''
+    lastUpdatedBy: -1
   };
 
   return {
@@ -64,7 +62,7 @@ export function createEnumValue(inputEnumValue: InputEnumValue): LegacyApi {
     value: -1,
     fields: {},
     effectiveDate: 0,
-    lastUpdatedBy: '',
+    lastUpdatedBy: -1,
     disabled: false
   };
 

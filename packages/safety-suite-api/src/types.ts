@@ -55,3 +55,17 @@ export type UnixTime = number;
 export interface ApiResponse<T> {
   response: T;
 }
+
+export interface LastUpdatedBy {
+  /**
+   * ID of the user account which last updated this record.
+   */
+  lastUpdatedBy: number;
+}
+
+export interface CreatedBy {
+  /**
+   * ID of the user account which created this record.
+   */
+  createdBy: number;
+}
