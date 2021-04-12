@@ -103,12 +103,6 @@ export interface BasicConfig extends NestedConfiguration {
       maxUploadSize: number;
       url: string;
     };
-    embeddedReporting: {
-      defaultDashboardId: string;
-      enabled: boolean;
-      url: string;
-      watchlist: {dashboardId: string; enabled: boolean};
-    };
     legacySaf: {
       frontendUrl: string;
     };
@@ -155,12 +149,6 @@ export interface BasicConfig extends NestedConfiguration {
 const exampleConfig: BasicConfig = {
   services: {
     adminPanel: {frontendUrl: '', enabled: false},
-    embeddedReporting: {
-      watchlist: {dashboardId: '', enabled: false},
-      defaultDashboardId: '',
-      url: '',
-      enabled: false
-    },
     saf: {
       auth0: {
         clientId: ''
