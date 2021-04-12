@@ -104,3 +104,20 @@ export function resetCustomerConfigItem(
     apiOptions
   });
 }
+
+/**
+ * Make SAF backend reload actual configuration form config service.
+ *
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Empty response.
+ */
+
+export function reloadSAFBackendConfiguration(
+  apiOptions?: ApiOptions
+): Request<EmptyResponse> {
+  return runApi<EmptyRequest, EmptyResponse>({
+    method: 'POST',
+    route: `/api/configuration/`,
+    apiOptions
+  });
+}
