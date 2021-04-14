@@ -117,7 +117,7 @@ export function reloadSAFBackendConfiguration(
 ): Request<EmptyResponse> {
   return runApi<EmptyRequest, EmptyResponse>({
     method: 'POST',
-    route: `/api/configuration/`,
+    route: `/api/configuration`,
     apiOptions
   });
 }
