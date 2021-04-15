@@ -900,7 +900,7 @@ export type QueryExport = {
   };
 };
 
-export type QueryExportJobStatus = 'Proccesing' | 'Ready' | 'Error';
+export type QueryExportJobStatus = 'Processing' | 'Ready' | 'Error';
 
 export type QueryExportJob = {
   id: number;
