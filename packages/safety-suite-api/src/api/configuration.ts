@@ -111,7 +111,6 @@ export function resetCustomerConfigItem(
  * @param apiOptions - Optional options for runApi.
  * @returns - Empty response.
  */
-
 export function reloadSAFBackendConfiguration(
   apiOptions?: ApiOptions
 ): Request<EmptyResponse> {

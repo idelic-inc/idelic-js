@@ -1,25 +1,25 @@
-import {Alias} from '../types';
+import {InputListItemPrototype, ListItemPrototype} from '../api/listItems';
 import {LegacyApi} from './types';
 
-export type InputListItemPrototype = {
-  listItemTemplateAlias: Alias;
-  alias: Alias;
-  fields: any;
-  deletable: boolean;
-};
-
-export type ListItemPrototype = any;
-
+/**
+ * @deprecated Use `fetchListItemTemplates` instead.
+ */
 export const getListItemTemplates: LegacyApi = {
   method: 'GET',
   route: '/api/listItemTemplates'
 };
 
+/**
+ * @deprecated Use `fetchListItemPrototypes` instead.
+ */
 export const getListItemPrototypes: LegacyApi = {
   method: 'GET',
   route: '/api/listItemPrototypes'
 };
 
+/**
+ * @deprecated Use `addListItemPrototype` instead.
+ */
 export function createListItemPrototype(
   inputPrototype: InputListItemPrototype
 ): LegacyApi {
@@ -30,6 +30,9 @@ export function createListItemPrototype(
   };
 }
 
+/**
+ * @deprecated Use `editListItemPrototype` instead.
+ */
 export function updateListItemPrototype(
   prototype: ListItemPrototype
 ): LegacyApi {
@@ -40,6 +43,9 @@ export function updateListItemPrototype(
   };
 }
 
+/**
+ * @deprecated Use `bulkEditListItemPrototypes` instead.
+ */
 export function updateListItemPrototypes(
   prototypes: ListItemPrototype[]
 ): LegacyApi {
