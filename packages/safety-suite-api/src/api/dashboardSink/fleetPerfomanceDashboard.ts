@@ -3,9 +3,10 @@ import {Request} from '@idelic/safety-net';
 import {runApi} from '../../runApi';
 import {ApiOptions, ApiSuccessResponse} from '../../types';
 
+type SortDirection = 'asc' | 'desc';
 interface Sort {
   column: string;
-  direction?: string;
+  direction?: SortDirection;
 }
 
 interface Query {
@@ -27,6 +28,7 @@ interface Model {
 }
 
 // Accident
+
 interface AccidentCounts {
   daysSincePreventable: number;
 }
