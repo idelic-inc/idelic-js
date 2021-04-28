@@ -15,12 +15,12 @@ interface Query {
 }
 
 interface TableQuery extends Query {
-  sort: Sort;
+  sort: Sort[];
   page?: number;
   size?: number;
 }
 
-interface Model {
+interface BaseFields {
   id: number;
   employeeLabel: string;
   customerAlias: string;
@@ -33,7 +33,7 @@ interface AccidentCounts {
   daysSincePreventable: number;
 }
 
-interface Accident extends Model {
+interface Accident extends BaseFields {
   recordNumber: number;
   date: string;
   terminalLabel: string;
@@ -50,7 +50,7 @@ interface DevelopmentPlanCounts {
   tasksPastDue: number;
 }
 
-interface DevelopmentPlan extends Model {
+interface DevelopmentPlan extends BaseFields {
   recordNumber: number;
   planType: string;
   planStatus: string;
@@ -64,7 +64,7 @@ interface EnforcementCounts {
   inspectionsWithViolations: number;
 }
 
-interface Enforcement extends Model {
+interface Enforcement extends BaseFields {
   recordNumber: number;
   date: string;
   csaPoints: number;
@@ -79,7 +79,7 @@ interface ExpirationCounts {
   expiresIn60Days: number;
 }
 
-interface Expiration extends Model {
+interface Expiration extends BaseFields {
   recordNumber: number;
   expirationDate: string;
   terminalLabel: string;
@@ -92,7 +92,7 @@ interface InjuryCounts {
   daysSince: number;
 }
 
-interface Injury extends Model {
+interface Injury extends BaseFields {
   recordNumber: number;
   date: string;
   terminalLabel: string;
@@ -116,14 +116,16 @@ type RiskScoreBuckets =
 
 type RiskScoreGraph = {[R in RiskScoreBuckets]: number};
 
-interface RiskScore extends Model {
+interface RiskScore extends BaseFields {
   terminalLabel: string;
   riskScore: number;
   planStatus: string;
 }
 
-const getSortString = (sort: Sort): string => {
-  return sort.direction ? `${sort.column},${sort.direction}` : sort.column;
+const convertSortsToStrings = (sorts: Sort[]): string[] => {
+  return sorts.map((sort) =>
+    sort.direction ? `${sort.column},${sort.direction}` : sort.column
+  );
 };
 
 // Accidents
@@ -155,7 +157,7 @@ export function getAccidents(
     requestOptions: {
       query: {
         ...query,
-        sort: getSortString(query.sort)
+        sort: convertSortsToStrings(query.sort)
       }
     }
   });
@@ -190,7 +192,7 @@ export function getDevelopmentPlans(
     requestOptions: {
       query: {
         ...query,
-        sort: getSortString(query.sort)
+        sort: convertSortsToStrings(query.sort)
       }
     }
   });
@@ -205,7 +207,7 @@ export function getEnforcementCounts(
   return runApi({
     method: 'GET',
     urlRoot: 'dashboardSinkUrlRoot',
-    route: '/api/fleet-performance/enforcement/counts',
+    route: '/api/fleet-performance/enforcements/counts',
     apiOptions,
     requestOptions: {
       query
@@ -225,7 +227,7 @@ export function getEnforcements(
     requestOptions: {
       query: {
         ...query,
-        sort: getSortString(query.sort)
+        sort: convertSortsToStrings(query.sort)
       }
     }
   });
@@ -260,7 +262,7 @@ export function getExpirations(
     requestOptions: {
       query: {
         ...query,
-        sort: getSortString(query.sort)
+        sort: convertSortsToStrings(query.sort)
       }
     }
   });
@@ -295,7 +297,7 @@ export function getInjuries(
     requestOptions: {
       query: {
         ...query,
-        sort: getSortString(query.sort)
+        sort: convertSortsToStrings(query.sort)
       }
     }
   });
@@ -330,7 +332,7 @@ export function getRiskScores(
     requestOptions: {
       query: {
         ...query,
-        sort: getSortString(query.sort)
+        sort: convertSortsToStrings(query.sort)
       }
     }
   });
