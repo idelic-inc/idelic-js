@@ -10,7 +10,8 @@ export type UrlRoot =
   | 'loginUrlRoot'
   | 'documentLibraryUrlRoot'
   | 'configUrlRoot'
-  | 'eformsUrlRoot';
+  | 'eformsUrlRoot'
+  | 'dashboardSinkUrlRoot';
 
 export interface Api<R, T> {
   method: Methods;
@@ -54,6 +55,26 @@ export type UnixTime = number;
 
 export interface ApiResponse<T> {
   response: T;
+}
+
+export interface Page {
+  size: number;
+  totalElements: number;
+  totalPages: number;
+  number: number;
+}
+
+export type LinkName = 'first' | 'prev' | 'self' | 'next' | 'last';
+export interface Link {
+  href: string;
+}
+
+export type Links = {[R in LinkName]: Link};
+
+export interface ApiSuccessResponse<T> {
+  data: T;
+  page?: Page;
+  _links?: Links;
 }
 
 export interface LastUpdatedBy {

@@ -22,6 +22,7 @@ export const config: InitConfig = {
   configUrlRoot: '',
   documentLibraryUrlRoot: '',
   eformsUrlRoot: '',
+  dashboardSinkUrlRoot: '',
   onAuthError: () => {}
 };
 
@@ -309,7 +310,8 @@ export const initializeConfig = (
         app: {url: ''},
         documentLibrary: {url: ''},
         eforms: {url: ''},
-        saf: {url: ''}
+        saf: {url: ''},
+        dashboardSink: {url: ''}
       }
     })
   ) {
@@ -320,6 +322,7 @@ export const initializeConfig = (
   config.loginUrlRoot = nestedConfig.services.app.url;
   config.documentLibraryUrlRoot = nestedConfig.services.documentLibrary.url;
   config.eformsUrlRoot = nestedConfig.services.eforms.url;
+  config.dashboardSinkUrlRoot = nestedConfig.services.dashboardSink.url;
   config.initialized = true;
 };
 
