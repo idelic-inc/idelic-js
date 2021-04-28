@@ -1,50 +1,36 @@
-import {Alias, Id, LastUpdatedBy} from '../types';
+import {EnumSet, EnumValue, InputEnumValue} from '../api/enums';
 import {LegacyApi} from './types';
 
 export type InputEnumSet = {
   name: string;
 };
 
-export interface EnumSet extends LastUpdatedBy {
-  id: Id;
-  name: string;
-  fields: any;
-  effectiveDate: number;
-}
-
-export type InputEnumValue = {
-  setId: Id;
-  name: Alias;
-  display: string;
-};
-
-export interface EnumValue extends LastUpdatedBy {
-  id: Id;
-  setId: Id;
-  value: number;
-  name: Alias;
-  display: string;
-  fields: any;
-  effectiveDate: number;
-  disabled: boolean;
-}
-
+/**
+ * @deprecated Use `fetchEnumSets` instead.
+ */
 export const getEnumSets: LegacyApi = {
   method: 'GET',
   route: '/api/enumSet'
 };
 
+/**
+ * @deprecated Use `fetchEnumValues` instead.
+ */
 export const getEnumValues: LegacyApi = {
   method: 'GET',
   route: '/api/enum'
 };
 
+/**
+ * @deprecated
+ */
 export function createEnumSet(inputEnumSet: InputEnumSet): LegacyApi {
   const enumSet: EnumSet = {
     ...inputEnumSet,
+    alias: inputEnumSet.name,
     id: -1,
     fields: {},
-    effectiveDate: 0,
+    effectiveDate: '',
     lastUpdatedBy: -1
   };
 
@@ -55,11 +41,13 @@ export function createEnumSet(inputEnumSet: InputEnumSet): LegacyApi {
   };
 }
 
+/**
+ * @deprecated Use `addEnumValue` instead.
+ */
 export function createEnumValue(inputEnumValue: InputEnumValue): LegacyApi {
   const enumValue: EnumValue = {
     ...inputEnumValue,
     id: -1,
-    value: -1,
     fields: {},
     effectiveDate: 0,
     lastUpdatedBy: -1,
@@ -73,6 +61,9 @@ export function createEnumValue(inputEnumValue: InputEnumValue): LegacyApi {
   };
 }
 
+/**
+ * @deprecated Use `editEnumSet` instead.
+ */
 export function updateEnumSet(enumSet: EnumSet): LegacyApi {
   return {
     method: 'PUT',
@@ -81,6 +72,9 @@ export function updateEnumSet(enumSet: EnumSet): LegacyApi {
   };
 }
 
+/**
+ * @deprecated Use `editEnumValue` instead.
+ */
 export function updateEnumValue(enumValue: EnumValue): LegacyApi {
   return {
     method: 'PUT',
