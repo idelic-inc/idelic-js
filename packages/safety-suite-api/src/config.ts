@@ -87,15 +87,6 @@ export interface BasicConfig extends NestedConfiguration {
       auth0: {
         clientId: string;
       };
-      db: {
-        appPassword: string;
-        appUsername: string;
-        dbname: string;
-        host: string;
-        port: string;
-        schemaPassword: string;
-        schemaUsername: string;
-      };
     };
     documentLibrary: {
       url: string;
@@ -189,16 +180,7 @@ const exampleConfig: BasicConfig = {
     },
     dashboardSink: {
       url: '',
-      auth0: {clientId: ''},
-      db: {
-        appPassword: '',
-        appUsername: '',
-        dbname: '',
-        host: '',
-        port: '',
-        schemaPassword: '',
-        schemaUsername: ''
-      }
+      auth0: {clientId: ''}
     },
     documentLibrary: {url: '', maxUploadSize: 0},
     legacySaf: {frontendUrl: ''},
