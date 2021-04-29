@@ -4,13 +4,13 @@ import {ApiOptions, ApiSuccessResponse, runApi} from 'src';
 import {BaseFields, Query, TableQuery} from './types';
 import {convertSortsToStrings} from './util';
 
-interface ExpirationCounts {
+export interface ExpirationCounts {
   expired: number;
   expiresIn30Days: number;
   expiresIn60Days: number;
 }
 
-interface Expiration extends BaseFields {
+export interface Expiration extends BaseFields {
   recordNumber: number;
   expirationDate: string;
   terminalLabel: string;

@@ -4,13 +4,13 @@ import {ApiOptions, ApiSuccessResponse, runApi} from 'src';
 import {BaseFields, Query, TableQuery} from './types';
 import {convertSortsToStrings} from './util';
 
-interface DevelopmentPlanCounts {
+export interface DevelopmentPlanCounts {
   activePlans: number;
   tasksAssigned: number;
   tasksPastDue: number;
 }
 
-interface DevelopmentPlan extends BaseFields {
+export interface DevelopmentPlan extends BaseFields {
   recordNumber: number;
   planType: string;
   planStatus: string;

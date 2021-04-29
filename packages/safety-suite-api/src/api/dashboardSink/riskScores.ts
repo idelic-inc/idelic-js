@@ -4,7 +4,7 @@ import {ApiOptions, ApiSuccessResponse, runApi} from 'src';
 import {BaseFields, Query, TableQuery} from './types';
 import {convertSortsToStrings} from './util';
 
-type RiskScoreBuckets =
+export type RiskScoreBuckets =
   | '1'
   | '11'
   | '21'
@@ -16,9 +16,9 @@ type RiskScoreBuckets =
   | '81'
   | '91';
 
-type RiskScoreGraph = {[R in RiskScoreBuckets]: number};
+export type RiskScoreGraph = {[R in RiskScoreBuckets]: number};
 
-interface RiskScore extends BaseFields {
+export interface RiskScore extends BaseFields {
   terminalLabel: string;
   riskScore: number;
   planStatus: string;

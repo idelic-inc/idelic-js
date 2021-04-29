@@ -4,11 +4,11 @@ import {ApiOptions, ApiSuccessResponse, runApi} from 'src';
 import {BaseFields, Query, TableQuery} from './types';
 import {convertSortsToStrings} from './util';
 
-interface AccidentCounts {
+export interface AccidentCounts {
   daysSincePreventable: number;
 }
 
-interface Accident extends BaseFields {
+export interface Accident extends BaseFields {
   recordNumber: number;
   date: string;
   terminalLabel: string;

@@ -4,13 +4,13 @@ import {ApiOptions, ApiSuccessResponse, runApi} from 'src';
 import {BaseFields, Query, TableQuery} from './types';
 import {convertSortsToStrings} from './util';
 
-interface EnforcementCounts {
+export interface EnforcementCounts {
   inspections: number;
   cleanInspections: number;
   inspectionsWithViolations: number;
 }
 
-interface Enforcement extends BaseFields {
+export interface Enforcement extends BaseFields {
   recordNumber: number;
   date: string;
   csaPoints: number;
