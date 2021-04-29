@@ -82,6 +82,21 @@ export interface BasicConfig extends NestedConfiguration {
       frontendUrl: string;
       url: string;
     };
+    dashboardSink: {
+      url: string;
+      auth0: {
+        clientId: string;
+      };
+      db: {
+        appPassword: string;
+        appUsername: string;
+        dbname: string;
+        host: string;
+        port: string;
+        schemaPassword: string;
+        schemaUsername: string;
+      };
+    };
     documentLibrary: {
       url: string;
       maxUploadSize: number;
@@ -108,6 +123,7 @@ export interface BasicConfig extends NestedConfiguration {
       frontendUrl: string;
     };
     performanceDashboard: {
+      apiTarget: string;
       enabled: boolean;
       frontendUrl: string;
       newHotness: {enabled: boolean};
@@ -171,6 +187,19 @@ const exampleConfig: BasicConfig = {
         }
       }
     },
+    dashboardSink: {
+      url: '',
+      auth0: {clientId: ''},
+      db: {
+        appPassword: '',
+        appUsername: '',
+        dbname: '',
+        host: '',
+        port: '',
+        schemaPassword: '',
+        schemaUsername: ''
+      }
+    },
     documentLibrary: {url: '', maxUploadSize: 0},
     legacySaf: {frontendUrl: ''},
     app: {
@@ -210,6 +239,7 @@ const exampleConfig: BasicConfig = {
       }
     },
     performanceDashboard: {
+      apiTarget: '',
       frontendUrl: '',
       enabled: false,
       newHotness: {enabled: false},
