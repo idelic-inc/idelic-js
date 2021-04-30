@@ -1,6 +1,7 @@
 import {Request} from '@idelic/safety-net';
-import {ApiOptions, ApiSuccessResponse, runApi} from 'src';
 
+import {runApi} from '../../runApi';
+import {ApiOptions, ApiSuccessResponse} from '../../types';
 import {BaseFields, Query, TableQuery} from './types';
 import {convertSortsToStrings} from './util';
 
@@ -15,6 +16,10 @@ export interface Accident extends BaseFields {
   type: string;
   preventable: boolean;
   daysSince: number;
+}
+
+export interface AccidentResponse {
+  accidents: Accident[];
 }
 
 export function getAccidentCounts(
@@ -35,7 +40,7 @@ export function getAccidentCounts(
 export function getAccidents(
   query: TableQuery,
   apiOptions: ApiOptions = {}
-): Request<ApiSuccessResponse<Accident[]>> {
+): Request<ApiSuccessResponse<AccidentResponse>> {
   return runApi({
     method: 'GET',
     urlRoot: 'dashboardSinkUrlRoot',

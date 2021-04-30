@@ -1,6 +1,7 @@
 import {Request} from '@idelic/safety-net';
-import {ApiOptions, ApiSuccessResponse, runApi} from 'src';
 
+import {runApi} from '../../runApi';
+import {ApiOptions, ApiSuccessResponse} from '../../types';
 import {BaseFields, Query, TableQuery} from './types';
 import {convertSortsToStrings} from './util';
 
@@ -14,6 +15,10 @@ export interface DevelopmentPlan extends BaseFields {
   recordNumber: number;
   planType: string;
   planStatus: string;
+}
+
+export interface DevelopmentPlanResponse {
+  developmentPlans: DevelopmentPlan[];
 }
 
 export function getDevelopmentPlanCounts(
@@ -34,7 +39,7 @@ export function getDevelopmentPlanCounts(
 export function getDevelopmentPlans(
   query: TableQuery,
   apiOptions: ApiOptions = {}
-): Request<ApiSuccessResponse<DevelopmentPlan[]>> {
+): Request<ApiSuccessResponse<DevelopmentPlanResponse>> {
   return runApi({
     method: 'GET',
     urlRoot: 'dashboardSinkUrlRoot',

@@ -1,6 +1,7 @@
 import {Request} from '@idelic/safety-net';
-import {ApiOptions, ApiSuccessResponse, runApi} from 'src';
 
+import {runApi} from '../../runApi';
+import {ApiOptions, ApiSuccessResponse} from '../../types';
 import {BaseFields, Query, TableQuery} from './types';
 import {convertSortsToStrings} from './util';
 
@@ -16,12 +17,16 @@ export type RiskScoreBuckets =
   | '81'
   | '91';
 
-export type RiskScoreGraph = {[R in RiskScoreBuckets]: number};
+export type RiskScoreGraph = Record<RiskScoreBuckets, number>;
 
 export interface RiskScore extends BaseFields {
   terminalLabel: string;
   riskScore: number;
   planStatus: string;
+}
+
+export interface RiskScoreResponse {
+  riskScores: RiskScore[];
 }
 
 export function getRiskScoresGraph(
@@ -42,7 +47,7 @@ export function getRiskScoresGraph(
 export function getRiskScores(
   query: TableQuery,
   apiOptions: ApiOptions = {}
-): Request<ApiSuccessResponse<RiskScore[]>> {
+): Request<ApiSuccessResponse<RiskScoreResponse>> {
   return runApi({
     method: 'GET',
     urlRoot: 'dashboardSinkUrlRoot',

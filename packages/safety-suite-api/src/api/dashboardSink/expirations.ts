@@ -1,6 +1,7 @@
 import {Request} from '@idelic/safety-net';
-import {ApiOptions, ApiSuccessResponse, runApi} from 'src';
 
+import {runApi} from '../../runApi';
+import {ApiOptions, ApiSuccessResponse} from '../../types';
 import {BaseFields, Query, TableQuery} from './types';
 import {convertSortsToStrings} from './util';
 
@@ -15,6 +16,10 @@ export interface Expiration extends BaseFields {
   expirationDate: string;
   terminalLabel: string;
   recordType: string;
+}
+
+export interface ExpirationResponse {
+  expirations: Expiration[];
 }
 
 export function getExpirationCounts(
@@ -35,7 +40,7 @@ export function getExpirationCounts(
 export function getExpirations(
   query: TableQuery,
   apiOptions: ApiOptions = {}
-): Request<ApiSuccessResponse<Expiration[]>> {
+): Request<ApiSuccessResponse<ExpirationResponse>> {
   return runApi({
     method: 'GET',
     urlRoot: 'dashboardSinkUrlRoot',

@@ -1,6 +1,7 @@
 import {Request} from '@idelic/safety-net';
-import {ApiOptions, ApiSuccessResponse, runApi} from 'src';
 
+import {runApi} from '../../runApi';
+import {ApiOptions, ApiSuccessResponse} from '../../types';
 import {BaseFields, Query, TableQuery} from './types';
 import {convertSortsToStrings} from './util';
 
@@ -15,6 +16,10 @@ export interface Enforcement extends BaseFields {
   date: string;
   csaPoints: number;
   outOfService: boolean;
+}
+
+export interface EnforcementResponse {
+  enforcements: Enforcement[];
 }
 
 export function getEnforcementCounts(
@@ -35,7 +40,7 @@ export function getEnforcementCounts(
 export function getEnforcements(
   query: TableQuery,
   apiOptions: ApiOptions = {}
-): Request<ApiSuccessResponse<Enforcement[]>> {
+): Request<ApiSuccessResponse<EnforcementResponse>> {
   return runApi({
     method: 'GET',
     urlRoot: 'dashboardSinkUrlRoot',
