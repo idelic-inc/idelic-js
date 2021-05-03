@@ -22,6 +22,7 @@ export const config: InitConfig = {
   configUrlRoot: '',
   documentLibraryUrlRoot: '',
   eformsUrlRoot: '',
+  dashboardSinkUrlRoot: '',
   onAuthError: () => {}
 };
 
@@ -87,6 +88,12 @@ export interface BasicConfig extends NestedConfiguration {
       frontendUrl: string;
       url: string;
     };
+    dashboardSink: {
+      url: string;
+      auth0: {
+        clientId: string;
+      };
+    };
     documentLibrary: {
       url: string;
       maxUploadSize: number;
@@ -113,6 +120,7 @@ export interface BasicConfig extends NestedConfiguration {
       frontendUrl: string;
     };
     performanceDashboard: {
+      apiTarget: string;
       enabled: boolean;
       frontendUrl: string;
       newHotness: {enabled: boolean};
@@ -185,6 +193,10 @@ const exampleConfig: BasicConfig = {
         }
       }
     },
+    dashboardSink: {
+      url: '',
+      auth0: {clientId: ''}
+    },
     documentLibrary: {url: '', maxUploadSize: 0},
     legacySaf: {frontendUrl: ''},
     app: {
@@ -224,6 +236,7 @@ const exampleConfig: BasicConfig = {
       }
     },
     performanceDashboard: {
+      apiTarget: '',
       frontendUrl: '',
       enabled: false,
       newHotness: {enabled: false},
@@ -324,7 +337,8 @@ export const initializeConfig = (
         app: {url: ''},
         documentLibrary: {url: ''},
         eforms: {url: ''},
-        saf: {url: ''}
+        saf: {url: ''},
+        dashboardSink: {url: ''}
       }
     })
   ) {
@@ -335,6 +349,7 @@ export const initializeConfig = (
   config.loginUrlRoot = nestedConfig.services.app.url;
   config.documentLibraryUrlRoot = nestedConfig.services.documentLibrary.url;
   config.eformsUrlRoot = nestedConfig.services.eforms.url;
+  config.dashboardSinkUrlRoot = nestedConfig.services.dashboardSink.url;
   config.initialized = true;
 };
 
