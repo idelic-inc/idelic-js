@@ -69,7 +69,7 @@ export interface Link {
   href: string;
 }
 
-export type Links = {[R in LinkName]: Link};
+export type Links = {[R in LinkName]?: Link};
 
 export interface ApiSuccessResponse<T> {
   _embedded: T;
