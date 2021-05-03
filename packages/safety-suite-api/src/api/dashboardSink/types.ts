@@ -19,6 +19,7 @@ export interface TableQuery extends Query {
 export interface BaseFields {
   id: number;
   employeeLabel: string;
+  employeeId: number;
   customerAlias: string;
   groupId: number;
 }
