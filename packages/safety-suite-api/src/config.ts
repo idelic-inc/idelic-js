@@ -70,6 +70,12 @@ export interface BasicConfig extends NestedConfiguration {
     adminPanel: {
       enabled: boolean;
       frontendUrl: string;
+      hierarchies: {
+        enabled: boolean;
+      };
+      roles: {
+        enabled: boolean;
+      };
     };
     app: {
       datadog: {
@@ -148,7 +154,16 @@ export interface BasicConfig extends NestedConfiguration {
 }
 const exampleConfig: BasicConfig = {
   services: {
-    adminPanel: {frontendUrl: '', enabled: false},
+    adminPanel: {
+      enabled: false,
+      frontendUrl: '',
+      hierarchies: {
+        enabled: false
+      },
+      roles: {
+        enabled: false
+      }
+    },
     saf: {
       auth0: {
         clientId: ''
