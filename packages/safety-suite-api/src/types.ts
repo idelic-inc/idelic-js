@@ -72,7 +72,7 @@ export interface Link {
 export type Links = {[R in LinkName]?: Link};
 
 export interface ApiSuccessResponse<T> {
-  _embedded: T;
+  _embedded?: T;
   page?: Page;
   _links?: Links;
 }
