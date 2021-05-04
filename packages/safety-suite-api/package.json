@@ -1,6 +1,6 @@
 {
   "name": "@idelic/safety-suite-api",
-  "version": "28.0.0",
+  "version": "29.0.0",
   "description": "API helper library for Safety Suite",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
