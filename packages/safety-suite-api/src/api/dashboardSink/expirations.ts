@@ -11,7 +11,7 @@ export interface ExpirationCounts {
   expiresIn60Days: number;
 }
 
-export interface Expiration extends BaseFields {
+export interface ExpiringDocument extends BaseFields {
   recordNumber: number;
   expirationDate: string;
   terminalLabel: string;
@@ -19,7 +19,7 @@ export interface Expiration extends BaseFields {
 }
 
 export interface ExpirationResponse {
-  expirations: Expiration[];
+  expiringDocuments: ExpiringDocument[];
 }
 
 export function getExpirationCounts(
@@ -29,7 +29,7 @@ export function getExpirationCounts(
   return runApi({
     method: 'GET',
     urlRoot: 'dashboardSinkUrlRoot',
-    route: '/api/fleet-performance/expirations/counts',
+    route: '/api/fleet-performance/expiring-documents/counts',
     apiOptions,
     requestOptions: {
       query
@@ -44,7 +44,7 @@ export function getExpirations(
   return runApi({
     method: 'GET',
     urlRoot: 'dashboardSinkUrlRoot',
-    route: '/api/fleet-performance/expirations',
+    route: '/api/fleet-performance/expiring-documents',
     apiOptions,
     requestOptions: {
       query: {
