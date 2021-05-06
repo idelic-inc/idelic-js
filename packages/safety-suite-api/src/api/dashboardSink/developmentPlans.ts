@@ -2,29 +2,29 @@ import {Request} from '@idelic/safety-net';
 
 import {runApi} from '../../runApi';
 import {ApiOptions, ApiSuccessResponse} from '../../types';
-import {BaseFields, Query, TableQuery} from './types';
+import {DashboardBaseFields, Query, TableQuery} from './types';
 import {convertSortsToStrings} from './util';
 
-export interface DevelopmentPlanCounts {
+export interface DashboardDevelopmentPlanCounts {
   activePlans: number;
   tasksAssigned: number;
   tasksPastDue: number;
 }
 
-export interface DevelopmentPlan extends BaseFields {
+export interface DashboardDevelopmentPlan extends DashboardBaseFields {
   recordNumber: number;
   planType: string;
   planStatus: string;
 }
 
-export interface DevelopmentPlanResponse {
-  developmentPlans: DevelopmentPlan[];
+export interface DashboardDevelopmentPlanResponse {
+  developmentPlans: DashboardDevelopmentPlan[];
 }
 
-export function getDevelopmentPlanCounts(
+export function getDashboardDevelopmentPlanCounts(
   query: Query,
   apiOptions: ApiOptions = {}
-): Request<ApiSuccessResponse<DevelopmentPlanCounts>> {
+): Request<ApiSuccessResponse<DashboardDevelopmentPlanCounts>> {
   return runApi({
     method: 'GET',
     urlRoot: 'dashboardSinkUrlRoot',
@@ -36,10 +36,10 @@ export function getDevelopmentPlanCounts(
   });
 }
 
-export function getDevelopmentPlans(
+export function getDashboardDevelopmentPlans(
   query: TableQuery,
   apiOptions: ApiOptions = {}
-): Request<ApiSuccessResponse<DevelopmentPlanResponse>> {
+): Request<ApiSuccessResponse<DashboardDevelopmentPlanResponse>> {
   return runApi({
     method: 'GET',
     urlRoot: 'dashboardSinkUrlRoot',

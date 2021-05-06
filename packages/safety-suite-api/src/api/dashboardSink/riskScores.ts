@@ -2,7 +2,7 @@ import {Request} from '@idelic/safety-net';
 
 import {runApi} from '../../runApi';
 import {ApiOptions, ApiSuccessResponse} from '../../types';
-import {BaseFields, Query, TableQuery} from './types';
+import {DashboardBaseFields, Query, TableQuery} from './types';
 import {convertSortsToStrings} from './util';
 
 export type RiskScoreBuckets =
@@ -17,22 +17,22 @@ export type RiskScoreBuckets =
   | '81'
   | '91';
 
-export type RiskScoreGraph = Record<RiskScoreBuckets, number>;
+export type DashboardRiskScoreGraph = Record<RiskScoreBuckets, number>;
 
-export interface RiskScore extends BaseFields {
+export interface DashboardRiskScore extends DashboardBaseFields {
   terminalLabel: string;
   riskScore: number;
   planStatus: string;
 }
 
-export interface RiskScoreResponse {
-  riskScores: RiskScore[];
+export interface DashboardRiskScoreResponse {
+  riskScores: DashboardRiskScore[];
 }
 
-export function getRiskScoresGraph(
+export function getDashboardRiskScoresGraph(
   query: Query,
   apiOptions: ApiOptions = {}
-): Request<ApiSuccessResponse<RiskScoreGraph>> {
+): Request<ApiSuccessResponse<DashboardRiskScoreGraph>> {
   return runApi({
     method: 'GET',
     urlRoot: 'dashboardSinkUrlRoot',
@@ -44,10 +44,10 @@ export function getRiskScoresGraph(
   });
 }
 
-export function getRiskScores(
+export function getDashboardRiskScores(
   query: TableQuery,
   apiOptions: ApiOptions = {}
-): Request<ApiSuccessResponse<RiskScoreResponse>> {
+): Request<ApiSuccessResponse<DashboardRiskScoreResponse>> {
   return runApi({
     method: 'GET',
     urlRoot: 'dashboardSinkUrlRoot',

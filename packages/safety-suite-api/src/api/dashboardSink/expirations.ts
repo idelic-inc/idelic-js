@@ -2,30 +2,30 @@ import {Request} from '@idelic/safety-net';
 
 import {runApi} from '../../runApi';
 import {ApiOptions, ApiSuccessResponse} from '../../types';
-import {BaseFields, Query, TableQuery} from './types';
+import {DashboardBaseFields, Query, TableQuery} from './types';
 import {convertSortsToStrings} from './util';
 
-export interface ExpirationCounts {
+export interface DashboardExpirationCounts {
   expired: number;
   expiresIn30Days: number;
   expiresIn60Days: number;
 }
 
-export interface ExpiringDocument extends BaseFields {
+export interface DashboardExpiringDocument extends DashboardBaseFields {
   recordNumber: number;
   expirationDate: string;
   terminalLabel: string;
   recordType: string;
 }
 
-export interface ExpirationResponse {
-  expiringDocuments: ExpiringDocument[];
+export interface DashboardExpirationResponse {
+  expiringDocuments: DashboardExpiringDocument[];
 }
 
-export function getExpirationCounts(
+export function getDashboardExpirationCounts(
   query: Query,
   apiOptions: ApiOptions = {}
-): Request<ApiSuccessResponse<ExpirationCounts>> {
+): Request<ApiSuccessResponse<DashboardExpirationCounts>> {
   return runApi({
     method: 'GET',
     urlRoot: 'dashboardSinkUrlRoot',
@@ -37,10 +37,10 @@ export function getExpirationCounts(
   });
 }
 
-export function getExpirations(
+export function getDashboardExpirations(
   query: TableQuery,
   apiOptions: ApiOptions = {}
-): Request<ApiSuccessResponse<ExpirationResponse>> {
+): Request<ApiSuccessResponse<DashboardExpirationResponse>> {
   return runApi({
     method: 'GET',
     urlRoot: 'dashboardSinkUrlRoot',

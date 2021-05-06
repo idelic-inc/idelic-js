@@ -2,30 +2,30 @@ import {Request} from '@idelic/safety-net';
 
 import {runApi} from '../../runApi';
 import {ApiOptions, ApiSuccessResponse} from '../../types';
-import {BaseFields, Query, TableQuery} from './types';
+import {DashboardBaseFields, Query, TableQuery} from './types';
 import {convertSortsToStrings} from './util';
 
-export interface EnforcementCounts {
+export interface DashboardEnforcementCounts {
   inspections: number;
   cleanInspections: number;
   inspectionsWithViolations: number;
 }
 
-export interface Enforcement extends BaseFields {
+export interface DashboardEnforcement extends DashboardBaseFields {
   recordNumber: number;
   date: string;
   csaPoints: number;
   outOfService: boolean;
 }
 
-export interface EnforcementResponse {
-  enforcements: Enforcement[];
+export interface DashboardEnforcementResponse {
+  enforcements: DashboardEnforcement[];
 }
 
-export function getEnforcementCounts(
+export function getDashboardEnforcementCounts(
   query: Query,
   apiOptions: ApiOptions = {}
-): Request<ApiSuccessResponse<EnforcementCounts>> {
+): Request<ApiSuccessResponse<DashboardEnforcementCounts>> {
   return runApi({
     method: 'GET',
     urlRoot: 'dashboardSinkUrlRoot',
@@ -37,10 +37,10 @@ export function getEnforcementCounts(
   });
 }
 
-export function getEnforcements(
+export function getDashboardEnforcements(
   query: TableQuery,
   apiOptions: ApiOptions = {}
-): Request<ApiSuccessResponse<EnforcementResponse>> {
+): Request<ApiSuccessResponse<DashboardEnforcementResponse>> {
   return runApi({
     method: 'GET',
     urlRoot: 'dashboardSinkUrlRoot',
