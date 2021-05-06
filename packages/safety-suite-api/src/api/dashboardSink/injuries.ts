@@ -2,14 +2,14 @@ import {Request} from '@idelic/safety-net';
 
 import {runApi} from '../../runApi';
 import {ApiOptions, ApiSuccessResponse} from '../../types';
-import {BaseFields, Query, TableQuery} from './types';
+import {DashboardBaseFields, Query, TableQuery} from './types';
 import {convertSortsToStrings} from './util';
 
-export interface InjuryCounts {
+export interface DashboardInjuryCounts {
   daysSince: number;
 }
 
-export interface Injury extends BaseFields {
+export interface DashboardInjury extends DashboardBaseFields {
   recordNumber: number;
   date: string;
   terminalLabel: string;
@@ -17,14 +17,14 @@ export interface Injury extends BaseFields {
   daysSince: number;
 }
 
-export interface InjuryResponse {
-  injuries: Injury[];
+export interface DashboardInjuryResponse {
+  injuries: DashboardInjury[];
 }
 
-export function getInjuryCounts(
+export function getDashboardInjuryCounts(
   query: Query,
   apiOptions: ApiOptions = {}
-): Request<ApiSuccessResponse<InjuryCounts>> {
+): Request<ApiSuccessResponse<DashboardInjuryCounts>> {
   return runApi({
     method: 'GET',
     urlRoot: 'dashboardSinkUrlRoot',
@@ -36,10 +36,10 @@ export function getInjuryCounts(
   });
 }
 
-export function getInjuries(
+export function getDashboardInjuries(
   query: TableQuery,
   apiOptions: ApiOptions = {}
-): Request<ApiSuccessResponse<InjuryResponse>> {
+): Request<ApiSuccessResponse<DashboardInjuryResponse>> {
   return runApi({
     method: 'GET',
     urlRoot: 'dashboardSinkUrlRoot',

@@ -16,7 +16,7 @@ export interface TableQuery extends Query {
   size?: number;
 }
 
-export interface BaseFields {
+export interface DashboardBaseFields {
   id: number;
   employeeLabel: string;
   employeeId: number;

@@ -2,30 +2,30 @@ import {Request} from '@idelic/safety-net';
 
 import {runApi} from '../../runApi';
 import {ApiOptions, ApiSuccessResponse} from '../../types';
-import {BaseFields, Query, TableQuery} from './types';
+import {DashboardBaseFields, Query, TableQuery} from './types';
 import {convertSortsToStrings} from './util';
 
-export interface AccidentCounts {
+export interface DashboardAccidentCounts {
   daysSincePreventable: number;
 }
 
-export interface Accident extends BaseFields {
+export interface DashboardAccident extends DashboardBaseFields {
   recordNumber: number;
   date: string;
   terminalLabel: string;
   type: string;
-  preventable: boolean;
+  preventable: string;
   daysSince: number;
 }
 
-export interface AccidentResponse {
-  accidents: Accident[];
+export interface DashboardAccidentResponse {
+  accidents: DashboardAccident[];
 }
 
-export function getAccidentCounts(
+export function getDashboardAccidentCounts(
   query: Query,
   apiOptions: ApiOptions = {}
-): Request<ApiSuccessResponse<AccidentCounts>> {
+): Request<ApiSuccessResponse<DashboardAccidentCounts>> {
   return runApi({
     method: 'GET',
     urlRoot: 'dashboardSinkUrlRoot',
@@ -37,10 +37,10 @@ export function getAccidentCounts(
   });
 }
 
-export function getAccidents(
+export function getDashboardAccidents(
   query: TableQuery,
   apiOptions: ApiOptions = {}
-): Request<ApiSuccessResponse<AccidentResponse>> {
+): Request<ApiSuccessResponse<DashboardAccidentResponse>> {
   return runApi({
     method: 'GET',
     urlRoot: 'dashboardSinkUrlRoot',
