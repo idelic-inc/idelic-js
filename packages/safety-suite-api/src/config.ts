@@ -124,6 +124,11 @@ export interface BasicConfig extends NestedConfiguration {
       enabled: boolean;
       frontendUrl: string;
       newHotness: {enabled: boolean};
+      accidents: {enabled: boolean};
+      developmentPlans: {enabled: boolean};
+      enforcements: {enabled: boolean};
+      expiringDocuments: {enabled: boolean};
+      injuries: {enabled: boolean};
       watchlist: {enabled: boolean};
     };
     saf: {
@@ -240,7 +245,12 @@ const exampleConfig: BasicConfig = {
       frontendUrl: '',
       enabled: false,
       newHotness: {enabled: false},
-      watchlist: {enabled: false}
+      watchlist: {enabled: false},
+      accidents: {enabled: false},
+      developmentPlans: {enabled: false},
+      enforcements: {enabled: false},
+      expiringDocuments: {enabled: false},
+      injuries: {enabled: false}
     }
   },
   integrations: {
