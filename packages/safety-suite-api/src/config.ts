@@ -245,12 +245,12 @@ const exampleConfig: BasicConfig = {
       frontendUrl: '',
       enabled: false,
       newHotness: {enabled: false},
-      watchlist: {enabled: false},
       accidents: {enabled: false},
       developmentPlans: {enabled: false},
       enforcements: {enabled: false},
       expiringDocuments: {enabled: false},
-      injuries: {enabled: false}
+      injuries: {enabled: false},
+      watchlist: {enabled: false}
     }
   },
   integrations: {
