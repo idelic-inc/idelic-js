@@ -911,3 +911,21 @@ export type QueryExportJob = {
   fileName: string;
   errorMessage?: string;
 };
+
+export type OshaInput = {
+  year: number;
+  terminalId: Id;
+  averageNumberOfEmployees: number;
+  totalHoursWorked: number;
+  company: string;
+  companyExecutive: string;
+  title: string;
+  phone: string;
+  lostRestrictedDays: LostRestrictedInput[];
+};
+
+export type LostRestrictedInput = {
+  modelId: Id;
+  estimateLostDays: number;
+  estimateRestrictedDays: number;
+};
