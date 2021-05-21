@@ -318,7 +318,7 @@ export function runOshaReportExport(
 ): Request<QueryExportJob> {
   return runApi({
     method: 'POST',
-    route: '/api/query/canned/osha/export/xlsx',
+    route: '/api/models/query/export/osha/xlsx',
     apiOptions,
     requestOptions: {
       body: query
@@ -381,7 +381,7 @@ export function runTurnoverReportExport(
 ): Request<QueryExportJob> {
   return runApi({
     method: 'POST',
-    route: '/api/models/query/export/turnover/export/xlsx',
+    route: '/api/models/query/export/turnover/xlsx',
     apiOptions,
     requestOptions: {
       body: query
@@ -401,7 +401,7 @@ export function runIncompleteTrainingReportExport(
 ): Request<QueryExportJob> {
   return runApi({
     method: 'POST',
-    route: '/api/models/query/canned/notCompletedTrainings/export/xlsx',
+    route: '/api/models/query/export/notCompletedTrainings/xlsx',
     apiOptions,
     requestOptions: {
       body: filters
@@ -421,7 +421,7 @@ export function runExpiringTrainingReportExport(
 ): Request<QueryExportJob> {
   return runApi({
     method: 'POST',
-    route: '/api/models/query/canned/expiringTrainings/export/xlsx',
+    route: '/api/models/query/export/expiringTrainings/xlsx',
     apiOptions,
     requestOptions: {
       body: filters
