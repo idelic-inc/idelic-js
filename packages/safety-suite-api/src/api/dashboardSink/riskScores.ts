@@ -2,7 +2,7 @@ import {Request} from '@idelic/safety-net';
 
 import {runApi} from '../../runApi';
 import {ApiOptions, ApiSuccessResponse} from '../../types';
-import {DashboardBaseFields, Query, TableQuery} from './types';
+import {DashboardBaseFields, Query, RiskScoreQuery} from './types';
 import {convertSortsToStrings} from './util';
 
 export type RiskScoreBuckets =
@@ -45,7 +45,7 @@ export function getDashboardRiskScoresGraph(
 }
 
 export function getDashboardRiskScores(
-  query: TableQuery,
+  query: RiskScoreQuery,
   apiOptions: ApiOptions = {}
 ): Request<ApiSuccessResponse<DashboardRiskScoreResponse>> {
   return runApi({

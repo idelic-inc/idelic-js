@@ -16,6 +16,10 @@ export interface TableQuery extends Query {
   size?: number;
 }
 
+export interface RiskScoreQuery extends TableQuery {
+  riskScoreBucket: number[];
+}
+
 export interface DashboardBaseFields {
   id: number;
   employeeLabel: string;
