@@ -14,6 +14,7 @@ export interface TableQuery extends Query {
   sort: Sort[];
   page?: number;
   size?: number;
+  riskScoreBucket?: number[];
 }
 
 export interface RiskScoreQuery extends TableQuery {
