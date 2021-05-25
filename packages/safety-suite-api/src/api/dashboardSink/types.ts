@@ -7,7 +7,7 @@ export interface Sort {
 
 export interface Query {
   customerAlias: string;
-  groupIds?: string[];
+  groupIds?: number[];
 }
 
 export interface TableQuery extends Query {
