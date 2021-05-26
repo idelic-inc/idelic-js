@@ -350,7 +350,7 @@ export function runEmployeeReviewReportExport(
 /**
  * Starts asynchronous enforcements report export.
  *
- * @param params - Object containing various filters for the report.
+ * @param query - Object containing various filters for the report.
  * @param apiOptions - Optional options for runApi.
  * @returns - Query export job object.
  */
@@ -394,6 +394,7 @@ export function runTurnoverReportExport(
  *
  * @param filters - Object containing various filters for the report.
  * @param apiOptions - Optional options for runApi.
+ * @returns - Query export job object.
  */
 export function runIncompleteTrainingReportExport(
   filters: CommonTrainingReportFilters,
@@ -414,6 +415,7 @@ export function runIncompleteTrainingReportExport(
  *
  * @param filters - Object containing various filters for the report.
  * @param apiOptions - Optional options for runApi.
+ * @returns - Query export job object.
  */
 export function runExpiringTrainingReportExport(
   filters: ExpiringTrainingReportFilters,
@@ -434,6 +436,7 @@ export function runExpiringTrainingReportExport(
  *
  * @param filters - Object containing various filters for the report.
  * @param apiOptions - Optional options for runApi.
+ * @returns - Query export job object.
  */
 export function runDueTrainingReportExport(
   filters: DueTrainingReportFilters,
