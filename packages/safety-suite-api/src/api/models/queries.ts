@@ -441,7 +441,7 @@ export function runDueTrainingReportExport(
 ): Request<QueryExportJob> {
   return runApi({
     method: 'POST',
-    route: '/api/models/query/canned/dueTrainings/xlsx',
+    route: '/api/models/query/export/dueTrainings/xlsx',
     apiOptions,
     requestOptions: {
       body: filters
