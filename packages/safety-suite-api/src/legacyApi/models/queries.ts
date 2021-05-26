@@ -1,4 +1,4 @@
-import {ExportColumn, ModelQuery} from '../../api/models/types';
+import {ExportColumn, ModelQuery, OshaInput} from '../../api/models/types';
 import {Id} from '../../types';
 import {LegacyApi} from '../types';
 
@@ -21,24 +21,6 @@ export type XlsxExportColumn = {
 export type XlsxExportQuery = {
   reportName: string;
   columns: XlsxExportColumn[];
-};
-
-export type LostRestrictedInput = {
-  modelId: Id;
-  estimateLostDays: number;
-  estimateRestrictedDays: number;
-};
-
-export type OshaInput = {
-  year: number;
-  terminalId: Id;
-  averageNumberOfEmployees: number;
-  totalHoursWorked: number;
-  company: string;
-  companyExecutive: string;
-  title: string;
-  phone: string;
-  lostRestrictedDays: LostRestrictedInput[];
 };
 
 /**

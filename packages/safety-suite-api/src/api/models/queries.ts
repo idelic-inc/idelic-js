@@ -7,6 +7,7 @@ import {
   Aggregation,
   ModelQuery,
   ModelQueryParams,
+  OshaInput,
   QueryExport,
   QueryExportJob,
   QueryExportTypes
@@ -300,6 +301,153 @@ export function getQueryExportContent(
     apiOptions,
     requestOptions: {
       responseType: 'blob'
+    }
+  });
+}
+
+/**
+ * Starts asynchronous OSHA report export.
+ *
+ * @param query - Object containing various filters for the report.
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Query export job object.
+ */
+export function runOshaReportExport(
+  query: OshaInput,
+  apiOptions?: ApiOptions
+): Request<QueryExportJob> {
+  return runApi({
+    method: 'POST',
+    route: '/api/models/query/export/osha/xlsx',
+    apiOptions,
+    requestOptions: {
+      body: query
+    }
+  });
+}
+
+/**
+ * Starts asynchronous employee review report export.
+ *
+ * @param query - Object containing various filters for the report.
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Query export job object.
+ */
+export function runEmployeeReviewReportExport(
+  query: EmployeeReviewParams,
+  apiOptions?: ApiOptions
+): Request<QueryExportJob> {
+  return runApi({
+    method: 'POST',
+    route: '/api/models/query/export/employeereview/pdf',
+    apiOptions,
+    requestOptions: {
+      body: query
+    }
+  });
+}
+
+/**
+ * Starts asynchronous enforcements report export.
+ *
+ * @param query - Object containing various filters for the report.
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Query export job object.
+ */
+export function runEnforcementsReportExport(
+  query: ModelQuery,
+  apiOptions?: ApiOptions
+): Request<QueryExportJob> {
+  return runApi({
+    method: 'POST',
+    route: '/api/models/query/export/enforcements/xlsx',
+    apiOptions,
+    requestOptions: {
+      body: query
+    }
+  });
+}
+
+/**
+ * Starts asynchronous turnover report export.
+ *
+ * @param query - Object containing various filters for the report.
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Query export job object.
+ */
+export function runTurnoverReportExport(
+  query: ModelQuery,
+  apiOptions?: ApiOptions
+): Request<QueryExportJob> {
+  return runApi({
+    method: 'POST',
+    route: '/api/models/query/export/turnover/xlsx',
+    apiOptions,
+    requestOptions: {
+      body: query
+    }
+  });
+}
+
+/**
+ * Starts asynchronous incomplete training report export.
+ *
+ * @param filters - Object containing various filters for the report.
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Query export job object.
+ */
+export function runIncompleteTrainingReportExport(
+  filters: CommonTrainingReportFilters,
+  apiOptions?: ApiOptions
+): Request<QueryExportJob> {
+  return runApi({
+    method: 'POST',
+    route: '/api/models/query/export/notCompletedTrainings/xlsx',
+    apiOptions,
+    requestOptions: {
+      body: filters
+    }
+  });
+}
+
+/**
+ * Starts asynchronous expiring training report export.
+ *
+ * @param filters - Object containing various filters for the report.
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Query export job object.
+ */
+export function runExpiringTrainingReportExport(
+  filters: ExpiringTrainingReportFilters,
+  apiOptions?: ApiOptions
+): Request<QueryExportJob> {
+  return runApi({
+    method: 'POST',
+    route: '/api/models/query/export/expiringTrainings/xlsx',
+    apiOptions,
+    requestOptions: {
+      body: filters
+    }
+  });
+}
+
+/**
+ * Starts asynchronous due training report export.
+ *
+ * @param filters - Object containing various filters for the report.
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Query export job object.
+ */
+export function runDueTrainingReportExport(
+  filters: DueTrainingReportFilters,
+  apiOptions?: ApiOptions
+): Request<QueryExportJob> {
+  return runApi({
+    method: 'POST',
+    route: '/api/models/query/export/dueTrainings/xlsx',
+    apiOptions,
+    requestOptions: {
+      body: filters
     }
   });
 }
