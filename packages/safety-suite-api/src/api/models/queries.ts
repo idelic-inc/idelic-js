@@ -368,6 +368,25 @@ export function runEnforcementsReportExport(
   });
 }
 
+export interface TurnoverReportFilters {
+  /**
+   * Report start timestamp.
+   */
+  dateFrom: number;
+  /**
+   * Report till timestamp.
+   */
+  dateTo: number;
+  /**
+   * `terminal` group id.
+   */
+  terminalId: number;
+  /**
+   * Targeted report timezone
+   */
+  timezone?: string;
+}
+
 /**
  * Starts asynchronous turnover report export.
  *
@@ -376,7 +395,7 @@ export function runEnforcementsReportExport(
  * @returns - Query export job object.
  */
 export function runTurnoverReportExport(
-  query: ModelQuery,
+  query: TurnoverReportFilters,
   apiOptions?: ApiOptions
 ): Request<QueryExportJob> {
   return runApi({
