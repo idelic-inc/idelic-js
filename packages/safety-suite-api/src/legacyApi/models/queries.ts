@@ -1,3 +1,4 @@
+import {TurnoverReportFilters} from '../../api/models/queries';
 import {ExportColumn, ModelQuery, OshaInput} from '../../api/models/types';
 import {Id} from '../../types';
 import {LegacyApi} from '../types';
@@ -71,7 +72,7 @@ export function exportEnforcementsReport(query: ModelQuery): LegacyApi {
   };
 }
 
-export function exportTurnoverReport(query: ModelQuery): LegacyApi {
+export function exportTurnoverReport(query: TurnoverReportFilters): LegacyApi {
   return {
     method: 'POST',
     route: '/api/models/query/canned/turnover/xlsx',
