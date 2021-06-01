@@ -381,6 +381,10 @@ export interface TurnoverReportFilters {
    * `terminal` group id.
    */
   terminalId: number;
+  /**
+   * Targeted report timezone
+   */
+  timezone?: string;
 }
 
 /**
