@@ -55,6 +55,26 @@ export interface User {
   termsOfServiceVersion?: string;
 }
 
+export interface SafUser {
+  admin: boolean;
+  allowProtected: boolean;
+  effectiveDate: string;
+  email: string;
+  fields: any; // JSON
+  firstName: string;
+  id: number;
+  identifier: string;
+  lastName: string;
+  lastUpdatedBy: string;
+  readGroupPermissions: number[];
+  readTemplatePermissions: number[];
+  securableId: number;
+  userId: number;
+  writeGroupPermissions: number[];
+  writeTemplatePermissions: number[];
+  termsOfServiceVersion?: string;
+}
+
 export interface UserWithErrors {
   user: User;
   failedCustomers: number[];
@@ -127,6 +147,16 @@ export function getCurrentUser(
     route: '/api/1.0/users/current',
     apiOptions,
     requestOptions: {transformers}
+  });
+}
+
+export function getCurrentSafUser(
+  apiOptions: ApiOptions = {}
+): Request<SafUser> {
+  return runApi({
+    method: 'GET',
+    route: '/api/userAccount',
+    apiOptions
   });
 }
 
