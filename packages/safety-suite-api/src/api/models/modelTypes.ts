@@ -7,6 +7,7 @@ import {InputModel, Model} from './types';
 // Type definitions for /advancedAccidents / Accident (accident)
 
 export interface AccidentFields {
+  accidentClassification?: string | null;
   accidentType?: string | null;
   ataReportable?: boolean;
   basicType?: string | null;
@@ -116,6 +117,7 @@ export interface AccidentComputations {
   assetsInvolved: any;
   claimsCount: any;
   csaScore: number | null;
+  daysSince: number | null;
   fullAddress: any;
   hasClaim: boolean;
   preventable: boolean;
@@ -695,16 +697,34 @@ export interface ClaimInputRelations {
 export interface ClaimComputations {
   bodilyInjuryPaid: number | null;
   bodilyInjuryRemaining: number | null;
+  bodilyInjuryReserves: number | null;
   companyDamagePaid: number | null;
   companyDamageRemaining: number | null;
+  companyDamageReserves: number | null;
+  disposalExpensePaid: number | null;
+  disposalExpenseRemaining: number | null;
+  disposalExpenseReserves: number | null;
   generalExpensePaid: number | null;
   generalExpenseRemaining: number | null;
+  generalExpenseReserves: number | null;
+  indemnityExpensePaid: number | null;
+  indemnityExpenseRemaining: number | null;
+  indemnityExpenseReserves: number | null;
   litigationExpensePaid: number | null;
   litigationExpenseRemaining: number | null;
+  litigationExpenseReserves: number | null;
+  medicalExpensePaid: number | null;
+  medicalExpenseRemaining: number | null;
+  medicalExpenseReserves: number | null;
   propertyDamagePaid: number | null;
   propertyDamageRemaining: number | null;
+  propertyDamageReserves: number | null;
+  responseExpensePaid: number | null;
+  responseExpenseRemaining: number | null;
+  responseExpenseReserves: number | null;
   subrogationPaid: number | null;
   subrogationRemaining: number | null;
+  subrogationReserves: number | null;
   totalPaid: number | null;
   totalRemaining: number | null;
   totalReserves: number | null;
@@ -724,7 +744,9 @@ export interface CorrectiveActionFields {
   letterReturnDate?: number | null;
   letterType?: string | null;
   preventability?: string | null;
+  preventable_2?: string | null;
   severity?: string | null;
+  severity_2?: string | null;
 }
 
 export interface CorrectiveActionRelations {
@@ -2171,7 +2193,41 @@ export interface ForkliftIncidentInputRelations {
   watchListReasons?: WatchListReasonInputModel | null;
 }
 
-export interface ForkliftIncidentComputations {}
+export interface ForkliftIncidentComputations {
+  bodilyInjuryPaid: number | null;
+  bodilyInjuryRemaining: number | null;
+  bodilyInjuryReserves: number | null;
+  companyDamagePaid: number | null;
+  companyDamageRemaining: number | null;
+  companyDamageReserves: number | null;
+  disposalExpensePaid: number | null;
+  disposalExpenseRemaining: number | null;
+  disposalExpenseReserves: number | null;
+  generalExpensePaid: number | null;
+  generalExpenseRemaining: number | null;
+  generalExpenseReserves: number | null;
+  indemnityExpensePaid: number | null;
+  indemnityExpenseRemaining: number | null;
+  indemnityExpenseReserves: number | null;
+  litigationExpensePaid: number | null;
+  litigationExpenseRemaining: number | null;
+  litigationExpenseReserves: number | null;
+  medicalExpensePaid: number | null;
+  medicalExpenseRemaining: number | null;
+  medicalExpenseReserves: number | null;
+  propertyDamagePaid: number | null;
+  propertyDamageRemaining: number | null;
+  propertyDamageReserves: number | null;
+  responseExpensePaid: number | null;
+  responseExpenseRemaining: number | null;
+  responseExpenseReserves: number | null;
+  subrogationPaid: number | null;
+  subrogationRemaining: number | null;
+  subrogationReserves: number | null;
+  totalPaid: number | null;
+  totalRemaining: number | null;
+  totalReserves: number | null;
+}
 
 export type ForkliftIncidentModel = Model<
   ForkliftIncidentFields,
@@ -2382,6 +2438,7 @@ export interface ImprovementPlanWeekInputRelations {
 }
 
 export interface ImprovementPlanWeekComputations {
+  completedTasks: number | null;
   numberOfTasks: number | null;
 }
 
@@ -2540,7 +2597,7 @@ export type ImprovementPlanWeekTemplateInputModel = InputModel<
 
 export interface TalkingPointTemplateFields {
   description?: string;
-  name?: string;
+  name: string;
 }
 
 export interface TalkingPointTemplateRelations {
@@ -2672,6 +2729,19 @@ export interface InjuryIllnessInputRelations {
 }
 
 export interface InjuryIllnessComputations {
+  bodilyInjuryPaid: number | null;
+  bodilyInjuryRemaining: number | null;
+  bodilyInjuryReserves: number | null;
+  companyDamagePaid: number | null;
+  companyDamageRemaining: number | null;
+  companyDamageReserves: number | null;
+  daysSince: number | null;
+  disposalExpensePaid: number | null;
+  disposalExpenseRemaining: number | null;
+  disposalExpenseReserves: number | null;
+  generalExpensePaid: number | null;
+  generalExpenseRemaining: number | null;
+  generalExpenseReserves: number | null;
   hasDaysAwayFromWork: any;
   hasHearingLoss: any;
   hasInjury: any;
@@ -2681,9 +2751,27 @@ export interface InjuryIllnessComputations {
   hasPoisoning: any;
   hasRespiratoryCondition: any;
   hasSkinDisorders: any;
+  indemnityExpensePaid: number | null;
+  indemnityExpenseRemaining: number | null;
+  indemnityExpenseReserves: number | null;
   ledToDeath: any;
+  litigationExpensePaid: number | null;
+  litigationExpenseRemaining: number | null;
+  litigationExpenseReserves: number | null;
+  medicalExpensePaid: number | null;
+  medicalExpenseRemaining: number | null;
+  medicalExpenseReserves: number | null;
   natureOfInjuryList: any;
   partsOfBody: any;
+  propertyDamagePaid: number | null;
+  propertyDamageRemaining: number | null;
+  propertyDamageReserves: number | null;
+  responseExpensePaid: number | null;
+  responseExpenseRemaining: number | null;
+  responseExpenseReserves: number | null;
+  subrogationPaid: number | null;
+  subrogationRemaining: number | null;
+  subrogationReserves: number | null;
   totalDaysLost: number | null;
   totalDaysRestricted: number | null;
   totalPaid: number | null;
@@ -2863,7 +2951,41 @@ export interface MaterialSpillInputRelations {
   watchListReasons?: WatchListReasonInputModel | null;
 }
 
-export interface MaterialSpillComputations {}
+export interface MaterialSpillComputations {
+  bodilyInjuryPaid: number | null;
+  bodilyInjuryRemaining: number | null;
+  bodilyInjuryReserves: number | null;
+  companyDamagePaid: number | null;
+  companyDamageRemaining: number | null;
+  companyDamageReserves: number | null;
+  disposalExpensePaid: number | null;
+  disposalExpenseRemaining: number | null;
+  disposalExpenseReserves: number | null;
+  generalExpensePaid: number | null;
+  generalExpenseRemaining: number | null;
+  generalExpenseReserves: number | null;
+  indemnityExpensePaid: number | null;
+  indemnityExpenseRemaining: number | null;
+  indemnityExpenseReserves: number | null;
+  litigationExpensePaid: number | null;
+  litigationExpenseRemaining: number | null;
+  litigationExpenseReserves: number | null;
+  medicalExpensePaid: number | null;
+  medicalExpenseRemaining: number | null;
+  medicalExpenseReserves: number | null;
+  propertyDamagePaid: number | null;
+  propertyDamageRemaining: number | null;
+  propertyDamageReserves: number | null;
+  responseExpensePaid: number | null;
+  responseExpenseRemaining: number | null;
+  responseExpenseReserves: number | null;
+  subrogationPaid: number | null;
+  subrogationRemaining: number | null;
+  subrogationReserves: number | null;
+  totalPaid: number | null;
+  totalRemaining: number | null;
+  totalReserves: number | null;
+}
 
 export type MaterialSpillModel = Model<
   MaterialSpillFields,
@@ -3481,13 +3603,13 @@ export interface TrainingClassFields {
 }
 
 export interface TrainingClassRelations {
-  attendees: TrainingAttendanceModel[];
+  attendees?: TrainingAttendanceModel[];
   trainer?: EmployeeModel | null;
   trainingCourse: TrainingCourseModel;
 }
 
 export interface TrainingClassInputRelations {
-  attendees: TrainingAttendanceInputModel[];
+  attendees?: TrainingAttendanceInputModel[];
   trainer?: EmployeeInputModel | null;
   trainingCourse: TrainingCourseInputModel;
 }
@@ -3526,7 +3648,7 @@ export interface TrainingCourseFields {
   isExpiring?: string | null;
   name?: string;
   positionsRequired?: string[];
-  source?: string | null;
+  source: string;
 }
 
 export interface TrainingCourseRelations {
@@ -3583,6 +3705,7 @@ export interface EmployeeWatchListInputRelations {
 
 export interface EmployeeWatchListComputations {
   currentScore: number | null;
+  riskScoreBucket: number | null;
   scorePercent: number | null;
 }
 

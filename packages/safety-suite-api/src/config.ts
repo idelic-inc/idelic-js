@@ -41,6 +41,19 @@ export interface TrainingIntegrationConfig extends NestedConfiguration {
   sourceKey: string;
 }
 
+export interface ScalaService extends NestedConfiguration {
+  auth0: {
+    clientId: string;
+  };
+  db: {
+    enableMigrations: boolean;
+    numThreads: number;
+    queueSize: number;
+  };
+  enabled: boolean;
+  url: string;
+}
+
 export interface BasicConfig extends NestedConfiguration {
   env: {
     auth0: {
@@ -119,6 +132,28 @@ export interface BasicConfig extends NestedConfiguration {
     legacySaf: {
       frontendUrl: string;
     };
+    lincoln: {
+      enabled: boolean;
+      db: {
+        appUsername: string;
+        dbname: string;
+        host: string;
+        migrationsEnabled: boolean;
+        port: string;
+        schemaUsername: string;
+      };
+      kafka: {
+        acks: string;
+        apiKey: string;
+        bootstrapServer: string;
+        topicName: string;
+      };
+      sns: {
+        region: string;
+        topicName: string;
+      };
+      strategy: string;
+    };
     performanceDashboard: {
       apiTarget: string;
       enabled: boolean;
@@ -131,6 +166,7 @@ export interface BasicConfig extends NestedConfiguration {
       injuries: {enabled: boolean};
       watchlist: {enabled: boolean};
     };
+    permission: ScalaService;
     saf: {
       auth0: {
         clientId: string;
@@ -142,6 +178,11 @@ export interface BasicConfig extends NestedConfiguration {
         env: string;
       };
       frontendUrl: string;
+      modules: {
+        safetyAndRisk: {
+          severityPreventabilityVersion: number;
+        };
+      };
       proDataIrv: string;
       url: string;
       watchlist: {
@@ -163,6 +204,7 @@ export interface BasicConfig extends NestedConfiguration {
       enabled: boolean;
       frontendUrl: string;
     };
+    usermanagement: ScalaService;
   };
 }
 const exampleConfig: BasicConfig = {
@@ -188,6 +230,11 @@ const exampleConfig: BasicConfig = {
         env: ''
       },
       frontendUrl: '',
+      modules: {
+        safetyAndRisk: {
+          severityPreventabilityVersion: 0
+        }
+      },
       proDataIrv: '',
       url: '',
       watchlist: {
@@ -204,6 +251,28 @@ const exampleConfig: BasicConfig = {
     },
     documentLibrary: {url: '', maxUploadSize: 0},
     legacySaf: {frontendUrl: ''},
+    lincoln: {
+      enabled: false,
+      db: {
+        appUsername: '',
+        dbname: '',
+        host: '',
+        migrationsEnabled: false,
+        port: '',
+        schemaUsername: ''
+      },
+      kafka: {
+        acks: '',
+        apiKey: '',
+        bootstrapServer: '',
+        topicName: ''
+      },
+      sns: {
+        region: '',
+        topicName: ''
+      },
+      strategy: ''
+    },
     app: {
       datadog: {
         applicationId: '',
@@ -239,6 +308,30 @@ const exampleConfig: BasicConfig = {
         clientId: '',
         testMode: false
       }
+    },
+    permission: {
+      auth0: {
+        clientId: ''
+      },
+      db: {
+        enableMigrations: false,
+        numThreads: 0,
+        queueSize: 0
+      },
+      enabled: false,
+      url: ''
+    },
+    usermanagement: {
+      auth0: {
+        clientId: ''
+      },
+      db: {
+        enableMigrations: false,
+        numThreads: 0,
+        queueSize: 0
+      },
+      enabled: false,
+      url: ''
     },
     performanceDashboard: {
       apiTarget: '',
