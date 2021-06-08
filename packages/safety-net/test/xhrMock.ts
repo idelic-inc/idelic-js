@@ -7,16 +7,18 @@ export default function createXHRmock(): any {
   api.setRequestHeader = jest.fn();
   api.open = jest.fn();
   api.send = jest.fn();
-  api.addEventListener = jest.fn((name, fn) => fns[name] = fn);
+  api.addEventListener = jest.fn((name, fn) => {
+    fns[name] = fn;
+  });
   api.trigger = (name: string, data: any) => fns[name](data);
 
   const xhrMockClass = function () {
     return api;
   };
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   window.XMLHttpRequest = jest.fn(xhrMockClass);
 
   return api;
 }
-
