@@ -155,15 +155,16 @@ export interface BasicConfig extends NestedConfiguration {
       strategy: string;
     };
     performanceDashboard: {
-      apiTarget: string;
-      enabled: boolean;
-      frontendUrl: string;
-      newHotness: {enabled: boolean};
       accidents: {enabled: boolean};
+      apiTarget: string;
       developmentPlans: {enabled: boolean};
+      enabled: boolean;
       enforcements: {enabled: boolean};
       expiringDocuments: {enabled: boolean};
+      frontendUrl: string;
+      hierarchyFilter: {enabled: boolean};
       injuries: {enabled: boolean};
+      newHotness: {enabled: boolean};
       watchlist: {enabled: boolean};
     };
     permission: ScalaService;
@@ -334,15 +335,16 @@ const exampleConfig: BasicConfig = {
       url: ''
     },
     performanceDashboard: {
-      apiTarget: '',
-      frontendUrl: '',
-      enabled: false,
-      newHotness: {enabled: false},
       accidents: {enabled: false},
+      apiTarget: '',
       developmentPlans: {enabled: false},
+      enabled: false,
       enforcements: {enabled: false},
       expiringDocuments: {enabled: false},
+      frontendUrl: '',
+      hierarchyFilter: {enabled: false},
       injuries: {enabled: false},
+      newHotness: {enabled: false},
       watchlist: {enabled: false}
     }
   },
