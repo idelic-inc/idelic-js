@@ -1,7 +1,7 @@
 export type SortDirection = 'asc' | 'desc';
 
 export interface Sort {
-  column: string;
+  column?: string;
   direction?: SortDirection;
 }
 
@@ -11,7 +11,7 @@ export interface Query {
 }
 
 export interface TableQuery extends Query {
-  sort: Sort[];
+  sort?: Sort[];
   page?: number;
   size?: number;
   riskScoreBucket?: number[];
