@@ -13,6 +13,11 @@
     "strict": true,
     "lib": ["es2015", "es2016", "dom", "es2018.promise"]
   },
-  "include": ["packages/*/src", "packages/*/scripts"],
+  "include": [
+    "packages/*/src",
+    "packages/*/scripts",
+    "packages/*/test",
+    "packages/*/jest.config.ts"
+  ],
   "exclude": ["node_modules"]
 }
