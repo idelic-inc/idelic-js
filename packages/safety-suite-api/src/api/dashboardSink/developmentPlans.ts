@@ -12,7 +12,6 @@ export interface DashboardDevelopmentPlanCounts {
 }
 
 export interface DashboardDevelopmentPlan extends DashboardBaseFields {
-  recordNumber: number;
   planType: string;
   planStatus: string;
 }

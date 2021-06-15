@@ -10,7 +10,6 @@ export interface DashboardInjuryCounts {
 }
 
 export interface DashboardInjury extends DashboardBaseFields {
-  recordNumber: number;
   date: string;
   terminalLabel: string;
   oshaReportable: boolean;

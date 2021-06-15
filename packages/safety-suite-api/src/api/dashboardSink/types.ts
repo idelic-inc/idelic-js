@@ -22,5 +22,6 @@ export interface DashboardBaseFields {
   employeeLabel: string;
   employeeId: number;
   customerAlias: string;
+  recordNumber: number;
   groupId: number;
 }

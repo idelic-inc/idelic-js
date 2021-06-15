@@ -10,7 +10,6 @@ export interface DashboardAccidentCounts {
 }
 
 export interface DashboardAccident extends DashboardBaseFields {
-  recordNumber: number;
   date: string;
   terminalLabel: string;
   type: string;

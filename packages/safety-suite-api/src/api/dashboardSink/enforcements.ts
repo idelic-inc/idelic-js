@@ -12,7 +12,6 @@ export interface DashboardEnforcementCounts {
 }
 
 export interface DashboardEnforcement extends DashboardBaseFields {
-  recordNumber: number;
   date: string;
   csaPoints: number;
   outOfService: boolean;
