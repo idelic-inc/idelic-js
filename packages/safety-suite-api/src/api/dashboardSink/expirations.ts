@@ -12,7 +12,6 @@ export interface DashboardExpirationCounts {
 }
 
 export interface DashboardExpiringDocument extends DashboardBaseFields {
-  recordNumber: number;
   expirationDate: string;
   terminalLabel: string;
   recordType: string;

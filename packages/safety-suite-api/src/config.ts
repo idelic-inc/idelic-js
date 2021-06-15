@@ -83,6 +83,7 @@ export interface BasicConfig extends NestedConfiguration {
   services: {
     adminPanel: {
       enabled: boolean;
+      fallbackFrontendUrl: string;
       frontendUrl: string;
       hierarchies: {
         enabled: boolean;
@@ -130,6 +131,7 @@ export interface BasicConfig extends NestedConfiguration {
       url: string;
     };
     legacySaf: {
+      fallbackFrontendUrl: string;
       frontendUrl: string;
     };
     lincoln: {
@@ -161,6 +163,7 @@ export interface BasicConfig extends NestedConfiguration {
       enabled: boolean;
       enforcements: {enabled: boolean};
       expiringDocuments: {enabled: boolean};
+      fallbackFrontendUrl: string;
       frontendUrl: string;
       hierarchyFilter: {enabled: boolean};
       injuries: {enabled: boolean};
@@ -203,6 +206,7 @@ export interface BasicConfig extends NestedConfiguration {
     };
     training: {
       enabled: boolean;
+      fallbackFrontendUrl: string;
       frontendUrl: string;
     };
     usermanagement: ScalaService;
@@ -212,6 +216,7 @@ const exampleConfig: BasicConfig = {
   services: {
     adminPanel: {
       enabled: false,
+      fallbackFrontendUrl: '',
       frontendUrl: '',
       hierarchies: {
         enabled: false
@@ -251,7 +256,10 @@ const exampleConfig: BasicConfig = {
       auth0: {clientId: ''}
     },
     documentLibrary: {url: '', maxUploadSize: 0},
-    legacySaf: {frontendUrl: ''},
+    legacySaf: {
+      fallbackFrontendUrl: '',
+      frontendUrl: ''
+    },
     lincoln: {
       enabled: false,
       db: {
@@ -291,7 +299,11 @@ const exampleConfig: BasicConfig = {
       frontendUrl: '',
       url: ''
     },
-    training: {frontendUrl: '', enabled: false},
+    training: {
+      enabled: false,
+      fallbackFrontendUrl: '',
+      frontendUrl: ''
+    },
     eforms: {
       auth0: {
         clientId: ''
@@ -341,6 +353,7 @@ const exampleConfig: BasicConfig = {
       enabled: false,
       enforcements: {enabled: false},
       expiringDocuments: {enabled: false},
+      fallbackFrontendUrl: '',
       frontendUrl: '',
       hierarchyFilter: {enabled: false},
       injuries: {enabled: false},
