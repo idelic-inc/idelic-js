@@ -47,7 +47,7 @@ export function getDashboardDevelopmentPlans(
     requestOptions: {
       query: {
         ...query,
-        sort: convertSortsToStrings(query.sort)
+        sort: query.sort && convertSortsToStrings(query.sort)
       }
     }
   });
