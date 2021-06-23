@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "start": "tsc --watch",
-    "test": "jest --config jest.config.ts",
+    "test": "jest --config jestconfig.json",
     "build": "tsc",
     "clean": "rm -rf lib"
   },
