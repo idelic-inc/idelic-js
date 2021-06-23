@@ -1,6 +1,6 @@
 {
   "name": "@idelic/safety-suite-api",
-  "version": "32.4.0",
+  "version": "32.5.0",
   "description": "API helper library for Safety Suite",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -21,7 +21,7 @@
   "author": "Idelic",
   "license": "MIT",
   "dependencies": {
-    "@idelic/safety-net": "^2.0.2",
+    "@idelic/safety-net": "^2.0.3",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.26",
     "source-map-support": "^0.5.13"
