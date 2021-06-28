@@ -6,9 +6,9 @@ export interface Created extends CreatedBy {
    */
   createdByName?: string;
   /**
-   * Unix timestamp of role creation.
+   * ISO timestamp of role creation.
    */
-  createdDate: number;
+  createdDate: string;
 }
 
 export interface LastUpdated extends LastUpdatedBy {
@@ -17,9 +17,9 @@ export interface LastUpdated extends LastUpdatedBy {
    */
   lastUpdatedByName?: string;
   /**
-   * Unix timestamp of the last time when this role was updated.
+   * ISO timestamp of the last time when this role was updated.
    */
-  lastUpdatedDate: number;
+  lastUpdatedDate: string;
 }
 
 export enum RoleType {
@@ -65,6 +65,10 @@ export interface Role extends Created, LastUpdated {
    * Array of module permission ids granted to this role.
    */
   modulePermissions: Id[];
+  /**
+   * The count of users assigned to this role.
+   */
+  usersCount?: number;
 }
 
 export type InputRole = Pick<

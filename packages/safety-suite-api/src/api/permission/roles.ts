@@ -10,6 +10,10 @@ export interface GetRolesQuery extends CustomerSpecificQuery {
    * `createdByUserName` and `lastUpdatedByUserName` or not.
    */
   includeUserNames?: boolean;
+  /**
+   * Defines whether the response should include `usersCount` or not.
+   */
+  includeUsersCount?: boolean;
 }
 
 /**
