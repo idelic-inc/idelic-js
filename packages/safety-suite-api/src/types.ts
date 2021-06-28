@@ -11,7 +11,9 @@ export type UrlRoot =
   | 'documentLibraryUrlRoot'
   | 'configUrlRoot'
   | 'eformsUrlRoot'
-  | 'dashboardSinkUrlRoot';
+  | 'dashboardSinkUrlRoot'
+  | 'permissionUrlRoot'
+  | 'userManagementUrlRoot';
 
 export interface Api<R, T> {
   method: Methods;
@@ -75,6 +77,15 @@ export interface ApiSuccessResponse<T> {
   _embedded?: T;
   page?: Page;
   _links?: Links;
+}
+
+export interface CustomerSpecificQuery {
+  /**
+   * Filter restricting the scope of the request to a single SAF
+   * instance at a time and allowing to check permissions of a user
+   * for a specific customer.
+   */
+  customerAlias: string;
 }
 
 export interface LastUpdatedBy {
