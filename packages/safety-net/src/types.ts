@@ -32,7 +32,9 @@ export type Promises<T> = {
   complete: Promise<Response<T>>;
 };
 
-export type RequestOptions<R, T, E = any> = {
+export type RequestOptions<R, T, E = any> = Partial<
+  Pick<XMLHttpRequest, 'withCredentials'>
+> & {
   query?: QueryParams;
   headers?: RequestHeaders;
   responseType?: XMLHttpRequestResponseType;
@@ -43,7 +45,9 @@ export type RequestOptions<R, T, E = any> = {
 
 export interface Request<T> {
   request: XMLHttpRequest;
-  // Deprecated (2019-11-05)
+  /**
+   * @deprecated as of 2019-11-05
+   */
   on: Promises<T>;
   response: Promise<Response<T>>;
   cancel: () => void;

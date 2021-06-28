@@ -36,7 +36,7 @@ export function request<R, T, E = any>(
     xhrRequest.setRequestHeader(header.name, header.value)
   );
 
-  xhrRequest.withCredentials = true;
+  xhrRequest.withCredentials = options.withCredentials ?? true;
   xhrRequest.responseType = options.responseType || 'json';
 
   xhrRequest.onreadystatechange = function () {
