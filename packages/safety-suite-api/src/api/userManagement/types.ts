@@ -26,3 +26,16 @@ export interface User {
    */
   active: boolean;
 }
+
+export interface UserWithRoleNames {
+  /**
+   * `User` object.
+   */
+  user: User;
+  /**
+   * Array of `Role` names which are granted to the included `User`
+   */
+  roleNames: string[];
+}
+
+export type InputUser = Pick<User, 'email' | 'firstName' | 'lastName'>;

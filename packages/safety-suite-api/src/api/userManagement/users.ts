@@ -1,15 +1,8 @@
 import {Request} from '@idelic/safety-net';
 
 import {runApi} from '../../runApi';
-import {ApiOptions, ApiResponse, CustomerSpecificQuery, Id} from '../../types';
-import {User} from './types';
-
-export interface GetUsersQuery extends Partial<CustomerSpecificQuery> {
-  /**
-   * Filter users by these ids.
-   */
-  ids?: Id[];
-}
+import {ApiOptions, ApiResponse, CustomerSpecificQuery} from '../../types';
+import {InputUser, User, UserWithRoleNames} from './types';
 
 /**
  * Get a list of users.
@@ -18,35 +11,13 @@ export interface GetUsersQuery extends Partial<CustomerSpecificQuery> {
  * @returns Array of `User` objects.
  */
 export const getUsers = (
-  query: GetUsersQuery = {},
+  query: CustomerSpecificQuery,
   apiOptions?: ApiOptions
-): Request<ApiResponse<User[]>> =>
+): Request<ApiResponse<UserWithRoleNames[]>> =>
   runApi({
     method: 'GET',
     urlRoot: 'userManagementUrlRoot',
     route: '/api/users',
-    apiOptions,
-    requestOptions: {
-      query
-    }
-  });
-
-/**
- * Get a specific user by id.
- * @param id Get user by this id.
- * @param query Object containing query params for this route.
- * @param apiOptions Optional options for runApi.
- * @returns A single `User` object.
- */
-export const getUser = (
-  id: Id,
-  query: CustomerSpecificQuery,
-  apiOptions?: ApiOptions
-): Request<ApiResponse<User>> =>
-  runApi({
-    method: 'GET',
-    urlRoot: 'userManagementUrlRoot',
-    route: `/api/users/${id}`,
     apiOptions,
     requestOptions: {
       query
@@ -71,4 +42,65 @@ export const getCurrentUser = (
     requestOptions: {
       query
     }
+  });
+
+/**
+ * Invite a new user.
+ * @param user `InputUser` object containing information about the user.
+ * @param query Object containing query params for this route.
+ * @param apiOptions Optional options for runApi.
+ * @returns The `User` object of the invited user.
+ */
+export const inviteUser = (
+  user: InputUser,
+  query: CustomerSpecificQuery,
+  apiOptions?: ApiOptions
+): Request<ApiResponse<User>> =>
+  runApi({
+    method: 'POST',
+    urlRoot: 'userManagementUrlRoot',
+    route: '/api/users/invite',
+    apiOptions,
+    requestOptions: {
+      body: user,
+      query
+    }
+  });
+
+/**
+ * Resend an invite to a user.
+ * @param user `User` object of the user to which the invite will be resent.
+ * @param query Object containing query params for this route.
+ * @param apiOptions Optional options for runApi.
+ * @returns Auth0 response.
+ */
+export const resendUserInvite = (
+  user: User,
+  query: CustomerSpecificQuery,
+  apiOptions?: ApiOptions
+): Request<ApiResponse<string>> =>
+  runApi({
+    method: 'POST',
+    urlRoot: 'userManagementUrlRoot',
+    route: '/api/users/resendInvite',
+    apiOptions,
+    requestOptions: {
+      body: user,
+      query
+    }
+  });
+
+/**
+ * Sends a change password request for the currently logged in user.
+ * @param apiOptions Optional options for runApi.
+ * @returns Auth0 response.
+ */
+export const changePassword = (
+  apiOptions?: ApiOptions
+): Request<ApiResponse<string>> =>
+  runApi({
+    method: 'POST',
+    urlRoot: 'userManagementUrlRoot',
+    route: '/api/users/changePassword',
+    apiOptions
   });

@@ -2,7 +2,7 @@ import {Request} from '@idelic/safety-net';
 
 import {runApi} from '../../runApi';
 import {ApiOptions, ApiResponse, CustomerSpecificQuery, Id} from '../../types';
-import {DeleteResponse, Grant, GrantDTO, InputGrant} from './types';
+import {DeleteResponse, GrantDTO, InputGrant} from './types';
 
 /**
  * Gets a specific `Grant`
@@ -15,7 +15,7 @@ export const getGrant = (
   userId: Id,
   query: CustomerSpecificQuery,
   apiOptions?: ApiOptions
-): Request<ApiResponse<Grant>> =>
+): Request<ApiResponse<GrantDTO>> =>
   runApi({
     method: 'GET',
     urlRoot: 'permissionUrlRoot',
@@ -37,7 +37,7 @@ export const createGrant = (
   inputGrant: InputGrant,
   query: CustomerSpecificQuery,
   apiOptions?: ApiOptions
-): Request<ApiResponse<Grant>> =>
+): Request<ApiResponse<GrantDTO>> =>
   runApi({
     method: 'POST',
     urlRoot: 'permissionUrlRoot',
@@ -60,7 +60,7 @@ export const bulkCreateGrant = (
   inputGrants: InputGrant[],
   query: CustomerSpecificQuery,
   apiOptions?: ApiOptions
-): Request<ApiResponse<Grant[]>> =>
+): Request<ApiResponse<GrantDTO[]>> =>
   runApi({
     method: 'POST',
     urlRoot: 'permissionUrlRoot',
@@ -83,7 +83,7 @@ export const updateGrant = (
   grant: GrantDTO,
   query: CustomerSpecificQuery,
   apiOptions?: ApiOptions
-): Request<ApiResponse<Grant>> =>
+): Request<ApiResponse<GrantDTO>> =>
   runApi({
     method: 'PUT',
     urlRoot: 'permissionUrlRoot',
@@ -106,7 +106,7 @@ export const bulkUpdateGrant = (
   grants: InputGrant[],
   query: CustomerSpecificQuery,
   apiOptions?: ApiOptions
-): Request<ApiResponse<Grant[]>> =>
+): Request<ApiResponse<GrantDTO[]>> =>
   runApi({
     method: 'PUT',
     urlRoot: 'permissionUrlRoot',
