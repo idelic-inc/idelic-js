@@ -16,14 +16,16 @@ export type InitConfig = Config & {
 };
 
 export const config: InitConfig = {
-  initialized: false,
   apiUrlRoot: '',
-  loginUrlRoot: '',
   configUrlRoot: '',
+  dashboardSinkUrlRoot: '',
   documentLibraryUrlRoot: '',
   eformsUrlRoot: '',
-  dashboardSinkUrlRoot: '',
-  onAuthError: () => {}
+  initialized: false,
+  loginUrlRoot: '',
+  onAuthError: () => {},
+  permissionUrlRoot: '',
+  userManagementUrlRoot: ''
 };
 
 export interface CrudOptions extends NestedConfiguration {
@@ -453,10 +455,12 @@ export const initializeConfig = (
     !matchesConfig(nestedConfig, {
       services: {
         app: {url: ''},
+        dashboardSink: {url: ''},
         documentLibrary: {url: ''},
         eforms: {url: ''},
+        permission: {url: ''},
         saf: {url: ''},
-        dashboardSink: {url: ''}
+        usermanagement: {url: ''}
       }
     })
   ) {
@@ -464,10 +468,12 @@ export const initializeConfig = (
   }
   config.configUrlRoot = configUrl;
   config.apiUrlRoot = nestedConfig.services.saf.url;
-  config.loginUrlRoot = nestedConfig.services.app.url;
+  config.dashboardSinkUrlRoot = nestedConfig.services.dashboardSink.url;
   config.documentLibraryUrlRoot = nestedConfig.services.documentLibrary.url;
   config.eformsUrlRoot = nestedConfig.services.eforms.url;
-  config.dashboardSinkUrlRoot = nestedConfig.services.dashboardSink.url;
+  config.loginUrlRoot = nestedConfig.services.app.url;
+  config.permissionUrlRoot = nestedConfig.services.permission.url;
+  config.userManagementUrlRoot = nestedConfig.services.usermanagement.url;
   config.initialized = true;
 };
 
