@@ -42,7 +42,7 @@ export type BusinessHierarchyTemplate = {
   companyStructureName: string;
   description: string;
   createdBy: number;
-  uploadDate: string;
+  uploadedDate: string;
 };
 
 /**
