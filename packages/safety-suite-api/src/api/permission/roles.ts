@@ -39,11 +39,13 @@ export const getRoles = (
 /**
  * Updates a role.
  * @param role `Role` object to update.
+ * @param query Object containing query params for this route.
  * @param apiOptions Optional options for runApi.
  * @returns The updated `Role` object.
  */
 export const updateRole = (
   role: Role,
+  query: CustomerSpecificQuery,
   apiOptions?: ApiOptions
 ): Request<ApiResponse<Role>> =>
   runApi({
@@ -52,14 +54,15 @@ export const updateRole = (
     route: '/api/roles',
     apiOptions,
     requestOptions: {
-      body: role
+      body: role,
+      query
     }
   });
 
 /**
  * Creates a new role.
  * @param inputRole `InputRole` object.
- * @param role `Role` object to update.
+ * @param query Object containing query params for this route.
  * @param apiOptions Optional options for runApi.
  * @returns The created `Role` object.
  */
