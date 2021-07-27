@@ -176,12 +176,14 @@ export interface BasicConfig extends NestedConfiguration {
       };
       safetyEvents: {
         accidentFrequency: {enabled: boolean};
+        enabled: boolean;
         enforcements: {enabled: boolean};
         incidentFrequency: {enabled: boolean};
         injuryFrequency: {enabled: boolean};
         riskScores: {enabled: boolean};
       };
       trainingAndDevelopment: {
+        enabled: boolean;
         hub_university: {enabled: boolean};
         professionalDevelopmentPlans: {enabled: boolean};
         smartDrive: {enabled: boolean};
@@ -382,12 +384,14 @@ const exampleConfig: BasicConfig = {
       },
       safetyEvents: {
         accidentFrequency: {enabled: false},
+        enabled: false,
         enforcements: {enabled: false},
         incidentFrequency: {enabled: false},
         injuryFrequency: {enabled: false},
         riskScores: {enabled: false}
       },
       trainingAndDevelopment: {
+        enabled: false,
         hub_university: {enabled: false},
         professionalDevelopmentPlans: {enabled: false},
         smartDrive: {enabled: false},
