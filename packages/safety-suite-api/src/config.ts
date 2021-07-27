@@ -158,19 +158,37 @@ export interface BasicConfig extends NestedConfiguration {
       };
       strategy: string;
     };
-    performanceDashboard: {
-      accidents: {enabled: boolean};
-      apiTarget: string;
-      developmentPlans: {enabled: boolean};
-      enabled: boolean;
-      enforcements: {enabled: boolean};
-      expiringDocuments: {enabled: boolean};
-      fallbackFrontendUrl: string;
-      frontendUrl: string;
-      hierarchyFilter: {enabled: boolean};
-      injuries: {enabled: boolean};
-      newHotness: {enabled: boolean};
-      watchlist: {enabled: boolean};
+    dashboards: {
+      defaultDashboard: string;
+      performance: {
+        accidents: {enabled: boolean};
+        apiTarget: string;
+        developmentPlans: {enabled: boolean};
+        enabled: boolean;
+        enforcements: {enabled: boolean};
+        expiringDocuments: {enabled: boolean};
+        fallbackFrontendUrl: string;
+        frontendUrl: string;
+        hierarchyFilter: {enabled: boolean};
+        injuries: {enabled: boolean};
+        newHotness: {enabled: boolean};
+        watchlist: {enabled: boolean};
+      };
+      safetyEvents: {
+        accidentFrequency: {enabled: boolean};
+        enabled: boolean;
+        enforcements: {enabled: boolean};
+        incidentFrequency: {enabled: boolean};
+        injuryFrequency: {enabled: boolean};
+        riskScores: {enabled: boolean};
+      };
+      trainingAndDevelopment: {
+        enabled: boolean;
+        hub_university: {enabled: boolean};
+        professionalDevelopmentPlans: {enabled: boolean};
+        smartDrive: {enabled: boolean};
+        worklete: {enabled: boolean};
+      };
     };
     permission: ScalaService;
     saf: {
@@ -348,19 +366,37 @@ const exampleConfig: BasicConfig = {
       enabled: false,
       url: ''
     },
-    performanceDashboard: {
-      accidents: {enabled: false},
-      apiTarget: '',
-      developmentPlans: {enabled: false},
-      enabled: false,
-      enforcements: {enabled: false},
-      expiringDocuments: {enabled: false},
-      fallbackFrontendUrl: '',
-      frontendUrl: '',
-      hierarchyFilter: {enabled: false},
-      injuries: {enabled: false},
-      newHotness: {enabled: false},
-      watchlist: {enabled: false}
+    dashboards: {
+      defaultDashboard: '',
+      performance: {
+        accidents: {enabled: false},
+        apiTarget: '',
+        developmentPlans: {enabled: false},
+        enabled: false,
+        enforcements: {enabled: false},
+        expiringDocuments: {enabled: false},
+        fallbackFrontendUrl: '',
+        frontendUrl: '',
+        hierarchyFilter: {enabled: false},
+        injuries: {enabled: false},
+        newHotness: {enabled: false},
+        watchlist: {enabled: false}
+      },
+      safetyEvents: {
+        accidentFrequency: {enabled: false},
+        enabled: false,
+        enforcements: {enabled: false},
+        incidentFrequency: {enabled: false},
+        injuryFrequency: {enabled: false},
+        riskScores: {enabled: false}
+      },
+      trainingAndDevelopment: {
+        enabled: false,
+        hub_university: {enabled: false},
+        professionalDevelopmentPlans: {enabled: false},
+        smartDrive: {enabled: false},
+        worklete: {enabled: false}
+      }
     }
   },
   integrations: {
