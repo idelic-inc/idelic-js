@@ -182,8 +182,7 @@ export interface BasicConfig extends NestedConfiguration {
         riskScores: {enabled: boolean};
       };
       trainingAndDevelopment: {
-        hubUniversity: {enabled: boolean};
-        lytxDriveCam: {enabled: boolean};
+        hub_university: {enabled: boolean};
         professionalDevelopmentPlans: {enabled: boolean};
         smartDrive: {enabled: boolean};
         worklete: {enabled: boolean};
@@ -365,19 +364,35 @@ const exampleConfig: BasicConfig = {
       enabled: false,
       url: ''
     },
-    performanceDashboard: {
-      accidents: {enabled: false},
-      apiTarget: '',
-      developmentPlans: {enabled: false},
-      enabled: false,
-      enforcements: {enabled: false},
-      expiringDocuments: {enabled: false},
-      fallbackFrontendUrl: '',
-      frontendUrl: '',
-      hierarchyFilter: {enabled: false},
-      injuries: {enabled: false},
-      newHotness: {enabled: false},
-      watchlist: {enabled: false}
+    dashboards: {
+      defaultDashboard: '',
+      performance: {
+        accidents: {enabled: false},
+        apiTarget: '',
+        developmentPlans: {enabled: false},
+        enabled: false,
+        enforcements: {enabled: false},
+        expiringDocuments: {enabled: false},
+        fallbackFrontendUrl: '',
+        frontendUrl: '',
+        hierarchyFilter: {enabled: false},
+        injuries: {enabled: false},
+        newHotness: {enabled: false},
+        watchlist: {enabled: false}
+      },
+      safetyEvents: {
+        accidentFrequency: {enabled: false},
+        enforcements: {enabled: false},
+        incidentFrequency: {enabled: false},
+        injuryFrequency: {enabled: false},
+        riskScores: {enabled: false}
+      },
+      trainingAndDevelopment: {
+        hub_university: {enabled: false},
+        professionalDevelopmentPlans: {enabled: false},
+        smartDrive: {enabled: false},
+        worklete: {enabled: false}
+      }
     }
   },
   integrations: {
