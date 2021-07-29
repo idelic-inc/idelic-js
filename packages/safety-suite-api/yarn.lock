@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@idelic/safety-net@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@idelic/safety-net/-/safety-net-2.0.0.tgz#5c2d310c95ed96222f89d4f1ae7d8a1116919993"
-  integrity sha512-6M20J8o6ZLjGMNABivXp+LRspryfQEnu0IxyDJL8uOZLL01MQExlXCiMFewo4nBxXx/HvbMs5PWBiZNu6W1thA==
+"@idelic/safety-net@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@idelic/safety-net/-/safety-net-2.1.0.tgz#a95557e4ebbd518e944f36b8ce823cc13db41925"
+  integrity sha512-CRWm1dQpy5bkM2DfvziV8xFuAZYcaU5rX5M/RAX/CgajdGWj6XXl1vxRmnYupguNnOPcOJsNPmALLq1ktvmygw==
   dependencies:
     source-map-support "^0.5.13"
 
@@ -13,6 +13,18 @@ buffer-from@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/buffer-from/-/buffer-from-1.1.1.tgz#32713bc028f75c02fdb710d7c7bcec1f2c6070ef"
   integrity sha512-MQcXEUbCKtEo7bhqEs6560Hyd4XaovZlO/k9V3hjVUF/zwW7KBVdSK4gIt/bzwS9MbR5qob+F5jusZsb0YQK2A==
+
+"js-tokens@^3.0.0 || ^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
+  integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
+
+loose-envify@^1.1.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
+  integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
+  dependencies:
+    js-tokens "^3.0.0 || ^4.0.0"
 
 moment-timezone@^0.5.26:
   version "0.5.31"
@@ -25,6 +37,19 @@ moment-timezone@^0.5.26:
   version "2.29.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
   integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
+
+object-assign@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
+  integrity sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=
+
+react@^17.0.2:
+  version "17.0.2"
+  resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"
+  integrity sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
 
 source-map-support@^0.5.13:
   version "0.5.19"

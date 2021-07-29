@@ -28,5 +28,8 @@
   },
   "peerDependencies": {
     "immutable": "4.x"
+  },
+  "optionalDependencies": {
+    "react": "^17.0.2"
   }
 }
