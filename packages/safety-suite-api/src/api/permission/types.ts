@@ -122,6 +122,17 @@ export type GrantDTO = Pick<
   'id' | 'userId' | 'roleId' | 'groupIds' | 'customerAlias'
 >;
 
+export type ModulePermissionActions =
+  | 'view'
+  | 'viewConfidential'
+  | 'add'
+  | 'edit'
+  | 'delete';
+export type DocumentLibraryPermissionActions =
+  | Exclude<ModulePermissionActions, 'add'>
+  | 'upload'
+  | 'download';
+
 export interface UserPermissions {
   /**
    * If the user has the `superAdmin` role.
@@ -132,10 +143,21 @@ export interface UserPermissions {
    */
   admin: boolean;
   /**
-   * If the user is not an admin, this will contain a key value map where the key is a module name
-   * and the value is another map with a permission name key and a list of id as the value.
+   * Record of module permissions where the key is
+   * the action and the value is a record where the key is
+   * the module alias and the value is an array of group ids.
    */
-  permissions: Record<string, Record<string, number[]>>;
+  modulePermissions: Record<ModulePermissionActions, Record<Alias, Id[]>>;
+  /**
+   * Record of canned report permissions where the key is
+   * the report alias and the value is an array of group ids.
+   */
+  reportPermissions: Record<Alias, Id[]>;
+  /**
+   * Record of document library permissions where the key is
+   * the action and the value is a boolean.
+   */
+  documentLibraryPermissions: Record<DocumentLibraryPermissionActions, boolean>;
 }
 
 export interface Module {
