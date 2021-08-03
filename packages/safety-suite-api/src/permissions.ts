@@ -5,8 +5,8 @@ import {
   ModulePermissionActions,
   UserPermissions
 } from './api/permission';
-import {BasicConfig} from './config';
 import {Alias, Id} from './types';
+import {LegacyUserArgs, UserArgs, UserWrapper} from './user';
 
 export interface ModelTemplate {
   alias: Alias;
@@ -22,26 +22,21 @@ export interface MonitorTemplate {
 }
 
 export interface BasePermissionsArgs {
-  config: BasicConfig;
   customerId: Id;
   modelGroups: ModelGroup[];
   modelTemplates: ModelTemplate[];
   monitorTemplates: MonitorTemplate[];
 }
-export interface LegacyPermissionsArgs extends BasePermissionsArgs {
-  legacySafUser: SafUser;
-  legacyUser: User;
+export interface LegacyPermissionsArgs
+  extends LegacyUserArgs,
+    BasePermissionsArgs {
   userPermissions?: never;
 }
-export interface PermissionsArgs extends BasePermissionsArgs {
-  legacySafUser?: never;
-  legacyUser?: never;
+export interface PermissionsArgs extends UserArgs, BasePermissionsArgs {
   userPermissions: UserPermissions;
 }
 
-export class Permissions {
-  private legacy: boolean;
-
+export class UserWithPermissions extends UserWrapper {
   private static readActions: ModulePermissionActions[] = [
     'view',
     'viewConfidential'
@@ -55,28 +50,22 @@ export class Permissions {
 
   monitorTemplates: MonitorTemplate[];
 
-  legacySafUser?: SafUser;
-
-  legacyUser?: User;
-
   legacyUserPermissions?: UserPermission;
 
   userPermissions?: UserPermissions;
 
-  constructor({
-    config,
-    customerId,
-    legacySafUser,
-    legacyUser,
-    modelGroups,
-    modelTemplates,
-    monitorTemplates,
-    userPermissions
-  }: LegacyPermissionsArgs | PermissionsArgs) {
+  constructor(args: LegacyPermissionsArgs | PermissionsArgs) {
+    super(args);
+    const {
+      customerId,
+      legacySafUser,
+      legacyUser,
+      modelGroups,
+      modelTemplates,
+      monitorTemplates,
+      userPermissions
+    } = args;
     this.customerId = customerId;
-    this.legacy =
-      !config.services.permission.enabled ||
-      !config.services.usermanagement.enabled;
     this.modelTemplates = modelTemplates;
     this.monitorTemplates = monitorTemplates;
     this.modelGroups = modelGroups;
@@ -94,8 +83,6 @@ export class Permissions {
           `No permissions found in "legacyUser" for customer with id "${this.customerId}"`
         );
       }
-      this.legacySafUser = legacySafUser;
-      this.legacyUser = legacyUser;
       this.legacyUserPermissions = legacyUserPermissions;
     } else {
       if (!userPermissions) {
@@ -146,6 +133,7 @@ export class Permissions {
     legacyUser: User;
     legacyUserPermissions: UserPermission;
     userPermissions: undefined;
+    user: undefined;
   } {
     return this.legacy;
   }
@@ -172,7 +160,7 @@ export class Permissions {
       if (action === 'viewConfidential' && !this.legacySafUser.allowProtected) {
         return [];
       }
-      const isReadAction = Permissions.readActions.includes(action);
+      const isReadAction = UserWithPermissions.readActions.includes(action);
       const legacyGroupIds = isReadAction
         ? this.legacySafUser.readGroupPermissions
         : this.legacySafUser.writeGroupPermissions;
@@ -218,7 +206,7 @@ export class Permissions {
       if (action === 'viewConfidential' && !this.legacySafUser.allowProtected) {
         return [];
       }
-      const isReadAction = Permissions.readActions.includes(action);
+      const isReadAction = UserWithPermissions.readActions.includes(action);
       return this.filterModelGroups(
         isReadAction
           ? this.legacySafUser.readGroupPermissions

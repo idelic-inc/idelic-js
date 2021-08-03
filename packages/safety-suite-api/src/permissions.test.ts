@@ -5,8 +5,8 @@ import {
   LegacyPermissionsArgs,
   ModelTemplate,
   MonitorTemplate,
-  Permissions,
-  PermissionsArgs
+  PermissionsArgs,
+  UserWithPermissions
 } from './permissions';
 
 const legacyConfig: BasicConfig = {
@@ -174,20 +174,21 @@ const permissionsArgs: PermissionsArgs = {
   userPermissions,
   modelGroups,
   modelTemplates,
-  monitorTemplates
+  monitorTemplates,
+  user: {} as any
 };
 
 describe('permissions constructor', () => {
   it('successfully constructs legacy permissions object', () => {
-    expect(() => new Permissions(legacyPermissionsArgs)).not.toThrow();
+    expect(() => new UserWithPermissions(legacyPermissionsArgs)).not.toThrow();
   });
   it('successfully constructs new permissions object', () => {
-    expect(() => new Permissions(permissionsArgs)).not.toThrow();
+    expect(() => new UserWithPermissions(permissionsArgs)).not.toThrow();
   });
   it('fails to construct a legacy permissions object when provided incorrect config', () => {
     expect(
       () =>
-        new Permissions({
+        new UserWithPermissions({
           ...legacyPermissionsArgs,
           config
         })
@@ -196,7 +197,7 @@ describe('permissions constructor', () => {
   it('fails to construct a new permissions object when provided incorrect config', () => {
     expect(
       () =>
-        new Permissions({
+        new UserWithPermissions({
           ...permissionsArgs,
           config: legacyConfig
         })
@@ -205,7 +206,7 @@ describe('permissions constructor', () => {
   it('fails to construct a legacy permissions object when provided incorrect legacyUser', () => {
     expect(
       () =>
-        new Permissions({
+        new UserWithPermissions({
           ...legacyPermissionsArgs,
           legacyUser: {...legacyUser, permissions: []}
         })
@@ -215,7 +216,7 @@ describe('permissions constructor', () => {
 
 describe('permissions admin flags', () => {
   it('successfully sets legacy admin flag', () => {
-    const permissions = new Permissions({
+    const permissions = new UserWithPermissions({
       ...legacyPermissionsArgs,
       legacySafUser: {...legacySafUser, admin: true}
     });
@@ -223,7 +224,7 @@ describe('permissions admin flags', () => {
     expect(permissions.superAdmin).toBe(false);
   });
   it('successfully sets legacy superAdmin flag', () => {
-    const permissions = new Permissions({
+    const permissions = new UserWithPermissions({
       ...legacyPermissionsArgs,
       legacyUser: {...legacyUser, admin: true}
     });
@@ -231,7 +232,7 @@ describe('permissions admin flags', () => {
     expect(permissions.superAdmin).toBe(true);
   });
   it('successfully sets new admin flag', () => {
-    const permissions = new Permissions({
+    const permissions = new UserWithPermissions({
       ...permissionsArgs,
       userPermissions: {
         ...userPermissions,
@@ -242,7 +243,7 @@ describe('permissions admin flags', () => {
     expect(permissions.superAdmin).toBe(false);
   });
   it('successfully sets new superAdmin flag', () => {
-    const permissions = new Permissions({
+    const permissions = new UserWithPermissions({
       ...permissionsArgs,
       userPermissions: {
         ...userPermissions,
@@ -256,7 +257,7 @@ describe('permissions admin flags', () => {
 
 describe('permissions admin flags', () => {
   it('successfully sets legacy admin flag', () => {
-    const permissions = new Permissions({
+    const permissions = new UserWithPermissions({
       ...legacyPermissionsArgs,
       legacySafUser: {...legacySafUser, admin: true}
     });
@@ -264,7 +265,7 @@ describe('permissions admin flags', () => {
     expect(permissions.superAdmin).toBe(false);
   });
   it('successfully sets legacy superAdmin flag', () => {
-    const permissions = new Permissions({
+    const permissions = new UserWithPermissions({
       ...legacyPermissionsArgs,
       legacyUser: {...legacyUser, admin: true}
     });
@@ -272,7 +273,7 @@ describe('permissions admin flags', () => {
     expect(permissions.superAdmin).toBe(true);
   });
   it('successfully sets new admin flag', () => {
-    const permissions = new Permissions({
+    const permissions = new UserWithPermissions({
       ...permissionsArgs,
       userPermissions: {
         ...userPermissions,
@@ -283,7 +284,7 @@ describe('permissions admin flags', () => {
     expect(permissions.superAdmin).toBe(false);
   });
   it('successfully sets new superAdmin flag', () => {
-    const permissions = new Permissions({
+    const permissions = new UserWithPermissions({
       ...permissionsArgs,
       userPermissions: {
         ...userPermissions,
@@ -297,19 +298,19 @@ describe('permissions admin flags', () => {
 
 describe('permissions groups by model template', () => {
   it('gets view groups for permitted template (legacy)', () => {
-    const permissions = new Permissions(legacyPermissionsArgs);
+    const permissions = new UserWithPermissions(legacyPermissionsArgs);
     expect(permissions.getGroupsByModelTemplate(6, 'view')).toEqual(
       permissions.filterModelGroups(legacySafUser.readGroupPermissions)
     );
   });
   it('gets empty array for viewConfidential action without allowProtected (legacy)', () => {
-    const permissions = new Permissions(legacyPermissionsArgs);
+    const permissions = new UserWithPermissions(legacyPermissionsArgs);
     expect(permissions.getGroupsByModelTemplate(6, 'viewConfidential')).toEqual(
       []
     );
   });
   it('gets viewConfidential groups for permitted template (legacy)', () => {
-    const permissions = new Permissions({
+    const permissions = new UserWithPermissions({
       ...legacyPermissionsArgs,
       legacySafUser: {...legacySafUser, allowProtected: true}
     });
@@ -318,21 +319,21 @@ describe('permissions groups by model template', () => {
     );
   });
   it('gets edit groups for permitted template (legacy)', () => {
-    const permissions = new Permissions(legacyPermissionsArgs);
+    const permissions = new UserWithPermissions(legacyPermissionsArgs);
     expect(permissions.getGroupsByModelTemplate(6, 'edit')).toEqual(
       permissions.filterModelGroups(legacySafUser.writeGroupPermissions)
     );
   });
   it('gets empty array for edit action for read-only template (legacy)', () => {
-    const permissions = new Permissions(legacyPermissionsArgs);
+    const permissions = new UserWithPermissions(legacyPermissionsArgs);
     expect(permissions.getGroupsByModelTemplate(8, 'edit')).toEqual([]);
   });
   it('gets empty array for non-permitted template (legacy)', () => {
-    const permissions = new Permissions(legacyPermissionsArgs);
+    const permissions = new UserWithPermissions(legacyPermissionsArgs);
     expect(permissions.getGroupsByModelTemplate(10, 'view')).toEqual([]);
   });
   it('gets all groups for any template when admin (legacy)', () => {
-    const permissions = new Permissions({
+    const permissions = new UserWithPermissions({
       ...legacyPermissionsArgs,
       legacySafUser: {...legacySafUser, admin: true}
     });
@@ -341,11 +342,11 @@ describe('permissions groups by model template', () => {
     );
   });
   it('gets empty array for non-existent template', () => {
-    const permissions = new Permissions(legacyPermissionsArgs);
+    const permissions = new UserWithPermissions(legacyPermissionsArgs);
     expect(permissions.getGroupsByModelTemplate(11, 'view')).toEqual([]);
   });
   it('gets groups for template with single module', () => {
-    const permissions = new Permissions(permissionsArgs);
+    const permissions = new UserWithPermissions(permissionsArgs);
     expect(permissions.getGroupsByModelTemplate(6, 'view')).toEqual(
       permissions.filterModelGroups(
         userPermissions.modulePermissions.view.module1
@@ -353,7 +354,7 @@ describe('permissions groups by model template', () => {
     );
   });
   it('gets groups for template with multiple modules', () => {
-    const permissions = new Permissions(permissionsArgs);
+    const permissions = new UserWithPermissions(permissionsArgs);
     expect(permissions.getGroupsByModelTemplate(8, 'view')).toEqual(
       permissions.filterModelGroups([
         ...userPermissions.modulePermissions.view.module1,
@@ -365,19 +366,19 @@ describe('permissions groups by model template', () => {
 
 describe('permissions groups by monitor template', () => {
   it('gets view groups for permitted template (legacy)', () => {
-    const permissions = new Permissions(legacyPermissionsArgs);
+    const permissions = new UserWithPermissions(legacyPermissionsArgs);
     expect(permissions.getGroupsByMonitorTemplate(11, 'view')).toEqual(
       permissions.filterModelGroups(legacySafUser.readGroupPermissions)
     );
   });
   it('gets empty array for viewConfidential action without allowProtected (legacy)', () => {
-    const permissions = new Permissions(legacyPermissionsArgs);
+    const permissions = new UserWithPermissions(legacyPermissionsArgs);
     expect(
       permissions.getGroupsByMonitorTemplate(11, 'viewConfidential')
     ).toEqual([]);
   });
   it('gets viewConfidential groups for permitted template (legacy)', () => {
-    const permissions = new Permissions({
+    const permissions = new UserWithPermissions({
       ...legacyPermissionsArgs,
       legacySafUser: {...legacySafUser, allowProtected: true}
     });
@@ -388,13 +389,13 @@ describe('permissions groups by monitor template', () => {
     );
   });
   it('gets edit groups for permitted template (legacy)', () => {
-    const permissions = new Permissions(legacyPermissionsArgs);
+    const permissions = new UserWithPermissions(legacyPermissionsArgs);
     expect(permissions.getGroupsByMonitorTemplate(11, 'edit')).toEqual(
       permissions.filterModelGroups(legacySafUser.writeGroupPermissions)
     );
   });
   it('gets all groups for any template when admin (legacy)', () => {
-    const permissions = new Permissions({
+    const permissions = new UserWithPermissions({
       ...legacyPermissionsArgs,
       legacySafUser: {...legacySafUser, admin: true}
     });
@@ -403,11 +404,11 @@ describe('permissions groups by monitor template', () => {
     );
   });
   it('gets empty array for non-existent template', () => {
-    const permissions = new Permissions(legacyPermissionsArgs);
+    const permissions = new UserWithPermissions(legacyPermissionsArgs);
     expect(permissions.getGroupsByMonitorTemplate(16, 'view')).toEqual([]);
   });
   it('gets groups for template with single module', () => {
-    const permissions = new Permissions(permissionsArgs);
+    const permissions = new UserWithPermissions(permissionsArgs);
     expect(permissions.getGroupsByMonitorTemplate(11, 'view')).toEqual(
       permissions.filterModelGroups(
         userPermissions.modulePermissions.view.module1
@@ -415,7 +416,7 @@ describe('permissions groups by monitor template', () => {
     );
   });
   it('gets groups for template with multiple modules', () => {
-    const permissions = new Permissions(permissionsArgs);
+    const permissions = new UserWithPermissions(permissionsArgs);
     expect(permissions.getGroupsByMonitorTemplate(13, 'view')).toEqual(
       permissions.filterModelGroups([
         ...userPermissions.modulePermissions.view.module1,
@@ -427,7 +428,7 @@ describe('permissions groups by monitor template', () => {
 
 describe('permissions groups by report', () => {
   it('gets view groups for any report (legacy)', () => {
-    const permissions = new Permissions(legacyPermissionsArgs);
+    const permissions = new UserWithPermissions(legacyPermissionsArgs);
     const groups = permissions.filterModelGroups(
       legacySafUser.readGroupPermissions
     );
@@ -437,20 +438,20 @@ describe('permissions groups by report', () => {
     );
   });
   it('gets all groups for any report when admin', () => {
-    const permissions = new Permissions({
+    const permissions = new UserWithPermissions({
       ...legacyPermissionsArgs,
       legacySafUser: {...legacySafUser, admin: true}
     });
     expect(permissions.getGroupsByReport('report1')).toEqual(modelGroups);
   });
   it('gets groups for existent report', () => {
-    const permissions = new Permissions(permissionsArgs);
+    const permissions = new UserWithPermissions(permissionsArgs);
     expect(permissions.getGroupsByReport('report1')).toEqual(
       permissions.filterModelGroups(userPermissions.reportPermissions.report1)
     );
   });
   it('gets empty array for non-existent report', () => {
-    const permissions = new Permissions(permissionsArgs);
+    const permissions = new UserWithPermissions(permissionsArgs);
     expect(permissions.getGroupsByReport('non-existent-report-alias')).toEqual(
       []
     );
@@ -459,7 +460,7 @@ describe('permissions groups by report', () => {
 
 describe('permissions document library', () => {
   it('gets viewConfidential permission with viewDocuments and allowProtected (legacy)', () => {
-    const permissions = new Permissions({
+    const permissions = new UserWithPermissions({
       ...legacyPermissionsArgs,
       legacySafUser: {...legacySafUser, allowProtected: true},
       legacyUser: {
@@ -470,7 +471,7 @@ describe('permissions document library', () => {
     expect(permissions.documentLibraryPermissions.viewConfidential).toBe(true);
   });
   it('does not get viewConfidential permission with viewDocuments but without allowProtected (legacy)', () => {
-    const permissions = new Permissions({
+    const permissions = new UserWithPermissions({
       ...legacyPermissionsArgs,
       legacyUser: {
         ...legacyUser,
@@ -480,14 +481,14 @@ describe('permissions document library', () => {
     expect(permissions.documentLibraryPermissions.viewConfidential).toBe(false);
   });
   it('does not get viewConfidential permission without viewDocuments but with allowProtected (legacy)', () => {
-    const permissions = new Permissions({
+    const permissions = new UserWithPermissions({
       ...legacyPermissionsArgs,
       legacySafUser: {...legacySafUser, allowProtected: true}
     });
     expect(permissions.documentLibraryPermissions.viewConfidential).toBe(false);
   });
   it('gets all permissions when admin', () => {
-    const permissions = new Permissions({
+    const permissions = new UserWithPermissions({
       ...legacyPermissionsArgs,
       legacySafUser: {...legacySafUser, admin: true}
     });
@@ -498,7 +499,7 @@ describe('permissions document library', () => {
     ).toBe(false);
   });
   it('gets permissions passed into constructor', () => {
-    const permissions = new Permissions(permissionsArgs);
+    const permissions = new UserWithPermissions(permissionsArgs);
     expect(permissions.documentLibraryPermissions).toEqual(
       userPermissions.documentLibraryPermissions
     );
@@ -507,7 +508,7 @@ describe('permissions document library', () => {
 
 describe('permissions groups by module', () => {
   it('gets all groups when getting any module (legacy)', () => {
-    const permissions = new Permissions(legacyPermissionsArgs);
+    const permissions = new UserWithPermissions(legacyPermissionsArgs);
     expect(permissions.getGroupsByModule('module1', 'view')).toEqual(
       modelGroups
     );
@@ -516,19 +517,21 @@ describe('permissions groups by module', () => {
     ).toEqual(modelGroups);
   });
   it('gets groups for module', () => {
-    const permissions = new Permissions(permissionsArgs);
+    const permissions = new UserWithPermissions(permissionsArgs);
     expect(permissions.getGroupsByModule('module1', 'view')).toEqual(
-      userPermissions.modulePermissions.view.module1
+      permissions.filterModelGroups(
+        userPermissions.modulePermissions.view.module1
+      )
     );
   });
   it('gets empty array for non-existent module', () => {
-    const permissions = new Permissions(permissionsArgs);
+    const permissions = new UserWithPermissions(permissionsArgs);
     expect(
       permissions.getGroupsByModule('non-existent-module', 'view')
     ).toEqual([]);
   });
   it('gets all groups when admin', () => {
-    const permissions = new Permissions({
+    const permissions = new UserWithPermissions({
       ...permissionsArgs,
       userPermissions: {
         ...userPermissions,
