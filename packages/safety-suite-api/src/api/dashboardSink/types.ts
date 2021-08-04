@@ -1,5 +1,11 @@
 export type SortDirection = 'asc' | 'desc';
-
+export type KpiAggregation = 'SUM' | 'COUNT';
+export type KpiTimeInterval =
+  | 'hourly'
+  | 'daily'
+  | 'weekly'
+  | 'monthly'
+  | 'yearly';
 export interface Sort {
   column?: string;
   direction?: SortDirection;
@@ -24,4 +30,21 @@ export interface DashboardBaseFields {
   customerAlias: string;
   recordNumber: number;
   groupId: number;
+}
+
+export interface KpiTimeFrame {
+  from: string;
+  to: string;
+}
+
+export interface KpiTime {
+  field?: string;
+  frame?: KpiTimeFrame;
+  interval?: KpiTimeInterval;
+}
+export interface KpiRequestBody {
+  metric: string;
+  aggregation: KpiAggregation;
+  time?: KpiTime;
+  filter?: string;
 }
