@@ -1,7 +1,11 @@
-import {AggregateFunctionLiteral} from '../models';
-
 export type SortDirection = 'asc' | 'desc';
-
+export type KpiAggregation = 'SUM' | 'COUNT';
+export type KpiTimeInterval =
+  | 'hourly'
+  | 'daily'
+  | 'weekly'
+  | 'monthly'
+  | 'yearly';
 export interface Sort {
   column?: string;
   direction?: SortDirection;
@@ -33,15 +37,15 @@ export interface KpiTimeFrame {
   to: string;
 }
 
-export interface KpiTimeQuery {
-  field: string;
+export interface KpiTime {
+  field?: string;
   frame?: KpiTimeFrame;
-  interval?: string;
+  interval?: KpiTimeInterval;
 }
-export interface KpiQuery {
+export interface KpiRequestBody {
   customerAlias: string;
   metric: string;
-  aggregation?: AggregateFunctionLiteral;
-  time?: KpiTimeQuery;
+  aggregation: KpiAggregation;
+  time?: KpiTime;
   filter?: string;
 }
