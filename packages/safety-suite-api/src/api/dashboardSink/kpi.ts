@@ -7,7 +7,7 @@ import {KpiQuery} from './types';
 export interface KpiGroup {
   name: string;
   fields: string[];
-  values: any[];
+  values: unknown[];
   humanName: string;
 }
 
@@ -17,16 +17,16 @@ export interface KpiMetadata {
   groups: KpiGroup[];
 }
 
-export interface KpiResponse {
+export interface KpiResponse<Data = unknown> {
   meta: KpiMetadata;
-  data: Record<string, any[][]>;
+  data: Record<string, Data[][]>;
 }
 
-export function getKpi(
+export function getKpi<Data>(
   kpi: string,
   query: KpiQuery,
   apiOptions: ApiOptions = {}
-): Request<ApiSuccessResponse<KpiResponse>> {
+): Request<ApiSuccessResponse<KpiResponse<Data>>> {
   return runApi({
     method: 'GET',
     urlRoot: 'dashboardSinkUrlRoot',
