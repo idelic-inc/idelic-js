@@ -17,17 +17,18 @@ export interface KpiMetadata {
   groups: KpiGroup[];
 }
 
-export interface KpiResponse<Data = unknown> {
+export type KpiData = [string | null, number];
+export interface KpiResponse {
   meta: KpiMetadata;
-  data: Record<string, Data[][]>;
+  data: Record<string, KpiData[]>;
 }
 
-export function getKpi<Data>(
+export function getKpi(
   kpi: string,
   query: Query,
   body: KpiRequestBody,
   apiOptions: ApiOptions = {}
-): Request<ApiSuccessResponse<KpiResponse<Data>>> {
+): Request<ApiSuccessResponse<KpiResponse>> {
   return runApi({
     method: 'POST',
     urlRoot: 'dashboardSinkUrlRoot',
