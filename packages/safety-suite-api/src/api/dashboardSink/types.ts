@@ -1,3 +1,5 @@
+import {AggregateFunctionLiteral} from '../models';
+
 export type SortDirection = 'asc' | 'desc';
 
 export interface Sort {
@@ -24,4 +26,22 @@ export interface DashboardBaseFields {
   customerAlias: string;
   recordNumber: number;
   groupId: number;
+}
+
+export interface KpiTimeFrame {
+  from: string;
+  to: string;
+}
+
+export interface KpiTimeQuery {
+  field: string;
+  frame?: KpiTimeFrame;
+  interval?: string;
+}
+export interface KpiQuery {
+  customerAlias: string;
+  metric: string;
+  aggregation?: AggregateFunctionLiteral;
+  time?: KpiTimeQuery;
+  filter?: string;
 }
