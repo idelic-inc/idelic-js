@@ -43,7 +43,6 @@ export interface KpiTime {
   interval?: KpiTimeInterval;
 }
 export interface KpiRequestBody {
-  customerAlias: string;
   metric: string;
   aggregation: KpiAggregation;
   time?: KpiTime;

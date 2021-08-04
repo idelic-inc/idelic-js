@@ -12,7 +12,7 @@ export interface KpiGroup {
 }
 
 export interface KpiMetadata {
-  query: any;
+  query: unknown;
   page: number;
   groups: KpiGroup[];
 }
