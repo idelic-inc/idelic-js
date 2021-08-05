@@ -178,12 +178,16 @@ export interface BasicConfig extends NestedConfiguration {
         accidentFrequency: {enabled: boolean};
         enabled: boolean;
         enforcements: {enabled: boolean};
+        fallbackFrontendUrl: string;
+        frontendUrl: string;
         incidentFrequency: {enabled: boolean};
         injuryFrequency: {enabled: boolean};
         riskScores: {enabled: boolean};
       };
       trainingAndDevelopment: {
         enabled: boolean;
+        fallbackFrontendUrl: string;
+        frontendUrl: string;
         hub_university: {enabled: boolean};
         professionalDevelopmentPlans: {enabled: boolean};
         smartDrive: {enabled: boolean};
@@ -386,12 +390,16 @@ const exampleConfig: BasicConfig = {
         accidentFrequency: {enabled: false},
         enabled: false,
         enforcements: {enabled: false},
+        fallbackFrontendUrl: '',
+        frontendUrl: '',
         incidentFrequency: {enabled: false},
         injuryFrequency: {enabled: false},
         riskScores: {enabled: false}
       },
       trainingAndDevelopment: {
         enabled: false,
+        fallbackFrontendUrl: '',
+        frontendUrl: '',
         hub_university: {enabled: false},
         professionalDevelopmentPlans: {enabled: false},
         smartDrive: {enabled: false},
