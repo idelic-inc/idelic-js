@@ -190,7 +190,9 @@ export interface BasicConfig extends NestedConfiguration {
         worklete: {enabled: boolean};
       };
     };
-    permission: ScalaService;
+    permission: ScalaService & {
+      allowCustomRoles: boolean;
+    };
     saf: {
       auth0: {
         clientId: string;
@@ -345,6 +347,7 @@ const exampleConfig: BasicConfig = {
       }
     },
     permission: {
+      allowCustomRoles: false,
       auth0: {
         clientId: ''
       },
