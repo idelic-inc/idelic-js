@@ -90,3 +90,30 @@ export function getBusinessHierarchyTemplates(
     apiOptions
   });
 }
+
+export type DashboardPushResults = {
+  updatedAccounts: string[];
+  notFoundAccounts: string[];
+};
+
+/**
+ * Push custom dashboard from one user to a group of users
+ *
+ * @param fromEmail - Source user email.
+ * @param toEmails - Array of target user emails.
+ * @param apiOptions - Optional options for runApi.
+ */
+export function pushCustomDashboard(
+  fromEmail: string,
+  toEmails: string[],
+  apiOptions?: ApiOptions
+): Request<DashboardPushResults> {
+  return runApi({
+    method: 'POST',
+    route: `/api/userAccounts/dashboard/push`,
+    apiOptions,
+    requestOptions: {
+      body: {fromEmail, toEmails}
+    }
+  });
+}
