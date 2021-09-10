@@ -2,18 +2,19 @@ import {Request} from '@idelic/safety-net';
 import {List, Map, Record as ImRecord} from 'immutable';
 
 import {runApi} from '../../runApi';
-import {ApiOptions, LastUpdatedBy} from '../../types';
+import {Alias, ApiOptions, Id, LastUpdatedBy} from '../../types';
 import {createRecordListResponseTransformer} from '../../utils';
 
 export interface ModelGroup extends LastUpdatedBy {
-  id: number;
-  alias: string;
+  alias: Alias;
   display: string;
-  groupType: string;
-  parentId?: number;
-  securableId: number;
-  lastUpdatedDate: string;
   fields: Record<string, unknown>;
+  groupType: string;
+  id: Id;
+  inactive: boolean;
+  lastUpdatedDate: string;
+  parentId?: Id;
+  securableId: Id;
 }
 
 export type ImModelGroup = Omit<ModelGroup, 'fields'> & {
@@ -25,6 +26,7 @@ export const ModelGroupRecord = ImRecord<ImModelGroup>({
   alias: '',
   display: '',
   groupType: '',
+  inactive: false,
   parentId: -1,
   securableId: -1,
   lastUpdatedDate: '',
