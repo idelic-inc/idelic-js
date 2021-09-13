@@ -46,6 +46,7 @@ export interface KpiTime {
 export interface KpiNormalization {
   metric: string;
   aggregation: KpiAggregation;
+  timeField?: string;
   filter?: string;
 }
 
