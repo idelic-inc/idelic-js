@@ -42,11 +42,19 @@ export interface KpiTime {
   frame?: KpiTimeFrame;
   interval?: KpiTimeInterval;
 }
+
+export interface KpiNormalization {
+  metric: string;
+  aggregation: KpiAggregation;
+  timeField?: string;
+  filter?: string;
+}
+
 export interface KpiRequestBody {
   metric: string;
   aggregation: KpiAggregation;
   time?: KpiTime;
-  normalization?: string;
+  normalization?: KpiNormalization;
   filter?: string;
   groups?: string[];
 }
