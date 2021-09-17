@@ -25,6 +25,10 @@ export interface User {
    * Flag which determines whether User is active.
    */
   active: boolean;
+  /**
+   * String to identify the ToS version agreed to by the user.
+   */
+  termsOfServiceVersion?: string;
 }
 
 export interface UserWithRoleNames {

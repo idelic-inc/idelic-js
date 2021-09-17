@@ -113,4 +113,13 @@ export class UserWrapper {
   get active(): boolean {
     return this.isLegacy() ? this.legacyUser.active : this.user!.active;
   }
+
+  /**
+   * String to identify the ToS version agreed to by the user.
+   */
+  get termsOfServiceVersion(): string | undefined {
+    return this.isLegacy()
+      ? this.legacyUser.termsOfServiceVersion
+      : this.user!.termsOfServiceVersion;
+  }
 }
