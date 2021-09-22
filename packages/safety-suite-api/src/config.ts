@@ -202,6 +202,7 @@ export interface BasicConfig extends NestedConfiguration {
       };
       safetyEvents: {
         accidentFrequency: {enabled: boolean};
+        emailWhitelist: string;
         enabled: boolean;
         enforcements: {enabled: boolean};
         incidentFrequency: {enabled: boolean};
@@ -209,6 +210,7 @@ export interface BasicConfig extends NestedConfiguration {
         riskScores: {enabled: boolean};
       };
       trainingAndDevelopment: {
+        emailWhitelist: string;
         enabled: boolean;
         hub_university: {enabled: boolean};
         professionalDevelopmentPlans: {enabled: boolean};
@@ -447,6 +449,7 @@ const exampleConfig: BasicConfig = {
       },
       safetyEvents: {
         accidentFrequency: {enabled: false},
+        emailWhitelist: '',
         enabled: false,
         enforcements: {enabled: false},
         incidentFrequency: {enabled: false},
@@ -454,6 +457,7 @@ const exampleConfig: BasicConfig = {
         riskScores: {enabled: false}
       },
       trainingAndDevelopment: {
+        emailWhitelist: '',
         enabled: false,
         hub_university: {enabled: false},
         professionalDevelopmentPlans: {enabled: false},
