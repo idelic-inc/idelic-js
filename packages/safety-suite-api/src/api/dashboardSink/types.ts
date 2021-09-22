@@ -1,5 +1,13 @@
 export type SortDirection = 'asc' | 'desc';
-export type KpiAggregation = 'SUM' | 'COUNT';
+export type KpiAggregation =
+  | 'SUM'
+  | 'COUNT'
+  | 'MOST_RECENT'
+  | 'MAX'
+  | 'MIN'
+  | 'AVG'
+  | 'ALL'
+  | 'ANY';
 export type KpiTimeInterval =
   | 'hourly'
   | 'daily'
