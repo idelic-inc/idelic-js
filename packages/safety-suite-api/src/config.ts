@@ -132,6 +132,32 @@ export interface BasicConfig extends NestedConfiguration {
       maxUploadSize: number;
       url: string;
     };
+    hubGoals: {
+      professionalDevelopmentPlans: {
+        tasksPastDue: number;
+      };
+      worklete: {
+        currentCourseCompletion: number;
+        '10WeekAverageCourseCompletion': number;
+      };
+      lytx: {
+        coachingEffectiveness: number;
+        overdueForCoaching: number;
+        unidentifiedDrivers: number;
+      };
+      smartDrive: {
+        coachingEffectiveness: number;
+        eventsCoached: number;
+        avgNumberDaysQueueToCoach: number;
+      };
+      accidentFrequency: {
+        preventable: number;
+        dotPreventable: number;
+      };
+      injuryFrequency: {
+        lostTime: number;
+      };
+    };
     legacySaf: {
       fallbackFrontendUrl: string;
       frontendUrl: string;
@@ -206,6 +232,9 @@ export interface BasicConfig extends NestedConfiguration {
       };
       frontendUrl: string;
       modules: {
+        licenseStatus: {
+          enabled: boolean;
+        };
         safetyAndRisk: {
           severityPreventabilityVersion: number;
         };
@@ -261,6 +290,9 @@ const exampleConfig: BasicConfig = {
       },
       frontendUrl: '',
       modules: {
+        licenseStatus: {
+          enabled: false
+        },
         safetyAndRisk: {
           severityPreventabilityVersion: 0
         }
@@ -278,6 +310,32 @@ const exampleConfig: BasicConfig = {
     dashboardSink: {
       url: '',
       auth0: {clientId: ''}
+    },
+    hubGoals: {
+      professionalDevelopmentPlans: {
+        tasksPastDue: 0
+      },
+      worklete: {
+        currentCourseCompletion: 0,
+        '10WeekAverageCourseCompletion': 0
+      },
+      lytx: {
+        coachingEffectiveness: 0,
+        overdueForCoaching: 0,
+        unidentifiedDrivers: 0
+      },
+      smartDrive: {
+        coachingEffectiveness: 0,
+        eventsCoached: 0,
+        avgNumberDaysQueueToCoach: 0
+      },
+      accidentFrequency: {
+        preventable: 0,
+        dotPreventable: 0
+      },
+      injuryFrequency: {
+        lostTime: 0
+      }
     },
     documentLibrary: {url: '', maxUploadSize: 0},
     legacySaf: {
