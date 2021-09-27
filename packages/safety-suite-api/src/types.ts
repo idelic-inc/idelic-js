@@ -84,8 +84,10 @@ export interface CustomerSpecificQuery {
    * Filter restricting the scope of the request to a single SAF
    * instance at a time and allowing to check permissions of a user
    * for a specific customer.
+   * Undefined `customerAlias` will result in returning all users across
+   * all customers, will only work for super admin.
    */
-  customerAlias: string;
+  customerAlias?: string;
 }
 
 export interface LastUpdatedBy {
