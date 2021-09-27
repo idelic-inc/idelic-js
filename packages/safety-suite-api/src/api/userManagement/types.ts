@@ -40,6 +40,10 @@ export interface UserWithRoleNames {
    * Array of `Role` names which are granted to the included `User`
    */
   roleNames: string[];
+  /**
+   * Array of customer aliases which user has access to.
+   */
+  customerAliases?: string[];
 }
 
 export type InputUser = Pick<User, 'email' | 'firstName' | 'lastName'>;
