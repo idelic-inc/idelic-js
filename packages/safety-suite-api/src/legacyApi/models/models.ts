@@ -3,7 +3,8 @@ import {
   Model,
   ModelFilterOptions,
   ModelOptions,
-  ModelOutputOptions
+  ModelOutputOptions,
+  RecomputeModelOptions
 } from '../../api';
 import {Id} from '../../types';
 import {LegacyApi} from '../types';
@@ -90,10 +91,10 @@ export function getHistory(modelId: Id): LegacyApi {
   };
 }
 
-export function recomputeModels(filterOptions: ModelFilterOptions): LegacyApi {
+export function recomputeModels(options: RecomputeModelOptions): LegacyApi {
   return {
     method: 'POST',
     route: '/api/models/recompute',
-    requestOptions: {body: filterOptions}
+    requestOptions: {body: options}
   };
 }
