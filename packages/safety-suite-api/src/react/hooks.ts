@@ -1,5 +1,4 @@
 import net, {Request, Response} from '@idelic/safety-net';
-import {useBoolean} from '@uifabric/react-hooks/lib/useBoolean';
 import {DependencyList, useCallback, useEffect, useState} from 'react';
 
 /**
@@ -25,10 +24,9 @@ export const useRequest = <R>(
   }
 ] => {
   // State
-  const [
-    isLoading,
-    {setTrue: startLoading, setFalse: stopLoading}
-  ] = useBoolean(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const startLoading = useCallback(() => setIsLoading(true), [setIsLoading]);
+  const stopLoading = useCallback(() => setIsLoading(false), [setIsLoading]);
   const [response, setResponse] = useState<Response<R>>();
   const [error, setError] = useState<any>();
 
