@@ -1,3 +1,4 @@
+import {useBoolean} from '@fluentui/react-hooks';
 import {
   AnyModel,
   DataType,
@@ -6,7 +7,6 @@ import {
   Model,
   Template
 } from '@idelic/formatron';
-import {useBoolean} from '@uifabric/react-hooks';
 import cloneDeep from 'lodash/cloneDeep';
 import isEqual from 'lodash/isEqual';
 import merge from 'lodash/merge';

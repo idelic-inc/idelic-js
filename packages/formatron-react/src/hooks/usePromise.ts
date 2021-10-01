@@ -1,4 +1,4 @@
-import {useBoolean} from '@uifabric/react-hooks';
+import {useBoolean} from '@fluentui/react-hooks';
 import {DependencyList, useCallback, useEffect, useState} from 'react';
 
 export interface PromiseInfo {
