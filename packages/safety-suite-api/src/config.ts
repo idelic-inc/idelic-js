@@ -245,8 +245,8 @@ export interface BasicConfig extends NestedConfiguration {
       };
       proDataIrv: string;
       sideNav: {
-        enabled: boolean
-      }
+        enabled: boolean;
+      };
       url: string;
       watchlist: {
         notifications: {
