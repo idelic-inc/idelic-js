@@ -244,6 +244,9 @@ export interface BasicConfig extends NestedConfiguration {
         };
       };
       proDataIrv: string;
+      sideNav: {
+        enabled: boolean
+      }
       url: string;
       watchlist: {
         notifications: {
@@ -304,6 +307,9 @@ const exampleConfig: BasicConfig = {
         }
       },
       proDataIrv: '',
+      sideNav: {
+        enabled: false
+      },
       url: '',
       watchlist: {
         notifications: {
