@@ -86,6 +86,14 @@ export type ModelFilterOptions = {
   protectedValueSearch?: Record<string, any>;
 };
 
+export interface RecomputeModelOptions extends ModelFilterOptions {
+  /**
+   * Array of computation names which should be recomputed.
+   * @defaultvalue All computation names.
+   */
+  computationNames?: string[];
+}
+
 export type ByGroup = {
   type: 'byGroup';
 };
