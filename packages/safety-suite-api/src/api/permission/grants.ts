@@ -5,17 +5,35 @@ import {ApiOptions, ApiResponse, CustomerSpecificQuery, Id} from '../../types';
 import {DeleteResponse, GrantDTO, InputGrant} from './types';
 
 /**
- * Gets a specific `Grant`
- * @param userId ID of the `User` related to the grant.
+ * Gets a list of all user grants grouped by customer alias.
+ * Requires super admin grant.
+ * @param userId ID of the `User` related to the grants.
+ * @param apiOptions Optional options for runApi.
+ * @returns Array of `Grant` objects.
+ */
+export const getGrantsGroupedByCustomer = (
+  userId: Id,
+  apiOptions?: ApiOptions
+): Request<ApiResponse<Record<string, GrantDTO[]>>> =>
+  runApi({
+    method: 'GET',
+    urlRoot: 'permissionUrlRoot',
+    route: `/api/grants/${userId}`,
+    apiOptions
+  });
+
+/**
+ * Gets all user grants for a specific customer.
+ * @param userId ID of the `User` related to the grants.
  * @param query Object containing query params for this route.
  * @param apiOptions Optional options for runApi.
- * @returns A single `Grant` object.
+ * @returns Array of `Grant` objects.
  */
-export const getGrant = (
+export const getGrants = (
   userId: Id,
   query: CustomerSpecificQuery,
   apiOptions?: ApiOptions
-): Request<ApiResponse<GrantDTO>> =>
+): Request<ApiResponse<GrantDTO[]>> =>
   runApi({
     method: 'GET',
     urlRoot: 'permissionUrlRoot',
