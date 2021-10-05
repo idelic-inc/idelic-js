@@ -27,7 +27,7 @@ export const getGrantsGroupedByCustomer = (
  * @param userId ID of the `User` related to the grants.
  * @param query Object containing query params for this route.
  * @param apiOptions Optional options for runApi.
- * @returns A single `Grant` object.
+ * @returns Array of `Grant` objects.
  */
 export const getGrants = (
   userId: Id,
