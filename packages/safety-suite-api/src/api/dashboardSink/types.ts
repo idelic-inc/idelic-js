@@ -13,6 +13,7 @@ export type KpiTimeInterval =
   | 'daily'
   | 'weekly'
   | 'monthly'
+  | 'quarterly'
   | 'yearly';
 export interface Sort {
   column?: string;
