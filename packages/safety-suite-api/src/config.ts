@@ -104,6 +104,10 @@ export interface BasicConfig extends NestedConfiguration {
       frontendUrl: string;
       url: string;
     };
+    claims: {
+      enabled: boolean;
+      frontendUrl: string;
+    };
     dashboardSink: {
       url: string;
       auth0: {
@@ -283,6 +287,10 @@ const exampleConfig: BasicConfig = {
       roles: {
         enabled: false
       }
+    },
+    claims: {
+      enabled: false,
+      frontendUrl: ''
     },
     saf: {
       auth0: {
