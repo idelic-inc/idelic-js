@@ -64,6 +64,7 @@ export interface KpiRequestBody {
   aggregation: KpiAggregation;
   time?: KpiTime;
   normalization?: KpiNormalization;
+  normalizationConstant?: number;
   filter?: string;
   groupings?: string[];
 }
