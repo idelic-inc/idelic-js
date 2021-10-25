@@ -93,6 +93,9 @@ export interface BasicConfig extends NestedConfiguration {
       roles: {
         enabled: boolean;
       };
+      auditLog: {
+        enabled: boolean;
+      };
     };
     app: {
       datadog: {
@@ -285,6 +288,9 @@ const exampleConfig: BasicConfig = {
         enabled: false
       },
       roles: {
+        enabled: false
+      },
+      auditLog: {
         enabled: false
       }
     },
