@@ -470,3 +470,31 @@ export function runDueTrainingReportExport(
     }
   });
 }
+
+export interface ClearinghouseReportFilters {
+  /**
+   * Employee position enum value
+   */
+  position?: string;
+}
+
+/**
+ * Starts asynchronous clearinghouse report export.
+ *
+ * @param filters - Object containing various filters for the report.
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Query export job object.
+ */
+export function runClearinghouseReportExport(
+  filters: ClearinghouseReportFilters = {},
+  apiOptions?: ApiOptions
+): Request<QueryExportJob> {
+  return runApi({
+    method: 'POST',
+    route: '/api/models/query/export/clearingHouse/xlsx',
+    apiOptions,
+    requestOptions: {
+      body: filters
+    }
+  });
+}
