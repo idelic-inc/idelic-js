@@ -17,6 +17,7 @@ export type InitConfig = Config & {
 
 export const config: InitConfig = {
   apiUrlRoot: '',
+  auditLogUrlRoot: '',
   configUrlRoot: '',
   dashboardSinkUrlRoot: '',
   documentLibraryUrlRoot: '',
@@ -276,6 +277,7 @@ export interface BasicConfig extends NestedConfiguration {
       frontendUrl: string;
     };
     usermanagement: ScalaService;
+    auditlog: ScalaService;
   };
 }
 const exampleConfig: BasicConfig = {
@@ -455,6 +457,18 @@ const exampleConfig: BasicConfig = {
       enabled: false,
       url: ''
     },
+    auditlog: {
+      auth0: {
+        clientId: ''
+      },
+      db: {
+        enableMigrations: false,
+        numThreads: 0,
+        queueSize: 0
+      },
+      enabled: false,
+      url: ''
+    },
     dashboards: {
       defaultDashboard: '',
       performance: {
@@ -587,7 +601,8 @@ export const initializeConfig = (
         eforms: {url: ''},
         permission: {url: ''},
         saf: {url: ''},
-        usermanagement: {url: ''}
+        usermanagement: {url: ''},
+        auditlog: {url: ''}
       }
     })
   ) {
@@ -601,6 +616,7 @@ export const initializeConfig = (
   config.loginUrlRoot = nestedConfig.services.app.url;
   config.permissionUrlRoot = nestedConfig.services.permission.url;
   config.userManagementUrlRoot = nestedConfig.services.usermanagement.url;
+  config.auditLogUrlRoot = nestedConfig.services.auditlog.url;
   config.initialized = true;
 };
 
