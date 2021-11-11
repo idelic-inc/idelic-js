@@ -13,6 +13,7 @@ export interface ModelTemplate {
   id: Id;
   fields: {
     modules: Alias[];
+    indirectModules: Alias[];
   };
 }
 export interface MonitorTemplate {
@@ -182,6 +183,38 @@ export class UserWithPermissions extends UserWrapper {
       return this.filterModelGroups(moduleGroupIds);
     }
     return [];
+  }
+
+  /**
+   * Gets array of indirectly accessible groups by template and action.
+   * @param idOrAlias ID or alias of the model template.
+   * @param action Permitted action type.
+   */
+  getIndirectGroupsByModelTemplate(
+    idOrAlias: Alias | Id,
+    action: ModulePermissionActions
+  ): ModelGroup[] {
+    const template = this.modelTemplates.find(
+      ({alias, id}) => idOrAlias === alias || idOrAlias === id
+    );
+    if (!template) {
+      return [];
+    }
+    if (this.admin) {
+      return this.modelGroups;
+    }
+    if (this.isLegacy()) {
+      return [];
+    }
+    const modulePermissions = this.userPermissions!.modulePermissions[action];
+    const moduleGroupIds = template.fields.indirectModules.reduce<number[]>(
+      (ids, moduleAlias) => {
+        const modulePermissionIds = modulePermissions[moduleAlias];
+        return modulePermissionIds ? [...ids, ...modulePermissionIds] : ids;
+      },
+      []
+    );
+    return this.filterModelGroups(moduleGroupIds);
   }
 
   /**

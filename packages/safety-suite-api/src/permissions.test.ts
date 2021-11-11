@@ -99,35 +99,40 @@ const modelTemplates: ModelTemplate[] = [
     id: 6,
     alias: 'six',
     fields: {
-      modules: ['module1']
+      modules: ['module1'],
+      indirectModules: []
     }
   },
   {
     id: 7,
     alias: 'seven',
     fields: {
-      modules: ['module2']
+      modules: ['module2'],
+      indirectModules: []
     }
   },
   {
     id: 8,
     alias: 'eight',
     fields: {
-      modules: ['module1', 'module2']
+      modules: ['module1', 'module2'],
+      indirectModules: []
     }
   },
   {
     id: 9,
     alias: 'nine',
     fields: {
-      modules: []
+      modules: [],
+      indirectModules: []
     }
   },
   {
     id: 10,
     alias: 'ten',
     fields: {
-      modules: []
+      modules: [],
+      indirectModules: []
     }
   }
 ];
