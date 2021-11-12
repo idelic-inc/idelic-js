@@ -13,7 +13,8 @@ export type UrlRoot =
   | 'eformsUrlRoot'
   | 'dashboardSinkUrlRoot'
   | 'permissionUrlRoot'
-  | 'userManagementUrlRoot';
+  | 'userManagementUrlRoot'
+  | 'auditLogUrlRoot';
 
 export interface Api<R, T> {
   method: Methods;
