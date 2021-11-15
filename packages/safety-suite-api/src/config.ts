@@ -213,6 +213,7 @@ export interface BasicConfig extends NestedConfiguration {
         emailWhitelist: string;
         enabled: boolean;
         enforcements: {enabled: boolean};
+        enforcementsTimeSeries: {enabled: boolean};
         incidentFrequency: {enabled: boolean};
         injuryFrequency: {enabled: boolean};
         riskScores: {enabled: boolean};
@@ -490,6 +491,7 @@ const exampleConfig: BasicConfig = {
         emailWhitelist: '',
         enabled: false,
         enforcements: {enabled: false},
+        enforcementsTimeSeries: {enabled: false},
         incidentFrequency: {enabled: false},
         injuryFrequency: {enabled: false},
         riskScores: {enabled: false}
