@@ -473,9 +473,13 @@ export function runDueTrainingReportExport(
 
 export interface ClearinghouseReportFilters {
   /**
-   * Employee position enum value
+   * Array of employee position enum value
    */
-  position?: string;
+  positions?: string[];
+  /**
+   * Array of employee status enum value
+   */
+  statuses?: string[];
 }
 
 /**
