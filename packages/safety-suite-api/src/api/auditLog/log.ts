@@ -1,4 +1,5 @@
 import {Request} from '@idelic/safety-net';
+import {QueryExportJob} from 'src/api/models/types';
 import {ApiOptions, ApiResponse} from 'src/types';
 
 import {runApi} from '../../runApi';
@@ -44,3 +45,42 @@ export const getAuditLog = (
     apiOptions,
     requestOptions: {query}
   });
+
+/**
+ * Starts asynchronous audit log export.
+ *
+ * @param filters - Object containing various filters for the report.
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Query export job object.
+ */
+export function runAuditLogExportJob(
+  query: AuditLogQuery,
+  apiOptions?: ApiOptions
+): Request<QueryExportJob> {
+  return runApi({
+    method: 'POST',
+    urlRoot: 'auditLogUrlRoot',
+    route: '/api/auditlogs',
+    apiOptions,
+    requestOptions: {
+      body: query
+    }
+  });
+}
+
+/**
+ * Gets all audit queries.
+ *
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Query export job object.
+ */
+export function getAuditLogExportStatus(
+  apiOptions?: ApiOptions
+): Request<QueryExportJob> {
+  return runApi({
+    method: 'GET',
+    urlRoot: 'auditLogUrlRoot',
+    route: `/api/auditLogs/status`,
+    apiOptions
+  });
+}
