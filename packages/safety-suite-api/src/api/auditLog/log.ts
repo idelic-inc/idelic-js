@@ -60,7 +60,7 @@ export function runAuditLogExportJob(
   return runApi({
     method: 'POST',
     urlRoot: 'auditLogUrlRoot',
-    route: '/api/auditlogs',
+    route: '/api/auditlogs/xlsx',
     apiOptions,
     requestOptions: {
       body: query
@@ -69,7 +69,7 @@ export function runAuditLogExportJob(
 }
 
 /**
- * Gets all audit queries.
+ * Gets all audit export jobs.
  *
  * @param apiOptions - Optional options for runApi.
  * @returns - Query export job object.
@@ -82,5 +82,46 @@ export function getAuditLogExportStatus(
     urlRoot: 'auditLogUrlRoot',
     route: `/api/auditLogs/status`,
     apiOptions
+  });
+}
+
+/**
+ * Gets audit log export job by it's Id.
+ *
+ * @param queryExportJobId - Id of desired query export job.
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Query export job object.
+ */
+export function getAuditLogExportStatusById(
+  id: number,
+  apiOptions?: ApiOptions
+): Request<QueryExportJob> {
+  return runApi({
+    method: 'GET',
+    urlRoot: 'auditLogUrlRoot',
+    route: `/api/auditLogs/status/${id}`,
+    apiOptions
+  });
+}
+
+/**
+ * Get audit log export raw file by Id.
+ *
+ * @param queryExportJobId - Id of desired query export job.
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Export raw file contents.
+ */
+export function getAuditLogExportContent(
+  id: number,
+  apiOptions?: ApiOptions
+): Request<Blob> {
+  return runApi({
+    method: 'GET',
+    urlRoot: 'auditLogUrlRoot',
+    route: `/api/auditLogs/content/${id}`,
+    apiOptions,
+    requestOptions: {
+      responseType: 'blob'
+    }
   });
 }
