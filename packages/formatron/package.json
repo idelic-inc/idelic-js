@@ -32,8 +32,5 @@
     "immutable": "^4.0.0-rc.12",
     "lodash": "^4.17.20",
     "moment": "^2.29.1"
-  },
-  "resolutions": {
-    "lodash": "^4.17.21"
   }
 }

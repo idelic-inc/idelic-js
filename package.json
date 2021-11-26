@@ -63,12 +63,5 @@
     "@idelic/formatron-react": "file:packages/formatron-react",
     "@idelic/safety-net": "file:packages/safety-net",
     "@idelic/safety-suite-api": "file:packages/safety-suite-api"
-  },
-  "resolutions": {
-    "trim-newlines": "^4.0.2",
-    "handlebars": "^4.7.7",
-    "ssri": "^8.0.1",
-    "y18n": "^5.0.8",
-    "lodash": "^4.17.21"
   }
 }
