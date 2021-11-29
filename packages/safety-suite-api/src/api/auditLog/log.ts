@@ -29,6 +29,8 @@ export type AuditLogItem = {
   details: string;
 };
 
+export type AuditLogExportJob = QueryExportJob & {id: string};
+
 /**
  * Gets audit log items based on query parameters
  * @param apiOptions Optional options for runApi.
@@ -51,12 +53,12 @@ export const getAuditLog = (
  *
  * @param filters - Object containing various filters for the report.
  * @param apiOptions - Optional options for runApi.
- * @returns - Query export job object.
+ * @returns - Audit log export job object.
  */
 export function runAuditLogExportJob(
   query: AuditLogQuery,
   apiOptions?: ApiOptions
-): Request<QueryExportJob> {
+): Request<AuditLogExportJob> {
   return runApi({
     method: 'POST',
     urlRoot: 'auditLogUrlRoot',
@@ -72,11 +74,11 @@ export function runAuditLogExportJob(
  * Gets all audit export jobs.
  *
  * @param apiOptions - Optional options for runApi.
- * @returns - Query export job object.
+ * @returns - Audit log export job object.
  */
 export function getAuditLogExportStatus(
   apiOptions?: ApiOptions
-): Request<QueryExportJob> {
+): Request<AuditLogExportJob> {
   return runApi({
     method: 'GET',
     urlRoot: 'auditLogUrlRoot',
@@ -86,39 +88,39 @@ export function getAuditLogExportStatus(
 }
 
 /**
- * Gets audit log export job by it's Id.
+ * Gets audit log export job by it's uuid.
  *
- * @param queryExportJobId - Id of desired query export job.
+ * @param queryExportJobId - uuid of desired audit log export job.
  * @param apiOptions - Optional options for runApi.
- * @returns - Query export job object.
+ * @returns - Audit log export job object.
  */
 export function getAuditLogExportStatusById(
-  id: number,
+  uuid: string,
   apiOptions?: ApiOptions
-): Request<QueryExportJob> {
+): Request<AuditLogExportJob> {
   return runApi({
     method: 'GET',
     urlRoot: 'auditLogUrlRoot',
-    route: `/api/auditLogs/status/${id}`,
+    route: `/api/auditLogs/status/${uuid}`,
     apiOptions
   });
 }
 
 /**
- * Get audit log export raw file by Id.
+ * Get audit log export raw file by uuid.
  *
- * @param queryExportJobId - Id of desired query export job.
+ * @param queryExportJobId - uuid of desired audit log export job.
  * @param apiOptions - Optional options for runApi.
  * @returns - Export raw file contents.
  */
 export function getAuditLogExportContent(
-  id: number,
+  uuid: string,
   apiOptions?: ApiOptions
 ): Request<Blob> {
   return runApi({
     method: 'GET',
     urlRoot: 'auditLogUrlRoot',
-    route: `/api/auditLogs/content/${id}`,
+    route: `/api/auditLogs/content/${uuid}`,
     apiOptions,
     requestOptions: {
       responseType: 'blob'
