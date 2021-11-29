@@ -51,7 +51,7 @@ export const getAuditLog = (
 /**
  * Starts asynchronous audit log export.
  *
- * @param filters - Object containing various filters for the report.
+ * @param query - Default audit log query filter.
  * @param apiOptions - Optional options for runApi.
  * @returns - Audit log export job object.
  */
