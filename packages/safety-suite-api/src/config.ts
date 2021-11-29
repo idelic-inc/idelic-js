@@ -222,6 +222,7 @@ export interface BasicConfig extends NestedConfiguration {
         emailWhitelist: string;
         enabled: boolean;
         hub_university: {enabled: boolean};
+        lytxDriveCam: {enabled: boolean};
         professionalDevelopmentPlans: {enabled: boolean};
         smartDrive: {enabled: boolean};
         worklete: {enabled: boolean};
@@ -500,6 +501,7 @@ const exampleConfig: BasicConfig = {
         emailWhitelist: '',
         enabled: false,
         hub_university: {enabled: false},
+        lytxDriveCam: {enabled: false},
         professionalDevelopmentPlans: {enabled: false},
         smartDrive: {enabled: false},
         worklete: {enabled: false}
