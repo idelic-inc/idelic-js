@@ -74,11 +74,11 @@ export function runAuditLogExportJob(
  * Gets all audit export jobs.
  *
  * @param apiOptions - Optional options for runApi.
- * @returns - Audit log export job object.
+ * @returns - Audit log export jobs.
  */
 export function getAuditLogExportStatus(
   apiOptions?: ApiOptions
-): Request<AuditLogExportJob> {
+): Request<AuditLogExportJob[]> {
   return runApi({
     method: 'GET',
     urlRoot: 'auditLogUrlRoot',
@@ -90,7 +90,7 @@ export function getAuditLogExportStatus(
 /**
  * Gets audit log export job by it's uuid.
  *
- * @param queryExportJobId - uuid of desired audit log export job.
+ * @param uuid - uuid of desired audit log export job.
  * @param apiOptions - Optional options for runApi.
  * @returns - Audit log export job object.
  */
@@ -109,7 +109,7 @@ export function getAuditLogExportStatusById(
 /**
  * Get audit log export raw file by uuid.
  *
- * @param queryExportJobId - uuid of desired audit log export job.
+ * @param uuid - uuid of desired audit log export job.
  * @param apiOptions - Optional options for runApi.
  * @returns - Export raw file contents.
  */
