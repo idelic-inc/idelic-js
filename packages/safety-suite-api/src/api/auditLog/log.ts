@@ -5,7 +5,7 @@ import {ApiOptions, ApiResponse} from 'src/types';
 import {runApi} from '../../runApi';
 
 export type AuditLogQuery = {
-  customerAlias: string;
+  customerAlias?: string;
   dateFrom?: number;
   dateTo?: number;
   actions?: string[];
@@ -24,9 +24,9 @@ export type AuditLogItem = {
   userRoleType: string;
   action: string;
   objectType: string;
-  linkUrl: string;
-  linkText: string;
-  details: string;
+  linkUrl?: string;
+  linkText?: string;
+  details: Record<string, any>;
 };
 
 export type AuditLogExportJob = QueryExportJob & {id: string};
