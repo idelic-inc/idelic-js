@@ -52,17 +52,19 @@ export const getAuditLog = (
  * Starts asynchronous audit log export.
  *
  * @param query - Default audit log query filter.
+ * @param type - Export output filetype.
  * @param apiOptions - Optional options for runApi.
  * @returns - Audit log export job object.
  */
 export function runAuditLogExportJob(
   query: AuditLogQuery,
+  type: 'xlsx' | 'csv' = 'xlsx',
   apiOptions?: ApiOptions
-): Request<AuditLogExportJob> {
+): Request<ApiResponse<AuditLogExportJob>> {
   return runApi({
     method: 'POST',
     urlRoot: 'auditLogUrlRoot',
-    route: '/api/auditlogs/xlsx',
+    route: `/api/export/${type}`,
     apiOptions,
     requestOptions: {
       body: query
@@ -78,11 +80,11 @@ export function runAuditLogExportJob(
  */
 export function getAuditLogExportStatus(
   apiOptions?: ApiOptions
-): Request<AuditLogExportJob[]> {
+): Request<ApiResponse<AuditLogExportJob[]>> {
   return runApi({
     method: 'GET',
     urlRoot: 'auditLogUrlRoot',
-    route: `/api/auditLogs/status`,
+    route: `/api/export/status`,
     apiOptions
   });
 }
@@ -97,11 +99,11 @@ export function getAuditLogExportStatus(
 export function getAuditLogExportStatusById(
   uuid: string,
   apiOptions?: ApiOptions
-): Request<AuditLogExportJob> {
+): Request<ApiResponse<AuditLogExportJob>> {
   return runApi({
     method: 'GET',
     urlRoot: 'auditLogUrlRoot',
-    route: `/api/auditLogs/status/${uuid}`,
+    route: `/api/export/status/${uuid}`,
     apiOptions
   });
 }
@@ -120,7 +122,7 @@ export function getAuditLogExportContent(
   return runApi({
     method: 'GET',
     urlRoot: 'auditLogUrlRoot',
-    route: `/api/auditLogs/content/${uuid}`,
+    route: `/api/export/content/${uuid}`,
     apiOptions,
     requestOptions: {
       responseType: 'blob'
