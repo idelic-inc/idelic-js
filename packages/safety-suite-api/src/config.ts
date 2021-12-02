@@ -18,6 +18,8 @@ export type InitConfig = Config & {
 export const config: InitConfig = {
   apiUrlRoot: '',
   auditLogUrlRoot: '',
+  claimsSinkUrlRoot: '',
+  claimsSourceUrlRoot: '',
   configUrlRoot: '',
   dashboardSinkUrlRoot: '',
   documentLibraryUrlRoot: '',
@@ -111,6 +113,18 @@ export interface BasicConfig extends NestedConfiguration {
     claims: {
       enabled: boolean;
       frontendUrl: string;
+    };
+    claimsSink: {
+      auth0: {
+        clientId: string;
+      },
+      url: string;
+    };
+    claimsSource: {
+      auth0: {
+        clientId: string;
+      },
+      url: string;
     };
     dashboardSink: {
       url: string;
@@ -471,6 +485,18 @@ const exampleConfig: BasicConfig = {
       enabled: false,
       url: ''
     },
+    claimsSink: {
+      auth0: {
+        clientId: ''
+      },
+      url: ''
+    },
+    claimsSource: {
+      auth0: {
+        clientId: ''
+      },
+      url: ''
+    },
     dashboards: {
       defaultDashboard: '',
       performance: {
@@ -606,7 +632,9 @@ export const initializeConfig = (
         permission: {url: ''},
         saf: {url: ''},
         usermanagement: {url: ''},
-        auditlog: {url: ''}
+        auditlog: {url: ''},
+        claimsSink: {url: ''},
+        claimsSource: {url: ''},
       }
     })
   ) {
@@ -621,6 +649,8 @@ export const initializeConfig = (
   config.permissionUrlRoot = nestedConfig.services.permission.url;
   config.userManagementUrlRoot = nestedConfig.services.usermanagement.url;
   config.auditLogUrlRoot = nestedConfig.services.auditlog.url;
+  config.claimsSinkUrlRoot = nestedConfig.services.claimsSink.url;
+  config.claimsSourceUrlRoot = nestedConfig.services.claimsSource.url;
   config.initialized = true;
 };
 
