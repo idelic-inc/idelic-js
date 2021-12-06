@@ -117,13 +117,13 @@ export interface BasicConfig extends NestedConfiguration {
     claimsSink: {
       auth0: {
         clientId: string;
-      },
+      };
       url: string;
     };
     claimsSource: {
       auth0: {
         clientId: string;
-      },
+      };
       url: string;
     };
     dashboardSink: {
@@ -634,7 +634,7 @@ export const initializeConfig = (
         usermanagement: {url: ''},
         auditlog: {url: ''},
         claimsSink: {url: ''},
-        claimsSource: {url: ''},
+        claimsSource: {url: ''}
       }
     })
   ) {

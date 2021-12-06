@@ -11,4 +11,4 @@ export * from './enums';
 export * from './listItems';
 export * from './admin';
 export * from './auditLog';
-export * from './pageRequest'
+export * from './pageRequest';

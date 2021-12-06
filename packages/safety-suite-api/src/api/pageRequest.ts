@@ -7,7 +7,7 @@ export interface PageRequest {
 
 export interface PageFilters {
   filterOperands: PageFilterOperand[];
-  booleanOperation?: BooleanOperation
+  booleanOperation?: BooleanOperation;
 }
 
 export interface PageFilterOperand {

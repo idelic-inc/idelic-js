@@ -121,7 +121,6 @@ export interface ClaimResponse {
   claims: ClaimModel[];
 }
 
-
 /**
  * Get all claims by page.
  *
@@ -148,7 +147,6 @@ export function getClaims(
     }
   });
 }
-
 
 /**
  * Get claim by id.
