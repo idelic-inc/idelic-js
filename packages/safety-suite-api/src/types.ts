@@ -14,7 +14,9 @@ export type UrlRoot =
   | 'dashboardSinkUrlRoot'
   | 'permissionUrlRoot'
   | 'userManagementUrlRoot'
-  | 'auditLogUrlRoot';
+  | 'auditLogUrlRoot'
+  | 'claimsSinkUrlRoot'
+  | 'claimsSourceUrlRoot';
 
 export interface Api<R, T> {
   method: Methods;
