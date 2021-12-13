@@ -208,7 +208,7 @@ export interface BasicConfig extends NestedConfiguration {
     };
     dashboards: {
       defaultDashboard: string;
-      discover: {enabled: boolean};
+      discover: {enabled: boolean; frontendUrl: string};
       performance: {
         accidents: {enabled: boolean};
         apiTarget: string;
@@ -500,7 +500,7 @@ const exampleConfig: BasicConfig = {
     },
     dashboards: {
       defaultDashboard: '',
-      discover: {enabled: false},
+      discover: {enabled: false, frontendUrl: ''},
       performance: {
         accidents: {enabled: false},
         apiTarget: '',
