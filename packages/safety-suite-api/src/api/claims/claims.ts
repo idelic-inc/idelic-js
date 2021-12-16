@@ -113,6 +113,9 @@ export interface ClaimModel {
   lastUpdatedDate: Date;
   createdBy: string;
   lastUpdatedBy: string;
+  totalReserves: number;
+  totalPaid: number;
+  totalRemaining: number;
   // Clarify
   eventType: keyof typeof EventType;
 }
