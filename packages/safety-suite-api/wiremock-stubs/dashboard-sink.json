@@ -1,79 +1,82 @@
 {
-  "mappings" : [ {
-    "id" : "02e3eb04-71b5-4bff-8044-38d81079ac02",
-    "name" : "Dataset Meta Route (Reverse Alphabetical)",
-    "request" : {
-      "urlPath" : "/datasets",
-      "method" : "GET",
-      "queryParameters" : {
-        "sortMethod" : {
-          "equalTo" : "alpha"
-        },
-        "sortParam" : {
-          "equalTo" : "desc"
+  "mappings": [
+    {
+      "id": "02e3eb04-71b5-4bff-8044-38d81079ac02",
+      "name": "Dataset Meta Route (Reverse Alphabetical)",
+      "request": {
+        "urlPath": "/api/discover",
+        "method": "GET",
+        "queryParameters": {
+          "sortMethod": {
+            "equalTo": "alpha"
+          },
+          "sortParam": {
+            "equalTo": "desc"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"customerAlias\": \"HubGroup\",\n  \"datasets\": [\n    {\n      \"name\": \"PDPs\",\n      \"iconName\": \"DietPlanNotebook\",\n      \"moduleAlias\": \"compliance\",\n      \"hasDefaultDate\": true,\n      \"attributes\": [\n        {\n          \"name\": \"csaPoints\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\"SUM\", \"AVG\"],\n          \"filterOps\": [\"EQ\", \"GTE\", \"LTE\"]\n        },\n        {\n          \"name\": \"hasViolation\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\"ANY\", \"ALL\"],\n          \"filterOps\": [\"EQ\"]\n        }\n      ]\n    },\n    {\n      \"name\": \"Injuries/Illnesses\",\n      \"iconName\": \"Hospital\",\n      \"moduleAlias\": \"compliance\",\n      \"hasDefaultDate\": true,\n      \"attributes\": [\n        {\n          \"name\": \"csaPoints\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\"SUM\", \"AVG\"],\n          \"filterOps\": [\"EQ\", \"GTE\", \"LTE\"]\n        },\n        {\n          \"name\": \"hasViolation\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\"ANY\", \"ALL\"],\n          \"filterOps\": [\"EQ\"]\n        }\n      ]\n    },\n    {\n      \"name\": \"Equipment\",\n      \"iconName\": \"DeliveryTruck\",\n      \"moduleAlias\": \"compliance\",\n      \"hasDefaultDate\": true,\n      \"attributes\": [\n        {\n          \"name\": \"csaPoints\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\"SUM\", \"AVG\"],\n          \"filterOps\": [\"EQ\", \"GTE\", \"LTE\"]\n        },\n        {\n          \"name\": \"hasViolation\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\"ANY\", \"ALL\"],\n          \"filterOps\": [\"EQ\"]\n        }\n      ]\n    },\n    {\n      \"name\": \"Enforcements\",\n      \"iconName\": \"ConstructionCone\",\n      \"moduleAlias\": \"compliance\",\n      \"hasDefaultDate\": true,\n      \"attributes\": [\n        {\n          \"name\": \"csaPoints\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\"SUM\", \"AVG\"],\n          \"filterOps\": [\"EQ\", \"GTE\", \"LTE\"]\n        },\n        {\n          \"name\": \"hasViolation\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\"ANY\", \"ALL\"],\n          \"filterOps\": [\"EQ\"]\n        }\n      ]\n    },\n    {\n      \"name\": \"Claims\",\n      \"iconName\": \"Money\",\n      \"moduleAlias\": \"compliance\",\n      \"hasDefaultDate\": true,\n      \"attributes\": [\n        {\n          \"name\": \"csaPoints\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\"SUM\", \"AVG\"],\n          \"filterOps\": [\"EQ\", \"GTE\", \"LTE\"]\n        },\n        {\n          \"name\": \"hasViolation\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\"ANY\", \"ALL\"],\n          \"filterOps\": [\"EQ\"]\n        }\n      ]\n    },\n    {\n      \"name\": \"Accidents\",\n      \"iconName\": \"Starburst\",\n      \"moduleAlias\": \"compliance\",\n      \"hasDefaultDate\": true,\n      \"attributes\": [\n        {\n          \"name\": \"csaPoints\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\"SUM\", \"AVG\"],\n          \"filterOps\": [\"EQ\", \"GTE\", \"LTE\"]\n        },\n        {\n          \"name\": \"hasViolation\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\"ANY\", \"ALL\"],\n          \"filterOps\": [\"EQ\"]\n        }\n      ]\n    }\n  ]\n}\n",
+        "headers": {}
+      },
+      "uuid": "02e3eb04-71b5-4bff-8044-38d81079ac02",
+      "persistent": true,
+      "priority": 5,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2021-12-17T13:58:12.717Z",
+            "via": "ADMIN_API",
+            "by": "70zg8"
+          },
+          "updated": {
+            "at": "2021-12-17T13:59:35.991Z",
+            "via": "ADMIN_API",
+            "by": "70zg8"
+          }
         }
       }
     },
-    "response" : {
-      "status" : 200,
-      "body" : "{\n  \"customerAlias\": \"HubGroup\",\n  \"datasets\": [\n    {\n      \"name\": \"PDPs\",\n      \"iconName\": \"DietPlanNotebook\",\n      \"moduleAlias\": \"compliance\",\n      \"hasDefaultDate\": true,\n      \"attributes\": [\n        {\n          \"name\": \"csaPoints\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\"SUM\", \"AVG\"],\n          \"filterOps\": [\"EQ\", \"GTE\", \"LTE\"]\n        },\n        {\n          \"name\": \"hasViolation\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\"ANY\", \"ALL\"],\n          \"filterOps\": [\"EQ\"]\n        }\n      ]\n    },\n    {\n      \"name\": \"Injuries/Illnesses\",\n      \"iconName\": \"Hospital\",\n      \"moduleAlias\": \"compliance\",\n      \"hasDefaultDate\": true,\n      \"attributes\": [\n        {\n          \"name\": \"csaPoints\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\"SUM\", \"AVG\"],\n          \"filterOps\": [\"EQ\", \"GTE\", \"LTE\"]\n        },\n        {\n          \"name\": \"hasViolation\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\"ANY\", \"ALL\"],\n          \"filterOps\": [\"EQ\"]\n        }\n      ]\n    },\n    {\n      \"name\": \"Equipment\",\n      \"iconName\": \"DeliveryTruck\",\n      \"moduleAlias\": \"compliance\",\n      \"hasDefaultDate\": true,\n      \"attributes\": [\n        {\n          \"name\": \"csaPoints\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\"SUM\", \"AVG\"],\n          \"filterOps\": [\"EQ\", \"GTE\", \"LTE\"]\n        },\n        {\n          \"name\": \"hasViolation\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\"ANY\", \"ALL\"],\n          \"filterOps\": [\"EQ\"]\n        }\n      ]\n    },\n    {\n      \"name\": \"Enforcements\",\n      \"iconName\": \"ConstructionCone\",\n      \"moduleAlias\": \"compliance\",\n      \"hasDefaultDate\": true,\n      \"attributes\": [\n        {\n          \"name\": \"csaPoints\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\"SUM\", \"AVG\"],\n          \"filterOps\": [\"EQ\", \"GTE\", \"LTE\"]\n        },\n        {\n          \"name\": \"hasViolation\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\"ANY\", \"ALL\"],\n          \"filterOps\": [\"EQ\"]\n        }\n      ]\n    },\n    {\n      \"name\": \"Claims\",\n      \"iconName\": \"Money\",\n      \"moduleAlias\": \"compliance\",\n      \"hasDefaultDate\": true,\n      \"attributes\": [\n        {\n          \"name\": \"csaPoints\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\"SUM\", \"AVG\"],\n          \"filterOps\": [\"EQ\", \"GTE\", \"LTE\"]\n        },\n        {\n          \"name\": \"hasViolation\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\"ANY\", \"ALL\"],\n          \"filterOps\": [\"EQ\"]\n        }\n      ]\n    },\n    {\n      \"name\": \"Accidents\",\n      \"iconName\": \"Starburst\",\n      \"moduleAlias\": \"compliance\",\n      \"hasDefaultDate\": true,\n      \"attributes\": [\n        {\n          \"name\": \"csaPoints\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\"SUM\", \"AVG\"],\n          \"filterOps\": [\"EQ\", \"GTE\", \"LTE\"]\n        },\n        {\n          \"name\": \"hasViolation\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\"ANY\", \"ALL\"],\n          \"filterOps\": [\"EQ\"]\n        }\n      ]\n    }\n  ]\n}\n",
-      "headers" : { }
-    },
-    "uuid" : "02e3eb04-71b5-4bff-8044-38d81079ac02",
-    "persistent" : true,
-    "priority" : 5,
-    "metadata" : {
-      "mocklab" : {
-        "created" : {
-          "at" : "2021-12-17T13:58:12.717Z",
-          "via" : "ADMIN_API",
-          "by" : "70zg8"
-        },
-        "updated" : {
-          "at" : "2021-12-17T13:59:35.991Z",
-          "via" : "ADMIN_API",
-          "by" : "70zg8"
+    {
+      "id": "64f7e8b0-9625-457f-9348-c55e4fff9d66",
+      "name": "Dataset Meta Route (Alphabetical)",
+      "request": {
+        "urlPath": "/api/discover",
+        "method": "GET",
+        "queryParameters": {
+          "sortMethod": {
+            "equalTo": "alpha"
+          },
+          "sortParam": {
+            "equalTo": "asc"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": "{\n  \"customerAlias\": \"HubGroup\",\n  \"datasets\": [\n    {\n      \"name\": \"Accidents\",\n      \"iconName\" : \"Starburst\",\n      \"moduleAlias\": \"compliance\",\n      \"hasDefaultDate\" : true,\n      \"attributes\": [\n        {\n          \"name\": \"csaPoints\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\n            \"SUM\",\n            \"AVG\"\n          ],\n          \"filterOps\": [\n            \"EQ\",\n            \"GTE\",\n            \"LTE\"\n          ]\n        },\n        {\n          \"name\": \"hasViolation\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\n            \"ANY\",\n            \"ALL\"\n          ],\n          \"filterOps\": [\n            \"EQ\"\n          ]\n        }\n      ]\n    },\n    {\n      \"name\": \"Claims\",\n      \"iconName\" : \"Money\",\n      \"moduleAlias\": \"compliance\",\n      \"hasDefaultDate\" : true,\n      \"attributes\": [\n        {\n          \"name\": \"csaPoints\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\n            \"SUM\",\n            \"AVG\"\n          ],\n          \"filterOps\": [\n            \"EQ\",\n            \"GTE\",\n            \"LTE\"\n          ]\n        },\n        {\n          \"name\": \"hasViolation\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\n            \"ANY\",\n            \"ALL\"\n          ],\n          \"filterOps\": [\n            \"EQ\"\n          ]\n        }\n      ]\n    },\n    {\n      \"name\": \"Enforcements\",\n      \"iconName\" : \"ConstructionCone\",\n      \"moduleAlias\": \"compliance\",\n      \"hasDefaultDate\" : true,\n      \"attributes\": [\n        {\n          \"name\": \"csaPoints\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\n            \"SUM\",\n            \"AVG\"\n          ],\n          \"filterOps\": [\n            \"EQ\",\n            \"GTE\",\n            \"LTE\"\n          ]\n        },\n        {\n          \"name\": \"hasViolation\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\n            \"ANY\",\n            \"ALL\"\n          ],\n          \"filterOps\": [\n            \"EQ\"\n          ]\n        }\n      ]\n    },\n    {\n      \"name\": \"Equipment\",\n      \"iconName\" : \"DeliveryTruck\",\n      \"moduleAlias\": \"compliance\",\n      \"hasDefaultDate\" : true,\n      \"attributes\": [\n        {\n          \"name\": \"csaPoints\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\n            \"SUM\",\n            \"AVG\"\n          ],\n          \"filterOps\": [\n            \"EQ\",\n            \"GTE\",\n            \"LTE\"\n          ]\n        },\n        {\n          \"name\": \"hasViolation\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\n            \"ANY\",\n            \"ALL\"\n          ],\n          \"filterOps\": [\n            \"EQ\"\n          ]\n        }\n      ]\n    },\n    {\n      \"name\": \"Injuries/Illnesses\",\n      \"iconName\" : \"Hospital\",\n      \"moduleAlias\": \"compliance\",\n      \"hasDefaultDate\" : true,\n      \"attributes\": [\n        {\n          \"name\": \"csaPoints\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\n            \"SUM\",\n            \"AVG\"\n          ],\n          \"filterOps\": [\n            \"EQ\",\n            \"GTE\",\n            \"LTE\"\n          ]\n        },\n        {\n          \"name\": \"hasViolation\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\n            \"ANY\",\n            \"ALL\"\n          ],\n          \"filterOps\": [\n            \"EQ\"\n          ]\n        }\n      ]\n    },\n    {\n      \"name\": \"PDPs\",\n      \"iconName\" : \"DietPlanNotebook\",\n      \"moduleAlias\": \"compliance\",\n      \"hasDefaultDate\" : true,\n      \"attributes\": [\n        {\n          \"name\": \"csaPoints\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\n            \"SUM\",\n            \"AVG\"\n          ],\n          \"filterOps\": [\n            \"EQ\",\n            \"GTE\",\n            \"LTE\"\n          ]\n        },\n        {\n          \"name\": \"hasViolation\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\n            \"ANY\",\n            \"ALL\"\n          ],\n          \"filterOps\": [\n            \"EQ\"\n          ]\n        }\n      ]\n    }\n  ]\n}",
+        "headers": {}
+      },
+      "uuid": "64f7e8b0-9625-457f-9348-c55e4fff9d66",
+      "persistent": true,
+      "priority": 5,
+      "metadata": {
+        "mocklab": {
+          "created": {
+            "at": "2021-12-17T13:43:31.287Z",
+            "via": "SYSTEM"
+          },
+          "updated": {
+            "at": "2021-12-17T13:59:29.018Z",
+            "via": "ADMIN_API",
+            "by": "70zg8"
+          }
         }
       }
     }
-  }, {
-    "id" : "64f7e8b0-9625-457f-9348-c55e4fff9d66",
-    "name" : "Dataset Meta Route (Alphabetical)",
-    "request" : {
-      "urlPath" : "/datasets",
-      "method" : "GET",
-      "queryParameters" : {
-        "sortMethod" : {
-          "equalTo" : "alpha"
-        },
-        "sortParam" : {
-          "equalTo" : "asc"
-        }
-      }
-    },
-    "response" : {
-      "status" : 200,
-      "body" : "{\n  \"customerAlias\": \"HubGroup\",\n  \"datasets\": [\n    {\n      \"name\": \"Accidents\",\n      \"iconName\" : \"Starburst\",\n      \"moduleAlias\": \"compliance\",\n      \"hasDefaultDate\" : true,\n      \"attributes\": [\n        {\n          \"name\": \"csaPoints\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\n            \"SUM\",\n            \"AVG\"\n          ],\n          \"filterOps\": [\n            \"EQ\",\n            \"GTE\",\n            \"LTE\"\n          ]\n        },\n        {\n          \"name\": \"hasViolation\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\n            \"ANY\",\n            \"ALL\"\n          ],\n          \"filterOps\": [\n            \"EQ\"\n          ]\n        }\n      ]\n    },\n    {\n      \"name\": \"Claims\",\n      \"iconName\" : \"Money\",\n      \"moduleAlias\": \"compliance\",\n      \"hasDefaultDate\" : true,\n      \"attributes\": [\n        {\n          \"name\": \"csaPoints\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\n            \"SUM\",\n            \"AVG\"\n          ],\n          \"filterOps\": [\n            \"EQ\",\n            \"GTE\",\n            \"LTE\"\n          ]\n        },\n        {\n          \"name\": \"hasViolation\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\n            \"ANY\",\n            \"ALL\"\n          ],\n          \"filterOps\": [\n            \"EQ\"\n          ]\n        }\n      ]\n    },\n    {\n      \"name\": \"Enforcements\",\n      \"iconName\" : \"ConstructionCone\",\n      \"moduleAlias\": \"compliance\",\n      \"hasDefaultDate\" : true,\n      \"attributes\": [\n        {\n          \"name\": \"csaPoints\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\n            \"SUM\",\n            \"AVG\"\n          ],\n          \"filterOps\": [\n            \"EQ\",\n            \"GTE\",\n            \"LTE\"\n          ]\n        },\n        {\n          \"name\": \"hasViolation\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\n            \"ANY\",\n            \"ALL\"\n          ],\n          \"filterOps\": [\n            \"EQ\"\n          ]\n        }\n      ]\n    },\n    {\n      \"name\": \"Equipment\",\n      \"iconName\" : \"DeliveryTruck\",\n      \"moduleAlias\": \"compliance\",\n      \"hasDefaultDate\" : true,\n      \"attributes\": [\n        {\n          \"name\": \"csaPoints\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\n            \"SUM\",\n            \"AVG\"\n          ],\n          \"filterOps\": [\n            \"EQ\",\n            \"GTE\",\n            \"LTE\"\n          ]\n        },\n        {\n          \"name\": \"hasViolation\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\n            \"ANY\",\n            \"ALL\"\n          ],\n          \"filterOps\": [\n            \"EQ\"\n          ]\n        }\n      ]\n    },\n    {\n      \"name\": \"Injuries/Illnesses\",\n      \"iconName\" : \"Hospital\",\n      \"moduleAlias\": \"compliance\",\n      \"hasDefaultDate\" : true,\n      \"attributes\": [\n        {\n          \"name\": \"csaPoints\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\n            \"SUM\",\n            \"AVG\"\n          ],\n          \"filterOps\": [\n            \"EQ\",\n            \"GTE\",\n            \"LTE\"\n          ]\n        },\n        {\n          \"name\": \"hasViolation\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\n            \"ANY\",\n            \"ALL\"\n          ],\n          \"filterOps\": [\n            \"EQ\"\n          ]\n        }\n      ]\n    },\n    {\n      \"name\": \"PDPs\",\n      \"iconName\" : \"DietPlanNotebook\",\n      \"moduleAlias\": \"compliance\",\n      \"hasDefaultDate\" : true,\n      \"attributes\": [\n        {\n          \"name\": \"csaPoints\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\n            \"SUM\",\n            \"AVG\"\n          ],\n          \"filterOps\": [\n            \"EQ\",\n            \"GTE\",\n            \"LTE\"\n          ]\n        },\n        {\n          \"name\": \"hasViolation\",\n          \"filterable\": true,\n          \"groupable\": true,\n          \"aggregations\": [\n            \"ANY\",\n            \"ALL\"\n          ],\n          \"filterOps\": [\n            \"EQ\"\n          ]\n        }\n      ]\n    }\n  ]\n}",
-      "headers" : { }
-    },
-    "uuid" : "64f7e8b0-9625-457f-9348-c55e4fff9d66",
-    "persistent" : true,
-    "priority" : 5,
-    "metadata" : {
-      "mocklab" : {
-        "created" : {
-          "at" : "2021-12-17T13:43:31.287Z",
-          "via" : "SYSTEM"
-        },
-        "updated" : {
-          "at" : "2021-12-17T13:59:29.018Z",
-          "via" : "ADMIN_API",
-          "by" : "70zg8"
-        }
-      }
-    }
-  } ],
-  "meta" : {
-    "total" : 2
+  ],
+  "meta": {
+    "total": 2
   }
 }
