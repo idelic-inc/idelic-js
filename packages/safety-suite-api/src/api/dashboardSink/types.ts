@@ -16,6 +16,7 @@ export type KpiTimeInterval =
   | 'monthly'
   | 'quarterly'
   | 'yearly';
+export type BinOp = 'EQ' | 'NEQ' | 'GT' | 'LT' | 'GTE' | 'LTE' | 'IN';
 export interface Sort {
   column?: string;
   direction?: SortDirection;
@@ -68,4 +69,30 @@ export interface KpiRequestBody {
   normalizationConstant?: number;
   filter?: string;
   groupings?: string[];
+}
+
+export interface DatasetMetaQuery {
+  filter: string;
+  sortMethod: string;
+  sortParam: string;
+}
+export interface AttributeMeta {
+  name: string;
+  filterable: boolean;
+  groupable: boolean;
+  aggregations: KpiAggregation[];
+  filterOptions: BinOp[];
+}
+
+export interface DatasetMeta {
+  name: string;
+  iconName: string;
+  moduleAliases: string[];
+  hasDefaultDate: boolean;
+  attributes: AttributeMeta[];
+}
+
+export interface DatasetMetaResponse {
+  customerAlias: string;
+  datasets: DatasetMeta[];
 }
