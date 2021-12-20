@@ -4,5 +4,6 @@ export * from './enforcements';
 export * from './expirations';
 export * from './injuries';
 export * from './kpi';
+export * from './meta';
 export * from './riskScores';
 export * from './types';
