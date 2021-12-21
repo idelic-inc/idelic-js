@@ -1,5 +1,5 @@
 import {Request} from '@idelic/safety-net';
-import {ApiOptions, ApiResponse, ApiSuccessResponse} from 'src/types';
+import {ApiOptions, ApiResponse, ApiSuccessResponse, EmptyResponse} from 'src/types';
 
 import {runApi} from '../../runApi';
 import {PageRequest} from '../pageRequest';
@@ -167,6 +167,89 @@ export function getClaimById(
   return runApi({
     method: 'GET',
     urlRoot: 'claimsSinkUrlRoot',
+    route: `/api/claims/${claimId}`,
+    apiOptions,
+    requestOptions: {
+      query: {
+        customerAlias
+      }
+    }
+  });
+}
+
+/**
+ * Create new claim.
+ *
+ * @param inputClaim - Claim To Create.
+ * @param customerAlias - Customer alias.
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Claim model response object.
+ */
+export function createClaim(
+  inputClaim: ClaimModel,
+  customerAlias: string,
+  apiOptions?: ApiOptions
+): Request<ApiResponse<ClaimModel>> {
+  return runApi({
+    method: 'POST',
+    urlRoot: 'claimsSourceUrlRoot',
+    route: `/api/claims`,
+    apiOptions,
+    requestOptions: {
+      query: {
+        customerAlias
+      },
+      body: inputClaim
+    }
+  });
+}
+
+
+/**
+ * Update claim by id.
+ *
+ * @param inputClaim - Claim To Update.
+ * @param claimId - Claim UUID
+ * @param customerAlias - Customer alias.
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Claim model response object.
+ */
+export function updateClaim(
+  inputClaim: ClaimModel,
+  claimId: string,
+  customerAlias: string,
+  apiOptions?: ApiOptions
+): Request<ApiResponse<ClaimModel>> {
+  return runApi({
+    method: 'PUT',
+    urlRoot: 'claimsSourceUrlRoot',
+    route: `/api/claims/${claimId}`,
+    apiOptions,
+    requestOptions: {
+      query: {
+        customerAlias
+      },
+      body: inputClaim
+    }
+  });
+}
+
+/**
+ * Delete claim by id.
+ *
+ * @param claimId - Claim UUID
+ * @param customerAlias - Customer alias.
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Claim model response object.
+ */
+export function deleteClaim(
+  claimId: string,
+  customerAlias: string,
+  apiOptions?: ApiOptions
+): Request<EmptyResponse> {
+  return runApi({
+    method: 'DELETE',
+    urlRoot: 'claimsSourceUrlRoot',
     route: `/api/claims/${claimId}`,
     apiOptions,
     requestOptions: {
