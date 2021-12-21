@@ -1,5 +1,10 @@
 import {Request} from '@idelic/safety-net';
-import {ApiOptions, ApiResponse, ApiSuccessResponse, EmptyResponse} from 'src/types';
+import {
+  ApiOptions,
+  ApiResponse,
+  ApiSuccessResponse,
+  EmptyResponse
+} from 'src/types';
 
 import {runApi} from '../../runApi';
 import {PageRequest} from '../pageRequest';
@@ -203,7 +208,6 @@ export function createClaim(
     }
   });
 }
-
 
 /**
  * Update claim by id.
