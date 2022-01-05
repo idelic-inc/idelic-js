@@ -106,7 +106,7 @@ export interface ClaimModel {
   lossDate: Date;
   closedDate: Date;
   status: keyof typeof ClaimStatus;
-  type: string;
+  claimType: string;
   groupId: number;
   internalClaimId: string;
   description: string;
