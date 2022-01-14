@@ -127,7 +127,7 @@ export type ModulePermissionActions =
   | 'viewConfidential'
   | 'add'
   | 'edit'
-  | 'delete';
+  | 'deletePermission';
 export type DocumentLibraryPermissionActions =
   | Exclude<ModulePermissionActions, 'add'>
   | 'upload'
