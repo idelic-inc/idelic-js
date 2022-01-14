@@ -75,14 +75,14 @@ const userPermissions: UserPermissions = {
     viewConfidential: {},
     add: {},
     edit: {},
-    delete: {}
+    deletePermission: {}
   },
   reportPermissions: {report1: [2, 3, 4]},
   documentLibraryPermissions: {
     view: false,
     viewConfidential: false,
     edit: false,
-    delete: false,
+    deletePermission: false,
     upload: false,
     download: false
   }
