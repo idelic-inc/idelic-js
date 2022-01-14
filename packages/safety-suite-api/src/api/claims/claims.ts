@@ -9,13 +9,6 @@ import {
 import {runApi} from '../../runApi';
 import {PageRequest} from '../pageRequest';
 
-export enum ClaimStatus {
-  OPEN = 'Open',
-  CLOSED = 'Closed',
-  LITIGATION = 'Ligitation',
-  SUBRO = 'Subro'
-}
-
 export interface RelatedOptions {
   id: string;
   employee: number;
@@ -105,8 +98,8 @@ export interface ClaimModel {
   recordNumber: string;
   lossDate: Date;
   closedDate: Date;
-  status: keyof typeof ClaimStatus;
-  claimType: string;
+  status: string;
+  type: string;
   groupId: number;
   internalClaimId: string;
   description: string;
@@ -118,6 +111,7 @@ export interface ClaimModel {
   lastUpdatedDate: Date;
   createdBy: string;
   lastUpdatedBy: string;
+  legacyId: number;
   totalReserves: number;
   totalPaid: number;
   totalRemaining: number;
