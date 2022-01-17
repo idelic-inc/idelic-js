@@ -91,6 +91,15 @@ export enum EventType {
   ACCIDENT = 'Accident'
 }
 
+export interface Payment {
+  id: string;
+  amount: number;
+  category: string;
+  date: Date;
+  description: string;
+  payee: string;
+}
+
 export interface ClaimModel {
   id: string;
   customerAlias: string;
@@ -115,6 +124,9 @@ export interface ClaimModel {
   totalReserves: number;
   totalPaid: number;
   totalRemaining: number;
+  payments: Payment[];
+  reimbursements: Payment[];
+  reserves: Pick<Payment, 'id' | 'amount' | 'category'>[];
   // Clarify
   eventType: keyof typeof EventType;
 }
