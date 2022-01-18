@@ -61,7 +61,7 @@ export enum TreatmentOptions {
 export interface WorkersCompInfo {
   id: string;
   injuryClaim: keyof typeof InjuryClaimType;
-  treatmentOptions: TreatmentOptions;
+  treatmentOptions: keyof typeof TreatmentOptions;
   averageWeeklyWage: string;
   benefitState: string;
   hourlyWage: string;
