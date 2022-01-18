@@ -9,13 +9,6 @@ import {
 import {runApi} from '../../runApi';
 import {PageRequest} from '../pageRequest';
 
-export enum ClaimStatus {
-  OPEN = 'Open',
-  CLOSED = 'Closed',
-  LITIGATION = 'Ligitation',
-  SUBRO = 'Subro'
-}
-
 export interface RelatedOptions {
   id: string;
   employee: number;
@@ -68,7 +61,7 @@ export enum TreatmentOptions {
 export interface WorkersCompInfo {
   id: string;
   injuryClaim: keyof typeof InjuryClaimType;
-  treatmentOptions: TreatmentOptions;
+  treatmentOptions: keyof typeof TreatmentOptions;
   averageWeeklyWage: string;
   benefitState: string;
   hourlyWage: string;
@@ -98,6 +91,15 @@ export enum EventType {
   ACCIDENT = 'Accident'
 }
 
+export interface Payment {
+  id: string;
+  amount: number;
+  category: string;
+  date: Date;
+  description: string;
+  payee: string;
+}
+
 export interface ClaimModel {
   id: string;
   customerAlias: string;
@@ -105,8 +107,8 @@ export interface ClaimModel {
   recordNumber: string;
   lossDate: Date;
   closedDate: Date;
-  status: keyof typeof ClaimStatus;
-  claimType: string;
+  status: string;
+  type: string;
   groupId: number;
   internalClaimId: string;
   description: string;
@@ -118,9 +120,13 @@ export interface ClaimModel {
   lastUpdatedDate: Date;
   createdBy: string;
   lastUpdatedBy: string;
+  legacyId: number;
   totalReserves: number;
   totalPaid: number;
   totalRemaining: number;
+  payments: Payment[];
+  reimbursements: Payment[];
+  reserves: Pick<Payment, 'id' | 'amount' | 'category'>[];
   // Clarify
   eventType: keyof typeof EventType;
 }
