@@ -53,9 +53,9 @@ export enum InjuryClaimType {
 }
 
 export enum TreatmentOptions {
-  EMERGENCY_CARE = "Emergency Care",
-  MINOR_CLINIC_HOSPITAL = "Minor Clinic/Hospital",
-  NO_MEDICAL_OPTIONS = "No Medical Treatment"
+  EMERGENCY_CARE = 'Emergency Care',
+  MINOR_CLINIC_HOSPITAL = 'Minor Clinic/Hospital',
+  NO_MEDICAL_OPTIONS = 'No Medical Treatment'
 }
 
 export interface WorkersCompInfo {
