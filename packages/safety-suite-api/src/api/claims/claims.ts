@@ -126,7 +126,7 @@ export interface ClaimModel {
   totalRemaining: number;
   payments: Payment[];
   reimbursements: Payment[];
-  reserves: Pick<Payment, 'id' | 'amount' | 'category'>[];
+  reserves: Payment[];
   // Clarify
   eventType: keyof typeof EventType;
 }
