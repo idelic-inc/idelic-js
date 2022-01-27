@@ -1,6 +1,7 @@
 import {Request} from '@idelic/safety-net';
-import {ApiOptions, ApiResponse, ApiSuccessResponse} from '../../types';
+
 import {runApi} from '../../runApi';
+import {ApiOptions, ApiResponse, ApiSuccessResponse} from '../../types';
 
 interface Balance {
   category: string;
