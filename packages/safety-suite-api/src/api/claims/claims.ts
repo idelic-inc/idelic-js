@@ -1,10 +1,5 @@
 import {Request} from '@idelic/safety-net';
-import {
-  ApiOptions,
-  ApiResponse,
-  ApiSuccessResponse,
-  EmptyResponse
-} from 'src/types';
+import {ApiOptions, ApiSuccessResponse, EmptyResponse} from 'src/types';
 
 import {runApi} from '../../runApi';
 import {PageRequest} from '../pageRequest';
@@ -147,11 +142,11 @@ export function getClaims(
   pageRequest: PageRequest,
   customerAlias: string,
   apiOptions?: ApiOptions
-): Request<ApiResponse<ApiSuccessResponse<ClaimResponse>>> {
+): Request<ApiSuccessResponse<ClaimResponse>> {
   return runApi({
     method: 'POST',
     urlRoot: 'claimsSinkUrlRoot',
-    route: `/api/claims`,
+    route: '/api/claims',
     apiOptions,
     requestOptions: {
       query: {
@@ -174,7 +169,7 @@ export function getClaimById(
   claimId: string,
   customerAlias: string,
   apiOptions?: ApiOptions
-): Request<ApiResponse<ClaimModel>> {
+): Request<ClaimModel> {
   return runApi({
     method: 'GET',
     urlRoot: 'claimsSinkUrlRoot',
@@ -200,11 +195,11 @@ export function createClaim(
   inputClaim: ClaimModel,
   customerAlias: string,
   apiOptions?: ApiOptions
-): Request<ApiResponse<ClaimModel>> {
+): Request<ClaimModel> {
   return runApi({
     method: 'POST',
     urlRoot: 'claimsSourceUrlRoot',
-    route: `/api/claims`,
+    route: '/api/claims',
     apiOptions,
     requestOptions: {
       query: {
@@ -229,7 +224,7 @@ export function updateClaim(
   claimId: string,
   customerAlias: string,
   apiOptions?: ApiOptions
-): Request<ApiResponse<ClaimModel>> {
+): Request<ClaimModel> {
   return runApi({
     method: 'PUT',
     urlRoot: 'claimsSourceUrlRoot',
