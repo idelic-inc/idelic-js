@@ -1,9 +1,9 @@
 import {Request} from '@idelic/safety-net';
 
 import {runApi} from '../../runApi';
-import {ApiOptions, ApiResponse, ApiSuccessResponse} from '../../types';
+import {ApiOptions, ApiResponse} from '../../types';
 
-interface Balance {
+export interface Balance {
   category: string;
   reserve: number;
   payment: number;
@@ -24,7 +24,7 @@ export function getBalanceByClaimId(
   claimId: string,
   customerAlias: string,
   apiOptions?: ApiOptions
-): Request<ApiResponse<ApiSuccessResponse<Balance[]>>> {
+): Request<ApiResponse<Balance[]>> {
   return runApi({
     method: 'GET',
     urlRoot: 'claimsSinkUrlRoot',
