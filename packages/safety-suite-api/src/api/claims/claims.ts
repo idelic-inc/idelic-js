@@ -111,7 +111,7 @@ export interface Payment {
 }
 
 export interface ClaimContact {
-  type: ContactType;
+  type: keyof typeof ContactType;
   firstName: string;
   lastName: string;
   fullName: string;
