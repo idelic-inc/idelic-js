@@ -91,6 +91,16 @@ export enum EventType {
   ACCIDENT = 'Accident'
 }
 
+export enum ContactType {
+  ADJUSTER = 'Adjuster',
+  ATTORNEY = 'Attorney',
+  CLAIMANT_ATTORNEY = 'Claimant Attorney',
+  DEPENDENT = 'Dependent',
+  INSURANCE_CARRIER = 'Insurance Carrier',
+  LEGAL_CONTACT = 'Legal Contact',
+  WIDOW = 'Widow'
+}
+
 export interface Payment {
   id: string;
   amount: number;
@@ -98,6 +108,21 @@ export interface Payment {
   date: Date;
   description: string;
   payee: string;
+}
+
+export interface ClaimContact {
+  type: ContactType;
+  firstName: string;
+  lastName: string;
+  fullName: string;
+  address: Address;
+  phoneNumber: string;
+  email: string;
+  organizationName: string;
+  organizationPhoneNumber: string;
+  description: string;
+  fileNumber: string;
+  dateNotified: Date;
 }
 
 export interface ClaimModel {
@@ -116,6 +141,7 @@ export interface ClaimModel {
   claimantInfo: ClaimantInfo;
   workersCompInfo: WorkersCompInfo;
   vehicleInfo: VehicleInfo;
+  contacts: ClaimContact[];
   createdDate: Date;
   lastUpdatedDate: Date;
   createdBy: string;
