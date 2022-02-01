@@ -78,6 +78,7 @@ export interface DatasetMetaQuery {
 }
 export interface AttributeMeta {
   name: string;
+  label: string;
   filterable: boolean;
   groupable: boolean;
   aggregations: KpiAggregation[];
@@ -86,6 +87,7 @@ export interface AttributeMeta {
 
 export interface DatasetMeta {
   name: string;
+  label: string;
   iconName: string;
   moduleAliases: string[];
   hasDefaultDate: boolean;
