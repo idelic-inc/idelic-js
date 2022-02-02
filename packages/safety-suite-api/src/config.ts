@@ -263,6 +263,9 @@ export interface BasicConfig extends NestedConfiguration {
           licenseStatus: {
             enabled: boolean;
           };
+          awards: {
+            enabled: boolean;
+          };
         };
         safetyAndRisk: {
           severityPreventabilityVersion: number;
@@ -332,6 +335,9 @@ const exampleConfig: BasicConfig = {
       modules: {
         hr: {
           licenseStatus: {
+            enabled: false
+          },
+          awards: {
             enabled: false
           }
         },
