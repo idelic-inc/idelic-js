@@ -72,13 +72,28 @@ export interface KpiRequestBody {
 }
 
 export interface DatasetMetaQuery {
-  filter: string;
-  sortMethod: string;
-  sortParam: string;
+  /**
+   * Dataset names to filter by
+   */
+  filter: string[];
+  /**
+   * Dataset attribute and direction to sort by. E.g 'name,asc` or 'name,desc'. Default is sorting by 'name'
+   */
+  sort: string;
 }
+export type AttributeType =
+  | 'ENUM'
+  | 'TEXT'
+  | 'NUMBER'
+  | 'DATE'
+  | 'TIME'
+  | 'BOOLEAN';
 export interface AttributeMeta {
-  name: string;
-  label: string;
+  metric: string;
+  label?: string;
+  alias: string;
+  type: AttributeType;
+  filterPriority?: number;
   filterable: boolean;
   groupable: boolean;
   aggregations: KpiAggregation[];
