@@ -11,7 +11,7 @@ export const getDatasetMeta = (
   runApi({
     method: 'GET',
     urlRoot: 'dashboardSinkUrlRoot',
-    route: '/api/discover',
+    route: '/api/dashboard/discover',
     apiOptions,
     requestOptions: {
       query
