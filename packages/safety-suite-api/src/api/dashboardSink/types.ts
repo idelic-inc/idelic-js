@@ -80,6 +80,10 @@ export interface DatasetMetaQuery {
    * Dataset attribute and direction to sort by. E.g 'name,asc` or 'name,desc'. Default is sorting by 'name'
    */
   sort: string;
+  /**
+   * Customer alias.
+   */
+  customerAlias: string;
 }
 export type AttributeType =
   | 'ENUM'
