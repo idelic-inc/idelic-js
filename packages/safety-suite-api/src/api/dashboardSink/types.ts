@@ -3,6 +3,7 @@ export type KpiAggregation =
   | 'SUM'
   | 'COUNT'
   | 'MOST_RECENT'
+  | 'MOST_RECENT_SUM'
   | 'SELECT'
   | 'MAX'
   | 'MIN'
