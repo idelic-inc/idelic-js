@@ -82,8 +82,12 @@ export interface VehicleInfo {
 }
 
 export enum EventType {
-  INJURY = 'Injury',
-  ACCIDENT = 'Accident'
+  independent = 'Independent',
+  accident = 'Accident',
+  forkliftIncident = 'Forklift Incident',
+  injuryIllness = 'Injury/Illness',
+  billOfLading = 'Bill Of Lading',
+  materialSpill = 'Material Spill'
 }
 
 export enum ContactType {
@@ -150,7 +154,6 @@ export interface ClaimModel {
   payments: Payment[];
   reimbursements: Payment[];
   reserves: Payment[];
-  // Clarify
   eventType: keyof typeof EventType;
 }
 
