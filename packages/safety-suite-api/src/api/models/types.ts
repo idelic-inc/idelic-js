@@ -878,6 +878,10 @@ export interface ModelQuery {
    * Options for filtering the returned model ids.
    */
   where?: QueryNode;
+  /**
+   * Will also include indirectly accessible models.
+   */
+  includeIndirectModels?: boolean;
 }
 
 export interface ModelQueryParams {
