@@ -113,6 +113,7 @@ export interface BasicConfig extends NestedConfiguration {
     claims: {
       enabled: boolean;
       frontendUrl: string;
+      linkingEventEnabled: boolean;
     };
     claimsSink: {
       auth0: {
@@ -318,7 +319,8 @@ const exampleConfig: BasicConfig = {
     },
     claims: {
       enabled: false,
-      frontendUrl: ''
+      frontendUrl: '',
+      linkingEventEnabled: false
     },
     saf: {
       auth0: {
