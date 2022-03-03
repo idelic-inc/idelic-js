@@ -90,16 +90,6 @@ export enum EventType {
   materialSpill = 'Material Spill'
 }
 
-export enum ContactType {
-  ADJUSTER = 'Adjuster',
-  ATTORNEY = 'Attorney',
-  CLAIMANT_ATTORNEY = 'Claimant Attorney',
-  DEPENDENT = 'Dependent',
-  INSURANCE_CARRIER = 'Insurance Carrier',
-  LEGAL_CONTACT = 'Legal Contact',
-  WIDOW = 'Widow'
-}
-
 export interface Payment {
   id: string;
   amount: number;
@@ -110,7 +100,7 @@ export interface Payment {
 }
 
 export interface ClaimContact {
-  type: keyof typeof ContactType;
+  type: string;
   firstName: string;
   lastName: string;
   fullName: string;
