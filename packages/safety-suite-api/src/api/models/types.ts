@@ -878,10 +878,6 @@ export interface ModelQuery {
    * Options for filtering the returned model ids.
    */
   where?: QueryNode;
-  /**
-   * Will also include indirectly accessible models.
-   */
-  includeIndirectModels?: boolean;
 }
 
 export interface ModelQueryParams {
@@ -889,6 +885,10 @@ export interface ModelQueryParams {
    * Used when we want to use the read replica database on a request.
    */
   readReplica?: boolean;
+  /**
+   * Used when we want to include indirectly accessible models
+   */
+  includeIndirectModels?: boolean;
 }
 
 export interface Aggregation<GroupValue = unknown> {

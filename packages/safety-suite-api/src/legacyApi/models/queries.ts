@@ -1,5 +1,10 @@
 import {TurnoverReportFilters} from '../../api/models/queries';
-import {ExportColumn, ModelQuery, OshaInput} from '../../api/models/types';
+import {
+  ExportColumn,
+  ModelQuery,
+  ModelQueryParams,
+  OshaInput
+} from '../../api/models/types';
 import {Id} from '../../types';
 import {LegacyApi} from '../types';
 
@@ -28,11 +33,14 @@ export type XlsxExportQuery = {
  * @deprecated Use `queryModels` instead.
  * @param modelQuery - Model query object.
  */
-export function runModelsQuery(modelQuery: ModelQuery): LegacyApi {
+export function runModelsQuery(
+  modelQuery: ModelQuery,
+  modelQueryParams: ModelQueryParams
+): LegacyApi {
   return {
     method: 'POST',
     route: '/api/models/query',
-    requestOptions: {body: modelQuery}
+    requestOptions: {body: modelQuery, query: modelQueryParams}
   };
 }
 
