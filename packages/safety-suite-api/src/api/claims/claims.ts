@@ -168,7 +168,7 @@ export function getClaims(
   return runApi({
     method: 'POST',
     urlRoot: 'claimsSinkUrlRoot',
-    route: '/api/claims',
+    route: '/api/claims/page',
     apiOptions,
     requestOptions: {
       query: {
@@ -220,7 +220,7 @@ export function createClaim(
 ): Request<ClaimModel> {
   return runApi({
     method: 'POST',
-    urlRoot: 'claimsSourceUrlRoot',
+    urlRoot: 'claimsSinkUrlRoot',
     route: '/api/claims',
     apiOptions,
     requestOptions: {
@@ -249,7 +249,7 @@ export function updateClaim(
 ): Request<ClaimModel> {
   return runApi({
     method: 'PUT',
-    urlRoot: 'claimsSourceUrlRoot',
+    urlRoot: 'claimsSinkUrlRoot',
     route: `/api/claims/${claimId}`,
     apiOptions,
     requestOptions: {
@@ -278,7 +278,7 @@ export function deleteClaim(
 ): Request<EmptyResponse> {
   return runApi({
     method: 'DELETE',
-    urlRoot: 'claimsSourceUrlRoot',
+    urlRoot: 'claimsSinkUrlRoot',
     route: `/api/claims/${claimId}/${groupId}`,
     apiOptions,
     requestOptions: {
