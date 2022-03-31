@@ -1,7 +1,7 @@
 import {Request} from '@idelic/safety-net';
 
 import {runApi} from '../../runApi';
-import {ApiOptions, ApiSuccessResponse, EmptyResponse} from '../../types';
+import {ApiOptions, ApiSuccessResponse, EmptyResponse, Id} from '../../types';
 import {PageRequest} from '../pageRequest';
 
 export interface RelatedOptions {
@@ -67,6 +67,7 @@ export interface WorkersCompInfo {
   privacyCase: boolean;
   privacyCaseState: string;
   temporaryTotalDisability: string;
+  description: string;
 }
 
 export interface VehicleInfo {
@@ -167,7 +168,7 @@ export function getClaims(
   return runApi({
     method: 'POST',
     urlRoot: 'claimsSinkUrlRoot',
-    route: '/api/claims',
+    route: '/api/claims/page',
     apiOptions,
     requestOptions: {
       query: {
@@ -219,7 +220,7 @@ export function createClaim(
 ): Request<ClaimModel> {
   return runApi({
     method: 'POST',
-    urlRoot: 'claimsSourceUrlRoot',
+    urlRoot: 'claimsSinkUrlRoot',
     route: '/api/claims',
     apiOptions,
     requestOptions: {
@@ -248,7 +249,7 @@ export function updateClaim(
 ): Request<ClaimModel> {
   return runApi({
     method: 'PUT',
-    urlRoot: 'claimsSourceUrlRoot',
+    urlRoot: 'claimsSinkUrlRoot',
     route: `/api/claims/${claimId}`,
     apiOptions,
     requestOptions: {
@@ -264,19 +265,21 @@ export function updateClaim(
  * Delete claim by id.
  *
  * @param claimId - Claim UUID
+ * @param groupId - Group ID
  * @param customerAlias - Customer alias.
  * @param apiOptions - Optional options for runApi.
  * @returns - Claim model response object.
  */
 export function deleteClaim(
   claimId: string,
+  groupId: Id,
   customerAlias: string,
   apiOptions?: ApiOptions
 ): Request<EmptyResponse> {
   return runApi({
     method: 'DELETE',
-    urlRoot: 'claimsSourceUrlRoot',
-    route: `/api/claims/${claimId}`,
+    urlRoot: 'claimsSinkUrlRoot',
+    route: `/api/claims/${claimId}/${groupId}`,
     apiOptions,
     requestOptions: {
       query: {

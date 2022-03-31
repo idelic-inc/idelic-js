@@ -32,15 +32,19 @@ export type XlsxExportQuery = {
 /**
  * @deprecated Use `queryModels` instead.
  * @param modelQuery - Model query object.
+ * @param modelQueryParams
  */
 export function runModelsQuery(
   modelQuery: ModelQuery,
-  modelQueryParams: ModelQueryParams
+  modelQueryParams?: ModelQueryParams
 ): LegacyApi {
   return {
     method: 'POST',
     route: '/api/models/query',
-    requestOptions: {body: modelQuery, query: modelQueryParams}
+    requestOptions: {
+      body: modelQuery,
+      ...(modelQueryParams && {query: modelQueryParams})
+    }
   };
 }
 
