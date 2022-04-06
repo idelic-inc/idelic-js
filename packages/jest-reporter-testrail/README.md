@@ -14,7 +14,7 @@ This package allows you to use [Jest](https://jestjs.io/) in conjunction with [T
 ## Install
 
 ```code
-npm i jest-2-testrail
+yarn add @idelic/jest-reporter-testrail
 ```
 
 ## Example - **jest-config.js**
@@ -31,7 +31,10 @@ module.exports = {
   testEnvironment: 'node',
   testRegex: '.test.ts$',
   transform: {'^.+\\.(t|j)s$': 'ts-jest'},
-  reporters: ['default', ['jest-2-testrail', {project_id: '1', suite_id: '1'}]]
+  reporters: [
+    'default',
+    ['@idelic/jest-reporter-testrail', {project_id: '1', suite_id: '1'}]
+  ]
 };
 ```
 
