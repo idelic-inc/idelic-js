@@ -41,7 +41,6 @@ class Reporter {
     globalConfig: Config.GlobalConfig,
     options: TestRailReporterOptions
   ) {
-    console.log(config);
     this._globalConfig = globalConfig;
     this._options = options;
     this.caseIds = [];
