@@ -1,6 +1,8 @@
 [![TestRail v4.1](https://img.shields.io/badge/TestRail%20API-v2-green.svg)](http://docs.gurock.com/testrail-api2/start)
 
-# Jest2TestRail
+# `@idelic/jest-reporter-testrail`
+
+Originally forked from https://github.com/zeljkosimic95/Jest-2-Testrail
 
 This package allows you to use [Jest](https://jestjs.io/) in conjunction with [TestRail](http://www.gurock.com/testrail/).
 
@@ -24,15 +26,12 @@ The Reporter must be specified in the jest-config.js file, under 'reporters'.
 
 ```javascript
 module.exports = {
-  moduleFileExtensions: ["js", "json", "ts"],
-  rootDir: ".",
-  testEnvironment: "node",
-  testRegex: ".test.ts$",
-  transform: { "^.+\\.(t|j)s$": "ts-jest" },
-  reporters: [
-    "default",
-    ["jest-2-testrail", { project_id: "1", suite_id: "1" }]
-  ]
+  moduleFileExtensions: ['js', 'json', 'ts'],
+  rootDir: '.',
+  testEnvironment: 'node',
+  testRegex: '.test.ts$',
+  transform: {'^.+\\.(t|j)s$': 'ts-jest'},
+  reporters: ['default', ['jest-2-testrail', {project_id: '1', suite_id: '1'}]]
 };
 ```
 
@@ -41,17 +40,17 @@ module.exports = {
 The Case ID from TestRail must be added to the start of each _it()_ description, <br>and separated from the test name by a colon - ":".
 
 ```javascript
-describe("Login Page", () => {
+describe('Login Page', () => {
   // "1:" this is Case ID from Test Rail
-  it("1: Login success", async () => {
+  it('1: Login success', async () => {
     expect(1).toBe(1);
   });
 
-  it("2: Login fail", async () => {
+  it('2: Login fail', async () => {
     expect(1).toBe(0);
   });
 
-  xit("3: Registration", async () => {
+  xit('3: Registration', async () => {
     expect(1).toBe(1);
   });
 });
