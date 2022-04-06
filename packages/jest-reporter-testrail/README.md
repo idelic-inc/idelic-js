@@ -66,9 +66,9 @@ This file needs to be created in your project's root folder.
 <br> This file needs to have all 3 parameters correctly filled.
 
 ```javascript
-NETWORK_URL = https://<YourProjectURL>.testrail.io
-USERNAME = email address
-PASSWORD = password or API key
+TESTRAIL_ENDPOINT = https://<YourProjectURL>.testrail.io
+TESTRAIL_USERNAME = email address
+TESTRAIL_PASSWORD = password or API key
 ```
 
 ## Enable TestRail API
