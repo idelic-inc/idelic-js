@@ -56,6 +56,12 @@
         "browser": false,
         "jest": true
       }
+    },
+    {
+      "files": ["packages/jest-reporter-testrail/**/*"],
+      "rules": {
+        "no-console": "off"
+      }
     }
   ],
   "globals": {
