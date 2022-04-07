@@ -1,0 +1,46 @@
+{
+  "name": "@idelic/jest-reporter-testrail",
+  "version": "0.0.0",
+  "description": "Jest based reporter for creating a new run and sending test results to TestRail",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/**/*"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "jest",
+    "testrail",
+    "reporter",
+    "customreporter",
+    "testresults",
+    "testcases",
+    "testautomation"
+  ],
+  "contributors": [
+    {
+      "name": "Slobodan Dusanic"
+    },
+    {
+      "name": "Zeljko Simic"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@dlenroc/testrail": "^1.6.0",
+    "dotenv": "8.0.0",
+    "strip-ansi": "5.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^15.14.1",
+    "jest": "^26.0.0",
+    "typescript": "^4.6.2"
+  },
+  "homepage": "https://github.com/idelic-inc/idelic-js/tree/master/packages/jest-reporter-testrail",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idelic-inc/idelic-js.git"
+  }
+}
