@@ -115,10 +115,10 @@
     "@fluentui/set-version" "^8.1.4"
     tslib "^2.1.0"
 
-"@idelic/formatron@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/@idelic/formatron/-/formatron-2.0.0.tgz#276fb4e099b35c70ef12bbf43669c2f429dd35da"
-  integrity sha512-EODV/le8tVaIxFtmEtsf/sNpelsmyF9fJfZZT/RuSj67YvOfWIADcSokm6iQcrBXMWmQANXSfVe/0GDIAAewkA==
+"@idelic/formatron@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@idelic/formatron/-/formatron-2.0.1.tgz#8f103297a0d1b79036ff9e516d527f1e7254e16f"
+  integrity sha512-qN5ij8INCoQ6bdUrSDJzPneosTAbp8JzH1cQ2QSF/IkzbHelR9uzuWOsVaoEsjfPsNTMjbruS0XPQtxEpWYVeQ==
   dependencies:
     idelic-safety-suite-api "^7.0.1"
     immutable "^4.0.0-rc.12"
@@ -298,9 +298,9 @@ moment-timezone@^0.5.26:
     moment ">= 2.9.0"
 
 "moment@>= 2.9.0", moment@^2.24.0, moment@^2.29.1:
-  version "2.29.1"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
-  integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
+  version "2.29.2"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.2.tgz#00910c60b20843bcba52d37d58c628b47b1f20e4"
+  integrity sha512-UgzG4rvxYpN15jgCmVJwac49h9ly9NurikMWGPdVxm8GZD6XjkKPxDTjQQ43gtGgnV3X0cAyWDdP2Wexoquifg==
 
 object-assign@^4.1.1:
   version "4.1.1"
