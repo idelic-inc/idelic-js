@@ -87,7 +87,7 @@ export interface DashboardBookmark {
   /**
    * The display name of the saved bookmark.
    */
-  name: string;
+  bookmarkName: string;
   /**
    * KPI filter string.
    */
