@@ -1,8 +1,8 @@
 import {Request} from '@idelic/safety-net';
-import {QueryExportJob} from 'src/api/models/types';
-import {ApiOptions, ApiResponse} from 'src/types';
 
 import {runApi} from '../../runApi';
+import {ApiOptions, ApiResponse} from '../../types';
+import {QueryExportJob} from '../models/types';
 
 export type AuditLogQuery = {
   customerAlias?: string;

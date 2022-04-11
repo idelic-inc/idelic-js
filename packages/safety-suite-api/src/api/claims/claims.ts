@@ -1,7 +1,7 @@
 import {Request} from '@idelic/safety-net';
-import {ApiOptions, ApiSuccessResponse, EmptyResponse, Id} from 'src/types';
 
 import {runApi} from '../../runApi';
+import {ApiOptions, ApiSuccessResponse, EmptyResponse, Id} from '../../types';
 import {PageRequest} from '../pageRequest';
 
 export interface RelatedOptions {
