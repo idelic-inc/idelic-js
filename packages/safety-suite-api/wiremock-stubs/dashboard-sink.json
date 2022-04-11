@@ -34,7 +34,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"customerAlias\": \"idelic\",\n  \"dashboardBookmarks\": [\n    {\n      \"id\": 1,\n      \"filter\": \"\",\n      \"groupIds\": [],\n      \"groupings\": \"\",\n      \"timeFrameFrom\": \"\",\n      \"timeFrameTo\": \"\",\n      \"timeField\": \"\",\n      \"chartType\": \"\",\n      \"datasetName\": \"accidents\",\n      \"order\": 1\n    }\n  ]\n}",
+        "body": "{\n  \"customerAlias\": \"idelic\",\n  \"dashboardBookmarks\": [\n    {\n      \"id\": 1,\n      \"filter\": \"\",\n      \"bookmarkName\": \"\",\n      \"groupIds\": [],\n      \"groupings\": \"\",\n      \"timeFrameFrom\": \"\",\n      \"timeFrameTo\": \"\",\n      \"timeField\": \"\",\n      \"chartType\": \"\",\n      \"datasetName\": \"accidents\",\n      \"order\": 1\n    }\n  ]\n}",
         "headers": {}
       },
       "uuid": "715cced6-66d9-494f-a70d-d1fbc0750ac6",
@@ -48,7 +48,7 @@
             "by": "94mvl"
           },
           "updated": {
-            "at": "2022-04-08T17:57:40.456Z",
+            "at": "2022-04-11T16:06:47.783Z",
             "via": "ADMIN_API",
             "by": "94mvl"
           }
@@ -64,7 +64,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"customerAlias\": \"idelic\",\n  \"dashboardBookmark\": {\n    \"id\": 1,\n    \"filter\": \"\",\n    \"groupIds\": [],\n    \"groupings\": \"\",\n    \"timeFrameFrom\": \"\",\n    \"timeFrameTo\": \"\",\n    \"timeField\": \"\",\n    \"chartType\": \"\",\n    \"datasetName\": \"accidents\",\n    \"order\": 1\n  }\n}",
+        "body": "{\n  \"customerAlias\": \"idelic\",\n  \"dashboardBookmark\": {\n    \"id\": 1,\n    \"filter\": \"\",\n    \"bookmarkName\": \"\",\n    \"groupIds\": [],\n    \"groupings\": \"\",\n    \"timeFrameFrom\": \"\",\n    \"timeFrameTo\": \"\",\n    \"timeField\": \"\",\n    \"chartType\": \"\",\n    \"datasetName\": \"accidents\",\n    \"order\": 1\n  }\n}",
         "headers": {}
       },
       "uuid": "f5086998-e15d-4d0f-b1e8-a47bf88e9e0a",
@@ -78,7 +78,7 @@
             "by": "94mvl"
           },
           "updated": {
-            "at": "2022-04-08T17:56:36.694Z",
+            "at": "2022-04-11T16:06:41.536Z",
             "via": "ADMIN_API",
             "by": "94mvl"
           }
@@ -94,7 +94,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"customerAlias\": \"idelic\",\n  \"dashboardBookmarks\": [\n    {\n      \"id\": 1,\n      \"filter\": \"\",\n      \"groupIds\": [],\n      \"groupings\": \"\",\n      \"timeFrameFrom\": \"\",\n      \"timeFrameTo\": \"\",\n      \"timeField\": \"\",\n      \"chartType\": \"\",\n      \"datasetName\": \"accidents\",\n      \"order\": 1\n    }\n  ]\n}",
+        "body": "{\n  \"customerAlias\": \"idelic\",\n  \"dashboardBookmarks\": [\n    {\n      \"id\": 1,\n      \"filter\": \"\",\n      \"bookmarkName\": \"\",\n      \"groupIds\": [],\n      \"groupings\": \"\",\n      \"timeFrameFrom\": \"\",\n      \"timeFrameTo\": \"\",\n      \"timeField\": \"\",\n      \"chartType\": \"\",\n      \"datasetName\": \"accidents\",\n      \"order\": 1\n    }\n  ]\n}",
         "headers": {}
       },
       "uuid": "2b009dd8-15f1-48e4-a92e-3018b22717a9",
@@ -108,7 +108,7 @@
             "by": "94mvl"
           },
           "updated": {
-            "at": "2022-04-08T17:53:08.751Z",
+            "at": "2022-04-11T16:06:35.403Z",
             "via": "ADMIN_API",
             "by": "94mvl"
           }
