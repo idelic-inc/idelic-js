@@ -85,6 +85,10 @@ export interface DashboardBookmark {
    */
   id: Id;
   /**
+   * The display name of the saved bookmark.
+   */
+  name: string;
+  /**
    * KPI filter string.
    */
   filter: string;
