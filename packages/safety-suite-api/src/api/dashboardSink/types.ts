@@ -1,3 +1,5 @@
+import {Alias, Id} from '../../types';
+
 export type SortDirection = 'asc' | 'desc';
 export type KpiAggregation =
   | 'SUM'
@@ -24,7 +26,7 @@ export interface Sort {
 }
 
 export interface Query {
-  customerAlias: string;
+  customerAlias: Alias;
   groupIds?: number[];
 }
 
@@ -36,12 +38,12 @@ export interface TableQuery extends Query {
 }
 
 export interface DashboardBaseFields {
-  id: number;
+  id: Id;
   employeeLabel: string;
-  employeeId: number;
-  customerAlias: string;
+  employeeId: Id;
+  customerAlias: Alias;
   recordNumber: number;
-  groupId: number;
+  groupId: Id;
 }
 
 export interface KpiTimeFrame {
@@ -71,6 +73,68 @@ export interface KpiRequestBody {
   filter?: string;
   groupings?: string[];
 }
+export interface DashboardBookmarksQuery {
+  /**
+   * Customer alias.
+   */
+  customerAlias: Alias;
+}
+export interface DashboardBookmark {
+  /**
+   * Database ID of the bookmark.
+   */
+  id: Id;
+  /**
+   * KPI filter string.
+   */
+  filter: string;
+  /**
+   * Model group IDs to filter the dataset on.
+   */
+  groupIds: Id[];
+  /**
+   * Groupings string.
+   */
+  groupings: string;
+  /**
+   * ISO date string that represents the oldest data in the chart.
+   */
+  timeFrameFrom: string;
+  /**
+   * ISO date string that represents the newest data in the chart.
+   */
+  timeFrameTo: string;
+  /**
+   * Which field the time frame applies to.
+   */
+  timeField: string;
+  /**
+   * Type of chart that should be rendered.
+   */
+  chartType: string;
+  /**
+   * Name of the dataset this bookmark is for.
+   */
+  datasetName: string;
+  /**
+   * Order the bookmark should appear in on the dataset card.
+   */
+  order: number;
+}
+export type InputDashboardBookmark = Omit<DashboardBookmark, 'order' | 'id'>;
+export interface GetDashboardBookmarksResponse extends DashboardBookmarksQuery {
+  /**
+   * Array of bookmarks for a specific dataset.
+   */
+  dashboardBookmarks: DashboardBookmark[];
+}
+export interface CreateDashboardBookmarksResponse
+  extends DashboardBookmarksQuery {
+  /**
+   * Newly created dashboard bookmark.
+   */
+  dashboardBookmark: DashboardBookmark;
+}
 
 export interface DatasetMetaQuery {
   /**
@@ -84,7 +148,7 @@ export interface DatasetMetaQuery {
   /**
    * Customer alias.
    */
-  customerAlias: string;
+  customerAlias: Alias;
 }
 export type AttributeType =
   | 'ENUM'
@@ -115,6 +179,6 @@ export interface DatasetMeta {
 }
 
 export interface DatasetMetaResponse {
-  customerAlias: string;
+  customerAlias: Alias;
   datasets: DatasetMeta[];
 }
