@@ -137,7 +137,10 @@ export interface DashboardBookmark {
    */
   savedDate: string;
 }
-export type InputDashboardBookmark = Omit<DashboardBookmark, 'order' | 'id'>;
+export type InputDashboardBookmark = Omit<
+  DashboardBookmark,
+  'order' | 'id' | 'isCustom' | 'savedDate'
+>;
 export interface GetDashboardBookmarksResponse extends DashboardBookmarksQuery {
   /**
    * Array of bookmarks for a specific dataset.
