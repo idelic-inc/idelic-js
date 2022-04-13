@@ -101,6 +101,10 @@ export interface DashboardBookmark {
    */
   groupings: string;
   /**
+   * Date filter interval.
+   */
+  interval: string;
+  /**
    * ISO date string that represents the oldest data in the chart.
    */
   timeFrameFrom: string;
@@ -124,6 +128,14 @@ export interface DashboardBookmark {
    * Order the bookmark should appear in on the dataset card.
    */
   order: number;
+  /**
+   * Flag to determine if bookmark is custom or standard.
+   */
+  isCustom: boolean;
+  /**
+   * ISO date string that represents when a custom bookmark is saved.
+   */
+  savedDate: string;
 }
 export type InputDashboardBookmark = Omit<DashboardBookmark, 'order' | 'id'>;
 export interface GetDashboardBookmarksResponse extends DashboardBookmarksQuery {
