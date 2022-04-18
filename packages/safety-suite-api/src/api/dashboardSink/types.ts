@@ -186,6 +186,9 @@ export interface AttributeMeta {
   groupable: boolean;
   aggregations: KpiAggregation[];
   filterOptions: BinOp[];
+  relatedDatasetName?: string;
+  multiModelRelation: boolean;
+  relation: boolean;
 }
 
 export interface DatasetMeta {
