@@ -16,7 +16,8 @@ export type UrlRoot =
   | 'userManagementUrlRoot'
   | 'auditLogUrlRoot'
   | 'claimsSinkUrlRoot'
-  | 'claimsSourceUrlRoot';
+  | 'claimsSourceUrlRoot'
+  | 'etlUriBackendRoot';
 
 export interface Api<R, T> {
   method: Methods;
