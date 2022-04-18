@@ -177,6 +177,10 @@ export interface Module {
    * Module description.
    */
   description: string;
+  /**
+   * The unique Module Parent ID.
+   */
+  parentId?: Id;
 }
 
 export interface ModulePermission {
