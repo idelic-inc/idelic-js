@@ -675,7 +675,7 @@ export const initializeConfig = (
   config.auditLogUrlRoot = nestedConfig.services.auditlog.url;
   config.claimsSinkUrlRoot = nestedConfig.services.claimsSink.url;
   config.claimsSourceUrlRoot = nestedConfig.services.claimsSource.url;
-  config.etlUriBackendRoot = nestedConfig.services.claimsSource.url;
+  config.etlUriBackendRoot = nestedConfig.services['etl-uri-backend'].url;
   config.initialized = true;
 };
 
