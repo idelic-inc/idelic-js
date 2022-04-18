@@ -28,7 +28,8 @@ export const config: InitConfig = {
   loginUrlRoot: '',
   onAuthError: () => {},
   permissionUrlRoot: '',
-  userManagementUrlRoot: ''
+  userManagementUrlRoot: '',
+  etlUriBackendRoot: ''
 };
 
 export interface CrudOptions extends NestedConfiguration {
@@ -299,6 +300,12 @@ export interface BasicConfig extends NestedConfiguration {
     };
     usermanagement: ScalaService;
     auditlog: ScalaService;
+    'etl-uri-backend': {
+      url: string;
+      auth0: {
+        clientId: string;
+      };
+    };
   };
 }
 const exampleConfig: BasicConfig = {
@@ -542,6 +549,12 @@ const exampleConfig: BasicConfig = {
         smartDrive: {enabled: false},
         worklete: {enabled: false}
       }
+    },
+    'etl-uri-backend': {
+      url: '',
+      auth0: {
+        clientId: ''
+      }
     }
   },
   integrations: {
@@ -644,7 +657,8 @@ export const initializeConfig = (
         usermanagement: {url: ''},
         auditlog: {url: ''},
         claimsSink: {url: ''},
-        claimsSource: {url: ''}
+        claimsSource: {url: ''},
+        'etl-uri-backend': {url: ''}
       }
     })
   ) {
@@ -661,6 +675,7 @@ export const initializeConfig = (
   config.auditLogUrlRoot = nestedConfig.services.auditlog.url;
   config.claimsSinkUrlRoot = nestedConfig.services.claimsSink.url;
   config.claimsSourceUrlRoot = nestedConfig.services.claimsSource.url;
+  config.etlUriBackendRoot = nestedConfig.services['etl-uri-backend'].url;
   config.initialized = true;
 };
 
