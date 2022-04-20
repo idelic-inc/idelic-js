@@ -181,6 +181,10 @@ export interface Module {
    * The unique Module Parent ID.
    */
   parentId?: Id;
+  /**
+   * Information message for tooltip
+   */
+  infoMessage?: string;
 }
 
 export interface ModulePermission {
