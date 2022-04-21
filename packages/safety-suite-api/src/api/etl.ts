@@ -4,8 +4,8 @@ import {runApi} from '../runApi';
 import {ApiOptions} from '../types';
 
 export type WorkleteScoresQuery = {
-  customerAlias: string;
-  groupId?: number;
+  customer_alias: string;
+  group_id?: number;
 };
 
 export type WorkleteScores = {
