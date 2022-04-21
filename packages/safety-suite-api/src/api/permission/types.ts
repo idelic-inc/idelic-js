@@ -69,6 +69,10 @@ export interface Role extends Created, LastUpdated {
    * The count of users assigned to this role.
    */
   usersCount?: number;
+  /**
+   * Sort order for roles
+   */
+  sortOrder?: number;
 }
 
 export type InputRole = Pick<
