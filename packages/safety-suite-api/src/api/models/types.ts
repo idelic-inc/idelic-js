@@ -96,6 +96,7 @@ export interface RecomputeModelOptions extends ModelFilterOptions {
 
 export type ByGroup = {
   type: 'byGroup';
+  fieldName: string;
 };
 
 export type ById = {
