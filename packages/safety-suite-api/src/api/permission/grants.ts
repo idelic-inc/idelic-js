@@ -2,6 +2,7 @@ import {Request} from '@idelic/safety-net';
 
 import {runApi} from '../../runApi';
 import {ApiOptions, ApiResponse, CustomerSpecificQuery, Id} from '../../types';
+import {QueryExportJob} from '../models';
 import {DeleteResponse, GrantDTO, InputGrant} from './types';
 
 /**
@@ -157,3 +158,83 @@ export const deleteGrant = (
       query
     }
   });
+
+/**
+ * Start async users export jobs.
+ *
+ * @param customerAlias - customer alias of desired users.
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Users export job.
+ */
+export function runUsersExportJob(
+  customerAlias: string,
+  apiOptions?: ApiOptions
+): Request<ApiResponse<QueryExportJob>> {
+  return runApi({
+    method: 'POST',
+    urlRoot: 'permissionUrlRoot',
+    route: `/api/grants/export`,
+    apiOptions,
+    requestOptions: {
+      body: {customerAlias}
+    }
+  });
+}
+
+/**
+ * Gets all users export jobs.
+ *
+ * @param apiOptions - Optional options for runApi.
+ * @returns - List of users export jobs.
+ */
+export function getUsersExportStatus(
+  apiOptions?: ApiOptions
+): Request<ApiResponse<QueryExportJob[]>> {
+  return runApi({
+    method: 'GET',
+    urlRoot: 'permissionUrlRoot',
+    route: `/api/grants/export/status`,
+    apiOptions
+  });
+}
+
+/**
+ * Gets users export job by it's uuid.
+ *
+ * @param uuid - uuid of desired users export job.
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Users export job object.
+ */
+export function getUsersExportStatusById(
+  uuid: string,
+  apiOptions?: ApiOptions
+): Request<ApiResponse<QueryExportJob>> {
+  return runApi({
+    method: 'GET',
+    urlRoot: 'permissionUrlRoot',
+    route: `/api/grants/export/status/${uuid}`,
+    apiOptions
+  });
+}
+
+/**
+ * Get users export raw file by uuid.
+ *
+ * @param uuid - uuid of desired users export job.
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Export raw file contents.
+ */
+export function getUsersExportContent(
+  uuid: string,
+  apiOptions?: ApiOptions
+): Request<Blob> {
+  return runApi({
+    method: 'GET',
+    urlRoot: 'permissionUrlRoot',
+    route: `/api/grants/export/content/${uuid}`,
+    apiOptions,
+    requestOptions: {
+      responseType: 'blob'
+    }
+  });
+}

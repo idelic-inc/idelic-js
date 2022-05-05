@@ -916,7 +916,7 @@ export type QueryExport = {
 export type QueryExportJobStatus = 'Processing' | 'Ready' | 'Error';
 
 export type QueryExportJob = {
-  id: number;
+  id: number | string;
   status: QueryExportJobStatus;
   progress: number;
   createdDate: string;
