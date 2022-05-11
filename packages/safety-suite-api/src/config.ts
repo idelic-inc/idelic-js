@@ -271,6 +271,7 @@ export interface BasicConfig extends NestedConfiguration {
         };
         safetyAndRisk: {
           severityPreventabilityVersion: number;
+          totalIncurredLegacy: boolean;
         };
       };
       proDataIrv: string;
@@ -351,7 +352,8 @@ const exampleConfig: BasicConfig = {
           }
         },
         safetyAndRisk: {
-          severityPreventabilityVersion: 0
+          severityPreventabilityVersion: 0,
+          totalIncurredLegacy: false
         }
       },
       proDataIrv: '',
