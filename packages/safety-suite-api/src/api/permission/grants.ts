@@ -173,8 +173,13 @@ export const runUsersExportJob = (
   runApi({
     method: 'POST',
     urlRoot: 'permissionUrlRoot',
-    route: `/api/grants/export?customerAlias=${customerAlias}`,
-    apiOptions
+    route: `/api/grants/export`,
+    apiOptions,
+    requestOptions: {
+      query: {
+        customerAlias
+      }
+    }
   });
 
 /**
@@ -191,8 +196,13 @@ export const getUsersExportStatus = (
   runApi({
     method: 'GET',
     urlRoot: 'permissionUrlRoot',
-    route: `/api/grants/export/status?customerAlias=${customerAlias}`,
-    apiOptions
+    route: `/api/grants/export/status`,
+    apiOptions,
+    requestOptions: {
+      query: {
+        customerAlias
+      }
+    }
   });
 
 /**
@@ -211,8 +221,13 @@ export const getUsersExportStatusById = (
   runApi({
     method: 'GET',
     urlRoot: 'permissionUrlRoot',
-    route: `/api/grants/export/status/${uuid}/?customerAlias=${customerAlias}`,
-    apiOptions
+    route: `/api/grants/export/status/${uuid}`,
+    apiOptions,
+    requestOptions: {
+      query: {
+        customerAlias
+      }
+    }
   });
 
 /**
@@ -231,9 +246,12 @@ export const getUsersExportContent = (
   runApi({
     method: 'GET',
     urlRoot: 'permissionUrlRoot',
-    route: `/api/grants/export/content/${uuid}?customerAlias=${customerAlias}`,
+    route: `/api/grants/export/content/${uuid}`,
     apiOptions,
     requestOptions: {
-      responseType: 'blob'
+      responseType: 'blob',
+      query: {
+        customerAlias
+      }
     }
   });
