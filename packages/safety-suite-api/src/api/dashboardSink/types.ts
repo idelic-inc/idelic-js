@@ -198,7 +198,7 @@ export interface DatasetMeta {
   moduleAliases: string[];
   hasDefaultDate: boolean;
   attributes: AttributeMeta[];
-  isSynced: boolean;
+  synced: boolean;
 }
 
 export interface DatasetMetaResponse {
