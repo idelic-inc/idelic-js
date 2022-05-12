@@ -111,6 +111,9 @@ export interface BasicConfig extends NestedConfiguration {
       frontendUrl: string;
       url: string;
     };
+    pdps: {
+      enabled: boolean;
+    };
     claims: {
       enabled: boolean;
       frontendUrl: string;
@@ -329,6 +332,9 @@ const exampleConfig: BasicConfig = {
       enabled: false,
       frontendUrl: '',
       linkingEventEnabled: false
+    },
+    pdps: {
+      enabled: false
     },
     saf: {
       auth0: {
