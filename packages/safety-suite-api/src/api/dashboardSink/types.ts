@@ -101,9 +101,9 @@ export interface DashboardBookmark {
    */
   groupings: string;
   /**
-   * Date filter interval.
+   * Date filter time period.
    */
-  interval: string;
+  timePeriod: string;
   /**
    * ISO date string that represents the oldest data in the chart.
    */
