@@ -166,75 +166,74 @@ export const deleteGrant = (
  * @param apiOptions - Optional options for runApi.
  * @returns - Users export job.
  */
-export function runUsersExportJob(
+export const runUsersExportJob = (
   customerAlias: string,
   apiOptions?: ApiOptions
-): Request<ApiResponse<QueryExportJob>> {
-  return runApi({
+): Request<ApiResponse<QueryExportJob>> =>
+  runApi({
     method: 'POST',
     urlRoot: 'permissionUrlRoot',
-    route: `/api/grants/export`,
-    apiOptions,
-    requestOptions: {
-      body: {customerAlias}
-    }
+    route: `/api/grants/export?customerAlias=${customerAlias}`,
+    apiOptions
   });
-}
 
 /**
  * Gets all users export jobs.
  *
+ * @param customerAlias - customer alias of desired users.
  * @param apiOptions - Optional options for runApi.
  * @returns - List of users export jobs.
  */
-export function getUsersExportStatus(
+export const getUsersExportStatus = (
+  customerAlias: string,
   apiOptions?: ApiOptions
-): Request<ApiResponse<QueryExportJob[]>> {
-  return runApi({
+): Request<ApiResponse<QueryExportJob[]>> =>
+  runApi({
     method: 'GET',
     urlRoot: 'permissionUrlRoot',
-    route: `/api/grants/export/status`,
+    route: `/api/grants/export/status?customerAlias=${customerAlias}`,
     apiOptions
   });
-}
 
 /**
  * Gets users export job by it's uuid.
  *
  * @param uuid - uuid of desired users export job.
+ * @param customerAlias - customer alias of desired users.
  * @param apiOptions - Optional options for runApi.
  * @returns - Users export job object.
  */
-export function getUsersExportStatusById(
+export const getUsersExportStatusById = (
   uuid: string,
+  customerAlias: string,
   apiOptions?: ApiOptions
-): Request<ApiResponse<QueryExportJob>> {
-  return runApi({
+): Request<ApiResponse<QueryExportJob>> =>
+  runApi({
     method: 'GET',
     urlRoot: 'permissionUrlRoot',
-    route: `/api/grants/export/status/${uuid}`,
+    route: `/api/grants/export/status/${uuid}/?customerAlias=${customerAlias}`,
     apiOptions
   });
-}
 
 /**
  * Get users export raw file by uuid.
  *
  * @param uuid - uuid of desired users export job.
+ * @param customerAlias - customer alias of desired users.
  * @param apiOptions - Optional options for runApi.
  * @returns - Export raw file contents.
  */
-export function getUsersExportContent(
+export const getUsersExportContent = (
   uuid: string,
+  customerAlias: string,
   apiOptions?: ApiOptions
-): Request<Blob> {
-  return runApi({
+): Request<Blob> =>
+  runApi({
     method: 'GET',
     urlRoot: 'permissionUrlRoot',
-    route: `/api/grants/export/content/${uuid}`,
+    route: `/api/grants/export/content/${uuid}?customerAlias=${customerAlias}`,
     apiOptions,
     requestOptions: {
       responseType: 'blob'
     }
   });
-}
