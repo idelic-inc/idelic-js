@@ -29,7 +29,8 @@ export const config: InitConfig = {
   onAuthError: () => {},
   permissionUrlRoot: '',
   userManagementUrlRoot: '',
-  etlUriBackendRoot: ''
+  etlUriBackendRoot: '',
+  configServiceUrlRoot: ''
 };
 
 export interface CrudOptions extends NestedConfiguration {
@@ -651,7 +652,8 @@ export function isConfig(conf: NestedConfiguration, example = exampleConfig) {
  */
 export const initializeConfig = (
   configUrl: string,
-  nestedConfig: NestedConfiguration
+  nestedConfig: NestedConfiguration,
+  configServiceUrl?: string
 ): void => {
   if (
     !matchesConfig(nestedConfig, {
@@ -672,6 +674,7 @@ export const initializeConfig = (
   ) {
     throw new Error("Config doesn't match!");
   }
+  config.configServiceUrlRoot = configServiceUrl ?? '';
   config.configUrlRoot = configUrl;
   config.apiUrlRoot = nestedConfig.services.saf.url;
   config.dashboardSinkUrlRoot = nestedConfig.services.dashboardSink.url;
