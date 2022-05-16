@@ -18,7 +18,7 @@ const config = {
 };
 
 const isConfig = (c: typeof config): c is Record<keyof typeof config, string> =>
-  Object.values(c).every((value) => typeof value === 'string');
+  Object.values(c).every((value) => !!value);
 
 if (!isConfig(config)) {
   throw new Error(
@@ -63,10 +63,9 @@ class Reporter {
     const message = 'Automated test run';
     try {
       const suite = await api.getSuite(suiteId);
-      const name = `${suite.name} - ${now.toLocaleString(
-        ['en-GB'],
-        options
-      )} - (${message})`;
+      const name = `${
+        process.env.GIT_BRANCH || suite.name
+      } - ${now.toLocaleString(['en-GB'], options)} - (${message})`;
 
       const {id} = await api.addRun(projectId, {
         suite_id: suiteId,
