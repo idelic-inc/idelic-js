@@ -26,7 +26,7 @@ export function getConfigTypeNames(
   });
 }
 
-type ConfigSpec = {
+export type ConfigSpec = {
   key: string;
   storageType: string;
   value: string;
@@ -38,7 +38,7 @@ type ConfigSpec = {
   };
 };
 
-type ConfigType = {
+export type ConfigType = {
   type: string;
   name: string;
   spec: ConfigSpec[];
