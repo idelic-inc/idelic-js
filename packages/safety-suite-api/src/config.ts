@@ -693,22 +693,24 @@ export const initializeConfig = (
 /**
  * A function that pulls config, sets up api config,
  * then returns a nested config object.
- * @param configUrl - URL of the config service
+ * @param legacyConfigUrl - URL of the login config service
  * @param [customerAlias] - Optional customer alias to fetch config for, otherwise pulls default config
+ * @param configServiceUrl - URL of the config service
  */
 export const setupApi = async (
-  configUrl: string,
-  customerAlias?: string
+  legacyConfigUrl: string,
+  customerAlias?: string,
+  configServiceUrl?: string
 ): Promise<NestedConfiguration> => {
   const apiOptions: ApiOptions = {
     bypassInitializeCheck: true,
-    customUrlRoot: configUrl
+    customUrlRoot: legacyConfigUrl
   };
   const configRequest = customerAlias
     ? getCustomerNestedConfig(customerAlias, apiOptions)
     : getDefaultNestedConfig(apiOptions);
   const {data: nestedConfig} = await configRequest.response;
-  initializeConfig(configUrl, nestedConfig);
+  initializeConfig(legacyConfigUrl, nestedConfig, configServiceUrl);
   return nestedConfig;
 };
 
