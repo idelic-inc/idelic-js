@@ -145,7 +145,7 @@ export interface GetDashboardBookmarksResponse extends DashboardBookmarksQuery {
   /**
    * Array of bookmarks for a specific dataset.
    */
-  dashboardBookmarks: DashboardBookmark[];
+  dashboardBookmarkList: DashboardBookmark[];
 }
 export interface CreateDashboardBookmarksResponse
   extends DashboardBookmarksQuery {

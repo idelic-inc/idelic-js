@@ -34,7 +34,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"customerAlias\": \"idelic\",\n  \"dashboardBookmarks\": [\n    {\n      \"id\": 1,\n      \"filter\": \"\",\n      \"bookmarkName\": \"\",\n      \"groupIds\": [],\n      \"groupings\": \"\",\n      \"timeFrameFrom\": \"\",\n      \"timeFrameTo\": \"\",\n      \"timeField\": \"\",\n      \"chartType\": \"\",\n      \"datasetName\": \"accidents\",\n      \"order\": 1\n    }\n  ]\n}",
+        "body": "{\n  \"customerAlias\": \"idelic\",\n  \"dashboardBookmarkList\": [\n    {\n      \"id\": 1,\n      \"filter\": \"\",\n      \"bookmarkName\": \"\",\n      \"groupIds\": [],\n      \"groupings\": \"\",\n      \"timeFrameFrom\": \"\",\n      \"timeFrameTo\": \"\",\n      \"timeField\": \"\",\n      \"chartType\": \"\",\n      \"datasetName\": \"accidents\",\n      \"order\": 1\n    }\n  ]\n}",
         "headers": {}
       },
       "uuid": "715cced6-66d9-494f-a70d-d1fbc0750ac6",
@@ -94,7 +94,7 @@
       },
       "response": {
         "status": 200,
-        "body": "{\n  \"customerAlias\": \"idelic\",\n  \"dashboardBookmarks\": [\n    {\n      \"id\": 1,\n      \"filter\": \"\",\n      \"bookmarkName\": \"\",\n      \"groupIds\": [],\n      \"groupings\": \"\",\n      \"timeFrameFrom\": \"\",\n      \"timeFrameTo\": \"\",\n      \"timeField\": \"\",\n      \"chartType\": \"\",\n      \"datasetName\": \"accidents\",\n      \"order\": 1\n    }\n  ]\n}",
+        "body": "{\n  \"customerAlias\": \"idelic\",\n  \"dashboardBookmarkList\": [\n    {\n      \"id\": 1,\n      \"filter\": \"\",\n      \"bookmarkName\": \"\",\n      \"groupIds\": [],\n      \"groupings\": \"\",\n      \"timeFrameFrom\": \"\",\n      \"timeFrameTo\": \"\",\n      \"timeField\": \"\",\n      \"chartType\": \"\",\n      \"datasetName\": \"accidents\",\n      \"order\": 1\n    }\n  ]\n}",
         "headers": {}
       },
       "uuid": "2b009dd8-15f1-48e4-a92e-3018b22717a9",
