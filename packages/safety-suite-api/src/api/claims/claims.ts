@@ -137,11 +137,13 @@ export interface ClaimModel {
   createdBy: string;
   lastUpdatedBy: string;
   legacyId: number;
+  eventId: string;
   totalReserves: number;
   totalPayments: number;
   totalReserveRemaining: number;
   totalReimbursements: number;
   totalIncurredExpense: number;
+  incurredLoss: number;
   payments: Payment[];
   reimbursements: Payment[];
   reserves: Payment[];
