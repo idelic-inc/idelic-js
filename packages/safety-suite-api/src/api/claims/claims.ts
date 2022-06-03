@@ -137,6 +137,7 @@ export interface ClaimModel {
   createdBy: string;
   lastUpdatedBy: string;
   legacyId: number;
+  eventId: string;
   totalReserves: number;
   totalPayments: number;
   totalReserveRemaining: number;
