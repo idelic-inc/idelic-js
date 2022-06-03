@@ -142,6 +142,7 @@ export interface ClaimModel {
   totalReserveRemaining: number;
   totalReimbursements: number;
   totalIncurredExpense: number;
+  incurredLoss: number;
   payments: Payment[];
   reimbursements: Payment[];
   reserves: Payment[];
