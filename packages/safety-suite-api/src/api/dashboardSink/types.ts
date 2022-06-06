@@ -147,14 +147,6 @@ export interface GetDashboardBookmarksResponse extends DashboardBookmarksQuery {
    */
   dashboardBookmarkList: DashboardBookmark[];
 }
-export interface CreateDashboardBookmarksResponse
-  extends DashboardBookmarksQuery {
-  /**
-   * Newly created dashboard bookmark.
-   */
-  dashboardBookmark: DashboardBookmark;
-}
-
 export interface DatasetMetaQuery {
   /**
    * Dataset names to filter by
