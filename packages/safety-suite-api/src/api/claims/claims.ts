@@ -85,10 +85,10 @@ export interface VehicleInfo {
 export enum EventType {
   independent = 'Independent',
   accident = 'Accident',
-  forkliftIncident = 'Forklift Incident',
-  injuryIllness = 'Injury/Illness',
-  billOfLading = 'Bill Of Lading',
-  materialSpill = 'Material Spill'
+  injuryIllness = 'Injury/Illness'
+  // forkliftIncident = 'Forklift Incident',
+  // billOfLading = 'Bill Of Lading',
+  // materialSpill = 'Material Spill'
 }
 
 export interface Payment {
