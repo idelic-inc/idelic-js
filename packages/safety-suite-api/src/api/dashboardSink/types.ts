@@ -174,6 +174,8 @@ export interface AttributeMeta {
   alias: string;
   type: AttributeType;
   filterPriority?: number;
+  // Used for relations
+  filterPriorityWeight?: number;
   filterable: boolean;
   groupable: boolean;
   aggregations: KpiAggregation[];
