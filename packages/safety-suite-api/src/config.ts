@@ -290,6 +290,9 @@ export interface BasicConfig extends NestedConfiguration {
           pointIncrease: number;
         };
       };
+      notificationImprovements: {
+        enabled: boolean;
+      };
     };
     testingUi: {
       auth0: {
@@ -374,6 +377,9 @@ const exampleConfig: BasicConfig = {
           percentIncrease: 0,
           pointIncrease: 0
         }
+      },
+      notificationImprovements: {
+        enabled: false
       }
     },
     dashboardSink: {
