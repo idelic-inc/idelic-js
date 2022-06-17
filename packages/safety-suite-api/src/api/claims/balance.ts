@@ -10,6 +10,7 @@ export interface Balance {
   reimbursement: number;
   incurredExpense: number;
   reservesRemaining: number;
+  incurredLoss: number;
 }
 
 /**
