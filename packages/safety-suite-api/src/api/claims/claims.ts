@@ -68,6 +68,12 @@ export interface WorkersCompInfo {
   privacyCaseState: string;
   temporaryTotalDisability: string;
   description: string;
+  insuranceCarrier: string;
+  insuranceAdjuster: string;
+  dateInsuranceNotified: Date;
+  phoneNumber: string;
+  email: string;
+  insuranceCarrierDescription: string;
 }
 
 export interface VehicleInfo {
