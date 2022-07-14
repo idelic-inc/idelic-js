@@ -39,24 +39,10 @@ export interface ClaimantInfo {
   phoneNumber: string;
 }
 
-export enum InjuryClaimType {
-  INTERNAL_ONLY = 'Internal only',
-  MEDICAL_ONLY = 'Medical only',
-  RESTRICTION_ONLY = 'Restriction only',
-  LOST_TIME = 'Lost time',
-  FATALITY = 'Fatality'
-}
-
-export enum TreatmentOptions {
-  EMERGENCY_CARE = 'Emergency Care',
-  MINOR_CLINIC_HOSPITAL = 'Minor Clinic/Hospital',
-  NO_MEDICAL_OPTIONS = 'No Medical Treatment'
-}
-
 export interface WorkersCompInfo {
   id: string;
-  injuryClaim: keyof typeof InjuryClaimType;
-  treatmentOptions: keyof typeof TreatmentOptions;
+  injuryClaimType: string;
+  treatmentOptionsType: string;
   averageWeeklyWage: string;
   benefitState: string;
   hourlyWage: string;
