@@ -527,6 +527,7 @@ export type DisplayTypeLiteral =
 export enum GroupingType {
   date = 'DATE',
   enum = 'ENUM',
+  multi_enum = 'MULTI_ENUM',
   modelGroup = 'MODEL_GROUP',
   relation = 'RELATION',
   value = 'VALUE',
@@ -535,6 +536,7 @@ export enum GroupingType {
 export type GroupingTypeLiteral =
   | 'DATE'
   | 'ENUM'
+  | 'MULTI_ENUM'
   | 'MODEL_GROUP'
   | 'RELATION'
   | 'VALUE'
