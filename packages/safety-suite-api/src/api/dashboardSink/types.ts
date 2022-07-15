@@ -163,6 +163,7 @@ export interface DatasetMetaQuery {
 }
 export type AttributeType =
   | 'ENUM'
+  | 'MULTI_ENUM'
   | 'TEXT'
   | 'NUMBER'
   | 'DATE'
