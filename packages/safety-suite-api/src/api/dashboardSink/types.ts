@@ -178,6 +178,7 @@ export interface AttributeMeta {
   // Used for relations
   filterPriorityWeight?: number;
   filterable: boolean;
+  filterHidden: boolean;
   groupable: boolean;
   aggregations: KpiAggregation[];
   filterOptions: BinOp[];
