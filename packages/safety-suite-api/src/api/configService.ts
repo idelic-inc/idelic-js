@@ -1,7 +1,7 @@
 import {Request} from '@idelic/safety-net';
-import {ApiOptions, ApiSuccessResponse} from 'src/types';
 
 import {runApi} from '../runApi';
+import {ApiOptions, ApiSuccessResponse} from '../types';
 
 export function getConfigTypes(
   apiOptions?: ApiOptions
@@ -53,6 +53,50 @@ export function getConfigTypeWithName(
     method: 'GET',
     urlRoot: 'configServiceUrlRoot',
     route: `/api/configuration/${type}/${name}`,
+    apiOptions
+  });
+}
+
+export function getConfigValuesV2(
+  type: string,
+  name: string,
+  override?: string,
+  apiOptions?: ApiOptions
+): Request<ApiSuccessResponse<Record<string, string>>> {
+  return runApi({
+    method: 'GET',
+    route: `/api/configuration/v2/${type}/${name}/values`,
+    urlRoot: 'configServiceUrlRoot',
+    requestOptions: {
+      query: {
+        override
+      }
+    },
+    apiOptions
+  });
+}
+
+export function getNestedConfigValuesV2<
+  Type extends string,
+  Name extends string
+>(
+  type: Type,
+  name: Name,
+  override?: string,
+  apiOptions?: ApiOptions
+): Request<
+  ApiSuccessResponse<Record<Type, Record<Name, Record<string, string>>>>
+> {
+  return runApi({
+    method: 'GET',
+    route: `/api/configuration/v2/${type}/${name}/values`,
+    urlRoot: 'configServiceUrlRoot',
+    requestOptions: {
+      query: {
+        override,
+        nested: true
+      }
+    },
     apiOptions
   });
 }
