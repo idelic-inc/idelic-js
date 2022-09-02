@@ -185,6 +185,9 @@ export interface BasicConfig extends NestedConfiguration {
       injuryFrequency: {
         lostTime: number;
       };
+      hubUniversity: {
+        ytdCompletionRate: number;
+      };
     };
     legacySaf: {
       fallbackFrontendUrl: string;
@@ -408,6 +411,9 @@ const exampleConfig: BasicConfig = {
       },
       injuryFrequency: {
         lostTime: 0
+      },
+      hubUniversity: {
+        ytdCompletionRate: 0
       }
     },
     documentLibrary: {url: '', maxUploadSize: 0},
