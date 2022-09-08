@@ -44,6 +44,10 @@ export type ConfigType = {
   spec: ConfigSpec[];
 };
 
+export interface NestedConfig {
+  [key: string]: string | NestedConfig;
+}
+
 export function getConfigTypeWithName(
   type: string,
   name: string,
@@ -57,6 +61,37 @@ export function getConfigTypeWithName(
   });
 }
 
+/**
+ * Gets nested global public config values.
+ *
+ * @param override Override string.
+ * @param apiOptions Optional options for runApi.
+ */
+export function getNestedGlobalValues(
+  override?: string,
+  apiOptions?: ApiOptions
+): Request<ApiSuccessResponse<Record<string, Record<string, NestedConfig>>>> {
+  return runApi({
+    method: 'GET',
+    route: '/api/global/configuration/values',
+    urlRoot: 'configServiceUrlRoot',
+    requestOptions: {
+      query: {
+        override
+      }
+    },
+    apiOptions
+  });
+}
+
+/**
+ * Gets config values. (Can only be used by super-admins)
+ *
+ * @param type Config type.
+ * @param name Config name.
+ * @param override Override string.
+ * @param apiOptions Optional options for runApi.
+ */
 export function getConfigValuesV2(
   type: string,
   name: string,
@@ -76,6 +111,14 @@ export function getConfigValuesV2(
   });
 }
 
+/**
+ * Gets nested config values. (Can only be used by super-admins)
+ *
+ * @param type Config type.
+ * @param name Config name.
+ * @param override Override string.
+ * @param apiOptions Optional options for runApi.
+ */
 export function getNestedConfigValuesV2<
   Type extends string,
   Name extends string
