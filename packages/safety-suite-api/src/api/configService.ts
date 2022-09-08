@@ -77,7 +77,8 @@ export function getNestedGlobalValues(
     urlRoot: 'configServiceUrlRoot',
     requestOptions: {
       query: {
-        override
+        override,
+        nested: true
       }
     },
     apiOptions
