@@ -122,6 +122,13 @@ export class UserWithPermissions extends UserWrapper {
     return this.userPermissions!.admin;
   }
 
+  /**
+   * If the user is an admin with an idelic email.
+   */
+  get idelicAdmin(): boolean {
+    return this.admin && this.email.split('@')[1] === 'idelic.com';
+  }
+
   get groupIds(): number[] {
     return this.modelGroups.map(({id}) => id);
   }
