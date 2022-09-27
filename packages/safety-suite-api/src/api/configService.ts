@@ -78,9 +78,8 @@ export function createConfigTypeWithName(
   });
 }
 
-export function updateConfigValue(
-  key: string,
-  value: any,
+export function updateConfigValues(
+  values: Record<string, any>,
   type: string,
   name: string,
   apiOptions?: ApiOptions
@@ -90,7 +89,7 @@ export function updateConfigValue(
     urlRoot: 'configServiceUrlRoot',
     route: `/api/configuration/${type}/${name}/values`,
     requestOptions: {
-      body: {[key]: value}
+      body: values
     },
     apiOptions
   });
