@@ -61,7 +61,7 @@ export function getConfigTypeWithName(
   });
 }
 
-export function updateConfigValue(
+export function createConfigTypeWithName(
   spec: ConfigSpec,
   type: string,
   name: string,
@@ -73,6 +73,24 @@ export function updateConfigValue(
     route: `/api/configuration/${type}/${name}`,
     requestOptions: {
       body: spec
+    },
+    apiOptions
+  });
+}
+
+export function updateConfigValue(
+  key: string,
+  value: any,
+  type: string,
+  name: string,
+  apiOptions?: ApiOptions
+): Request<ApiSuccessResponse<ConfigType>> {
+  return runApi({
+    method: 'PATCH',
+    urlRoot: 'configServiceUrlRoot',
+    route: `/api/configuration/${type}/${name}/values`,
+    requestOptions: {
+      body: {[key]: value}
     },
     apiOptions
   });
