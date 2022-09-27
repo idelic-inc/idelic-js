@@ -26,10 +26,10 @@ export function getConfigTypeNames(
   });
 }
 
-export type ConfigSpec = {
+export type ConfigSpec<Value = any> = {
   key: string;
   storageType: string;
-  value: string;
+  value: Value;
   valueType: string;
   valueOptions?: {
     itemValueType: string;
@@ -57,6 +57,23 @@ export function getConfigTypeWithName(
     method: 'GET',
     urlRoot: 'configServiceUrlRoot',
     route: `/api/configuration/${type}/${name}`,
+    apiOptions
+  });
+}
+
+export function updateConfigValue(
+  spec: ConfigSpec,
+  type: string,
+  name: string,
+  apiOptions?: ApiOptions
+): Request<ApiSuccessResponse<ConfigType>> {
+  return runApi({
+    method: 'PUT',
+    urlRoot: 'configServiceUrlRoot',
+    route: `/api/configuration/${type}/${name}`,
+    requestOptions: {
+      body: spec
+    },
     apiOptions
   });
 }
