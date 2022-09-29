@@ -48,21 +48,17 @@ export interface NestedConfig {
   [key: string]: string | NestedConfig;
 }
 
+export type ConfigValues = Record<string, any>;
+
 export function getConfigTypeWithName(
   type: string,
   name: string,
-  override?: string,
   apiOptions?: ApiOptions
 ): Request<ApiSuccessResponse<ConfigType>> {
   return runApi({
     method: 'GET',
     urlRoot: 'configServiceUrlRoot',
     route: `/api/configuration/${type}/${name}`,
-    requestOptions: {
-      query: {
-        override
-      }
-    },
     apiOptions
   });
 }
@@ -71,7 +67,6 @@ export function createConfigTypeWithName(
   spec: ConfigSpec,
   type: string,
   name: string,
-  override?: string,
   apiOptions?: ApiOptions
 ): Request<ApiSuccessResponse<ConfigType>> {
   return runApi({
@@ -79,7 +74,23 @@ export function createConfigTypeWithName(
     urlRoot: 'configServiceUrlRoot',
     route: `/api/configuration/${type}/${name}`,
     requestOptions: {
-      body: spec,
+      body: spec
+    },
+    apiOptions
+  });
+}
+
+export function getConfigValues(
+  type: string,
+  name: string,
+  override?: string,
+  apiOptions?: ApiOptions
+): Request<ApiSuccessResponse<ConfigValues>> {
+  return runApi({
+    method: 'GET',
+    urlRoot: 'configServiceUrlRoot',
+    route: `/api/configuration/${type}/${name}/values`,
+    requestOptions: {
       query: {
         override
       }
@@ -89,7 +100,7 @@ export function createConfigTypeWithName(
 }
 
 export function updateConfigValues(
-  values: Record<string, any>,
+  values: ConfigValues,
   type: string,
   name: string,
   override?: string,
@@ -103,6 +114,25 @@ export function updateConfigValues(
       body: values,
       query: {
         override
+      }
+    },
+    apiOptions
+  });
+}
+
+export function getConfigOverrides(
+  type: string,
+  name: string,
+  apiOptions?: ApiOptions
+): Request<ApiSuccessResponse<string[]>> {
+  return runApi({
+    method: 'GET',
+    urlRoot: 'configServiceUrlRoot',
+    route: '/api/configuration/overrides',
+    requestOptions: {
+      query: {
+        configurationType: type,
+        name
       }
     },
     apiOptions
