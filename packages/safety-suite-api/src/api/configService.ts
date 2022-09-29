@@ -51,12 +51,18 @@ export interface NestedConfig {
 export function getConfigTypeWithName(
   type: string,
   name: string,
+  override?: string,
   apiOptions?: ApiOptions
 ): Request<ApiSuccessResponse<ConfigType>> {
   return runApi({
     method: 'GET',
     urlRoot: 'configServiceUrlRoot',
     route: `/api/configuration/${type}/${name}`,
+    requestOptions: {
+      query: {
+        override
+      }
+    },
     apiOptions
   });
 }
@@ -65,6 +71,7 @@ export function createConfigTypeWithName(
   spec: ConfigSpec,
   type: string,
   name: string,
+  override?: string,
   apiOptions?: ApiOptions
 ): Request<ApiSuccessResponse<ConfigType>> {
   return runApi({
@@ -72,7 +79,10 @@ export function createConfigTypeWithName(
     urlRoot: 'configServiceUrlRoot',
     route: `/api/configuration/${type}/${name}`,
     requestOptions: {
-      body: spec
+      body: spec,
+      query: {
+        override
+      }
     },
     apiOptions
   });
@@ -82,6 +92,7 @@ export function updateConfigValues(
   values: Record<string, any>,
   type: string,
   name: string,
+  override?: string,
   apiOptions?: ApiOptions
 ): Request<ApiSuccessResponse<ConfigType>> {
   return runApi({
@@ -89,7 +100,10 @@ export function updateConfigValues(
     urlRoot: 'configServiceUrlRoot',
     route: `/api/configuration/${type}/${name}/values`,
     requestOptions: {
-      body: values
+      body: values,
+      query: {
+        override
+      }
     },
     apiOptions
   });
