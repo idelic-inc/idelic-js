@@ -31,6 +31,7 @@ export type ConfigSpec<Value = any> = {
   storageType: string;
   value: Value;
   valueType: string;
+  advanced: boolean;
   valueOptions?: {
     itemValueType: string;
     itemValueOptions: string;
@@ -53,12 +54,18 @@ export type ConfigValues = Record<string, any>;
 export function getConfigTypeWithName(
   type: string,
   name: string,
+  override?: string,
   apiOptions?: ApiOptions
 ): Request<ApiSuccessResponse<ConfigType>> {
   return runApi({
     method: 'GET',
     urlRoot: 'configServiceUrlRoot',
     route: `/api/configuration/${type}/${name}`,
+    requestOptions: {
+      query: {
+        override
+      }
+    },
     apiOptions
   });
 }
