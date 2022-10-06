@@ -31,6 +31,7 @@ export type ConfigSpec<Value = any> = {
   storageType: string;
   value: Value;
   valueType: string;
+  advanced: boolean;
   valueOptions?: {
     itemValueType: string;
     itemValueOptions: string;
