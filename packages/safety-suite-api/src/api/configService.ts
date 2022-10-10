@@ -106,6 +106,17 @@ export function getConfigValues(
   });
 }
 
+export function getAllConfigKeys(
+  apiOptions?: ApiOptions
+): Request<ApiSuccessResponse<string[]>> {
+  return runApi({
+    method: 'GET',
+    urlRoot: 'configServiceUrlRoot',
+    route: '/api/configuration/keys',
+    apiOptions
+  });
+}
+
 export function updateConfigValues(
   values: ConfigValues,
   type: string,
