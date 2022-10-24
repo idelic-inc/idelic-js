@@ -48,6 +48,7 @@ export type ConfigType = {
 export interface NestedConfig {
   [key: string]: string | NestedConfig;
 }
+export type NestedConfiguration = Record<string, Record<string, NestedConfig>>;
 
 export type ConfigValues = Record<string, any>;
 
@@ -151,6 +152,29 @@ export function getConfigOverrides(
       query: {
         configurationType: type,
         name
+      }
+    },
+    apiOptions
+  });
+}
+
+/**
+ * Gets global public config values.
+ *
+ * @param override Override string.
+ * @param apiOptions Optional options for runApi.
+ */
+export function getGlobalValues(
+  override?: string,
+  apiOptions?: ApiOptions
+): Request<ApiSuccessResponse<Record<string, unknown>>> {
+  return runApi({
+    method: 'GET',
+    route: '/api/global/configuration/values',
+    urlRoot: 'configServiceUrlRoot',
+    requestOptions: {
+      query: {
+        override
       }
     },
     apiOptions

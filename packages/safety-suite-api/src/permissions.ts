@@ -1,12 +1,11 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-import {ModelGroup, SafUser, User, UserPermission} from './api';
+import {ModelGroup, User} from './api';
 import {
   DocumentLibraryPermissionActions,
   ModulePermissionActions,
   UserPermissions
 } from './api/permission';
 import {Alias, Id} from './types';
-import {LegacyUserArgs, UserArgs, UserWrapper} from './user';
+import {UserWrapper} from './user';
 
 export interface ModelTemplate {
   alias: Alias;
@@ -28,12 +27,9 @@ export interface BasePermissionsArgs {
   modelTemplates: ModelTemplate[];
   monitorTemplates: MonitorTemplate[];
 }
-export interface LegacyPermissionsArgs
-  extends LegacyUserArgs,
-    BasePermissionsArgs {
-  userPermissions?: never;
-}
-export interface PermissionsArgs extends UserArgs, BasePermissionsArgs {
+
+export interface PermissionsArgs extends BasePermissionsArgs {
+  user: User;
   userPermissions: UserPermissions;
 }
 
@@ -51,16 +47,12 @@ export class UserWithPermissions extends UserWrapper {
 
   monitorTemplates: MonitorTemplate[];
 
-  legacyUserPermissions?: UserPermission;
+  userPermissions: UserPermissions;
 
-  userPermissions?: UserPermissions;
-
-  constructor(args: LegacyPermissionsArgs | PermissionsArgs) {
-    super(args);
+  constructor(args: PermissionsArgs) {
+    super(args.user);
     const {
       customerId,
-      legacySafUser,
-      legacyUser,
       modelGroups,
       modelTemplates,
       monitorTemplates,
@@ -70,29 +62,7 @@ export class UserWithPermissions extends UserWrapper {
     this.modelTemplates = modelTemplates;
     this.monitorTemplates = monitorTemplates;
     this.modelGroups = modelGroups;
-    if (this.legacy) {
-      if (!legacySafUser || !legacyUser) {
-        throw new Error(
-          'When using legacy permissions `legacySafUser` and `legacyUser` are required in args.'
-        );
-      }
-      const legacyUserPermissions = legacyUser.permissions.find(
-        (permission) => permission.customerId === customerId
-      );
-      if (!legacyUserPermissions) {
-        throw new Error(
-          `No permissions found in "legacyUser" for customer with id "${this.customerId}"`
-        );
-      }
-      this.legacyUserPermissions = legacyUserPermissions;
-    } else {
-      if (!userPermissions) {
-        throw new Error(
-          'When using new permissions `userPermissions` is required in args.'
-        );
-      }
-      this.userPermissions = userPermissions;
-    }
+    this.userPermissions = userPermissions;
   }
 
   filterModelGroups(ids: Id[]): ModelGroup[] {
@@ -103,10 +73,7 @@ export class UserWithPermissions extends UserWrapper {
    * If the user is a super-admin.
    */
   get superAdmin(): boolean {
-    if (this.isLegacy()) {
-      return this.legacyUser.admin;
-    }
-    return this.userPermissions!.superAdmin;
+    return this.userPermissions.superAdmin;
   }
 
   /**
@@ -116,10 +83,7 @@ export class UserWithPermissions extends UserWrapper {
     if (this.superAdmin) {
       return true;
     }
-    if (this.isLegacy()) {
-      return this.legacySafUser.admin;
-    }
-    return this.userPermissions!.admin;
+    return this.userPermissions.admin;
   }
 
   /**
@@ -136,14 +100,8 @@ export class UserWithPermissions extends UserWrapper {
   /**
    * If this object was constructed with legacy permissions.
    */
-  isLegacy(): this is {
-    legacySafUser: SafUser;
-    legacyUser: User;
-    legacyUserPermissions: UserPermission;
-    userPermissions: undefined;
-    user: undefined;
-  } {
-    return this.legacy;
+  isLegacy(): boolean {
+    return false;
   }
 
   /**
@@ -164,32 +122,15 @@ export class UserWithPermissions extends UserWrapper {
     if (this.admin) {
       return this.modelGroups;
     }
-    if (this.isLegacy()) {
-      if (action === 'viewConfidential' && !this.legacySafUser.allowProtected) {
-        return [];
-      }
-      const isReadAction = UserWithPermissions.readActions.includes(action);
-      const legacyGroupIds = isReadAction
-        ? this.legacySafUser.readGroupPermissions
-        : this.legacySafUser.writeGroupPermissions;
-      const templateIds = isReadAction
-        ? this.legacySafUser.readTemplatePermissions
-        : this.legacySafUser.writeTemplatePermissions;
-      if (templateIds.includes(template.id)) {
-        return this.filterModelGroups(legacyGroupIds);
-      }
-    } else {
-      const modulePermissions = this.userPermissions!.modulePermissions[action];
-      const moduleGroupIds = template.fields.modules.reduce<number[]>(
-        (ids, moduleAlias) => {
-          const modulePermissionIds = modulePermissions[moduleAlias];
-          return modulePermissionIds ? [...ids, ...modulePermissionIds] : ids;
-        },
-        []
-      );
-      return this.filterModelGroups(moduleGroupIds);
-    }
-    return [];
+    const modulePermissions = this.userPermissions.modulePermissions[action];
+    const moduleGroupIds = template.fields.modules.reduce<number[]>(
+      (ids, moduleAlias) => {
+        const modulePermissionIds = modulePermissions[moduleAlias];
+        return modulePermissionIds ? [...ids, ...modulePermissionIds] : ids;
+      },
+      []
+    );
+    return this.filterModelGroups(moduleGroupIds);
   }
 
   /**
@@ -210,10 +151,7 @@ export class UserWithPermissions extends UserWrapper {
     if (this.admin) {
       return this.modelGroups;
     }
-    if (this.isLegacy()) {
-      return [];
-    }
-    const modulePermissions = this.userPermissions!.modulePermissions[action];
+    const modulePermissions = this.userPermissions.modulePermissions[action];
     const moduleGroupIds = template.fields.indirectModules.reduce<number[]>(
       (ids, moduleAlias) => {
         const modulePermissionIds = modulePermissions[moduleAlias];
@@ -242,18 +180,7 @@ export class UserWithPermissions extends UserWrapper {
     if (this.admin) {
       return this.modelGroups;
     }
-    if (this.isLegacy()) {
-      if (action === 'viewConfidential' && !this.legacySafUser.allowProtected) {
-        return [];
-      }
-      const isReadAction = UserWithPermissions.readActions.includes(action);
-      return this.filterModelGroups(
-        isReadAction
-          ? this.legacySafUser.readGroupPermissions
-          : this.legacySafUser.writeGroupPermissions
-      );
-    }
-    const modulePermissions = this.userPermissions!.modulePermissions[action];
+    const modulePermissions = this.userPermissions.modulePermissions[action];
     const moduleGroupIds = template.modules.reduce<number[]>(
       (ids, moduleAlias) => {
         const modulePermissionIds = modulePermissions[moduleAlias];
@@ -272,10 +199,7 @@ export class UserWithPermissions extends UserWrapper {
     if (this.admin) {
       return this.modelGroups;
     }
-    if (this.isLegacy()) {
-      return this.filterModelGroups(this.legacySafUser.readGroupPermissions);
-    }
-    const permissions = this.userPermissions!.reportPermissions[alias];
+    const permissions = this.userPermissions.reportPermissions[alias];
     return permissions ? this.filterModelGroups(permissions) : [];
   }
 
@@ -298,19 +222,7 @@ export class UserWithPermissions extends UserWrapper {
         download: true
       };
     }
-    if (this.isLegacy()) {
-      const permissions = this.legacyUserPermissions;
-      const view = permissions.viewDocuments ?? false;
-      return {
-        view,
-        viewConfidential: view && this.legacySafUser.allowProtected,
-        upload: permissions.uploadDocuments ?? false,
-        delete: permissions.deleteDocuments ?? false,
-        edit: permissions.editDocuments ?? false,
-        download: permissions.downloadDocuments ?? false
-      };
-    }
-    return this.userPermissions!.documentLibraryPermissions;
+    return this.userPermissions.documentLibraryPermissions;
   }
 
   /**
@@ -322,10 +234,10 @@ export class UserWithPermissions extends UserWrapper {
     alias: Alias,
     action: ModulePermissionActions
   ): ModelGroup[] {
-    if (this.admin || this.isLegacy()) {
+    if (this.admin) {
       return this.modelGroups;
     }
-    const moduleGroupIds = this.userPermissions!.modulePermissions[action]?.[
+    const moduleGroupIds = this.userPermissions.modulePermissions[action]?.[
       alias
     ];
     return moduleGroupIds ? this.filterModelGroups(moduleGroupIds) : [];
