@@ -9,14 +9,11 @@ export type UrlRoot =
   | 'apiUrlRoot'
   | 'loginUrlRoot'
   | 'documentLibraryUrlRoot'
-  | 'configUrlRoot'
-  | 'eformsUrlRoot'
   | 'dashboardSinkUrlRoot'
   | 'permissionUrlRoot'
   | 'userManagementUrlRoot'
   | 'auditLogUrlRoot'
   | 'claimsSinkUrlRoot'
-  | 'claimsSourceUrlRoot'
   | 'etlUriBackendRoot'
   | 'configServiceUrlRoot';
 
