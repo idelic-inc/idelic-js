@@ -5,13 +5,6 @@ export class UserWrapper {
   constructor(public user: User) {}
 
   /**
-   * If this object was constructed with legacy user management.
-   */
-  isLegacy(): boolean {
-    return false;
-  }
-
-  /**
    * The unique User ID.
    */
   get id(): Id {

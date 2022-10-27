@@ -1,9 +1,10 @@
-import {ModelGroup, User} from './api';
+import {ModelGroup} from './api';
 import {
   DocumentLibraryPermissionActions,
   ModulePermissionActions,
   UserPermissions
 } from './api/permission';
+import {User} from './api/userManagement';
 import {Alias, Id} from './types';
 import {UserWrapper} from './user';
 
@@ -34,11 +35,6 @@ export interface PermissionsArgs extends BasePermissionsArgs {
 }
 
 export class UserWithPermissions extends UserWrapper {
-  private static readActions: ModulePermissionActions[] = [
-    'view',
-    'viewConfidential'
-  ];
-
   customerId: Id;
 
   modelGroups: ModelGroup[];
@@ -95,13 +91,6 @@ export class UserWithPermissions extends UserWrapper {
 
   get groupIds(): number[] {
     return this.modelGroups.map(({id}) => id);
-  }
-
-  /**
-   * If this object was constructed with legacy permissions.
-   */
-  isLegacy(): boolean {
-    return false;
   }
 
   /**
