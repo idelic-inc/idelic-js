@@ -185,10 +185,12 @@ export function getPublicValues(
  * Gets global config values.
  *
  * @param override Override string.
+ * @param frontendApplication Optional enum string, usually `saf-frontend`
  * @param apiOptions Optional options for runApi.
  */
 export function getGlobalValues(
   override?: string,
+  frontendApplication?: string,
   apiOptions?: ApiOptions
 ): Request<ApiSuccessResponse<Record<string, unknown>>> {
   return runApi({
@@ -197,7 +199,8 @@ export function getGlobalValues(
     urlRoot: 'configServiceUrlRoot',
     requestOptions: {
       query: {
-        override
+        override,
+        frontendApplication
       }
     },
     apiOptions
@@ -208,10 +211,12 @@ export function getGlobalValues(
  * Gets nested global config values.
  *
  * @param override Override string.
+ * @param frontendApplication Optional enum string, usually `saf-frontend`
  * @param apiOptions Optional options for runApi.
  */
 export function getNestedGlobalValues(
   override?: string,
+  frontendApplication?: string,
   apiOptions?: ApiOptions
 ): Request<ApiSuccessResponse<NestedConfiguration>> {
   return runApi({
@@ -221,6 +226,7 @@ export function getNestedGlobalValues(
     requestOptions: {
       query: {
         override,
+        frontendApplication,
         nested: true
       }
     },
