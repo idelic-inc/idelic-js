@@ -1,4 +1,4 @@
-import {Alias, CreatedBy, Id, LastUpdatedBy} from '../../types';
+import {Alias, CreatedBy, Id, LastUpdated} from '../../types';
 
 export interface ModelUser {
   id: Id;
@@ -25,7 +25,7 @@ export interface InputModel<F, R> {
   relationModels?: R;
 }
 
-export interface Model<F, R, C> extends LastUpdatedBy, CreatedBy {
+export interface Model<F, R, C> extends LastUpdated, CreatedBy {
   id: Id;
   templateId: Id;
   groupId: Id;
@@ -38,7 +38,6 @@ export interface Model<F, R, C> extends LastUpdatedBy, CreatedBy {
   profilePictureUrl?: string;
   createdDate: string;
   createdByUser?: ModelUser;
-  lastUpdatedDate: string;
   lastUpdatedByUser?: ModelUser;
 }
 
@@ -944,3 +943,262 @@ export type LostRestrictedInput = {
   estimateLostDays: number;
   estimateRestrictedDays: number;
 };
+
+export type FieldType =
+  | 'boolean'
+  | 'dateTime'
+  | 'enum'
+  | 'group'
+  | 'list'
+  | 'number'
+  | 'text'
+  | 'interval';
+export type RelationType = 'singleModel' | 'multiModel';
+export interface FieldTypes extends Record<FieldType, unknown> {
+  list: string;
+  interval: number;
+  number: number;
+  enum: string;
+  text: string;
+  boolean: string;
+}
+
+export interface BaseField<Type extends string> {
+  /**
+   * Field name.
+   */
+  name: Alias;
+  /**
+   * Formatted display label.
+   */
+  label?: string;
+  /**
+   * The data type.
+   */
+  type: Type;
+}
+
+export type BaseFieldOptions<Type extends FieldType = FieldType> = {
+  /**
+   * Default value if no value is provided upon creation of the model.
+   */
+  defaultValue?: FieldTypes[Type];
+  /**
+   * If the field is included in custom reporting. Can be a boolean or an object to be checked against config.
+   *
+   * Use `true` as a default.
+   */
+  onReport?: boolean | {key: string; values: unknown[]};
+  onColumn?: boolean;
+  /**
+   * Indirect modules which use this field.
+   */
+  indirectModules?: Alias[];
+} & (Type extends 'interval'
+  ? {
+      /**
+       * How the value should be formatted.
+       */
+      formatType?: 'days' | 'years' | 'time';
+    }
+  : Type extends 'number'
+  ? {
+      /**
+       * How the value should be formatted.
+       */
+      formatType?: 'currency';
+    }
+  : Type extends 'text'
+  ? {
+      /**
+       * How the value should be formatted.
+       */
+      formatType?: 'ssn';
+    }
+  : // eslint-disable-next-line @typescript-eslint/ban-types
+    {});
+
+export type Required =
+  | boolean
+  | {
+      path: string[];
+      cases: {
+        pattern: string;
+        result: boolean;
+      }[];
+      default?: boolean;
+    };
+
+export type DateType = 'date' | 'time' | 'dateTime';
+
+export interface Field<Type extends FieldType = FieldType>
+  extends BaseField<Type> {
+  options: BaseFieldOptions<Type> & {
+    /**
+     * If the field is confidential.
+     */
+    protected: boolean;
+    /**
+     * If the field is required, can be a boolean or an object to be checked against config.
+     */
+    required: Required;
+    sideEffect?: unknown;
+  } & (Type extends 'list'
+      ? {
+          itemType: {
+            name: string;
+            type: FieldType;
+          };
+        }
+      : Type extends 'number'
+      ? {
+          /**
+           * Type of number.
+           *
+           * Use `integer` as a default.
+           */
+          numberType?: 'decimal' | 'integer';
+          /**
+           * Minimum allowed value.
+           */
+          min?: number;
+        }
+      : Type extends 'dateTime'
+      ? {
+          errorOnHoliday?: boolean;
+          errorOnWeekend?: boolean;
+          onlyFuture?: boolean;
+          /**
+           * Format string. E.g. `MM/DD/YYYY`
+           */
+          format?: string;
+          /**
+           * If the field is a date, time, or both.
+           *
+           * Use `dateTime` as a default.
+           */
+          type?: DateType;
+        }
+      : Type extends 'enum'
+      ? {
+          /**
+           * ID of the enum associated with this field.
+           */
+          enumSetId: number;
+          /**
+           * If the field can accept multiple values.
+           */
+          multi?: boolean;
+        }
+      : // eslint-disable-next-line @typescript-eslint/ban-types
+        {});
+}
+
+export interface Computation<ResultType extends FieldType = FieldType>
+  extends BaseField<'computed'> {
+  options: BaseFieldOptions<ResultType> & {
+    operation: string;
+    /**
+     * The data type of the computation result.
+     */
+    resultType?: ResultType;
+    ignoreBlank?: boolean;
+    separator?: string;
+    sortWith?: string;
+    status?: string;
+    /**
+     * When the computation will be run. E.g. `read`
+     */
+    computeOn?: string;
+    condition?: string;
+    ifTrue?: unknown;
+    ifFalse?: unknown;
+    arguments?: unknown[];
+    conditionArguments?: unknown[];
+  } & (ResultType extends 'number'
+      ? {
+          decimalPlaces?: number;
+        }
+      : ResultType extends 'dateTime'
+      ? {
+          /**
+           * If the result is a date, time, or both.
+           *
+           * Use `dateTime` as a default.
+           */
+          dateType?: DateType;
+        }
+      : // eslint-disable-next-line @typescript-eslint/ban-types
+        {});
+}
+
+export interface Relation<Type extends RelationType = RelationType>
+  extends BaseField<Type> {
+  options: {
+    /**
+     * Array of template IDs the relation is for.
+     *
+     * Will always have at least one ID when in a valid state.
+     */
+    templatesId: Id[];
+    /**
+     * If this is a parent relation.
+     */
+    parent: boolean;
+    relatedTo: string;
+    /**
+     * If the field is required, can be a boolean or an object to be checked against config.
+     */
+    required: Required;
+    onUpdateRelated?: {
+      type: string;
+      computations: string[];
+    };
+    buildFrom?: boolean;
+    fromComputation?: string;
+    onDelete?: string;
+  };
+}
+
+export interface ModelTemplate extends LastUpdated {
+  /**
+   * Formatted display name.
+   */
+  name: string;
+  /**
+   * Unique template alias.
+   */
+  alias: Alias;
+  /**
+   * Unique template ID.
+   */
+  id: Id;
+  securableId: Id;
+  /**
+   * Object containing template info.
+   *
+   * For template fields, use `template.fields.fields`
+   */
+  fields: {
+    /**
+     * Template fields.
+     */
+    fields: Field[];
+    /**
+     * Computed template fields.
+     */
+    computations: Computation[];
+    /**
+     * Relations to other templates.
+     */
+    relations: Relation[];
+    /**
+     * Module aliases from the permission service.
+     */
+    modules: Alias[];
+    /**
+     * Module aliases which indirectly use this template.
+     */
+    indirectModules: Alias[];
+  };
+}

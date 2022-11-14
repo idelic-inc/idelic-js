@@ -2,17 +2,16 @@ import {Request} from '@idelic/safety-net';
 import {List, Map, Record as ImRecord} from 'immutable';
 
 import {runApi} from '../../runApi';
-import {Alias, ApiOptions, Id, LastUpdatedBy} from '../../types';
+import {Alias, ApiOptions, Id, LastUpdated} from '../../types';
 import {createRecordListResponseTransformer} from '../../utils';
 
-export interface ModelGroup extends LastUpdatedBy {
+export interface ModelGroup extends LastUpdated {
   alias: Alias;
   display: string;
   fields: Record<string, unknown>;
   groupType: string;
   id: Id;
   inactive: boolean;
-  lastUpdatedDate: string;
   parentId?: Id;
   securableId: Id;
 }

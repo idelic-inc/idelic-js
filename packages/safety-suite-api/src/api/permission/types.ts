@@ -1,4 +1,4 @@
-import {Alias, CreatedBy, Id, LastUpdatedBy} from '../../types';
+import {Alias, CreatedBy, Id, LastUpdated} from '../../types';
 
 export interface Created extends CreatedBy {
   /**
@@ -11,15 +11,11 @@ export interface Created extends CreatedBy {
   createdDate: string;
 }
 
-export interface LastUpdated extends LastUpdatedBy {
+export interface LastUpdatedFull extends LastUpdated {
   /**
    * Full name of the user who was the last to update this role.
    */
   lastUpdatedByName?: string;
-  /**
-   * ISO timestamp of the last time when this role was updated.
-   */
-  lastUpdatedDate: string;
 }
 
 export enum RoleType {
@@ -28,7 +24,7 @@ export enum RoleType {
   user = 'USER'
 }
 
-export interface Role extends Created, LastUpdated {
+export interface Role extends Created, LastUpdatedFull {
   /**
    * The unique Role ID.
    */

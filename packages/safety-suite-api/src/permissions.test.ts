@@ -1,7 +1,6 @@
-import {ModelGroup} from './api';
+import {ModelGroup, ModelTemplate} from './api';
 import {UserPermissions} from './api/permission';
 import {
-  ModelTemplate,
   MonitorTemplate,
   PermissionsArgs,
   UserWithPermissions
@@ -42,7 +41,14 @@ const modelTemplates: ModelTemplate[] = [
   {
     id: 6,
     alias: 'six',
+    name: 'six',
+    securableId: 0,
+    lastUpdatedBy: 0,
+    lastUpdatedDate: '',
     fields: {
+      fields: [],
+      computations: [],
+      relations: [],
       modules: ['module1'],
       indirectModules: []
     }
@@ -50,7 +56,14 @@ const modelTemplates: ModelTemplate[] = [
   {
     id: 7,
     alias: 'seven',
+    name: 'seven',
+    securableId: 0,
+    lastUpdatedBy: 0,
+    lastUpdatedDate: '',
     fields: {
+      fields: [],
+      computations: [],
+      relations: [],
       modules: ['module2'],
       indirectModules: []
     }
@@ -58,7 +71,14 @@ const modelTemplates: ModelTemplate[] = [
   {
     id: 8,
     alias: 'eight',
+    name: 'eight',
+    securableId: 0,
+    lastUpdatedBy: 0,
+    lastUpdatedDate: '',
     fields: {
+      fields: [],
+      computations: [],
+      relations: [],
       modules: ['module1', 'module2'],
       indirectModules: []
     }
@@ -66,7 +86,14 @@ const modelTemplates: ModelTemplate[] = [
   {
     id: 9,
     alias: 'nine',
+    name: 'nine',
+    securableId: 0,
+    lastUpdatedBy: 0,
+    lastUpdatedDate: '',
     fields: {
+      fields: [],
+      computations: [],
+      relations: [],
       modules: [],
       indirectModules: []
     }
@@ -74,7 +101,14 @@ const modelTemplates: ModelTemplate[] = [
   {
     id: 10,
     alias: 'ten',
+    name: 'ten',
+    securableId: 0,
+    lastUpdatedBy: 0,
+    lastUpdatedDate: '',
     fields: {
+      fields: [],
+      computations: [],
+      relations: [],
       modules: [],
       indirectModules: []
     }
