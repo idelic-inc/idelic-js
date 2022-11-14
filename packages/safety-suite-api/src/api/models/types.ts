@@ -952,10 +952,12 @@ export type FieldType =
   | 'group'
   | 'list'
   | 'number'
-  | 'text';
+  | 'text'
+  | 'interval';
 export type RelationType = 'singleModel' | 'multiModel';
 export interface FieldTypes extends Record<FieldType, unknown> {
   list: string;
+  interval: number;
   number: number;
   enum: string;
   text: string;
@@ -977,19 +979,15 @@ export interface BaseField<Type extends string> {
   type: Type;
 }
 
-export interface BaseFieldOptions<Value extends unknown> {
-  /**
-   * How the value should be formatted. E.g. `currency` for a number type.
-   */
-  formatType?: string;
+export type BaseFieldOptions<Type extends FieldType = FieldType> = {
   /**
    * Default value if no value is provided upon creation of the model.
    */
-  defaultValue?: Value;
+  defaultValue?: FieldTypes[Type];
   /**
    * If the field is included in custom reporting. Can be a boolean or an object to be checked against config.
    *
-   * Defaults to `true`
+   * Use `true` as a default.
    */
   onReport?: boolean | {key: string; values: unknown[]};
   onColumn?: boolean;
@@ -997,7 +995,29 @@ export interface BaseFieldOptions<Value extends unknown> {
    * Indirect modules which use this field.
    */
   indirectModules?: Alias[];
-}
+} & (Type extends 'interval'
+  ? {
+      /**
+       * How the value should be formatted.
+       */
+      formatType?: 'days' | 'years' | 'time';
+    }
+  : Type extends 'number'
+  ? {
+      /**
+       * How the value should be formatted.
+       */
+      formatType?: 'currency';
+    }
+  : Type extends 'text'
+  ? {
+      /**
+       * How the value should be formatted.
+       */
+      formatType?: 'ssn';
+    }
+  : // eslint-disable-next-line @typescript-eslint/ban-types
+    {});
 
 export type Required =
   | boolean
@@ -1014,7 +1034,7 @@ export type DateType = 'date' | 'time' | 'dateTime';
 
 export interface Field<Type extends FieldType = FieldType>
   extends BaseField<Type> {
-  options: BaseFieldOptions<FieldTypes[Type]> & {
+  options: BaseFieldOptions<Type> & {
     /**
      * If the field is confidential.
      */
@@ -1034,9 +1054,11 @@ export interface Field<Type extends FieldType = FieldType>
       : Type extends 'number'
       ? {
           /**
-           * Type of number. E.g. `decimal`
+           * Type of number.
+           *
+           * Use `integer` as a default.
            */
-          numberType?: string;
+          numberType?: 'decimal' | 'integer';
           /**
            * Minimum allowed value.
            */
@@ -1051,6 +1073,11 @@ export interface Field<Type extends FieldType = FieldType>
            * Format string. E.g. `MM/DD/YYYY`
            */
           format?: string;
+          /**
+           * If the field is a date, time, or both.
+           *
+           * Use `dateTime` as a default.
+           */
           type?: DateType;
         }
       : Type extends 'enum'
@@ -1070,7 +1097,7 @@ export interface Field<Type extends FieldType = FieldType>
 
 export interface Computation<ResultType extends FieldType = FieldType>
   extends BaseField<'computed'> {
-  options: BaseFieldOptions<FieldTypes[ResultType]> & {
+  options: BaseFieldOptions<ResultType> & {
     operation: string;
     /**
      * The data type of the computation result.
@@ -1095,6 +1122,11 @@ export interface Computation<ResultType extends FieldType = FieldType>
         }
       : ResultType extends 'dateTime'
       ? {
+          /**
+           * If the result is a date, time, or both.
+           *
+           * Use `dateTime` as a default.
+           */
           dateType?: DateType;
         }
       : // eslint-disable-next-line @typescript-eslint/ban-types
@@ -1106,8 +1138,10 @@ export interface Relation<Type extends RelationType = RelationType>
   options: {
     /**
      * Array of template IDs the relation is for.
+     *
+     * Will always have at least one ID when in a valid state.
      */
-    templatesId: Type extends 'singleModel' ? [number] : number[];
+    templatesId: Id[];
     /**
      * If this is a parent relation.
      */
