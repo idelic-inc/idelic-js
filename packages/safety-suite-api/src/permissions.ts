@@ -1,4 +1,4 @@
-import {ModelGroup} from './api';
+import {ModelGroup, ModelTemplate} from './api';
 import {
   DocumentLibraryPermissionActions,
   ModulePermissionActions,
@@ -8,14 +8,6 @@ import {User} from './api/userManagement';
 import {Alias, Id} from './types';
 import {UserWrapper} from './user';
 
-export interface ModelTemplate {
-  alias: Alias;
-  id: Id;
-  fields: {
-    modules: Alias[];
-    indirectModules: Alias[];
-  };
-}
 export interface MonitorTemplate {
   alias: Alias;
   id: Id;
