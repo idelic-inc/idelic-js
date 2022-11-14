@@ -115,10 +115,10 @@
     "@fluentui/set-version" "^8.1.4"
     tslib "^2.1.0"
 
-"@idelic/formatron@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@idelic/formatron/-/formatron-2.0.1.tgz#8f103297a0d1b79036ff9e516d527f1e7254e16f"
-  integrity sha512-qN5ij8INCoQ6bdUrSDJzPneosTAbp8JzH1cQ2QSF/IkzbHelR9uzuWOsVaoEsjfPsNTMjbruS0XPQtxEpWYVeQ==
+"@idelic/formatron@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@idelic/formatron/-/formatron-2.0.2.tgz#1af39547df4e2f7e870264eac2980dbd84464774"
+  integrity sha512-I6qV+Tlh008Zpbv16EQN1Z5xdXLsBsCi+VjEwMiusdMwYzVc53tklEtvpb5Gjr1RUF4LDybpBe5SE7M+39b6sQ==
   dependencies:
     idelic-safety-suite-api "^7.0.1"
     immutable "^4.0.0-rc.12"
@@ -297,7 +297,7 @@ moment-timezone@^0.5.26:
   dependencies:
     moment ">= 2.9.0"
 
-"moment@>= 2.9.0", moment@^2.24.0, moment@^2.29.1:
+"moment@>= 2.9.0", moment@^2.24.0, moment@^2.29.1, moment@^2.29.4:
   version "2.29.4"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
   integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==

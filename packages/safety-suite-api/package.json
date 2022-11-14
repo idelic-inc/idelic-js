@@ -22,8 +22,8 @@
   "license": "MIT",
   "dependencies": {
     "@idelic/safety-net": "^2.1.0",
-    "moment": "^2.24.0",
-    "moment-timezone": "^0.5.26",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.35",
     "source-map-support": "^0.5.13"
   },
   "peerDependencies": {
