@@ -98,6 +98,12 @@ export interface LastUpdatedBy {
    */
   lastUpdatedBy: number;
 }
+export interface LastUpdated extends LastUpdatedBy {
+  /**
+   * Date when this record was last updated.
+   */
+  lastUpdatedDate: string;
+}
 
 export interface CreatedBy {
   /**

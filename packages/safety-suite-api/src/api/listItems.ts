@@ -1,9 +1,9 @@
 import {Request} from '@idelic/safety-net';
 
 import {runApi} from '../runApi';
-import {Alias, ApiOptions, EmptyRequest, Id, LastUpdatedBy} from '../types';
+import {Alias, ApiOptions, EmptyRequest, Id, LastUpdated} from '../types';
 
-export interface ListItemTemplate extends LastUpdatedBy {
+export interface ListItemTemplate extends LastUpdated {
   /**
    * String alias
    */
@@ -13,10 +13,6 @@ export interface ListItemTemplate extends LastUpdatedBy {
    */
   id: Id;
   /**
-   * Date when the template was last updated
-   */
-  lastUpdatedDate: string;
-  /**
    * Formatted display name
    */
   name: string;
@@ -25,7 +21,7 @@ export interface ListItemTemplate extends LastUpdatedBy {
    */
   template: any;
 }
-export interface ListItemPrototype extends LastUpdatedBy {
+export interface ListItemPrototype extends LastUpdated {
   /**
    * String alias
    */
@@ -55,10 +51,6 @@ export interface ListItemPrototype extends LastUpdatedBy {
    * Inactive or disabled
    */
   inactive: boolean;
-  /**
-   * Date when the prototype was last updated
-   */
-  lastUpdatedDate: string;
   /**
    * ID of the parent `ListItemTemplate`
    */

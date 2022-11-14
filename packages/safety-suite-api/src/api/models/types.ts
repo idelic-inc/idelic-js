@@ -1,4 +1,4 @@
-import {Alias, CreatedBy, Id, LastUpdatedBy} from '../../types';
+import {Alias, CreatedBy, Id, LastUpdated} from '../../types';
 
 export interface ModelUser {
   id: Id;
@@ -25,7 +25,7 @@ export interface InputModel<F, R> {
   relationModels?: R;
 }
 
-export interface Model<F, R, C> extends LastUpdatedBy, CreatedBy {
+export interface Model<F, R, C> extends LastUpdated, CreatedBy {
   id: Id;
   templateId: Id;
   groupId: Id;
@@ -38,7 +38,6 @@ export interface Model<F, R, C> extends LastUpdatedBy, CreatedBy {
   profilePictureUrl?: string;
   createdDate: string;
   createdByUser?: ModelUser;
-  lastUpdatedDate: string;
   lastUpdatedByUser?: ModelUser;
 }
 
@@ -1161,14 +1160,45 @@ export interface Relation<Type extends RelationType = RelationType>
   };
 }
 
-export interface ModelTemplate {
+export interface ModelTemplate extends LastUpdated {
+  /**
+   * Formatted display name.
+   */
+  name: string;
+  /**
+   * Unique template alias.
+   */
   alias: Alias;
+  /**
+   * Unique template ID.
+   */
   id: Id;
+  securableId: Id;
+  /**
+   * Object containing template info.
+   *
+   * For template fields, use `template.fields.fields`
+   */
   fields: {
+    /**
+     * Template fields.
+     */
     fields: Field[];
+    /**
+     * Computed template fields.
+     */
     computations: Computation[];
+    /**
+     * Relations to other templates.
+     */
     relations: Relation[];
+    /**
+     * Module aliases from the permission service.
+     */
     modules: Alias[];
+    /**
+     * Module aliases which indirectly use this template.
+     */
     indirectModules: Alias[];
   };
 }
