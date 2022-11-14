@@ -1080,6 +1080,9 @@ export interface Computation<ResultType extends FieldType = FieldType>
     separator?: string;
     sortWith?: string;
     status?: string;
+    /**
+     * When the computation will be run. E.g. `read`
+     */
     computeOn?: string;
     condition?: string;
     ifTrue?: unknown;
@@ -1101,9 +1104,18 @@ export interface Computation<ResultType extends FieldType = FieldType>
 export interface Relation<Type extends RelationType = RelationType>
   extends BaseField<Type> {
   options: {
+    /**
+     * Array of template IDs the relation is for.
+     */
     templatesId: Type extends 'singleModel' ? [number] : number[];
+    /**
+     * If this is a parent relation.
+     */
     parent: boolean;
     relatedTo: string;
+    /**
+     * If the field is required, can be a boolean or an object to be checked against config.
+     */
     required: Required;
     onUpdateRelated?: {
       type: string;
