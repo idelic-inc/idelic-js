@@ -1,4 +1,4 @@
-import {ModelGroup, ModelTemplate} from './api';
+import {ModelGroup, ModelTemplate, MonitorTemplate} from './api';
 import {
   DocumentLibraryPermissionActions,
   ModulePermissionActions,
@@ -7,12 +7,6 @@ import {
 import {User} from './api/userManagement';
 import {Alias, Id} from './types';
 import {UserWrapper} from './user';
-
-export interface MonitorTemplate {
-  alias: Alias;
-  id: Id;
-  modules: Alias[];
-}
 
 export interface BasePermissionsArgs {
   customerId: Id;

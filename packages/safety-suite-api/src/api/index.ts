@@ -13,3 +13,4 @@ export * from './auditLog';
 export * from './pageRequest';
 export * from './etl';
 export * from './configService';
+export * from './notifications';
