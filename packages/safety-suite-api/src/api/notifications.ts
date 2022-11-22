@@ -1,5 +1,4 @@
-import {runApi} from 'src/runApi';
-
+import {runApi} from '../runApi';
 import {ApiOptions, Id} from '../types';
 
 export type NotificationEventType =
