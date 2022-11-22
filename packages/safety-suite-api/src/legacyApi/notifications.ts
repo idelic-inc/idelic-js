@@ -2,18 +2,27 @@ import {Id} from '../types';
 import {LegacyApi} from './types';
 
 export type NotificationOption = any;
-export type NotificationSourceType = string;
+type NotificationSourceType = string;
 
+/**
+ * @deprecated Use `fetchNotificationTypes` instead.
+ */
 export const getNotificationsTypes: LegacyApi = {
   method: 'GET',
   route: '/api/notifications/types'
 };
 
+/**
+ * @deprecated Use `fetchNotificationSubscriptions` instead.
+ */
 export const getSubscriptions: LegacyApi = {
   method: 'GET',
   route: '/api/notifications/subscriptions'
 };
 
+/**
+ * @deprecated Use `createNotificationSubscription` instead.
+ */
 export function createSubscription(
   notificationTypeId: Id,
   notificationSourceType: NotificationSourceType,
@@ -34,6 +43,9 @@ export function createSubscription(
   };
 }
 
+/**
+ * @deprecated Use `updateNotificationSubscription` instead.
+ */
 export function updateSubscription(
   id: Id,
   userId: Id,
@@ -58,6 +70,9 @@ export function updateSubscription(
   };
 }
 
+/**
+ * @deprecated Use `deleteNotificationSubscription` instead.
+ */
 export function removeSubscription(subscriptionId: Id): LegacyApi {
   return {
     method: 'DELETE',

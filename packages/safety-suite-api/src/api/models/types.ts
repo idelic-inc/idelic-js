@@ -1,4 +1,8 @@
 import {Alias, CreatedBy, Id, LastUpdated} from '../../types';
+import {
+  NotificationEventType,
+  NotificationSubscriptionOption
+} from '../notifications';
 
 export interface ModelUser {
   id: Id;
@@ -1201,4 +1205,32 @@ export interface ModelTemplate extends LastUpdated {
      */
     indirectModules: Alias[];
   };
+}
+
+export interface MonitorTemplate extends LastUpdated {
+  /**
+   * Formatted display name.
+   */
+  name: string;
+  /**
+   * Unique template alias.
+   */
+  alias: Alias;
+  /**
+   * Unique template ID.
+   */
+  id: Id;
+  relationName?: string;
+  /**
+   * Module aliases from the permission service.
+   */
+  modules: Alias[];
+  /**
+   * List of possible notification subscriptions.
+   */
+  subscriptions: {
+    type: NotificationEventType;
+    label?: string;
+    options?: NotificationSubscriptionOption[];
+  }[];
 }
