@@ -1,10 +1,6 @@
-import {ModelGroup, ModelTemplate} from './api';
+import {ModelGroup, ModelTemplate, MonitorTemplate} from './api';
 import {UserPermissions} from './api/permission';
-import {
-  MonitorTemplate,
-  PermissionsArgs,
-  UserWithPermissions
-} from './permissions';
+import {PermissionsArgs, UserWithPermissions} from './permissions';
 
 const customerId = 1;
 const userPermissions: UserPermissions = {
@@ -118,27 +114,47 @@ const monitorTemplates: MonitorTemplate[] = [
   {
     id: 11,
     alias: 'eleven',
-    modules: ['module1']
+    modules: ['module1'],
+    name: '',
+    subscriptions: [],
+    lastUpdatedBy: 0,
+    lastUpdatedDate: ''
   },
   {
     id: 12,
     alias: 'twelve',
-    modules: ['module2']
+    modules: ['module2'],
+    name: '',
+    subscriptions: [],
+    lastUpdatedBy: 0,
+    lastUpdatedDate: ''
   },
   {
     id: 13,
     alias: 'thirteen',
-    modules: ['module1', 'module2']
+    modules: ['module1', 'module2'],
+    name: '',
+    subscriptions: [],
+    lastUpdatedBy: 0,
+    lastUpdatedDate: ''
   },
   {
     id: 14,
     alias: 'fourteen',
-    modules: []
+    modules: [],
+    name: '',
+    subscriptions: [],
+    lastUpdatedBy: 0,
+    lastUpdatedDate: ''
   },
   {
     id: 15,
     alias: 'fifteen',
-    modules: []
+    modules: [],
+    name: '',
+    subscriptions: [],
+    lastUpdatedBy: 0,
+    lastUpdatedDate: ''
   }
 ];
 
