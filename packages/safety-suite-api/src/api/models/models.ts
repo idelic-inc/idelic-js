@@ -17,9 +17,9 @@ export function fetchModels<
   modelQueryParams?: ModelQueryParams,
   apiOptions?: ApiOptions
 ): Request<Models[]> {
-  const {ids, orderBy, textSearch} = modelOptions;
+  const {ids, orderBy, textSearch, jsValueSearch} = modelOptions;
   const baseApi: Api<ModelOptions, Models[]> =
-    ids || orderBy || textSearch
+    ids || orderBy || textSearch || jsValueSearch
       ? {
           method: 'POST',
           route: '/api/models/get',
