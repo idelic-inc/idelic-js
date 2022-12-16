@@ -97,6 +97,7 @@ export declare type ModelOutputOptions = {
   relationTemplateIds?: Id[];
   relationsLevel?: number;
   restrictReadComputations?: string[];
+  restrictRelatedComputations?: string[];
   updateReadComputations?: boolean;
   users?: boolean;
 };
