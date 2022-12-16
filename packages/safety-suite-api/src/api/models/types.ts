@@ -238,6 +238,7 @@ export type ModelOutputOptions = {
    * Array of names of computations with `computeOn === 'read'` to compute, others will be skipped.
    */
   restrictReadComputations?: string[];
+  restrictRelatedComputations?: string[];
   /**
    * Will force computation of all computations with `computeOn === 'read'`.
    */
