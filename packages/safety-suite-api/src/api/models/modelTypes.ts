@@ -2373,6 +2373,7 @@ export interface ImprovementPlanTaskFields {
   completed?: boolean;
   daysDueAfterPlanStart?: number | null;
   daysOfWeek?: string | null;
+  description?: string | null;
   dueDate?: number | null;
   name?: string;
   positionAssignedTo?: string | null;
