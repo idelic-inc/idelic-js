@@ -619,34 +619,34 @@
     tslib "^2.1.0"
 
 "@idelic/formatron-react@file:packages/formatron-react":
-  version "4.0.4"
+  version "4.0.5"
   dependencies:
     "@fluentui/react" "^7.145.0"
     "@fluentui/react-hooks" "^8.3.3"
-    "@idelic/formatron" "^2.0.2"
+    "@idelic/formatron" "^2.0.3"
     "@types/react" "^16.9.51"
     formik "^2.2.0"
     lodash "^4.17.20"
     moment "^2.29.4"
 
-"@idelic/formatron@^2.0.2", "@idelic/formatron@file:packages/formatron":
-  version "2.0.2"
+"@idelic/formatron@^2.0.3", "@idelic/formatron@file:packages/formatron":
+  version "2.0.3"
   dependencies:
     idelic-safety-suite-api "^7.0.1"
     immutable "^4.0.0-rc.12"
     lodash "^4.17.20"
     moment "^2.29.4"
 
-"@idelic/safety-net@^2.1.0", "@idelic/safety-net@file:packages/safety-net":
-  version "2.1.0"
+"@idelic/safety-net@^2.1.1", "@idelic/safety-net@file:packages/safety-net":
+  version "2.1.1"
   dependencies:
     moment "^2.29.4"
     source-map-support "^0.5.13"
 
 "@idelic/safety-suite-api@file:packages/safety-suite-api":
-  version "53.0.1"
+  version "54.1.1"
   dependencies:
-    "@idelic/safety-net" "^2.1.0"
+    "@idelic/safety-net" "^2.1.1"
     moment "^2.29.4"
     moment-timezone "^0.5.35"
     source-map-support "^0.5.13"
@@ -6582,9 +6582,9 @@ q@^1.5.1:
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
 
 qs@~6.5.2:
-  version "6.5.2"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
-  integrity sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
+  version "6.5.3"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.3.tgz#3aeeffc91967ef6e35c0e488ef46fb296ab76aad"
+  integrity sha512-qxXIEh4pCGfHICj1mAJQ2/2XVZkjCDTcEgfoSQxc/fYivUZxTkk7L3bDBJSoNrEzXI17oUO5Dp07ktqE5KzczA==
 
 quick-lru@^4.0.1:
   version "4.0.1"
