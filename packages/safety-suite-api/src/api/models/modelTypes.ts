@@ -1756,7 +1756,6 @@ export interface EmployeeRelations {
   injuriesIllnesses?: InjuryIllnessModel[];
   inspections?: InspectionModel[];
   materialSpills?: MaterialSpillModel[];
-  mileageAndFuels?: MileageAndFuelModel[];
   performanceImprovementPlans?: PerformanceImprovementPlanModel[];
   probationaryData?: ProbationaryDataModel[];
   sleepApnea?: SleepApneaModel[];
@@ -1822,7 +1821,6 @@ export interface EmployeeInputRelations {
   injuriesIllnesses?: InjuryIllnessInputModel[];
   inspections?: InspectionInputModel[];
   materialSpills?: MaterialSpillInputModel[];
-  mileageAndFuels?: MileageAndFuelInputModel[];
   performanceImprovementPlans?: PerformanceImprovementPlanInputModel[];
   probationaryData?: ProbationaryDataInputModel[];
   sleepApnea?: SleepApneaInputModel[];
@@ -2997,70 +2995,6 @@ export type MaterialSpillModel = Model<
 export type MaterialSpillInputModel = InputModel<
   MaterialSpillFields,
   MaterialSpillInputRelations
->;
-
-// Type definitions for /mileageAndFuel / Mileage and Fuel (mileage_and_fuel)
-
-export interface MileageAndFuelFields {
-  distance?: number | null;
-  endDate?: number | null;
-  source?: string | null;
-  startDate?: number | null;
-  totalFuelUsed?: number | null;
-}
-
-export interface MileageAndFuelRelations {
-  primaryModel?: EmployeeModel | null;
-  terminalMileageAndFuel?: TerminalMileageAndFuelModel | null;
-}
-
-export interface MileageAndFuelInputRelations {
-  primaryModel?: EmployeeInputModel | null;
-  terminalMileageAndFuel?: TerminalMileageAndFuelInputModel | null;
-}
-
-export interface MileageAndFuelComputations {
-  averageMilesPerGallon: number | null;
-}
-
-export type MileageAndFuelModel = Model<
-  MileageAndFuelFields,
-  MileageAndFuelRelations,
-  MileageAndFuelComputations
->;
-
-export type MileageAndFuelInputModel = InputModel<
-  MileageAndFuelFields,
-  MileageAndFuelInputRelations
->;
-
-// Type definitions for /mileageAndFuel / Terminal Mileage and Fuel (terminal_mileage_and_fuel)
-
-export interface TerminalMileageAndFuelFields {}
-
-export interface TerminalMileageAndFuelRelations {
-  mileageAndFuels?: MileageAndFuelModel[];
-}
-
-export interface TerminalMileageAndFuelInputRelations {
-  mileageAndFuels?: MileageAndFuelInputModel[];
-}
-
-export interface TerminalMileageAndFuelComputations {
-  averageMilesPerGallonByTerminal: number | null;
-  totalFuelUsedByTerminal: number | null;
-  totalMilesDriven: number | null;
-}
-
-export type TerminalMileageAndFuelModel = Model<
-  TerminalMileageAndFuelFields,
-  TerminalMileageAndFuelRelations,
-  TerminalMileageAndFuelComputations
->;
-
-export type TerminalMileageAndFuelInputModel = InputModel<
-  TerminalMileageAndFuelFields,
-  TerminalMileageAndFuelInputRelations
 >;
 
 // Type definitions for /observations / Customer Observation (customer_observation)
