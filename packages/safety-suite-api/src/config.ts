@@ -22,7 +22,8 @@ export const config: InitConfig = {
   permissionUrlRoot: '',
   userManagementUrlRoot: '',
   etlUriBackendRoot: '',
-  configServiceUrlRoot: ''
+  configServiceUrlRoot: '',
+  notificationServiceUrlRoot: ''
 };
 
 /**
@@ -44,6 +45,7 @@ export const initializeConfig = (
   config.auditLogUrlRoot = envUrls['audit-log'];
   config.claimsSinkUrlRoot = envUrls['claims-sink'];
   config.etlUriBackendRoot = envUrls['etl-uri-backend'];
+  config.notificationServiceUrlRoot = envUrls['notification-service'];
   config.initialized = true;
 };
 
