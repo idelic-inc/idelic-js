@@ -8,7 +8,7 @@ import {
   NotificationType
 } from './types';
 
-export const getNotificationSubscriptionsByUserId = (
+export const getNotificationServiceSubscriptionsByUserId = (
   userId: Id,
   customerAlias: Alias,
   apiOptions: ApiOptions = {}
@@ -20,7 +20,7 @@ export const getNotificationSubscriptionsByUserId = (
     apiOptions
   });
 
-export const getNotificationSubscriptionsByNotificationType = (
+export const getNotificationServiceSubscriptionsByNotificationType = (
   notificationType: NotificationType,
   apiOptions: ApiOptions = {}
 ): Request<NotificationSubscriptionResponse[]> =>
@@ -31,7 +31,7 @@ export const getNotificationSubscriptionsByNotificationType = (
     apiOptions
   });
 
-export const updateNotificationSubscription = (
+export const updateNotificationServiceSubscription = (
   body: NotificationSubscriptionRequest,
   apiOptions: ApiOptions = {}
 ): Request<NotificationSubscriptionResponse> =>
