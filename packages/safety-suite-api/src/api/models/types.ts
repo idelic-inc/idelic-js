@@ -26,7 +26,7 @@ export interface InputModel<F, R> {
   prototypeId?: Id;
   fields: F;
   relations?: RelationModelsToIds<R>;
-  relationModels?: R;
+  relationModels?: Partial<R>;
 }
 
 export interface Model<F, R, C> extends LastUpdated, CreatedBy {
