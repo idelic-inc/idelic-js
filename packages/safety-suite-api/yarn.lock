@@ -2,11 +2,12 @@
 # yarn lockfile v1
 
 
-"@idelic/safety-net@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@idelic/safety-net/-/safety-net-2.1.0.tgz#a95557e4ebbd518e944f36b8ce823cc13db41925"
-  integrity sha512-CRWm1dQpy5bkM2DfvziV8xFuAZYcaU5rX5M/RAX/CgajdGWj6XXl1vxRmnYupguNnOPcOJsNPmALLq1ktvmygw==
+"@idelic/safety-net@^2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@idelic/safety-net/-/safety-net-2.1.2.tgz#83306f9ce56373984caa38625e1e2ca5e185335e"
+  integrity sha512-80ODsbLW/dC5KU+tdoAR6RecBnAnj2MPfW4IcN4v+whGyvQ10if1UVoXX1wnOygHP2p+PdAE/nRnN9Zi47Muag==
   dependencies:
+    moment "^2.29.4"
     source-map-support "^0.5.13"
 
 buffer-from@^1.0.0:
@@ -78,3 +79,8 @@ source-map@^0.6.0:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
   integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
+
+typescript@4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.1.2.tgz#6369ef22516fe5e10304aae5a5c4862db55380e9"
+  integrity sha512-thGloWsGH3SOxv1SoY7QojKi0tc+8FnOmiarEGMbd/lar7QOEd3hvlx3Fp5y6FlDUGl9L+pd4n2e+oToGMmhRQ==

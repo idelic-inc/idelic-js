@@ -27,7 +27,7 @@ export interface InputModel<F, R> {
   prototypeId?: Id;
   fields: F;
   relations?: RelationModelsToIds<R>;
-  relationModels?: R;
+  relationModels?: Partial<R>;
 }
 export interface ModelType<F, R, C> {
   id: Id;

@@ -72,6 +72,7 @@ export interface AccidentFields {
   severityWeight?: number | null;
   shortDescription?: string;
   speed?: string;
+  status?: string | null;
   terminal?: number | null;
   thirdPartyDamageDescription?: string;
   time?: number | null;
@@ -125,7 +126,10 @@ export interface AccidentComputations {
   timeWeight: number | null;
   totalCost: number | null;
   totalIncurred: number | null;
+  totalIncurredLegacy: number | null;
+  totalReimbursements: number | null;
   totalRemainingReserves: number | null;
+  totalReserves: number | null;
 }
 
 export type AccidentModel = Model<
@@ -659,12 +663,14 @@ export interface ClaimFields {
   adjusterPhoneNumber?: string;
   city?: string;
   claimStatus?: string | null;
+  claimType?: string | null;
   closingDate?: number | null;
   companyName?: string;
   description?: string;
   fullName?: string;
   insuranceClaimNumber?: string;
   insuranceCompany?: string;
+  internalClaimNumber?: string;
   legalCounselName?: string;
   legalCounselPhoneNumber?: string;
   legalLawFirm?: string;
@@ -676,21 +682,24 @@ export interface ClaimFields {
   vehicleMake?: string;
   vehicleModel?: string;
   vehicleState?: string | null;
+  vehicleVinNumber?: string;
   vehicleYear?: string;
   zip?: string;
 }
 
 export interface ClaimRelations {
   costs?: CostModel[];
-  incident?: AccidentModel | null;
+  incident?: (AccidentModel | InjuryIllnessModel) | null;
   primaryModel?: EmployeeModel | null;
+  reimbursements?: ReimbursementModel[];
   reservesAndTotals?: ReservesAndTotalsModel[];
 }
 
 export interface ClaimInputRelations {
   costs?: CostInputModel[];
-  incident?: AccidentInputModel | null;
+  incident?: (AccidentInputModel | InjuryIllnessInputModel) | null;
   primaryModel?: EmployeeInputModel | null;
+  reimbursements?: ReimbursementInputModel[];
   reservesAndTotals?: ReservesAndTotalsInputModel[];
 }
 
@@ -707,6 +716,8 @@ export interface ClaimComputations {
   generalExpensePaid: number | null;
   generalExpenseRemaining: number | null;
   generalExpenseReserves: number | null;
+  incurredExpense: number | null;
+  incurredLoss: number | null;
   indemnityExpensePaid: number | null;
   indemnityExpenseRemaining: number | null;
   indemnityExpenseReserves: number | null;
@@ -726,6 +737,7 @@ export interface ClaimComputations {
   subrogationRemaining: number | null;
   subrogationReserves: number | null;
   totalPaid: number | null;
+  totalReimbursements: number | null;
   totalRemaining: number | null;
   totalReserves: number | null;
 }
@@ -741,6 +753,8 @@ export interface CorrectiveActionFields {
   dateOfAction?: number | null;
   description?: string;
   disciplinaryAction?: string | null;
+  legacy_preventability?: string | null;
+  legacy_severity?: string | null;
   letterReturnDate?: number | null;
   letterType?: string | null;
   preventability?: string | null;
@@ -815,12 +829,26 @@ export interface CostFields {
 }
 
 export interface CostRelations {
-  event?: (InjuryIllnessModel | ClaimModel) | null;
+  event?:
+    | (
+        | InjuryIllnessModel
+        | ClaimModel
+        | ForkliftIncidentModel
+        | MaterialSpillModel
+      )
+    | null;
   reservesAndTotals?: ReservesAndTotalsModel | null;
 }
 
 export interface CostInputRelations {
-  event?: (InjuryIllnessInputModel | ClaimInputModel) | null;
+  event?:
+    | (
+        | InjuryIllnessInputModel
+        | ClaimInputModel
+        | ForkliftIncidentInputModel
+        | MaterialSpillInputModel
+      )
+    | null;
   reservesAndTotals?: ReservesAndTotalsInputModel | null;
 }
 
@@ -894,6 +922,39 @@ export type PerformanceImprovementPlanInputModel = InputModel<
   PerformanceImprovementPlanInputRelations
 >;
 
+// Type definitions for /default/events / Reimbursement (reimbursement)
+
+export interface ReimbursementFields {
+  amount?: number | null;
+  costCategory?: string | null;
+  date?: number | null;
+  description?: string;
+  payee?: string;
+}
+
+export interface ReimbursementRelations {
+  event?: (InjuryIllnessModel | ClaimModel) | null;
+  reservesAndTotals?: ReservesAndTotalsModel | null;
+}
+
+export interface ReimbursementInputRelations {
+  event?: (InjuryIllnessInputModel | ClaimInputModel) | null;
+  reservesAndTotals?: ReservesAndTotalsInputModel | null;
+}
+
+export interface ReimbursementComputations {}
+
+export type ReimbursementModel = Model<
+  ReimbursementFields,
+  ReimbursementRelations,
+  ReimbursementComputations
+>;
+
+export type ReimbursementInputModel = InputModel<
+  ReimbursementFields,
+  ReimbursementInputRelations
+>;
+
 // Type definitions for /default/events / Claim Reserves and Totals (reserves_and_totals)
 
 export interface ReservesAndTotalsFields {
@@ -911,6 +972,7 @@ export interface ReservesAndTotalsRelations {
       )
     | null;
   costs?: CostModel[];
+  reimbursements?: ReimbursementModel[];
 }
 
 export interface ReservesAndTotalsInputRelations {
@@ -923,11 +985,14 @@ export interface ReservesAndTotalsInputRelations {
       )
     | null;
   costs?: CostInputModel[];
+  reimbursements?: ReimbursementInputModel[];
 }
 
 export interface ReservesAndTotalsComputations {
+  incurredExpense: number | null;
   paid: number | null;
   remaining: number | null;
+  totalReimbursements: number | null;
 }
 
 export type ReservesAndTotalsModel = Model<
@@ -980,12 +1045,15 @@ export type WitnessInputModel = InputModel<
 // Type definitions for /default/expirations / A-CDL (a_cdl)
 
 export interface ACdlFields {
+  canadaAdministrativeDistrict?: string | null;
+  country?: string | null;
   current?: boolean;
   endorsements?: string[];
   expirationDate?: number | null;
   expirationTime?: string | null;
   interim?: boolean;
   issueDate?: number | null;
+  licenseStatus?: string | null;
   number?: string;
   realId?: boolean;
   restrictions?: string[];
@@ -1013,12 +1081,15 @@ export type ACdlInputModel = InputModel<ACdlFields, ACdlInputRelations>;
 // Type definitions for /default/expirations / B-CDL (b_cdl)
 
 export interface BCdlFields {
+  canadaAdministrativeDistrict?: string | null;
+  country?: string | null;
   current?: boolean;
   endorsements?: string[];
   expirationDate?: number | null;
   expirationTime?: string | null;
   interim?: boolean;
   issueDate?: number | null;
+  licenseStatus?: string | null;
   number?: string;
   realId?: boolean;
   restrictions?: string[];
@@ -1112,7 +1183,7 @@ export type EmployerPullNoticeInputModel = InputModel<
 // Type definitions for /default/expirations / Employment Verification Form (employment_verification_form)
 
 export interface EmploymentVerificationFormFields {
-  eligibleForRehire?: boolean;
+  eligibleForRehire?: string | null;
   equipmentOperated?: string;
   workPerformed?: string;
 }
@@ -1312,6 +1383,40 @@ export type MedicalWaiverInputModel = InputModel<
   MedicalWaiverInputRelations
 >;
 
+// Type definitions for /default/expirations / Milk Receiver License (milk_receiver_license)
+
+export interface MilkReceiverLicenseFields {
+  current?: boolean;
+  expirationDate?: number | null;
+  expirationTime?: string | null;
+  issueDate?: number | null;
+  receiverNumber?: string;
+  state?: string | null;
+}
+
+export interface MilkReceiverLicenseRelations {
+  primaryModel?: EmployeeModel | null;
+}
+
+export interface MilkReceiverLicenseInputRelations {
+  primaryModel?: EmployeeInputModel | null;
+}
+
+export interface MilkReceiverLicenseComputations {
+  expirationStatus: any;
+}
+
+export type MilkReceiverLicenseModel = Model<
+  MilkReceiverLicenseFields,
+  MilkReceiverLicenseRelations,
+  MilkReceiverLicenseComputations
+>;
+
+export type MilkReceiverLicenseInputModel = InputModel<
+  MilkReceiverLicenseFields,
+  MilkReceiverLicenseInputRelations
+>;
+
 // Type definitions for /default/expirations / MVR (mvr)
 
 export interface MvrFields {
@@ -1410,12 +1515,15 @@ export type PassportInputModel = InputModel<
 // Type definitions for /default/expirations / Permit A-CDL (permit_a_cdl)
 
 export interface PermitACdlFields {
+  canadaAdministrativeDistrict?: string | null;
+  country?: string | null;
   current?: boolean;
   endorsements?: string[];
   expirationDate?: number | null;
   expirationTime?: string | null;
   interim?: boolean;
   issueDate?: number | null;
+  licenseStatus?: string | null;
   number?: string;
   realId?: boolean;
   restrictions?: string[];
@@ -1450,12 +1558,15 @@ export type PermitACdlInputModel = InputModel<
 // Type definitions for /default/expirations / Permit B-CDL (permit_b_cdl)
 
 export interface PermitBCdlFields {
+  canadaAdministrativeDistrict?: string | null;
+  country?: string | null;
   current?: boolean;
   endorsements?: string[];
   expirationDate?: number | null;
   expirationTime?: string | null;
   interim?: boolean;
   issueDate?: number | null;
+  licenseStatus?: string | null;
   number?: string;
   realId?: boolean;
   restrictions?: string[];
@@ -1692,10 +1803,6 @@ export interface EmployeeFields {
   receivedConfidentialFileOn?: number | null;
   receivedDQFileOn?: number | null;
   requiresDrugTest?: string | null;
-  riskLevel?: string | null;
-  riskReasons?: string[];
-  riskSafetyEvents?: number | null;
-  riskScore?: number | null;
   socialSecurityNumber?: string;
   state?: string | null;
   status?: string | null;
@@ -1722,7 +1829,6 @@ export interface EmployeeRelations {
   currentCdl?:
     | (ACdlModel | BCdlModel | NonCdlModel | PermitACdlModel | PermitBCdlModel)
     | null;
-  currentWatchListPlan?: ImprovementPlanModel | null;
   customerObservations?: CustomerObservationModel[];
   disciplinaryActions?: DisciplinaryActionModel[];
   documentsWithExpirations?: (
@@ -1742,6 +1848,7 @@ export interface EmployeeRelations {
     | FederalBackgroundCheckModel
     | EmployerPullNoticeModel
     | EmploymentVerificationFormModel
+    | MilkReceiverLicenseModel
   )[];
   emergencyContacts?: EmergencyContactModel[];
   employmentStatusHistory?: EmploymentStatusHistoryModel[];
@@ -1787,7 +1894,6 @@ export interface EmployeeInputRelations {
         | PermitBCdlInputModel
       )
     | null;
-  currentWatchListPlan?: ImprovementPlanInputModel | null;
   customerObservations?: CustomerObservationInputModel[];
   disciplinaryActions?: DisciplinaryActionInputModel[];
   documentsWithExpirations?: (
@@ -1807,6 +1913,7 @@ export interface EmployeeInputRelations {
     | FederalBackgroundCheckInputModel
     | EmployerPullNoticeInputModel
     | EmploymentVerificationFormInputModel
+    | MilkReceiverLicenseInputModel
   )[];
   emergencyContacts?: EmergencyContactInputModel[];
   employmentStatusHistory?: EmploymentStatusHistoryInputModel[];
@@ -1838,7 +1945,6 @@ export interface EmployeeComputations {
   csaScore: number | null;
   currentCdlId: any;
   currentScore: number | null;
-  currentWatchListPlanId: any;
   dateOfLastAccident: number | null;
   dateOfLastBillOfLadingViolation: number | null;
   dateOfLastCPAPViolation: number | null;
@@ -1868,11 +1974,13 @@ export interface EmployeeComputations {
   employmentDates: any;
   fullAddress: any;
   fullName: any;
+  hasClearingHouseCdl: any;
   hasCriminalInvestigationAuthorization: any;
   hasPhysicalExam: any;
   hasPreEmploymentDrugTest: any;
   hasWorkersCompAuthorization: any;
   label: string;
+  lastCompletedPDP: any;
   mostRecentPip: number | null;
   numberOfAccidents: any;
   onPlan: any;
@@ -2291,7 +2399,7 @@ export interface ImprovementPlanFields {
 
 export interface ImprovementPlanRelations {
   improvementPlanTasks?: ImprovementPlanTaskModel[];
-  improvementPlanTemplate?: ImprovementPlanTemplateModel | null;
+  improvementPlanTemplate: ImprovementPlanTemplateModel;
   improvementPlanWeeks?: ImprovementPlanWeekModel[];
   negativeEvents?: (
     | AccidentModel
@@ -2315,7 +2423,7 @@ export interface ImprovementPlanRelations {
 
 export interface ImprovementPlanInputRelations {
   improvementPlanTasks?: ImprovementPlanTaskInputModel[];
-  improvementPlanTemplate?: ImprovementPlanTemplateInputModel | null;
+  improvementPlanTemplate: ImprovementPlanTemplateInputModel;
   improvementPlanWeeks?: ImprovementPlanWeekInputModel[];
   negativeEvents?: (
     | AccidentInputModel
@@ -2344,7 +2452,6 @@ export interface ImprovementPlanComputations {
   numberOfOverdueTasks: number | null;
   numberOfOverdueThisWeek: number | null;
   planIsInProgress: boolean;
-  planIsOpenedAndHasNegativeEvents: boolean;
   planStatus: any;
   projectedEndDate: number | null;
   totalComplete: number | null;
@@ -2371,7 +2478,7 @@ export interface ImprovementPlanTaskFields {
   completed?: boolean;
   daysDueAfterPlanStart?: number | null;
   daysOfWeek?: string | null;
-  description?: string | null;
+  description?: string;
   dueDate?: number | null;
   name?: string;
   positionAssignedTo?: string | null;
@@ -2385,7 +2492,7 @@ export interface ImprovementPlanTaskRelations {
   improvementPlanWeek?: ImprovementPlanWeekModel | null;
   primaryModel: EmployeeModel;
   progressUpdate?: ImprovementPlanProgressUpdateModel | null;
-  talkingPoints?: TalkingPointTemplateModel[];
+  talkingPoints?: TalkingPointModel[];
 }
 
 export interface ImprovementPlanTaskInputRelations {
@@ -2394,7 +2501,7 @@ export interface ImprovementPlanTaskInputRelations {
   improvementPlanWeek?: ImprovementPlanWeekInputModel | null;
   primaryModel: EmployeeInputModel;
   progressUpdate?: ImprovementPlanProgressUpdateInputModel | null;
-  talkingPoints?: TalkingPointTemplateInputModel[];
+  talkingPoints?: TalkingPointInputModel[];
 }
 
 export interface ImprovementPlanTaskComputations {
@@ -2417,7 +2524,7 @@ export type ImprovementPlanTaskInputModel = InputModel<
   ImprovementPlanTaskInputRelations
 >;
 
-// Type definitions for /improvementPlan / Development Plan Week (improvement_plan_week)
+// Type definitions for /improvementPlan / Week (improvement_plan_week)
 
 export interface ImprovementPlanWeekFields {
   name?: string;
@@ -2485,12 +2592,42 @@ export type ImprovementPlanProgressUpdateInputModel = InputModel<
   ImprovementPlanProgressUpdateInputRelations
 >;
 
-// Type definitions for /improvementPlan/templates / Development Plan Task Template (improvement_plan_task_template)
+// Type definitions for /improvementPlan / Talking Point (talking_point)
+
+export interface TalkingPointFields {
+  description?: string;
+  name: string;
+  sortOrder?: number | null;
+}
+
+export interface TalkingPointRelations {
+  improvementPlanTask?: ImprovementPlanTaskModel | null;
+}
+
+export interface TalkingPointInputRelations {
+  improvementPlanTask?: ImprovementPlanTaskInputModel | null;
+}
+
+export interface TalkingPointComputations {}
+
+export type TalkingPointModel = Model<
+  TalkingPointFields,
+  TalkingPointRelations,
+  TalkingPointComputations
+>;
+
+export type TalkingPointInputModel = InputModel<
+  TalkingPointFields,
+  TalkingPointInputRelations
+>;
+
+// Type definitions for /improvementPlan/templates / Task Template (improvement_plan_task_template)
 
 export interface ImprovementPlanTaskTemplateFields {
   assignTo?: string | null;
-  daysDueAfterPlanStart?: number | null;
+  daysDueAfterPlanStart: number;
   daysOfWeek?: string | null;
+  description?: string;
   name?: string;
   positionAssignedTo?: string | null;
   reminders?: string | null;
@@ -2501,12 +2638,14 @@ export interface ImprovementPlanTaskTemplateRelations {
   assignee?: EmployeeModel | null;
   improvementPlan?: ImprovementPlanTemplateModel | null;
   improvementPlanWeek?: ImprovementPlanWeekTemplateModel | null;
+  talkingPoints?: TalkingPointTemplateModel[];
 }
 
 export interface ImprovementPlanTaskTemplateInputRelations {
   assignee?: EmployeeInputModel | null;
   improvementPlan?: ImprovementPlanTemplateInputModel | null;
   improvementPlanWeek?: ImprovementPlanWeekTemplateInputModel | null;
+  talkingPoints?: TalkingPointTemplateInputModel[];
 }
 
 export interface ImprovementPlanTaskTemplateComputations {
@@ -2524,7 +2663,7 @@ export type ImprovementPlanTaskTemplateInputModel = InputModel<
   ImprovementPlanTaskTemplateInputRelations
 >;
 
-// Type definitions for /improvementPlan/templates / Professional Development Plan Template (improvement_plan_template)
+// Type definitions for /improvementPlan/templates / PDP Template (improvement_plan_template)
 
 export interface ImprovementPlanTemplateFields {
   acceptablePerformance?: string;
@@ -2561,7 +2700,7 @@ export type ImprovementPlanTemplateInputModel = InputModel<
   ImprovementPlanTemplateInputRelations
 >;
 
-// Type definitions for /improvementPlan/templates / Development Plan Week Template (improvement_plan_week_template)
+// Type definitions for /improvementPlan/templates / Week Template (improvement_plan_week_template)
 
 export interface ImprovementPlanWeekTemplateFields {
   weekNum?: number | null;
@@ -2597,14 +2736,17 @@ export type ImprovementPlanWeekTemplateInputModel = InputModel<
 export interface TalkingPointTemplateFields {
   description?: string;
   name: string;
+  sortOrder?: number | null;
 }
 
 export interface TalkingPointTemplateRelations {
   improvementPlan?: ImprovementPlanTemplateModel | null;
+  improvementPlanTask?: ImprovementPlanTaskTemplateModel | null;
 }
 
 export interface TalkingPointTemplateInputRelations {
   improvementPlan?: ImprovementPlanTemplateInputModel | null;
+  improvementPlanTask?: ImprovementPlanTaskTemplateInputModel | null;
 }
 
 export interface TalkingPointTemplateComputations {}
@@ -2620,7 +2762,7 @@ export type TalkingPointTemplateInputModel = InputModel<
   TalkingPointTemplateInputRelations
 >;
 
-// Type definitions for /injuries / Injury/Illness (injury_illness)
+// Type definitions for /injuries / Injury (injury_illness)
 
 export interface InjuryIllnessFields {
   autopsyPerformed?: string | null;
@@ -2658,6 +2800,7 @@ export interface InjuryIllnessFields {
   insuranceAdjusterEmail?: string;
   insuranceCarrier?: string | null;
   insuranceCarrierPhoneNo?: string;
+  insuranceRefNumber?: string;
   investigationAndPrevention?: string;
   lackOfSkills?: string[];
   locationAddress?: string;
@@ -2680,6 +2823,7 @@ export interface InjuryIllnessFields {
   safetyEquipmentUsed?: string | null;
   skidCount?: string;
   soughtMedicalAttention?: string | null;
+  status?: string | null;
   storeId?: string;
   supervisorFollowUp?: string | null;
   temporaryTotalDisability?: string;
@@ -2700,6 +2844,7 @@ export interface InjuryIllnessFields {
 }
 
 export interface InjuryIllnessRelations {
+  claims?: ClaimModel[];
   correctiveAction?: CorrectiveActionModel | null;
   costs?: CostModel[];
   injuryIllnessCodes?: InjuryIllnessCodeModel[];
@@ -2707,6 +2852,7 @@ export interface InjuryIllnessRelations {
   lostRestrictedDays?: LostRestrictedDaysModel[];
   otherEmployee?: EmployeeModel | null;
   primaryModel: EmployeeModel;
+  reimbursements?: ReimbursementModel[];
   reservesAndTotals?: ReservesAndTotalsModel[];
   supervisorNotified?: EmployeeModel | null;
   watchListReasons?: WatchListReasonModel | null;
@@ -2714,6 +2860,7 @@ export interface InjuryIllnessRelations {
 }
 
 export interface InjuryIllnessInputRelations {
+  claims?: ClaimInputModel[];
   correctiveAction?: CorrectiveActionInputModel | null;
   costs?: CostInputModel[];
   injuryIllnessCodes?: InjuryIllnessCodeInputModel[];
@@ -2721,6 +2868,7 @@ export interface InjuryIllnessInputRelations {
   lostRestrictedDays?: LostRestrictedDaysInputModel[];
   otherEmployee?: EmployeeInputModel | null;
   primaryModel: EmployeeInputModel;
+  reimbursements?: ReimbursementInputModel[];
   reservesAndTotals?: ReservesAndTotalsInputModel[];
   supervisorNotified?: EmployeeInputModel | null;
   watchListReasons?: WatchListReasonInputModel | null;
@@ -2750,6 +2898,7 @@ export interface InjuryIllnessComputations {
   hasPoisoning: any;
   hasRespiratoryCondition: any;
   hasSkinDisorders: any;
+  incurredExpense: number | null;
   indemnityExpensePaid: number | null;
   indemnityExpenseRemaining: number | null;
   indemnityExpenseReserves: number | null;
@@ -2774,6 +2923,7 @@ export interface InjuryIllnessComputations {
   totalDaysLost: number | null;
   totalDaysRestricted: number | null;
   totalPaid: number | null;
+  totalReimbursements: number | null;
   totalRemaining: number | null;
   totalReserves: number | null;
 }
@@ -2789,7 +2939,7 @@ export type InjuryIllnessInputModel = InputModel<
   InjuryIllnessInputRelations
 >;
 
-// Type definitions for /injuries / Injury/Illness Code (injury_illness_code)
+// Type definitions for /injuries / Injury Code (injury_illness_code)
 
 export interface InjuryIllnessCodeFields {
   natureOfInjury?: string | null;
@@ -2820,7 +2970,7 @@ export type InjuryIllnessCodeInputModel = InputModel<
   InjuryIllnessCodeInputRelations
 >;
 
-// Type definitions for /injuries / Injury/Illness Contact (injury_illness_contact)
+// Type definitions for /injuries / Injury Contact (injury_illness_contact)
 
 export interface InjuryIllnessContactFields {
   address?: string;
@@ -3491,6 +3641,7 @@ export type TelematicsAlertInputModel = InputModel<
 export interface TrainingAttendanceFields {
   completedDate?: number | null;
   grade?: number | null;
+  historicalGrade?: number | null;
   startDate?: number | null;
   status?: string | null;
 }
@@ -3617,13 +3768,7 @@ export interface EmployeeWatchListFields {
   baselineScore?: number | null;
   date?: number | null;
   percentile?: number | null;
-  scorePredictions?: (number | null)[];
   scores?: (number | null)[];
-  trend14?: number | null;
-  trend30?: number | null;
-  trend60?: number | null;
-  trend7?: number | null;
-  trend90?: number | null;
 }
 
 export interface EmployeeWatchListRelations {
@@ -3712,6 +3857,7 @@ export interface WatchListReasonRelations {
     | WorkplaceObservationModel
   )[];
   positiveEvent?: ImprovementPlanModel | null;
+  watchList?: EmployeeWatchListModel | null;
 }
 
 export interface WatchListReasonInputRelations {
@@ -3730,6 +3876,7 @@ export interface WatchListReasonInputRelations {
     | WorkplaceObservationInputModel
   )[];
   positiveEvent?: ImprovementPlanInputModel | null;
+  watchList?: EmployeeWatchListInputModel | null;
 }
 
 export interface WatchListReasonComputations {

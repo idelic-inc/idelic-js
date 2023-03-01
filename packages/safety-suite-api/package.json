@@ -31,5 +31,8 @@
   },
   "optionalDependencies": {
     "react": "^16.10.2"
+  },
+  "devDependencies": {
+    "typescript": "4.1.2"
   }
 }
