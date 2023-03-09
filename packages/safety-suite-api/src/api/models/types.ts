@@ -95,6 +95,11 @@ export interface RecomputeModelOptions extends ModelFilterOptions {
    * @defaultvalue All computation names.
    */
   computationNames?: string[];
+  /**
+   * If true, dependent computations will be re-computed as well.
+   * @defaultvalue `true`
+   */
+  cascadeComputations?: boolean;
 }
 
 export type ByGroup = {
