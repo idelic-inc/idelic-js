@@ -112,6 +112,7 @@ export interface ClaimModel {
   type: string;
   groupId: number;
   internalClaimId: string;
+  costCenter: string;
   description: string;
   related: RelatedOptions;
   claimantInfo: ClaimantInfo;
