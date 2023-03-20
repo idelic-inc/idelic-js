@@ -210,6 +210,10 @@ export type ModelOutputOptions = {
    */
   protectedFields?: boolean;
   /**
+   * Will only include the relations in this array in the API response.
+   */
+  relationIdNames: string[];
+  /**
    * Will include related models in returned models.
    *
    * Depth is set by `relationsLevel`.
