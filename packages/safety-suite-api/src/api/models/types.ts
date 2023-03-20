@@ -212,7 +212,7 @@ export type ModelOutputOptions = {
   /**
    * Will only include the relations in this array in the API response.
    */
-  relationIdNames: string[];
+  relationIdNames?: string[];
   /**
    * Will include related models in returned models.
    *
