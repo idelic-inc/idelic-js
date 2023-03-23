@@ -32,6 +32,7 @@ export type ConfigSpec<Value = any> = {
   value: Value;
   valueType: string;
   advanced: boolean;
+  description: string;
   valueOptions?: {
     itemValueType: string;
     itemValueOptions: string;
