@@ -846,6 +846,17 @@ export interface IdStartsWithCondition extends QueryCondition {
     value: string;
   };
 }
+export interface PathPercentileCondition extends QueryCondition {
+  operation: {
+    type: OperationType.greaterThanEqual | 'GREATER_THAN_EQUAL';
+  };
+  queryPath: QueryPath & {
+    pathType: QueryPathType.pathPercentile | 'PATH_PERCENTILE';
+  };
+  queryValue: {
+    value: number;
+  };
+}
 
 export type ValidQueryCondition =
   | RelationCondition
@@ -863,7 +874,8 @@ export type ValidQueryCondition =
   | UserNameOrSourceCondition
   | IdEqualsCondition
   | IdContainsCondition
-  | IdStartsWithCondition;
+  | IdStartsWithCondition
+  | PathPercentileCondition;
 
 export interface QueryNode {
   /**
