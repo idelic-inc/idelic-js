@@ -381,7 +381,23 @@ export enum QueryPathType {
    * queryValue: {value: 'luma:luma_id'} // Key of a source to exact match
    * ```
    */
-  source = 'SOURCE'
+  source = 'SOURCE',
+  /**
+   * Used to match the top X percentile.
+   *
+   * Only `OperationType.pathPercentile` is supported here.
+   *
+   * Example:
+   * ```ts
+   * operation: {type: OperationType.greaterThanEqual},
+   * queryPath: {
+   *   pathType: QueryPathType.pathPercentile,
+   *   path: ['scorePercent']
+   * },
+   * queryValue: {value: 0.9} // Returns items within the top 10 percentile
+   * ```
+   */
+  pathPercentile = 'PATH_PERCENTILE'
 }
 export type QueryPathTypeLiteral =
   | 'GROUP'
@@ -391,7 +407,8 @@ export type QueryPathTypeLiteral =
   | 'RELATION'
   | 'SOURCE'
   | 'TEMPLATE'
-  | 'USER_NAME';
+  | 'USER_NAME'
+  | 'PATH_PERCENTILE';
 
 /**
  * Determines how the `conditions` will applied.
