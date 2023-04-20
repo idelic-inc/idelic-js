@@ -20,7 +20,6 @@
   "author": "Idelic",
   "license": "MIT",
   "dependencies": {
-    "moment": "^2.29.4",
     "source-map-support": "^0.5.13"
   }
 }

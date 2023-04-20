@@ -1,4 +1,4 @@
-import momentTimezone from 'moment-timezone';
+import {DateTime} from 'luxon';
 
 import {ModelQuery, ModelQueryParams} from '../api/models/types';
 import {Id} from '../types';
@@ -35,7 +35,7 @@ export function getMonitorsActionParams(
     method: 'POST',
     route: `/api/monitor/${monitorId}/action`,
     requestOptions: {
-      body: {query, type, options: {timezone: momentTimezone.tz.guess()}},
+      body: {query, type, options: {timezone: DateTime.now().zoneName}},
       responseType: type === 'export' ? 'text' : 'json'
     }
   };

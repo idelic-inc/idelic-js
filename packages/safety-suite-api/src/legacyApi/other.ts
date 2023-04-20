@@ -1,4 +1,4 @@
-import momentTimezone from 'moment-timezone';
+import {DateTime} from 'luxon';
 
 import {Id} from '../types';
 import {LegacyApi} from './types';
@@ -13,7 +13,9 @@ export function getCorrectiveActionLetterParams(
 ): LegacyApi {
   return {
     method: 'GET',
-    route: `/api/letters/correctiveActions/${correctiveActionId}?timezone=${momentTimezone.tz.guess()}`,
+    route: `/api/letters/correctiveActions/${correctiveActionId}?timezone=${
+      DateTime.now().zoneName
+    }`,
     requestOptions: {responseType: 'text'}
   };
 }
