@@ -1,6 +1,5 @@
 import {Request, RequestOptions} from '@idelic/safety-net';
 import {Set} from 'immutable';
-import {Moment} from 'moment';
 
 import {runApi} from '../../runApi';
 import {CreatedBy, EmptyRequest, LastUpdatedBy} from '../../types';
@@ -16,8 +15,14 @@ export interface ModelDocument extends LastUpdatedBy, CreatedBy {
    * Full name of the user who created this record.
    */
   createdByUserName?: string;
-  createdDate: Moment;
-  lastUpdatedDate: Moment;
+  /**
+   * ISO timestamp of when this document was created.
+   */
+  createdDate: string;
+  /**
+   * ISO timestamp of when this document was last updated.
+   */
+  lastUpdatedDate: string;
   mimeType: string;
   uri: string;
   modelId: number;

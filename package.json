@@ -33,6 +33,7 @@
   "devDependencies": {
     "@types/jest": "^26.0.23",
     "@types/lodash": "^4.14.161",
+    "@types/luxon": "^2.0.7",
     "@types/node": "^13.9.3",
     "@types/react-dom": "^16.9.8",
     "@typescript-eslint/eslint-plugin": "^4.6.0",
@@ -51,6 +52,7 @@
     "jest": "^27.0.4",
     "lerna": "^4.0.0",
     "lint-staged": "^10.5.0",
+    "luxon": "^2.5.2",
     "prettier": "^2.1.2",
     "react": "^16.10.2",
     "ts-jest": "^27.0.3",
