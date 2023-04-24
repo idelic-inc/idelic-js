@@ -146,6 +146,14 @@ export type ByField = {
   name: string;
 };
 
+export type ByCreatedDate = {
+  type: 'byCreatedDate';
+};
+
+export type ByLastUpdatedDate = {
+  type: 'byLastUpdatedDate';
+};
+
 export type OrderBy = {
   direction: 'ASC' | 'DESC';
   parameter:
@@ -155,7 +163,9 @@ export type OrderBy = {
     | ByRelation
     | ByField
     | ByIdsInFilter
-    | ByCreatedBy;
+    | ByCreatedBy
+    | ByCreatedDate
+    | ByLastUpdatedDate;
 };
 
 export type ModelListOptions = {
@@ -397,7 +407,35 @@ export enum QueryPathType {
    * queryValue: {value: 0.9} // Returns items within the top 10 percentile
    * ```
    */
-  pathPercentile = 'PATH_PERCENTILE'
+  pathPercentile = 'PATH_PERCENTILE',
+  /**
+   * Used to match the model created date.
+   *
+   * Example:
+   * ```ts
+   * operation: {type: OperationType.inRange},
+   * queryPath: {
+   *   pathType: QueryPathType.createdDate,
+   *   path: []
+   * },
+   * queryValue: {value: {min: 1682308800, max: 1682827200}} // Returns models with a created date between April 24, 2023 and April 30, 2023
+   * ```
+   */
+  createdDate = 'CREATED_DATE',
+  /**
+   * Used to match the model last updated date.
+   *
+   * Example:
+   * ```ts
+   * operation: {type: OperationType.inRange},
+   * queryPath: {
+   *   pathType: QueryPathType.lastUpdatedDate,
+   *   path: []
+   * },
+   * queryValue: {value: {min: 1682308800, max: 1682827200}} // Returns models with a last updated date between April 24, 2023 and April 30, 2023
+   * ```
+   */
+  lastUpdatedDate = 'LAST_UPDATED_DATE'
 }
 export type QueryPathTypeLiteral =
   | 'GROUP'
@@ -408,7 +446,9 @@ export type QueryPathTypeLiteral =
   | 'SOURCE'
   | 'TEMPLATE'
   | 'USER_NAME'
-  | 'PATH_PERCENTILE';
+  | 'PATH_PERCENTILE'
+  | 'CREATED_DATE'
+  | 'LAST_UPDATED_DATE';
 
 /**
  * Determines how the `conditions` will applied.
@@ -750,8 +790,12 @@ export interface RangeValueCondition extends QueryCondition {
     pathType:
       | QueryPathType.path
       | QueryPathType.relationPath
+      | QueryPathType.createdDate
+      | QueryPathType.lastUpdatedDate
       | 'PATH'
-      | 'RELATION_PATH';
+      | 'RELATION_PATH'
+      | 'CREATED_DATE'
+      | 'LAST_UPDATED_DATE';
   };
   queryValue: {
     value: RangeValue;
