@@ -55,12 +55,21 @@ export interface KpiTime {
   field?: string;
   frame?: KpiTimeFrame;
   interval?: KpiTimeInterval;
+  /**
+   * Only relevant when used for a normalization.
+   * @defaultvalue `false`
+   */
+  ignoreParentTimeFrame?: boolean;
 }
 
 export interface KpiNormalization {
   metric: string;
   aggregation: KpiAggregation;
+  /**
+   * @deprecated Use `time.field` instead.
+   */
   timeField?: string;
+  time?: KpiTime;
   filter?: string;
 }
 
