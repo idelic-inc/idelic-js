@@ -55,11 +55,6 @@ export interface KpiTime {
   field?: string;
   frame?: KpiTimeFrame;
   interval?: KpiTimeInterval;
-  /**
-   * Only relevant when used for a normalization.
-   * @defaultvalue `false`
-   */
-  ignoreParentTimeFrame?: boolean;
 }
 
 export interface KpiNormalization {
@@ -71,6 +66,10 @@ export interface KpiNormalization {
   timeField?: string;
   time?: KpiTime;
   filter?: string;
+  /**
+   * @defaultvalue `false`
+   */
+  ignoreParentTimeFrame?: boolean;
 }
 
 export interface KpiRequestBody {
