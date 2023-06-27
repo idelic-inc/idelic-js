@@ -43,6 +43,7 @@ export interface Model<F, R, C> extends LastUpdated, CreatedBy {
   createdDate: string;
   createdByUser?: ModelUser;
   lastUpdatedByUser?: ModelUser;
+  retentionLock?: boolean;
 }
 
 export type SearchText = {
