@@ -135,6 +135,8 @@ export interface ClaimModel {
   reimbursements: Payment[];
   reserves: Payment[];
   eventType: keyof typeof EventType;
+  submittedToInsurance: string;
+  dateSubmittedToInsurance: Date;
 }
 
 export interface ClaimResponse {
