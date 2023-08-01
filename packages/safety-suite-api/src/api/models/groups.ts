@@ -8,7 +8,7 @@ import {createRecordListResponseTransformer} from '../../utils';
 export interface ModelGroup extends LastUpdated {
   alias: Alias;
   display: string;
-  fields: Record<string, unknown>;
+  fields: Record<string, unknown> | null;
   groupType: string;
   id: Id;
   inactive: boolean;
