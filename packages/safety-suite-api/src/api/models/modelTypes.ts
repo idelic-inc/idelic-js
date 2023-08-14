@@ -122,6 +122,7 @@ export interface AccidentComputations {
   fullAddress: any;
   hasClaim: boolean;
   preventable: boolean;
+  tenureAtTimeOfEvent: number | null;
   timeSinceEnforcement: number | null;
   timeWeight: number | null;
   totalCost: number | null;
@@ -492,7 +493,7 @@ export interface EquipmentFields {
   rollerbox?: string | null;
   rollerboxType?: string | null;
   rollerboxVendor?: string | null;
-  safetyFeatures?: string | null;
+  safetyFeatures?: string[];
   salePrice?: number | null;
   salvageApplicationDate?: number | null;
   salvageTitleNumber?: string;
@@ -666,6 +667,8 @@ export interface ClaimFields {
   claimType?: string | null;
   closingDate?: number | null;
   companyName?: string;
+  costCenter?: string | null;
+  dateSubmittedToInsurance?: number | null;
   description?: string;
   fullName?: string;
   insuranceClaimNumber?: string;
@@ -677,6 +680,7 @@ export interface ClaimFields {
   lossDate?: number | null;
   phone?: string;
   state?: string | null;
+  submittedToInsurance?: string | null;
   vehicleColor?: string;
   vehicleLicense?: string;
   vehicleMake?: string;
@@ -1769,6 +1773,146 @@ export type DisciplinaryActionInputModel = InputModel<
   DisciplinaryActionInputRelations
 >;
 
+// Type definitions for /dot / DOT Unit (dot_unit)
+
+export interface DotUnitFields {
+  contractedDate?: number | null;
+  dotName?: string;
+  dotNumber?: string;
+  nextRenewalDate?: number | null;
+  numberOfDrivers?: number | null;
+  registeredState?: string | null;
+  status?: string | null;
+  type?: string | null;
+}
+
+export interface DotUnitRelations {
+  watchList?: DotWatchListModel | null;
+}
+
+export interface DotUnitInputRelations {
+  watchList?: DotWatchListInputModel | null;
+}
+
+export interface DotUnitComputations {
+  activeDriverCount: any;
+  inactiveDriverCount: any;
+}
+
+export type DotUnitModel = Model<
+  DotUnitFields,
+  DotUnitRelations,
+  DotUnitComputations
+>;
+
+export type DotUnitInputModel = InputModel<
+  DotUnitFields,
+  DotUnitInputRelations
+>;
+
+// Type definitions for /dot / DOT Watch List (dot_watch_list)
+
+export interface DotWatchListFields {
+  baselineScore?: number | null;
+  currentScore?: number | null;
+  date?: number | null;
+  percentile?: number | null;
+  riskScoreBucket?: number | null;
+  score30DaysAgo?: number | null;
+  scorePercent?: number | null;
+  scorePercentChangeInLast30Days?: number | null;
+  scores?: (number | null)[];
+}
+
+export interface DotWatchListRelations {
+  dotUnit?: DotUnitModel | null;
+  watchListReasons?: DotWatchListReasonModel[];
+}
+
+export interface DotWatchListInputRelations {
+  dotUnit?: DotUnitInputModel | null;
+  watchListReasons?: DotWatchListReasonInputModel[];
+}
+
+export interface DotWatchListComputations {}
+
+export type DotWatchListModel = Model<
+  DotWatchListFields,
+  DotWatchListRelations,
+  DotWatchListComputations
+>;
+
+export type DotWatchListInputModel = InputModel<
+  DotWatchListFields,
+  DotWatchListInputRelations
+>;
+
+// Type definitions for /dot / DOT Watch List Reason (dot_watch_list_reason)
+
+export interface DotWatchListReasonFields {
+  actions?: string;
+  correctiveActions?: string;
+  dateRange?: number | null;
+  eventsCount?: number | null;
+  maxActual?: number | null;
+  name?: string;
+  outsideSource?: string;
+  score?: number | null;
+  templateName?: string;
+  timeframe?: string;
+  totalEventCount?: number | null;
+  type?: string;
+}
+
+export interface DotWatchListReasonRelations {
+  event?: (
+    | AccidentModel
+    | BillOfLadingViolationModel
+    | EnforcementModel
+    | TelematicsAlertModel
+    | InjuryIllnessModel
+    | ForkliftIncidentModel
+    | MaterialSpillModel
+    | HoursOfServiceObservationModel
+    | CpapViolationModel
+    | HighwayObservationModel
+    | CustomerObservationModel
+    | WorkplaceObservationModel
+  )[];
+  watchList?: DotWatchListModel | null;
+}
+
+export interface DotWatchListReasonInputRelations {
+  event?: (
+    | AccidentInputModel
+    | BillOfLadingViolationInputModel
+    | EnforcementInputModel
+    | TelematicsAlertInputModel
+    | InjuryIllnessInputModel
+    | ForkliftIncidentInputModel
+    | MaterialSpillInputModel
+    | HoursOfServiceObservationInputModel
+    | CpapViolationInputModel
+    | HighwayObservationInputModel
+    | CustomerObservationInputModel
+    | WorkplaceObservationInputModel
+  )[];
+  watchList?: DotWatchListInputModel | null;
+}
+
+export interface DotWatchListReasonComputations {}
+
+export type DotWatchListReasonModel = Model<
+  DotWatchListReasonFields,
+  DotWatchListReasonRelations,
+  DotWatchListReasonComputations
+>;
+
+export type DotWatchListReasonInputModel = InputModel<
+  DotWatchListReasonFields,
+  DotWatchListReasonInputRelations
+>;
+
 // Type definitions for /editableEmployees / Employee (employee)
 
 export interface EmployeeFields {
@@ -1797,6 +1941,7 @@ export interface EmployeeFields {
   lastName: string;
   maritalStatus?: string | null;
   middleName?: string;
+  miscellaneousAttributes?: string[];
   numberOfDependents?: string;
   phoneNumber?: string;
   position?: string | null;
@@ -1857,7 +2002,9 @@ export interface EmployeeRelations {
   highwayObservations?: HighwayObservationModel[];
   hoursOfServiceObservations?: HoursOfServiceObservationModel[];
   improvementPlanTaskTemplatesAssigned?: ImprovementPlanTaskTemplateModel[];
+  improvementPlanTasks?: ImprovementPlanTaskModel[];
   improvementPlanTasksAssigned?: ImprovementPlanTaskModel[];
+  improvementPlanWeeks?: ImprovementPlanWeekModel[];
   improvementPlans?: ImprovementPlanModel[];
   improvementPlansActions?: ImprovementPlanActionModel[];
   injuriesIllnesses?: InjuryIllnessModel[];
@@ -1922,7 +2069,9 @@ export interface EmployeeInputRelations {
   highwayObservations?: HighwayObservationInputModel[];
   hoursOfServiceObservations?: HoursOfServiceObservationInputModel[];
   improvementPlanTaskTemplatesAssigned?: ImprovementPlanTaskTemplateInputModel[];
+  improvementPlanTasks?: ImprovementPlanTaskInputModel[];
   improvementPlanTasksAssigned?: ImprovementPlanTaskInputModel[];
+  improvementPlanWeeks?: ImprovementPlanWeekInputModel[];
   improvementPlans?: ImprovementPlanInputModel[];
   improvementPlansActions?: ImprovementPlanActionInputModel[];
   injuriesIllnesses?: InjuryIllnessInputModel[];
@@ -1985,6 +2134,7 @@ export interface EmployeeComputations {
   numberOfAccidents: any;
   onPlan: any;
   positionLabel: any;
+  scorable: any;
   serviceYears: number | null;
   serviceYearsYear: any;
   totalChecklistItemsNotCompleted: any;
@@ -2454,6 +2604,7 @@ export interface ImprovementPlanComputations {
   planIsInProgress: boolean;
   planStatus: any;
   projectedEndDate: number | null;
+  taskCompletionPercent: any;
   totalComplete: number | null;
   totalIncomplete: number | null;
 }
@@ -3768,6 +3919,8 @@ export interface EmployeeWatchListFields {
   baselineScore?: number | null;
   date?: number | null;
   percentile?: number | null;
+  score30DaysAgo?: number | null;
+  scorePercentChangeInLast30Days?: number | null;
   scores?: (number | null)[];
 }
 
