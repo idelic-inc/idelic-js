@@ -1776,14 +1776,25 @@ export type DisciplinaryActionInputModel = InputModel<
 // Type definitions for /dot / DOT Unit (dot_unit)
 
 export interface DotUnitFields {
-  contractedDate?: number | null;
-  dotName?: string;
-  dotNumber?: string;
-  nextRenewalDate?: number | null;
-  numberOfDrivers?: number | null;
-  registeredState?: string | null;
+  city?: string;
+  contactEmail?: string;
+  contactFirstName?: string;
+  contactLastName?: string;
+  contactPhone?: string;
+  countOfDrivers?: number | null;
+  dateLastAuditPerformed?: number | null;
+  dotNumber: string;
+  inceptionDate?: number | null;
+  mobilePhone?: string;
+  name: string;
+  secondaryContactFirstName?: string;
+  secondaryContactLastName?: string;
+  state?: string | null;
   status?: string | null;
+  streetAddress?: string;
+  streetAddress2?: string;
   type?: string | null;
+  zip?: string;
 }
 
 export interface DotUnitRelations {
@@ -1933,6 +1944,7 @@ export interface EmployeeFields {
   employeeNumber: string;
   employeePay?: number | null;
   employeeType?: string | null;
+  experience?: number | null;
   firstName: string;
   fullOrPartTime?: string | null;
   gender?: string | null;
@@ -1944,6 +1956,9 @@ export interface EmployeeFields {
   miscellaneousAttributes?: string[];
   numberOfDependents?: string;
   phoneNumber?: string;
+  policyAddDate?: number | null;
+  policyExcluded?: boolean;
+  policyRemoveDate?: number | null;
   position?: string | null;
   receivedConfidentialFileOn?: number | null;
   receivedDQFileOn?: number | null;
