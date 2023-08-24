@@ -1785,6 +1785,7 @@ export interface DotUnitFields {
   dateLastAuditPerformed?: number | null;
   dotNumber: string;
   inceptionDate?: number | null;
+  interactionStatus?: string | null;
   mobilePhone?: string;
   name: string;
   secondaryContactFirstName?: string;
@@ -1798,10 +1799,12 @@ export interface DotUnitFields {
 }
 
 export interface DotUnitRelations {
+  interactions?: DotUnitInteractionModel[];
   watchList?: DotWatchListModel | null;
 }
 
 export interface DotUnitInputRelations {
+  interactions?: DotUnitInteractionInputModel[];
   watchList?: DotWatchListInputModel | null;
 }
 
@@ -1819,6 +1822,37 @@ export type DotUnitModel = Model<
 export type DotUnitInputModel = InputModel<
   DotUnitFields,
   DotUnitInputRelations
+>;
+
+// Type definitions for /dot / DOT Unit Interaction (dot_unit_interaction)
+
+export interface DotUnitInteractionFields {
+  details?: string;
+  dueDate?: number | null;
+  personContacted?: string;
+  status?: string | null;
+  type?: string | null;
+}
+
+export interface DotUnitInteractionRelations {
+  dotUnit?: DotUnitModel | null;
+}
+
+export interface DotUnitInteractionInputRelations {
+  dotUnit?: DotUnitInputModel | null;
+}
+
+export interface DotUnitInteractionComputations {}
+
+export type DotUnitInteractionModel = Model<
+  DotUnitInteractionFields,
+  DotUnitInteractionRelations,
+  DotUnitInteractionComputations
+>;
+
+export type DotUnitInteractionInputModel = InputModel<
+  DotUnitInteractionFields,
+  DotUnitInteractionInputRelations
 >;
 
 // Type definitions for /dot / DOT Watch List (dot_watch_list)
@@ -3434,6 +3468,7 @@ export type HighwayObservationInputModel = InputModel<
 export interface HoursOfServiceObservationFields {
   date?: number | null;
   details?: string;
+  duration?: number | null;
   outsideSource?: string;
   reason?: string[];
   time?: number | null;
