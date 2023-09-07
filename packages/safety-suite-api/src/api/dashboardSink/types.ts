@@ -4,6 +4,7 @@ export type SortDirection = 'asc' | 'desc';
 export type KpiAggregation =
   | 'SUM'
   | 'COUNT'
+  | 'COUNT_DISTINCT'
   | 'MOST_RECENT'
   | 'MOST_RECENT_SUM'
   | 'SELECT'
