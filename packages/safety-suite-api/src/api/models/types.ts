@@ -558,12 +558,14 @@ export type OperationTypeLiteral =
 export enum OperationOption {
   all = 'ALL',
   any = 'ANY',
+  anyOrNoValue = 'ANY_OR_NO_VALUE',
   defaultOption = 'DEFAULT_OPTION',
   startsWith = 'STARTS_WITH'
 }
 export type OperationOptionLiteral =
   | 'ALL'
   | 'ANY'
+  | 'ANY_OR_NO_VALUE'
   | 'DEFAULT_OPTION'
   | 'STARTS_WITH';
 
@@ -762,7 +764,13 @@ export interface RelationPathConditionString extends QueryCondition {
 export interface PathConditionStringArray extends QueryCondition {
   operation: {
     type: OperationType.contains | 'CONTAINS';
-    option: OperationOption.any | OperationOption.all | 'ANY' | 'ALL';
+    option:
+      | OperationOption.any
+      | OperationOption.all
+      | OperationOption.anyOrNoValue
+      | 'ANY'
+      | 'ALL'
+      | 'ANY_OR_NO_VALUE';
   };
   queryPath: QueryPath & {
     pathType: QueryPathType.path | 'PATH';
@@ -774,7 +782,13 @@ export interface PathConditionStringArray extends QueryCondition {
 export interface RelationPathConditionStringArray extends QueryCondition {
   operation: {
     type: OperationType.contains | 'CONTAINS';
-    option: OperationOption.any | OperationOption.all | 'ANY' | 'ALL';
+    option:
+      | OperationOption.any
+      | OperationOption.all
+      | OperationOption.anyOrNoValue
+      | 'ANY'
+      | 'ALL'
+      | 'ANY_OR_NO_VALUE';
   };
   queryPath: QueryPath & {
     pathType: QueryPathType.relationPath | 'RELATION_PATH';
