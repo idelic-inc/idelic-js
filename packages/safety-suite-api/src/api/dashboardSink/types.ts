@@ -81,6 +81,7 @@ export interface KpiRequestBody {
   normalizationConstant?: number;
   filter?: string;
   groupings?: string[];
+  defaultValue?: string | number;
 }
 export interface DashboardBookmarksQuery {
   /**
