@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "bootstrap": "lerna bootstrap && lerna exec -- yarn install --pure-lockfile",
+    "bootstrap": "lerna exec -- yarn install --pure-lockfile",
     "clean": "lerna run clean",
     "build": "lerna run build",
     "format": "prettier --write \"**/src/**/*.ts*\" \"**/scripts/**/*.ts*\"",
@@ -50,7 +50,7 @@
     "husky": "^4.3.0",
     "immutable": "^4.0.0-rc.12",
     "jest": "^27.0.4",
-    "lerna": "^4.0.0",
+    "lerna": "^8.0.1",
     "lint-staged": "^10.5.0",
     "luxon": "^2.5.2",
     "prettier": "^2.1.2",
