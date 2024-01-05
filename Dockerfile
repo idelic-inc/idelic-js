@@ -13,6 +13,7 @@ COPY ./packages ./packages
 
 ENV NODE_OPTIONS ${NODE_OPTIONS}
 
+RUN yarn install --pure-lockfile
 RUN yarn bootstrap
 RUN yarn lint
 RUN yarn build
