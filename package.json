@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "bootstrap": "lerna bootstrap && lerna exec -- yarn install --pure-lockfile",
+    "bootstrap": "lerna exec -- yarn install --pure-lockfile",
     "clean": "lerna run clean",
     "build": "lerna run build",
     "format": "prettier --write \"**/src/**/*.ts*\" \"**/scripts/**/*.ts*\"",
@@ -16,7 +16,8 @@
     "preversion": "yarn lint && yarn test",
     "version": "yarn format && git add -A packages/*/src packages/*/scripts",
     "postversion": "git push && git push --tags",
-    "prepack": "yarn lint && yarn test && yarn clean && yarn build"
+    "prepack": "yarn lint && yarn test && yarn clean && yarn build",
+    "publish": "lerna publish"
   },
   "husky": {
     "hooks": {
@@ -31,6 +32,11 @@
     ]
   },
   "devDependencies": {
+    "@lerna-lite/cli": "^3.2.0",
+    "@lerna-lite/exec": "^3.2.0",
+    "@lerna-lite/publish": "^3.2.0",
+    "@lerna-lite/run": "^3.2.0",
+    "@lerna-lite/version": "^3.2.0",
     "@types/jest": "^26.0.23",
     "@types/lodash": "^4.14.161",
     "@types/luxon": "^2.0.7",
@@ -50,7 +56,6 @@
     "husky": "^4.3.0",
     "immutable": "^4.0.0-rc.12",
     "jest": "^27.0.4",
-    "lerna": "^4.0.0",
     "lint-staged": "^10.5.0",
     "luxon": "^2.5.2",
     "prettier": "^2.1.2",

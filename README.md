@@ -13,9 +13,6 @@ $ yarn bootstrap
 
 ### Publishing
 
-In order to be able to publish you need to have lerna installed globally:
-
 ```bash
-$ yarn global add lerna
-$ lerna publish
+$ yarn publish
 ```
