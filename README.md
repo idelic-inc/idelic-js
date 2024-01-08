@@ -14,5 +14,5 @@ $ yarn bootstrap
 ### Publishing
 
 ```bash
-$ yarn publish
+$ yarn new-publish
 ```
