@@ -21,6 +21,12 @@ export interface DashboardAccidentResponse {
   accidents: DashboardAccident[];
 }
 
+/**
+ * Returns the accident count for the given customer ID and groupIDs.
+ * @param query
+ * @param apiOptions
+ * @returns
+ */
 export function getDashboardAccidentCounts(
   query: Query,
   apiOptions: ApiOptions = {}
