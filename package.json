@@ -17,7 +17,10 @@
     "version": "yarn format && git add -A packages/*/src packages/*/scripts",
     "postversion": "git push && git push --tags",
     "prepack": "yarn lint && yarn test && yarn clean && yarn build",
-    "publish": "lerna publish"
+    "new-version": "lerna version",
+    "new-publish": "lerna publish",
+    "preview:new-version": "lerna version --dry-run",
+    "run-tests": "lerna run test"
   },
   "husky": {
     "hooks": {
