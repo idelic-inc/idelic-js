@@ -1,7 +1,7 @@
 {
   "name": "@idelic/safety-suite-api",
   "version": "58.1.5-alpha.0",
-  "description": "API helper library for Safety Suite",
+  "description": "API helper library for Safety Suite applications",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
@@ -33,5 +33,6 @@
   },
   "devDependencies": {
     "typescript": "4.1.2"
-  }
+  },
+  "gitHead": "581f337e9314f3f842e951d471c7fc8bc115a4f2"
 }
