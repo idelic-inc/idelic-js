@@ -202,7 +202,7 @@ export interface DatasetMeta {
   label: string;
   iconName: string;
   moduleAliases: string[];
-  hasDefaultDate: boolean;
+  defaultDate: string | null;
   attributes: AttributeMeta[];
   synced: boolean;
 }
