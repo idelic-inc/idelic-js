@@ -2675,6 +2675,7 @@ export interface ImprovementPlanTaskFields {
   acceptablePerformance?: string;
   assignTo?: string | null;
   category?: string | null;
+  closed?: boolean;
   completed?: boolean;
   daysDueAfterPlanStart?: number | null;
   daysOfWeek?: string | null;
