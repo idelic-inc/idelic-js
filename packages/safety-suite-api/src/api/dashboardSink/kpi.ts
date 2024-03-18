@@ -7,14 +7,13 @@ import {KpiRequestBody, Query} from './types';
 export interface KpiGroup {
   name: string;
   fields: string[];
-  values: unknown[];
-  humanName: string;
+  values: [string | number | boolean | null];
+  label: string;
 }
 
 export interface KpiMetadata {
-  query: unknown;
-  page: number;
   groups: KpiGroup[];
+  groupings: string[];
 }
 
 export type KpiData = [string | null, number];
