@@ -979,6 +979,10 @@ export interface ModelQuery {
    */
   templateId?: Id;
   /**
+   * Will only return ids of models of these templates.
+   */
+  templateAliases?: Alias[];
+  /**
    * Options for filtering the returned model ids.
    */
   where?: QueryNode;
