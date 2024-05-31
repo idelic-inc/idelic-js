@@ -1,7 +1,7 @@
 import {Request} from '@idelic/safety-net';
 
 import {runApi} from '../../runApi';
-import {ApiOptions, ApiSuccessResponse, EmptyResponse, Id} from '../../types';
+import {ApiOptions, ApiSuccessResponse, EmptyResponse} from '../../types';
 import {PageRequest} from '../pageRequest';
 
 export interface RelatedOptions {
@@ -256,21 +256,19 @@ export function updateClaim(
  * Delete claim by id.
  *
  * @param claimId - Claim UUID
- * @param groupId - Group ID
  * @param customerAlias - Customer alias.
  * @param apiOptions - Optional options for runApi.
  * @returns - Claim model response object.
  */
 export function deleteClaim(
   claimId: string,
-  groupId: Id,
   customerAlias: string,
   apiOptions?: ApiOptions
 ): Request<EmptyResponse> {
   return runApi({
     method: 'DELETE',
     urlRoot: 'claimsSinkUrlRoot',
-    route: `/api/claims/${claimId}/${groupId}`,
+    route: `/api/claims/${claimId}`,
     apiOptions,
     requestOptions: {
       query: {
