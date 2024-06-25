@@ -2833,6 +2833,9 @@ export interface ImprovementPlanTaskTemplateFields {
   positionAssignedTo?: string | null;
   reminders?: string | null;
   type?: string | null;
+  isTrainingExpiring?: string | null;
+  trainingExpirationInterval?: number;
+  trainingExpirationIntervalUnits?: string | null;
 }
 
 export interface ImprovementPlanTaskTemplateRelations {
@@ -2840,6 +2843,7 @@ export interface ImprovementPlanTaskTemplateRelations {
   improvementPlan?: ImprovementPlanTemplateModel | null;
   improvementPlanWeek?: ImprovementPlanWeekTemplateModel | null;
   talkingPoints?: TalkingPointTemplateModel[];
+  trainingCourse?: TrainingCourseModel;
 }
 
 export interface ImprovementPlanTaskTemplateInputRelations {
