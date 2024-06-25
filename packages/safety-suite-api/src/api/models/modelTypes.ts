@@ -2694,6 +2694,7 @@ export interface ImprovementPlanTaskRelations {
   primaryModel: EmployeeModel;
   progressUpdate?: ImprovementPlanProgressUpdateModel | null;
   talkingPoints?: TalkingPointModel[];
+  trainingClass?: TrainingClassModel;
 }
 
 export interface ImprovementPlanTaskInputRelations {
@@ -2703,6 +2704,7 @@ export interface ImprovementPlanTaskInputRelations {
   primaryModel: EmployeeInputModel;
   progressUpdate?: ImprovementPlanProgressUpdateInputModel | null;
   talkingPoints?: TalkingPointInputModel[];
+  trainingClass?: TrainingClassModel;
 }
 
 export interface ImprovementPlanTaskComputations {
@@ -3898,12 +3900,14 @@ export interface TrainingClassRelations {
   attendees?: TrainingAttendanceModel[];
   trainer?: EmployeeModel | null;
   trainingCourse: TrainingCourseModel;
+  improvementPlanTask?: ImprovementPlanTaskModel;
 }
 
 export interface TrainingClassInputRelations {
   attendees?: TrainingAttendanceInputModel[];
   trainer?: EmployeeInputModel | null;
   trainingCourse: TrainingCourseInputModel;
+  improvementPlanTask?: ImprovementPlanTaskModel;
 }
 
 export interface TrainingClassComputations {
