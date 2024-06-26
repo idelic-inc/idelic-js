@@ -2853,6 +2853,7 @@ export interface ImprovementPlanTaskTemplateInputRelations {
   improvementPlan?: ImprovementPlanTemplateInputModel | null;
   improvementPlanWeek?: ImprovementPlanWeekTemplateInputModel | null;
   talkingPoints?: TalkingPointTemplateInputModel[];
+  trainingCourse?: TrainingCourseModel;
 }
 
 export interface ImprovementPlanTaskTemplateComputations {
