@@ -115,15 +115,15 @@
     "@fluentui/set-version" "^8.1.4"
     tslib "^2.1.0"
 
-"@idelic/formatron@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@idelic/formatron/-/formatron-2.0.2.tgz#1af39547df4e2f7e870264eac2980dbd84464774"
-  integrity sha512-I6qV+Tlh008Zpbv16EQN1Z5xdXLsBsCi+VjEwMiusdMwYzVc53tklEtvpb5Gjr1RUF4LDybpBe5SE7M+39b6sQ==
+"@idelic/formatron@^2.0.5":
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/@idelic/formatron/-/formatron-2.0.5.tgz#48eab2188f09503f6f80137edcb34549fce3dd6a"
+  integrity sha512-gkWoWZUc971aZ69V9YmvY/7VGbdJ1yRnZVjcPc4U+dnNlOuz5BbRyrPJdOCmDEQZLRFJByQTLm/D0yV+ezulxw==
   dependencies:
     idelic-safety-suite-api "^7.0.1"
     immutable "^4.0.0-rc.12"
     lodash "^4.17.20"
-    moment "^2.29.1"
+    moment "^2.29.4"
 
 "@microsoft/load-themed-styles@^1.10.26":
   version "1.10.147"
@@ -291,16 +291,16 @@ loose-envify@^1.4.0:
     js-tokens "^3.0.0 || ^4.0.0"
 
 moment-timezone@^0.5.26:
-  version "0.5.37"
-  resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.37.tgz#adf97f719c4e458fdb12e2b4e87b8bec9f4eef1e"
-  integrity sha512-uEDzDNFhfaywRl+vwXxffjjq1q0Vzr+fcQpQ1bU0kbzorfS7zVtZnCnGc8mhWmF39d4g4YriF6kwA75mJKE/Zg==
+  version "0.5.45"
+  resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.45.tgz#cb685acd56bac10e69d93c536366eb65aa6bcf5c"
+  integrity sha512-HIWmqA86KcmCAhnMAN0wuDOARV/525R2+lOLotuGFzn4HO+FH+/645z2wx0Dt3iDv6/p61SIvKnDstISainhLQ==
   dependencies:
-    moment ">= 2.9.0"
+    moment "^2.29.4"
 
-"moment@>= 2.9.0", moment@^2.24.0, moment@^2.29.1, moment@^2.29.4:
-  version "2.29.4"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
-  integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
+moment@^2.24.0, moment@^2.29.4:
+  version "2.30.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.30.0.tgz#c2a65bb962bdf2a9c49c69b5358c41f6c66ad10e"
+  integrity sha512-8XSlYFhOSJvnEJOas6RpDCNU2PYeVC+oE33d3Z9tIsXpD8LIgBeqrHPjP8es4b3fcJpf07D1PJWGDUfdbqDLnQ==
 
 object-assign@^4.1.1:
   version "4.1.1"
