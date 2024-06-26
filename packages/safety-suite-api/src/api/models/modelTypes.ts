@@ -2694,6 +2694,7 @@ export interface ImprovementPlanTaskRelations {
   primaryModel: EmployeeModel;
   progressUpdate?: ImprovementPlanProgressUpdateModel | null;
   talkingPoints?: TalkingPointModel[];
+  trainingClass?: TrainingClassModel;
 }
 
 export interface ImprovementPlanTaskInputRelations {
@@ -2703,6 +2704,7 @@ export interface ImprovementPlanTaskInputRelations {
   primaryModel: EmployeeInputModel;
   progressUpdate?: ImprovementPlanProgressUpdateInputModel | null;
   talkingPoints?: TalkingPointInputModel[];
+  trainingClass?: TrainingClassModel;
 }
 
 export interface ImprovementPlanTaskComputations {
@@ -2833,6 +2835,9 @@ export interface ImprovementPlanTaskTemplateFields {
   positionAssignedTo?: string | null;
   reminders?: string | null;
   type?: string | null;
+  isTrainingExpiring?: string | null;
+  trainingExpirationInterval?: number;
+  trainingExpirationIntervalUnits?: string | null;
 }
 
 export interface ImprovementPlanTaskTemplateRelations {
@@ -2840,6 +2845,7 @@ export interface ImprovementPlanTaskTemplateRelations {
   improvementPlan?: ImprovementPlanTemplateModel | null;
   improvementPlanWeek?: ImprovementPlanWeekTemplateModel | null;
   talkingPoints?: TalkingPointTemplateModel[];
+  trainingCourse?: TrainingCourseModel;
 }
 
 export interface ImprovementPlanTaskTemplateInputRelations {
@@ -3894,12 +3900,14 @@ export interface TrainingClassRelations {
   attendees?: TrainingAttendanceModel[];
   trainer?: EmployeeModel | null;
   trainingCourse: TrainingCourseModel;
+  improvementPlanTask?: ImprovementPlanTaskModel;
 }
 
 export interface TrainingClassInputRelations {
   attendees?: TrainingAttendanceInputModel[];
   trainer?: EmployeeInputModel | null;
   trainingCourse: TrainingCourseInputModel;
+  improvementPlanTask?: ImprovementPlanTaskModel;
 }
 
 export interface TrainingClassComputations {
