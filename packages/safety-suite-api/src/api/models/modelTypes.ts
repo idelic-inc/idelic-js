@@ -765,6 +765,7 @@ export interface CorrectiveActionFields {
   preventable_2?: string | null;
   severity?: string | null;
   severity_2?: string | null;
+  completed?: boolean | null;
 }
 
 export interface CorrectiveActionRelations {
