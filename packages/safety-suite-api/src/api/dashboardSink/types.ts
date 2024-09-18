@@ -82,7 +82,6 @@ export interface KpiRequestBody {
   filter?: string;
   groupings?: string[];
   defaultValue?: string | number;
-  isRounded?: boolean;
 }
 export interface DashboardBookmarksQuery {
   /**
