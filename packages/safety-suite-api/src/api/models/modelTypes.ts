@@ -2059,9 +2059,11 @@ export interface EmployeeRelations {
   improvementPlansActions?: ImprovementPlanActionModel[];
   injuriesIllnesses?: InjuryIllnessModel[];
   inspections?: InspectionModel[];
+  leaderOfLeader?: EmployeeModel | null;
   materialSpills?: MaterialSpillModel[];
   performanceImprovementPlans?: PerformanceImprovementPlanModel[];
   probationaryData?: ProbationaryDataModel[];
+  safetyManager?: EmployeeModel | null;
   sleepApnea?: SleepApneaModel[];
   supervisor?: EmployeeModel | null;
   telematicsAlerts?: TelematicsAlertModel[];
@@ -2126,9 +2128,11 @@ export interface EmployeeInputRelations {
   improvementPlansActions?: ImprovementPlanActionInputModel[];
   injuriesIllnesses?: InjuryIllnessInputModel[];
   inspections?: InspectionInputModel[];
+  leaderOfLeader?: EmployeeModel | null;
   materialSpills?: MaterialSpillInputModel[];
   performanceImprovementPlans?: PerformanceImprovementPlanInputModel[];
   probationaryData?: ProbationaryDataInputModel[];
+  safetyManager?: EmployeeModel | null;
   sleepApnea?: SleepApneaInputModel[];
   supervisor?: EmployeeInputModel | null;
   telematicsAlerts?: TelematicsAlertInputModel[];
