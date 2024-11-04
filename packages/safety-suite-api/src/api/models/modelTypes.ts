@@ -2184,6 +2184,7 @@ export interface EmployeeComputations {
   hasWorkersCompAuthorization: any;
   label: string;
   lastCompletedPDP: any;
+  lastCompletedPdpDate: any;
   mostRecentPip: number | null;
   numberOfAccidents: any;
   onPlan: any;
