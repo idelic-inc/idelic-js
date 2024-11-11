@@ -959,6 +959,10 @@ export interface ModelQuery {
    */
   groupId?: Id;
   /**
+   * Will only return ids of models of these groups.
+   */
+  groupIds?: Id[];
+  /**
    * Maximum number of model ids to return.
    */
   limit?: number;
