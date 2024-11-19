@@ -5,6 +5,13 @@
   "repository": "git@github.com:idelic-inc/idelic-js.git",
   "author": "Idelic",
   "license": "MIT",
+  "workspaces": [
+    "packages/formatron",
+    "packages/formatron-react",
+    "packages/jest-reporter-testrail",
+    "packages/safety-net",
+    "packages/safety-suite-api"
+  ],
   "scripts": {
     "bootstrap": "lerna exec -- yarn install",
     "clean": "lerna run clean",
