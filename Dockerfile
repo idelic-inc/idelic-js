@@ -2,7 +2,7 @@ FROM node:20 AS build
 
 ARG NODE_OPTIONS
 
-WORKDIR /packages
+WORKDIR /idelic-js
 
 COPY ./package.json ./
 COPY ./yarn.lock ./
