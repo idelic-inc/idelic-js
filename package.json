@@ -5,9 +5,11 @@
   "repository": "git@github.com:idelic-inc/idelic-js.git",
   "author": "Idelic",
   "license": "MIT",
-  "private": false,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "bootstrap": "lerna exec -- yarn install --pure-lockfile",
+    "bootstrap": "lerna exec -- yarn install",
     "clean": "lerna run clean",
     "build": "lerna run build",
     "format": "prettier --write \"**/src/**/*.ts*\" \"**/scripts/**/*.ts*\"",
@@ -79,6 +81,8 @@
     "ssri": "^8.0.1",
     "y18n": "^5.0.8",
     "lodash": "^4.17.21",
-    "tar": "^6.1.11"
-  }
+    "tar": "^6.1.11",
+    "micromatch": "4.0.8"
+  },
+  "packageManager": "yarn@4.5.1"
 }
