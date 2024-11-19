@@ -6,11 +6,7 @@
   "author": "Idelic",
   "license": "MIT",
   "workspaces": [
-    "packages/formatron",
-    "packages/formatron-react",
-    "packages/jest-reporter-testrail",
-    "packages/safety-net",
-    "packages/safety-suite-api"
+    "packages/*"
   ],
   "scripts": {
     "bootstrap": "lerna exec -- yarn install",
