@@ -12,7 +12,9 @@ COPY ./packages ./packages
 
 ENV NODE_OPTIONS ${NODE_OPTIONS}
 
-RUN yarn install --pure-lockfile
+RUN corepack enable
+RUN yarn set version berry
+RUN yarn install
 RUN yarn bootstrap
 RUN yarn lint
 RUN yarn build
