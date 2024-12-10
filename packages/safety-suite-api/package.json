@@ -1,6 +1,6 @@
 {
   "name": "@idelic/safety-suite-api",
-  "version": "59.0.10",
+  "version": "59.0.11",
   "description": "API helper library for Safety Suite applications",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -21,7 +21,7 @@
   "author": "Idelic",
   "license": "MIT",
   "dependencies": {
-    "@idelic/safety-net": "^2.1.3",
+    "@idelic/safety-net": "^2.1.4",
     "source-map-support": "^0.5.13"
   },
   "peerDependencies": {
