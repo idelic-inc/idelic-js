@@ -715,7 +715,11 @@ export interface PathConditionAny extends QueryCondition {
 }
 export interface RelationPathConditionAny extends QueryCondition {
   operation: {
-    type: OperationType.equals | OperationType.notEquals | 'EQUALS' | 'NOT_EQUALS';
+    type:
+      | OperationType.equals
+      | OperationType.notEquals
+      | 'EQUALS'
+      | 'NOT_EQUALS';
   };
   queryPath: QueryPath & {
     pathType: QueryPathType.relationPath | 'RELATION_PATH';
