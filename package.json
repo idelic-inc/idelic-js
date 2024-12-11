@@ -76,13 +76,13 @@
     "@idelic/safety-suite-api": "file:packages/safety-suite-api"
   },
   "resolutions": {
-    "trim-newlines": "^4.0.2",
     "handlebars": "^4.7.7",
     "ssri": "^8.0.1",
     "y18n": "^5.0.8",
     "lodash": "^4.17.21",
     "tar": "^6.1.11",
-    "micromatch": "4.0.8"
+    "micromatch": "^4.0.8",
+    "cross-spawn": "^7.0.5"
   },
   "packageManager": "yarn@4.5.1"
 }
