@@ -919,7 +919,7 @@ __metadata:
 
 "@idelic/formatron-react@file:packages/formatron-react::locator=idelic%40workspace%3A.":
   version: 4.0.8
-  resolution: "@idelic/formatron-react@file:packages/formatron-react#packages/formatron-react::hash=2ace80&locator=idelic%40workspace%3A."
+  resolution: "@idelic/formatron-react@file:packages/formatron-react#packages/formatron-react::hash=3d9fe0&locator=idelic%40workspace%3A."
   dependencies:
     "@fluentui/react": "npm:^7.145.0"
     "@fluentui/react-hooks": "npm:^8.3.3"
@@ -932,7 +932,7 @@ __metadata:
     "@idelic/formatron": 1.0.0-alpha.0
     react: ^16.13.1
     react-dom: ^16.13.1
-  checksum: 10c0/31e49d0e6722e8c728ba5f519ee53546fab0a624a59ecb4f4a271a79184e9da5619a60e99afe77df1dc303aac640e8a5a7fdad67c1c139c6bee071ce5ca90e24
+  checksum: 10c0/a62fa5d98af42431d5b7d4623ce249c8c880480cd46c9fc5c64e5d6e1448fe0a5adf98a59a00cf59133b1e60d4dcfd135f8c9f3d9077471a5b40080f7f3414ca
   languageName: node
   linkType: hard
 
@@ -956,13 +956,13 @@ __metadata:
 
 "@idelic/formatron@file:packages/formatron::locator=idelic%40workspace%3A.":
   version: 2.0.6
-  resolution: "@idelic/formatron@file:packages/formatron#packages/formatron::hash=3b4e65&locator=idelic%40workspace%3A."
+  resolution: "@idelic/formatron@file:packages/formatron#packages/formatron::hash=4fe2d4&locator=idelic%40workspace%3A."
   dependencies:
     idelic-safety-suite-api: "npm:^7.0.1"
     immutable: "npm:^4.0.0-rc.12"
     lodash: "npm:^4.17.20"
     moment: "npm:^2.29.4"
-  checksum: 10c0/a05cef331143a8bb4f026d50b337b50b7a88949f0ec8d3dcfac80b3c0457814d795e50953451a5d57fb1470da2bd9d9ceef48210d10844442d6bb8f6f074d242
+  checksum: 10c0/99e05189f4d0f0380b38657854706a335968824a54e3504736b65b9685697b8ce2a674ee130fd8f24b52774a31a47fadc73fc8cff28152a556f5624fc55b4127
   languageName: node
   linkType: hard
 
@@ -979,10 +979,10 @@ __metadata:
 
 "@idelic/safety-net@file:packages/safety-net::locator=idelic%40workspace%3A.":
   version: 2.1.4
-  resolution: "@idelic/safety-net@file:packages/safety-net#packages/safety-net::hash=05d0a9&locator=idelic%40workspace%3A."
+  resolution: "@idelic/safety-net@file:packages/safety-net#packages/safety-net::hash=817ad8&locator=idelic%40workspace%3A."
   dependencies:
     source-map-support: "npm:^0.5.13"
-  checksum: 10c0/5c0ca5461a61fd40c15f05869d9527fbd11e801a0f3fb264539e0827bf61ecf4f77c16b04f3a5a336a2718cd736a2eec0545476434461e45281c0646d1823cbc
+  checksum: 10c0/4bc763b68faaa5a03cf4f7cdd8773f7df2717b638565c4fbba5ef5dee8d51f24492c2a836e91c942a24ce5e31d3c071677e1e64f0354a58d7536120955ef7587
   languageName: node
   linkType: hard
 
@@ -996,7 +996,7 @@ __metadata:
 
 "@idelic/safety-suite-api@file:packages/safety-suite-api::locator=idelic%40workspace%3A.":
   version: 59.0.11
-  resolution: "@idelic/safety-suite-api@file:packages/safety-suite-api#packages/safety-suite-api::hash=1673e1&locator=idelic%40workspace%3A."
+  resolution: "@idelic/safety-suite-api@file:packages/safety-suite-api#packages/safety-suite-api::hash=5709dd&locator=idelic%40workspace%3A."
   dependencies:
     "@idelic/safety-net": "npm:^2.1.4"
     react: "npm:^16.10.2"
@@ -1007,7 +1007,7 @@ __metadata:
   dependenciesMeta:
     react:
       optional: true
-  checksum: 10c0/c0950eda1cdec499cdc9e33a06d9b272b4b17af10ad7e24ae977e37a5eef6d418267ca657cf08e641c885682796e54191c2dfa740570d58960be41438c59902a
+  checksum: 10c0/bef922bdb3a302b91d78e9fd7c260e4bfd205e4bc19b39e5cab4994956fd3bc0f556c4c56cbfb1da9076955f9924899a695b91dcec004814dd4a7c17a5403854
   languageName: node
   linkType: hard
 

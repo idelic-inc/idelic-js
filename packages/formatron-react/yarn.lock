@@ -179,7 +179,7 @@ __metadata:
   dependencies:
     "@fluentui/react": "npm:^7.145.0"
     "@fluentui/react-hooks": "npm:^8.3.3"
-    "@idelic/formatron": "npm:^2.0.5"
+    "@idelic/formatron": "npm:^2.0.6"
     "@types/react": "npm:^16.9.51"
     formik: "npm:^2.2.0"
     lodash: "npm:^4.17.20"
@@ -191,15 +191,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@idelic/formatron@npm:^2.0.5":
-  version: 2.0.5
-  resolution: "@idelic/formatron@npm:2.0.5"
+"@idelic/formatron@npm:^2.0.6":
+  version: 2.0.6
+  resolution: "@idelic/formatron@npm:2.0.6"
   dependencies:
     idelic-safety-suite-api: "npm:^7.0.1"
     immutable: "npm:^4.0.0-rc.12"
     lodash: "npm:^4.17.20"
     moment: "npm:^2.29.4"
-  checksum: 10c0/c689ee162c4fbe83201585bb6cdae39206d162f51354ae1e8cf7aa50644829c771f11751a7b6632c1373d69a508e9971c2e176e8f9941b084719b2955a1c6782
+  checksum: 10c0/88f6688b43f85673a7aeade080e294de5f9f3ae7412d468b607cf01cd4fae036e52387b0b1491afd7e8198511f5c416494e28cd9f911b1c6fa794683708aa384
   languageName: node
   linkType: hard
 
