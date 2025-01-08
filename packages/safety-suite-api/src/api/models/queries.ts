@@ -327,6 +327,48 @@ export function runOshaReportExport(
 }
 
 /**
+ * Starts asynchronous 2025 OSHA 300 report export.
+ *
+ * @param query - Object containing various filters for the report.
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Query export job object.
+ */
+export function run2025Osha300ReportExport(
+  query: OshaInput,
+  apiOptions?: ApiOptions
+): Request<QueryExportJob> {
+  return runApi({
+    method: 'POST',
+    route: '/api/models/query/export/osha300/csv',
+    apiOptions,
+    requestOptions: {
+      body: query
+    }
+  });
+}
+
+/**
+ * Starts asynchronous 20025 OSHA 300A report export.
+ *
+ * @param query - Object containing various filters for the report.
+ * @param apiOptions - Optional options for runApi.
+ * @returns - Query export job object.
+ */
+export function run2025Osha300aReportExport(
+  query: OshaInput,
+  apiOptions?: ApiOptions
+): Request<QueryExportJob> {
+  return runApi({
+    method: 'POST',
+    route: '/api/models/query/export/osha300a/csv',
+    apiOptions,
+    requestOptions: {
+      body: query
+    }
+  });
+}
+
+/**
  * Starts asynchronous employee review report export.
  *
  * @param query - Object containing various filters for the report.
