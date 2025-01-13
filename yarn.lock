@@ -919,7 +919,7 @@ __metadata:
 
 "@idelic/formatron-react@file:packages/formatron-react::locator=idelic%40workspace%3A.":
   version: 5.0.0
-  resolution: "@idelic/formatron-react@file:packages/formatron-react#packages/formatron-react::hash=695f95&locator=idelic%40workspace%3A."
+  resolution: "@idelic/formatron-react@file:packages/formatron-react#packages/formatron-react::hash=89c61a&locator=idelic%40workspace%3A."
   dependencies:
     "@fluentui/react": "npm:^7.145.0"
     "@fluentui/react-hooks": "npm:^8.3.3"
@@ -932,7 +932,7 @@ __metadata:
     "@idelic/formatron": 1.0.0-alpha.0
     react: ^16.13.1
     react-dom: ^16.13.1
-  checksum: 10c0/3033f1334c2638a2bfb45c8257c6de8885d0a2c254de000995a03683def9d6bc6623a4594992c5c497de4b36587c8b2d8e464e5fe4590537353af22dc78bc57b
+  checksum: 10c0/a6460aa39473a8dac44a6d144734372cd1ba523f70ecfe7d1f8bf8872be5a87686ba5847eabbfb29a7cb053d7f54d3df5c84e1a02a7ff865cd21f7ed82811914
   languageName: node
   linkType: hard
 
