@@ -17,7 +17,8 @@
     "packages/*/src",
     "packages/*/scripts",
     "packages/*/test",
-    "packages/*/jest.config.ts"
+    "packages/*/jest.config.ts",
+    "packages/formatron-react/idelic__formatron.d.ts"
   ],
   "exclude": ["node_modules"]
 }
