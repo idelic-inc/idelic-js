@@ -60,6 +60,7 @@ export declare type ModelFilterOptions = {
   textSearch?: SearchText[];
   jsValueSearch?: any;
   protectedValueSearch?: any;
+  hasRelationName?: string;
 };
 export declare type ByGroup = {
   type: 'byGroup';
