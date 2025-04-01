@@ -2683,6 +2683,8 @@ export interface ImprovementPlanTaskFields {
   category?: string | null;
   closed?: boolean;
   completed?: boolean;
+  closedDate?: number | null;
+  closedBy?: string | null;
   daysDueAfterPlanStart?: number | null;
   daysOfWeek?: string | null;
   description?: string;
