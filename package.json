@@ -37,11 +37,11 @@
     ]
   },
   "devDependencies": {
-    "@lerna-lite/cli": "^3.2.0",
-    "@lerna-lite/exec": "^3.2.0",
-    "@lerna-lite/publish": "^3.2.0",
-    "@lerna-lite/run": "^3.2.0",
-    "@lerna-lite/version": "^3.2.0",
+    "@lerna-lite/cli": "^4.1.2",
+    "@lerna-lite/exec": "^4.1.2",
+    "@lerna-lite/publish": "^4.1.2",
+    "@lerna-lite/run": "^4.1.2",
+    "@lerna-lite/version": "^4.1.2",
     "@types/jest": "^26.0.23",
     "@types/lodash": "^4.14.161",
     "@types/luxon": "^2.0.7",
