@@ -10,6 +10,11 @@ export default class NetError<E> extends Error {
     this.response = response;
   }
 
+  /**
+   * Create a user-friendly error message based on the XMLHttpRequest status.
+   * @param request The XMLHttpRequest object.
+   * @returns A user-friendly error message.
+   */
   static createErrorMessage(request: XMLHttpRequest): string {
     switch (Math.floor(request.status / 100)) {
       case 4:
