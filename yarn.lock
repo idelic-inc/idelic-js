@@ -1049,7 +1049,7 @@ __metadata:
 
 "@idelic/safety-suite-api@file:packages/safety-suite-api::locator=idelic%40workspace%3A.":
   version: 59.1.0
-  resolution: "@idelic/safety-suite-api@file:packages/safety-suite-api#packages/safety-suite-api::hash=0f874d&locator=idelic%40workspace%3A."
+  resolution: "@idelic/safety-suite-api@file:packages/safety-suite-api#packages/safety-suite-api::hash=f684d4&locator=idelic%40workspace%3A."
   dependencies:
     "@idelic/safety-net": "npm:^2.1.4"
     react: "npm:^16.10.2"
@@ -1060,7 +1060,7 @@ __metadata:
   dependenciesMeta:
     react:
       optional: true
-  checksum: 10c0/a0013b8f0a0c4f7f3f8c38e09f3072bf0e687c2394ea8d94b4be50b6862e83158bf236c1743f180c0f89180854251976a0ffc41117f5278484264198127f80a8
+  checksum: 10c0/eeb61e8aa3b8db34546ef47d50f58cb1b344f3171190e3b39c1272b142bc1e79ba2510ecacac0268554d211c4eabe8c80e109d4241c821ff85fee61e8ea5dd00
   languageName: node
   linkType: hard
 
