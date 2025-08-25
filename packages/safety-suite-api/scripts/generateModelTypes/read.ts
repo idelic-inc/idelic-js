@@ -29,6 +29,7 @@ export function readTemplates(templatesPath: string): ModelTemplate[] {
   return glob
     .sync(`${templatesPath}/**/*.json`, {follow: false})
     .filter((file) => file.indexOf('/dev/') < 0)
+    .filter((file) => file.indexOf('/dot/dotWatchlist') < 0)
     .filter((file) => file.indexOf('/accidents/') < 0) // use advanced accidents
     .filter((file) => file.indexOf('/default/Employee.json') < 0) // use editable employees
     .map((file) => {

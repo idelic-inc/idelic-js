@@ -4,7 +4,7 @@
 // See `scripts/generateModelTypes/index.ts` for more details.
 import {InputModel, Model} from './types';
 
-// Type definitions for /advancedAccidents / Accident (accident)
+// Type definitions for /advancedAccidents / $configuration_accident (accident)
 
 export interface AccidentFields {
   accidentClassification?: string | null;
@@ -16,12 +16,17 @@ export interface AccidentFields {
   citationDetails?: string;
   companyAssetDamageDescription?: string;
   contributingFactors?: string[];
+  costAllocationDescription?: string;
   daTestDetails?: string;
   daTestGiven?: string | null;
   date?: number | null;
+  dateOfNextAction?: number | null;
+  dateReceived?: number | null;
   dateReported?: number | null;
+  dateRequested?: number | null;
   dayOfWorkWeekShift?: string | null;
   description?: string;
+  dividedHighway?: boolean;
   dotReportable?: boolean;
   employeeSignaledOrSoundedBorn?: boolean;
   fatality?: string | null;
@@ -38,6 +43,7 @@ export interface AccidentFields {
   injuryCount?: number | null;
   injuryDetails?: string;
   lightConditions?: string | null;
+  lineOfBusiness?: string[];
   locationAddress?: string;
   locationAreaNumber?: string;
   locationCity?: string;
@@ -50,9 +56,12 @@ export interface AccidentFields {
   locationType?: string | null;
   locationZipCode?: string;
   name?: string;
+  numberOfLanes?: number | null;
   numberOfVehiclesInvolved?: string | null;
+  occurrenceNumber?: string;
   officerBadgeNumber?: string;
   officerName?: string;
+  orderId?: string;
   party1EmployeeRollover?: string | null;
   party2Type?: string | null;
   party3Type?: string | null;
@@ -71,7 +80,9 @@ export interface AccidentFields {
   roadwayGrade?: string | null;
   severityWeight?: number | null;
   shortDescription?: string;
+  sourceSystemUrl?: string;
   speed?: string;
+  speedLimit?: number | null;
   status?: string | null;
   terminal?: number | null;
   thirdPartyDamageDescription?: string;
@@ -96,6 +107,8 @@ export interface AccidentFields {
 
 export interface AccidentRelations {
   assets?: EquipmentModel[];
+  checklist?: ChecklistModel | null;
+  checklistItems?: ChecklistItemModel[];
   claims?: ClaimModel[];
   correctiveAction?: CorrectiveActionModel | null;
   fmcsaBasicReport?: FmcsaBasicReportModel | null;
@@ -106,6 +119,8 @@ export interface AccidentRelations {
 
 export interface AccidentInputRelations {
   assets?: EquipmentInputModel[];
+  checklist?: ChecklistInputModel | null;
+  checklistItems?: ChecklistItemInputModel[];
   claims?: ClaimInputModel[];
   correctiveAction?: CorrectiveActionInputModel | null;
   fmcsaBasicReport?: FmcsaBasicReportInputModel | null;
@@ -210,7 +225,7 @@ export interface AwardInputRelations {
 }
 
 export interface AwardComputations {
-  label: any;
+  label: string;
 }
 
 export type AwardModel = Model<AwardFields, AwardRelations, AwardComputations>;
@@ -223,6 +238,7 @@ export interface EmployeeAwardFields {
   awardLevel?: number | null;
   date?: number | null;
   dateFinalized?: number | null;
+  mulliganUsed?: boolean;
   notes?: string;
   status?: string | null;
 }
@@ -265,7 +281,7 @@ export interface CertificationRelations {}
 export interface CertificationInputRelations {}
 
 export interface CertificationComputations {
-  label: any;
+  label: string;
 }
 
 export type CertificationModel = Model<
@@ -311,6 +327,274 @@ export type EmployeeCertificationModel = Model<
 export type EmployeeCertificationInputModel = InputModel<
   EmployeeCertificationFields,
   EmployeeCertificationInputRelations
+>;
+
+// Type definitions for /default/checklist / Checklist (checklist)
+
+export interface ChecklistFields {
+  name: string;
+}
+
+export interface ChecklistRelations {
+  checklistItems?: ChecklistItemModel[];
+  event: AccidentModel | InjuryIllnessModel | MaterialSpillModel;
+  primaryModel?: EmployeeModel | null;
+}
+
+export interface ChecklistInputRelations {
+  checklistItems?: ChecklistItemInputModel[];
+  event: AccidentInputModel | InjuryIllnessInputModel | MaterialSpillInputModel;
+  primaryModel?: EmployeeInputModel | null;
+}
+
+export interface ChecklistComputations {
+  numberOfCompletedItems: number | null;
+  numberOfExemptItems: number | null;
+  numberOfItems: number | null;
+  numberOfOpenItems: number | null;
+  numberOfOverdueItems: number | null;
+  progressPercentage: number | null;
+}
+
+export type ChecklistModel = Model<
+  ChecklistFields,
+  ChecklistRelations,
+  ChecklistComputations
+>;
+
+export type ChecklistInputModel = InputModel<
+  ChecklistFields,
+  ChecklistInputRelations
+>;
+
+// Type definitions for /default/checklist / Checklist Item (checklist_item)
+
+export interface ChecklistItemFields {
+  completedById?: number | null;
+  completedByName?: string;
+  dateCompleted?: number | null;
+  dueDate?: number | null;
+  name: string;
+  notes?: string;
+  status?: string | null;
+}
+
+export interface ChecklistItemRelations {
+  assignee?: EmployeeModel | null;
+  checklist: ChecklistModel;
+  event: AccidentModel | InjuryIllnessModel | MaterialSpillModel;
+  primaryModel?: EmployeeModel | null;
+}
+
+export interface ChecklistItemInputRelations {
+  assignee?: EmployeeInputModel | null;
+  checklist: ChecklistInputModel;
+  event: AccidentInputModel | InjuryIllnessInputModel | MaterialSpillInputModel;
+  primaryModel?: EmployeeInputModel | null;
+}
+
+export interface ChecklistItemComputations {
+  daysPastDue: number | null;
+  isOverdue: boolean;
+}
+
+export type ChecklistItemModel = Model<
+  ChecklistItemFields,
+  ChecklistItemRelations,
+  ChecklistItemComputations
+>;
+
+export type ChecklistItemInputModel = InputModel<
+  ChecklistItemFields,
+  ChecklistItemInputRelations
+>;
+
+// Type definitions for /default/checklist / Checklist Item Template (checklist_item_template)
+
+export interface ChecklistItemTemplateFields {
+  daysDueAfterEventDate: number;
+  name: string;
+}
+
+export interface ChecklistItemTemplateRelations {
+  checklistTemplate: ChecklistTemplateModel;
+}
+
+export interface ChecklistItemTemplateInputRelations {
+  checklistTemplate: ChecklistTemplateInputModel;
+}
+
+export interface ChecklistItemTemplateComputations {}
+
+export type ChecklistItemTemplateModel = Model<
+  ChecklistItemTemplateFields,
+  ChecklistItemTemplateRelations,
+  ChecklistItemTemplateComputations
+>;
+
+export type ChecklistItemTemplateInputModel = InputModel<
+  ChecklistItemTemplateFields,
+  ChecklistItemTemplateInputRelations
+>;
+
+// Type definitions for /default/checklist / Checklist Template (checklist_template)
+
+export interface ChecklistTemplateFields {
+  applicableDatasets?: string[];
+  name: string;
+}
+
+export interface ChecklistTemplateRelations {
+  checklistItemTemplates?: ChecklistItemTemplateModel[];
+}
+
+export interface ChecklistTemplateInputRelations {
+  checklistItemTemplates?: ChecklistItemTemplateInputModel[];
+}
+
+export interface ChecklistTemplateComputations {}
+
+export type ChecklistTemplateModel = Model<
+  ChecklistTemplateFields,
+  ChecklistTemplateRelations,
+  ChecklistTemplateComputations
+>;
+
+export type ChecklistTemplateInputModel = InputModel<
+  ChecklistTemplateFields,
+  ChecklistTemplateInputRelations
+>;
+
+// Type definitions for /default / Contact (contact)
+
+export interface ContactFields {
+  city?: string;
+  dateNotified?: number | null;
+  description?: string;
+  email?: string;
+  fileNumber?: string;
+  fullName?: string;
+  organizationName?: string;
+  organizationPhoneNumber?: string;
+  phoneNumber?: string;
+  state?: string | null;
+  streetLine1?: string;
+  streetLine2?: string;
+  type?: string | null;
+  zipCode?: string;
+}
+
+export interface ContactRelations {
+  event?: ClaimModel | null;
+}
+
+export interface ContactInputRelations {
+  event?: ClaimInputModel | null;
+}
+
+export interface ContactComputations {}
+
+export type ContactModel = Model<
+  ContactFields,
+  ContactRelations,
+  ContactComputations
+>;
+
+export type ContactInputModel = InputModel<
+  ContactFields,
+  ContactInputRelations
+>;
+
+// Type definitions for /default/dot / DOT Unit (dot_unit)
+
+export interface DotUnitFields {
+  carrierType?: string | null;
+  city?: string;
+  contactEmail?: string;
+  contactFirstName?: string;
+  contactLastName?: string;
+  contactPhone?: string;
+  countOfDrivers?: number | null;
+  dateLastAuditPerformed?: number | null;
+  dotNumber?: string;
+  fmcsaEnabled?: boolean;
+  inceptionDate?: number | null;
+  interactionStatus?: string | null;
+  mobilePhone?: string;
+  name: string;
+  secondaryContactFirstName?: string;
+  secondaryContactLastName?: string;
+  state?: string | null;
+  status?: string | null;
+  streetAddress?: string;
+  streetAddress2?: string;
+  type?: string | null;
+  zip?: string;
+}
+
+export interface DotUnitRelations {
+  improvementPlanTasks?: ImprovementPlanTaskModel[];
+  improvementPlanWeeks?: ImprovementPlanWeekModel[];
+  improvementPlans?: ImprovementPlanModel[];
+  interactions?: DotUnitInteractionModel[];
+  progressUpdates?: ImprovementPlanProgressUpdateModel[];
+  watchList?: DotWatchListModel | null;
+}
+
+export interface DotUnitInputRelations {
+  improvementPlanTasks?: ImprovementPlanTaskInputModel[];
+  improvementPlanWeeks?: ImprovementPlanWeekInputModel[];
+  improvementPlans?: ImprovementPlanInputModel[];
+  interactions?: DotUnitInteractionInputModel[];
+  progressUpdates?: ImprovementPlanProgressUpdateInputModel[];
+  watchList?: DotWatchListInputModel | null;
+}
+
+export interface DotUnitComputations {
+  activeDriverCount: any;
+  inactiveDriverCount: any;
+}
+
+export type DotUnitModel = Model<
+  DotUnitFields,
+  DotUnitRelations,
+  DotUnitComputations
+>;
+
+export type DotUnitInputModel = InputModel<
+  DotUnitFields,
+  DotUnitInputRelations
+>;
+
+// Type definitions for /default/dot / DOT Unit Interaction (dot_unit_interaction)
+
+export interface DotUnitInteractionFields {
+  details?: string;
+  dueDate?: number | null;
+  personContacted?: string;
+  status?: string | null;
+  type?: string | null;
+}
+
+export interface DotUnitInteractionRelations {
+  dotUnit?: DotUnitModel | null;
+}
+
+export interface DotUnitInteractionInputRelations {
+  dotUnit?: DotUnitInputModel | null;
+}
+
+export interface DotUnitInteractionComputations {}
+
+export type DotUnitInteractionModel = Model<
+  DotUnitInteractionFields,
+  DotUnitInteractionRelations,
+  DotUnitInteractionComputations
+>;
+
+export type DotUnitInteractionInputModel = InputModel<
+  DotUnitInteractionFields,
+  DotUnitInteractionInputRelations
 >;
 
 // Type definitions for /default/drugTests / Test (employee_test)
@@ -382,7 +666,7 @@ export interface EmergencyContactInputRelations {
 }
 
 export interface EmergencyContactComputations {
-  label: any;
+  label: string;
 }
 
 export type EmergencyContactModel = Model<
@@ -480,6 +764,7 @@ export interface EquipmentFields {
   reasonForSale?: string | null;
   reasonForSalvage?: string | null;
   reeferEngineSerialNumber?: string;
+  reeferEngineYear?: string;
   reeferModelNumber?: string;
   reeferSerialNumber?: string;
   reeferUnitModelNumber?: string;
@@ -500,6 +785,7 @@ export interface EquipmentFields {
   scheduleNumber?: string;
   secondAssetNumber?: string;
   serviceLine?: string | null;
+  sourceSystemUrl?: string;
   speeds?: string | null;
   state?: string | null;
   status?: string | null;
@@ -513,6 +799,7 @@ export interface EquipmentFields {
   title?: string | null;
   titleReleasedDate?: number | null;
   titleSent?: string | null;
+  totalMilesAllowed?: number | null;
   trackingNumber?: string;
   tractorType?: string | null;
   tractorWeight?: number | null;
@@ -534,6 +821,7 @@ export interface EquipmentFields {
 
 export interface EquipmentRelations {
   accidents?: AccidentModel[];
+  claims?: ClaimModel[];
   equipmentTollPasses?: EquipmentTollPassesModel[];
   maintenance?: MaintenanceModel[];
   mileages?: MileageModel[];
@@ -541,6 +829,7 @@ export interface EquipmentRelations {
 
 export interface EquipmentInputRelations {
   accidents?: AccidentInputModel[];
+  claims?: ClaimInputModel[];
   equipmentTollPasses?: EquipmentTollPassesInputModel[];
   maintenance?: MaintenanceInputModel[];
   mileages?: MileageInputModel[];
@@ -548,7 +837,7 @@ export interface EquipmentInputRelations {
 
 export interface EquipmentComputations {
   fixedRatePerPeroid: any;
-  label: any;
+  label: string;
 }
 
 export type EquipmentModel = Model<
@@ -668,6 +957,7 @@ export interface ClaimFields {
   closingDate?: number | null;
   companyName?: string;
   costCenter?: string | null;
+  dateOfNextAction?: number | null;
   dateSubmittedToInsurance?: number | null;
   description?: string;
   fullName?: string;
@@ -679,6 +969,7 @@ export interface ClaimFields {
   legalLawFirm?: string;
   lossDate?: number | null;
   phone?: string;
+  recordNumber?: string;
   state?: string | null;
   submittedToInsurance?: string | null;
   vehicleColor?: string;
@@ -692,6 +983,8 @@ export interface ClaimFields {
 }
 
 export interface ClaimRelations {
+  assets?: EquipmentModel[];
+  contacts?: ContactModel[];
   costs?: CostModel[];
   incident?: (AccidentModel | InjuryIllnessModel) | null;
   primaryModel?: EmployeeModel | null;
@@ -700,6 +993,8 @@ export interface ClaimRelations {
 }
 
 export interface ClaimInputRelations {
+  assets?: EquipmentInputModel[];
+  contacts?: ContactInputModel[];
   costs?: CostInputModel[];
   incident?: (AccidentInputModel | InjuryIllnessInputModel) | null;
   primaryModel?: EmployeeInputModel | null;
@@ -708,6 +1003,7 @@ export interface ClaimInputRelations {
 }
 
 export interface ClaimComputations {
+  balancePerCategory: any;
   bodilyInjuryPaid: number | null;
   bodilyInjuryRemaining: number | null;
   bodilyInjuryReserves: number | null;
@@ -754,6 +1050,10 @@ export type ClaimInputModel = InputModel<ClaimFields, ClaimInputRelations>;
 
 export interface CorrectiveActionFields {
   correctiveActionType?: string | null;
+  criticalEvent?: boolean;
+  criticalEventCompleted?: boolean;
+  criticalEventRuleIds?: string[];
+  criticalEventRuleName?: string;
   dateOfAction?: number | null;
   description?: string;
   disciplinaryAction?: string | null;
@@ -765,10 +1065,10 @@ export interface CorrectiveActionFields {
   preventable_2?: string | null;
   severity?: string | null;
   severity_2?: string | null;
-  criticalEventCompleted?: boolean | null;
 }
 
 export interface CorrectiveActionRelations {
+  assignee?: EmployeeModel | null;
   incident?:
     | (
         | AccidentModel
@@ -785,11 +1085,12 @@ export interface CorrectiveActionRelations {
         | EnforcementModel
       )
     | null;
-  primaryModel: EmployeeModel;
+  primaryModel?: EmployeeModel | null;
   reviewedBy?: EmployeeModel | null;
 }
 
 export interface CorrectiveActionInputRelations {
+  assignee?: EmployeeInputModel | null;
   incident?:
     | (
         | AccidentInputModel
@@ -806,11 +1107,14 @@ export interface CorrectiveActionInputRelations {
         | EnforcementInputModel
       )
     | null;
-  primaryModel: EmployeeInputModel;
+  primaryModel?: EmployeeInputModel | null;
   reviewedBy?: EmployeeInputModel | null;
 }
 
-export interface CorrectiveActionComputations {}
+export interface CorrectiveActionComputations {
+  criticalEventStatus: string;
+  daysUntilDue: number | null;
+}
 
 export type CorrectiveActionModel = Model<
   CorrectiveActionFields,
@@ -863,7 +1167,7 @@ export type CostModel = Model<CostFields, CostRelations, CostComputations>;
 
 export type CostInputModel = InputModel<CostFields, CostInputRelations>;
 
-// Type definitions for /default/events / Improvement Plan Action (improvement_plan_action)
+// Type definitions for /default/events / $configuration_professional_development_plan Action (improvement_plan_action)
 
 export interface ImprovementPlanActionFields {
   actualDate?: number | null;
@@ -964,6 +1268,9 @@ export type ReimbursementInputModel = InputModel<
 
 export interface ReservesAndTotalsFields {
   costCategory?: string | null;
+  date?: number | null;
+  description?: string;
+  payee?: string;
   reserves?: number | null;
 }
 
@@ -1033,7 +1340,7 @@ export interface WitnessInputRelations {
 }
 
 export interface WitnessComputations {
-  label: any;
+  label: string;
 }
 
 export type WitnessModel = Model<
@@ -1774,89 +2081,7 @@ export type DisciplinaryActionInputModel = InputModel<
   DisciplinaryActionInputRelations
 >;
 
-// Type definitions for /dot / DOT Unit (dot_unit)
-
-export interface DotUnitFields {
-  city?: string;
-  contactEmail?: string;
-  contactFirstName?: string;
-  contactLastName?: string;
-  contactPhone?: string;
-  countOfDrivers?: number | null;
-  dateLastAuditPerformed?: number | null;
-  dotNumber: string;
-  inceptionDate?: number | null;
-  interactionStatus?: string | null;
-  mobilePhone?: string;
-  name: string;
-  secondaryContactFirstName?: string;
-  secondaryContactLastName?: string;
-  state?: string | null;
-  status?: string | null;
-  streetAddress?: string;
-  streetAddress2?: string;
-  type?: string | null;
-  zip?: string;
-}
-
-export interface DotUnitRelations {
-  interactions?: DotUnitInteractionModel[];
-  watchList?: DotWatchListModel | null;
-}
-
-export interface DotUnitInputRelations {
-  interactions?: DotUnitInteractionInputModel[];
-  watchList?: DotWatchListInputModel | null;
-}
-
-export interface DotUnitComputations {
-  activeDriverCount: any;
-  inactiveDriverCount: any;
-}
-
-export type DotUnitModel = Model<
-  DotUnitFields,
-  DotUnitRelations,
-  DotUnitComputations
->;
-
-export type DotUnitInputModel = InputModel<
-  DotUnitFields,
-  DotUnitInputRelations
->;
-
-// Type definitions for /dot / DOT Unit Interaction (dot_unit_interaction)
-
-export interface DotUnitInteractionFields {
-  details?: string;
-  dueDate?: number | null;
-  personContacted?: string;
-  status?: string | null;
-  type?: string | null;
-}
-
-export interface DotUnitInteractionRelations {
-  dotUnit?: DotUnitModel | null;
-}
-
-export interface DotUnitInteractionInputRelations {
-  dotUnit?: DotUnitInputModel | null;
-}
-
-export interface DotUnitInteractionComputations {}
-
-export type DotUnitInteractionModel = Model<
-  DotUnitInteractionFields,
-  DotUnitInteractionRelations,
-  DotUnitInteractionComputations
->;
-
-export type DotUnitInteractionInputModel = InputModel<
-  DotUnitInteractionFields,
-  DotUnitInteractionInputRelations
->;
-
-// Type definitions for /dot / DOT Watch List (dot_watch_list)
+// Type definitions for /dotWatchlist / DOT Watch List (dot_watch_list)
 
 export interface DotWatchListFields {
   baselineScore?: number | null;
@@ -1865,8 +2090,8 @@ export interface DotWatchListFields {
   percentile?: number | null;
   riskScoreBucket?: number | null;
   score30DaysAgo?: number | null;
+  scoreChangeInLast30Days?: number | null;
   scorePercent?: number | null;
-  scorePercentChangeInLast30Days?: number | null;
   scores?: (number | null)[];
 }
 
@@ -1893,7 +2118,7 @@ export type DotWatchListInputModel = InputModel<
   DotWatchListInputRelations
 >;
 
-// Type definitions for /dot / DOT Watch List Reason (dot_watch_list_reason)
+// Type definitions for /dotWatchlist / DOT Watch List Reason (dot_watch_list_reason)
 
 export interface DotWatchListReasonFields {
   actions?: string;
@@ -1915,6 +2140,7 @@ export interface DotWatchListReasonRelations {
     | AccidentModel
     | BillOfLadingViolationModel
     | EnforcementModel
+    | EnforcementViolationModel
     | TelematicsAlertModel
     | InjuryIllnessModel
     | ForkliftIncidentModel
@@ -1933,6 +2159,7 @@ export interface DotWatchListReasonInputRelations {
     | AccidentInputModel
     | BillOfLadingViolationInputModel
     | EnforcementInputModel
+    | EnforcementViolationInputModel
     | TelematicsAlertInputModel
     | InjuryIllnessInputModel
     | ForkliftIncidentInputModel
@@ -1983,9 +2210,11 @@ export interface EmployeeFields {
   firstName: string;
   fullOrPartTime?: string | null;
   gender?: string | null;
+  hasMulliganAvailable?: boolean;
   hireDate?: number | null;
   hrIntegrationId?: string;
   lastName: string;
+  lineOfBusiness?: string[];
   maritalStatus?: string | null;
   middleName?: string;
   miscellaneousAttributes?: string[];
@@ -1999,6 +2228,7 @@ export interface EmployeeFields {
   receivedDQFileOn?: number | null;
   requiresDrugTest?: string | null;
   socialSecurityNumber?: string;
+  sourceSystemUrl?: string;
   state?: string | null;
   status?: string | null;
   streetAddress?: string;
@@ -2012,9 +2242,13 @@ export interface EmployeeFields {
 export interface EmployeeRelations {
   accidents?: AccidentModel[];
   asset?: EquipmentModel | null;
+  assignedChecklistItems?: ChecklistItemModel[];
+  assignedCorrectiveActions?: CorrectiveActionModel[];
   awards?: EmployeeAwardModel[];
   billOfLadingViolations?: BillOfLadingViolationModel[];
   certifications?: EmployeeCertificationModel[];
+  checklistItems?: ChecklistItemModel[];
+  checklists?: ChecklistModel[];
   claimIncidents?: ClaimModel[];
   classes?: TrainingAttendanceModel[];
   classesTrained?: TrainingClassModel[];
@@ -2063,9 +2297,13 @@ export interface EmployeeRelations {
   materialSpills?: MaterialSpillModel[];
   performanceImprovementPlans?: PerformanceImprovementPlanModel[];
   probationaryData?: ProbationaryDataModel[];
+  progressUpdates?: ImprovementPlanProgressUpdateModel[];
   safetyManager?: EmployeeModel | null;
   sleepApnea?: SleepApneaModel[];
   supervisor?: EmployeeModel | null;
+  supervisorPosition3?: EmployeeModel | null;
+  supervisorPosition4?: EmployeeModel | null;
+  supervisorPosition5?: EmployeeModel | null;
   telematicsAlerts?: TelematicsAlertModel[];
   tests?: EmployeeTestModel[];
   watchList?: EmployeeWatchListModel | null;
@@ -2075,9 +2313,13 @@ export interface EmployeeRelations {
 export interface EmployeeInputRelations {
   accidents?: AccidentInputModel[];
   asset?: EquipmentInputModel | null;
+  assignedChecklistItems?: ChecklistItemInputModel[];
+  assignedCorrectiveActions?: CorrectiveActionInputModel[];
   awards?: EmployeeAwardInputModel[];
   billOfLadingViolations?: BillOfLadingViolationInputModel[];
   certifications?: EmployeeCertificationInputModel[];
+  checklistItems?: ChecklistItemInputModel[];
+  checklists?: ChecklistInputModel[];
   claimIncidents?: ClaimInputModel[];
   classes?: TrainingAttendanceInputModel[];
   classesTrained?: TrainingClassInputModel[];
@@ -2128,13 +2370,17 @@ export interface EmployeeInputRelations {
   improvementPlansActions?: ImprovementPlanActionInputModel[];
   injuriesIllnesses?: InjuryIllnessInputModel[];
   inspections?: InspectionInputModel[];
-  leaderOfLeader?: EmployeeModel | null;
+  leaderOfLeader?: EmployeeInputModel | null;
   materialSpills?: MaterialSpillInputModel[];
   performanceImprovementPlans?: PerformanceImprovementPlanInputModel[];
   probationaryData?: ProbationaryDataInputModel[];
-  safetyManager?: EmployeeModel | null;
+  progressUpdates?: ImprovementPlanProgressUpdateInputModel[];
+  safetyManager?: EmployeeInputModel | null;
   sleepApnea?: SleepApneaInputModel[];
   supervisor?: EmployeeInputModel | null;
+  supervisorPosition3?: EmployeeInputModel | null;
+  supervisorPosition4?: EmployeeInputModel | null;
+  supervisorPosition5?: EmployeeInputModel | null;
   telematicsAlerts?: TelematicsAlertInputModel[];
   tests?: EmployeeTestInputModel[];
   watchList?: EmployeeWatchListInputModel | null;
@@ -2146,7 +2392,6 @@ export interface EmployeeComputations {
   anniversaryLetterContent: any;
   birthdayLetterContent: any;
   csaScore: number | null;
-  currentCdlId: any;
   currentScore: number | null;
   dateOfLastAccident: number | null;
   dateOfLastBillOfLadingViolation: number | null;
@@ -2184,7 +2429,7 @@ export interface EmployeeComputations {
   hasWorkersCompAuthorization: any;
   label: string;
   lastCompletedPDP: any;
-  lastCompletedPdpDate: any;
+  lastCompletedPdpDate: number | null;
   mostRecentPip: number | null;
   numberOfAccidents: any;
   onPlan: any;
@@ -2267,7 +2512,7 @@ export interface EnforcementCitationInputRelations {
 
 export interface EnforcementCitationComputations {
   date: number | null;
-  label: any;
+  label: string;
   unitNo: any;
 }
 
@@ -2303,6 +2548,12 @@ export interface EnforcementFields {
   state?: string | null;
   storeId?: string;
   terminal?: number | null;
+  vehicleOneLicensePlateNumber?: string;
+  vehicleOneType?: string;
+  vehicleOneVin?: string;
+  vehicleTwoLicensePlateNumber?: string;
+  vehicleTwoType?: string;
+  vehicleTwoVin?: string;
   vehicleType?: string | null;
 }
 
@@ -2456,7 +2707,7 @@ export interface EnforcementViolationInputRelations {
 export interface EnforcementViolationComputations {
   csaScore: number | null;
   date: number | null;
-  label: any;
+  label: string;
   timeWeight: number | null;
 }
 
@@ -2590,7 +2841,7 @@ export type FuelTankInputModel = InputModel<
   FuelTankInputRelations
 >;
 
-// Type definitions for /improvementPlan / Professional Development Plan (improvement_plan)
+// Type definitions for /improvementPlan / $configuration_professional_development_plan (improvement_plan)
 
 export interface ImprovementPlanFields {
   acceptablePerformance?: string;
@@ -2598,6 +2849,8 @@ export interface ImprovementPlanFields {
   closedDate?: number | null;
   description?: string;
   name?: string;
+  partyInvolved?: string | null;
+  reasonForAssignment?: string;
   startDate: number;
   status?: string | null;
 }
@@ -2620,7 +2873,7 @@ export interface ImprovementPlanRelations {
     | CustomerObservationModel
     | WorkplaceObservationModel
   )[];
-  primaryModel: EmployeeModel;
+  primaryModel: EmployeeModel | DotUnitModel;
   progressUpdates?: ImprovementPlanProgressUpdateModel[];
   watchlistPositiveContributor?: WatchListPositiveContributorModel | null;
   watchlistReasons?: WatchListReasonModel[];
@@ -2644,7 +2897,7 @@ export interface ImprovementPlanInputRelations {
     | CustomerObservationInputModel
     | WorkplaceObservationInputModel
   )[];
-  primaryModel: EmployeeInputModel;
+  primaryModel: EmployeeInputModel | DotUnitInputModel;
   progressUpdates?: ImprovementPlanProgressUpdateInputModel[];
   watchlistPositiveContributor?: WatchListPositiveContributorInputModel | null;
   watchlistReasons?: WatchListReasonInputModel[];
@@ -2675,13 +2928,15 @@ export type ImprovementPlanInputModel = InputModel<
   ImprovementPlanInputRelations
 >;
 
-// Type definitions for /improvementPlan / Development Plan Task (improvement_plan_task)
+// Type definitions for /improvementPlan / $configuration_professional_development_plan Task (improvement_plan_task)
 
 export interface ImprovementPlanTaskFields {
   acceptablePerformance?: string;
   assignTo?: string | null;
   category?: string | null;
   closed?: boolean;
+  closedBy?: string;
+  closedDate?: number | null;
   completed?: boolean;
   daysDueAfterPlanStart?: number | null;
   daysOfWeek?: string | null;
@@ -2697,20 +2952,20 @@ export interface ImprovementPlanTaskRelations {
   assignee?: EmployeeModel | null;
   improvementPlan?: ImprovementPlanModel | null;
   improvementPlanWeek?: ImprovementPlanWeekModel | null;
-  primaryModel: EmployeeModel;
+  primaryModel: EmployeeModel | DotUnitModel;
   progressUpdate?: ImprovementPlanProgressUpdateModel | null;
   talkingPoints?: TalkingPointModel[];
-  trainingClass?: TrainingClassModel;
+  trainingClass?: TrainingClassModel | null;
 }
 
 export interface ImprovementPlanTaskInputRelations {
   assignee?: EmployeeInputModel | null;
   improvementPlan?: ImprovementPlanInputModel | null;
   improvementPlanWeek?: ImprovementPlanWeekInputModel | null;
-  primaryModel: EmployeeInputModel;
+  primaryModel: EmployeeInputModel | DotUnitInputModel;
   progressUpdate?: ImprovementPlanProgressUpdateInputModel | null;
   talkingPoints?: TalkingPointInputModel[];
-  trainingClass?: TrainingClassModel;
+  trainingClass?: TrainingClassInputModel | null;
 }
 
 export interface ImprovementPlanTaskComputations {
@@ -2743,13 +2998,13 @@ export interface ImprovementPlanWeekFields {
 export interface ImprovementPlanWeekRelations {
   improvementPlan?: ImprovementPlanModel | null;
   improvementPlanTasks?: ImprovementPlanTaskModel[];
-  primaryModel: EmployeeModel;
+  primaryModel: EmployeeModel | DotUnitModel;
 }
 
 export interface ImprovementPlanWeekInputRelations {
   improvementPlan?: ImprovementPlanInputModel | null;
   improvementPlanTasks?: ImprovementPlanTaskInputModel[];
-  primaryModel: EmployeeInputModel;
+  primaryModel: EmployeeInputModel | DotUnitInputModel;
 }
 
 export interface ImprovementPlanWeekComputations {
@@ -2779,13 +3034,13 @@ export interface ImprovementPlanProgressUpdateFields {
 export interface ImprovementPlanProgressUpdateRelations {
   improvementPlan?: ImprovementPlanModel | null;
   improvementPlanTask?: ImprovementPlanTaskModel | null;
-  primaryModel?: EmployeeModel | null;
+  primaryModel?: (EmployeeModel | DotUnitModel) | null;
 }
 
 export interface ImprovementPlanProgressUpdateInputRelations {
   improvementPlan?: ImprovementPlanInputModel | null;
   improvementPlanTask?: ImprovementPlanTaskInputModel | null;
-  primaryModel?: EmployeeInputModel | null;
+  primaryModel?: (EmployeeInputModel | DotUnitInputModel) | null;
 }
 
 export interface ImprovementPlanProgressUpdateComputations {}
@@ -2837,13 +3092,13 @@ export interface ImprovementPlanTaskTemplateFields {
   daysDueAfterPlanStart: number;
   daysOfWeek?: string | null;
   description?: string;
-  name?: string;
+  isTrainingExpiring?: string | null;
+  name: string;
   positionAssignedTo?: string | null;
   reminders?: string | null;
-  type?: string | null;
-  isTrainingExpiring?: string | null;
-  trainingExpirationInterval?: number;
+  trainingExpirationInterval?: number | null;
   trainingExpirationIntervalUnits?: string | null;
+  type?: string | null;
 }
 
 export interface ImprovementPlanTaskTemplateRelations {
@@ -2851,7 +3106,7 @@ export interface ImprovementPlanTaskTemplateRelations {
   improvementPlan?: ImprovementPlanTemplateModel | null;
   improvementPlanWeek?: ImprovementPlanWeekTemplateModel | null;
   talkingPoints?: TalkingPointTemplateModel[];
-  trainingCourse?: TrainingCourseModel;
+  trainingCourse?: TrainingCourseModel | null;
 }
 
 export interface ImprovementPlanTaskTemplateInputRelations {
@@ -2859,7 +3114,7 @@ export interface ImprovementPlanTaskTemplateInputRelations {
   improvementPlan?: ImprovementPlanTemplateInputModel | null;
   improvementPlanWeek?: ImprovementPlanWeekTemplateInputModel | null;
   talkingPoints?: TalkingPointTemplateInputModel[];
-  trainingCourse?: TrainingCourseModel;
+  trainingCourse?: TrainingCourseInputModel | null;
 }
 
 export interface ImprovementPlanTaskTemplateComputations {
@@ -2877,13 +3132,14 @@ export type ImprovementPlanTaskTemplateInputModel = InputModel<
   ImprovementPlanTaskTemplateInputRelations
 >;
 
-// Type definitions for /improvementPlan/templates / PDP Template (improvement_plan_template)
+// Type definitions for /improvementPlan/templates / $configuration_pdp Template (improvement_plan_template)
 
 export interface ImprovementPlanTemplateFields {
   acceptablePerformance?: string;
   category?: string | null;
   description?: string;
   name?: string;
+  partyInvolved?: string | null;
   status?: string | null;
 }
 
@@ -2900,7 +3156,7 @@ export interface ImprovementPlanTemplateInputRelations {
 }
 
 export interface ImprovementPlanTemplateComputations {
-  label: any;
+  label: string;
 }
 
 export type ImprovementPlanTemplateModel = Model<
@@ -2993,6 +3249,7 @@ export interface InjuryIllnessFields {
   dateBeganWork?: number | null;
   dateInsuranceNotified?: number | null;
   dateOfMedicalTreatment?: number | null;
+  dateOfNextAction?: number | null;
   dateReported?: number | null;
   dateSupervisorNotified?: number | null;
   deathDate?: number | null;
@@ -3037,6 +3294,7 @@ export interface InjuryIllnessFields {
   safetyEquipmentUsed?: string | null;
   skidCount?: string;
   soughtMedicalAttention?: string | null;
+  sourceSystemUrl?: string;
   status?: string | null;
   storeId?: string;
   supervisorFollowUp?: string | null;
@@ -3058,6 +3316,8 @@ export interface InjuryIllnessFields {
 }
 
 export interface InjuryIllnessRelations {
+  checklist?: ChecklistModel | null;
+  checklistItems?: ChecklistItemModel[];
   claims?: ClaimModel[];
   correctiveAction?: CorrectiveActionModel | null;
   costs?: CostModel[];
@@ -3074,6 +3334,8 @@ export interface InjuryIllnessRelations {
 }
 
 export interface InjuryIllnessInputRelations {
+  checklist?: ChecklistInputModel | null;
+  checklistItems?: ChecklistItemInputModel[];
   claims?: ClaimInputModel[];
   correctiveAction?: CorrectiveActionInputModel | null;
   costs?: CostInputModel[];
@@ -3257,28 +3519,41 @@ export type LostRestrictedDaysInputModel = InputModel<
 
 export interface MaterialSpillFields {
   address?: string;
+  airPressureAtTime?: string;
+  atFaultParty?: string | null;
   causeOfSpill?: string | null;
   chemicalNameOfMaterial?: string;
   city?: string;
+  compartmentUnloaded?: string | null;
   consigneeAddress?: string;
   consigneeCity?: string;
   consigneeName?: string;
   consigneePhone?: string;
   consigneeState?: string;
   consigneeZipCode?: string;
+  contributingFactors?: string[];
   date?: number | null;
+  dateReported?: number | null;
   deliveryStatus?: string | null;
   description?: string;
   dotTrackNumber?: string;
+  equipmentAndDamages?: string;
   hazardClass?: string | null;
   hazardId?: string;
+  impactToProduct?: string[];
   incidentLocation?: string | null;
+  materialSpillType?: string | null;
+  numberOneDriverAtolDepartment?: string;
+  occurrenceNumber?: string;
   packageType?: string | null;
   packingGroup?: string | null;
   phone?: string;
-  proNumber: string;
+  potentialTransferFactor?: string | null;
+  primaryIncidentCause?: string | null;
+  proNumber?: string;
   properShippingName?: string;
   quantityReleased?: string;
+  rejectionReason?: string | null;
   salesRepresentative?: string;
   shiftDiscovered?: string | null;
   shiftResponsible?: string | null;
@@ -3288,15 +3563,21 @@ export interface MaterialSpillFields {
   shipperPhone?: string;
   shipperState?: string;
   shipperZipCode?: string;
+  sourceSystemUrl?: string;
   state?: string;
   status?: string | null;
   terminalDiscovered?: number | null;
   terminalResponsible?: number | null;
   time?: number | null;
+  timeReported?: number | null;
+  unloadType?: string | null;
+  whatIsBeingReported?: string[];
   zipCode?: string;
 }
 
 export interface MaterialSpillRelations {
+  checklist?: ChecklistModel | null;
+  checklistItems?: ChecklistItemModel[];
   correctiveAction?: CorrectiveActionModel | null;
   costs?: CostModel[];
   primaryModel?: EmployeeModel | null;
@@ -3306,6 +3587,8 @@ export interface MaterialSpillRelations {
 }
 
 export interface MaterialSpillInputRelations {
+  checklist?: ChecklistInputModel | null;
+  checklistItems?: ChecklistItemInputModel[];
   correctiveAction?: CorrectiveActionInputModel | null;
   costs?: CostInputModel[];
   primaryModel?: EmployeeInputModel | null;
@@ -3440,6 +3723,8 @@ export interface HighwayObservationFields {
   locationZipCode?: string;
   outsideSource?: string;
   proNumber?: string;
+  sourceSystemId?: string;
+  sourceSystemUrl?: string;
   state?: string | null;
   terminal?: number | null;
   time?: number | null;
@@ -3485,6 +3770,7 @@ export interface HoursOfServiceObservationFields {
   duration?: number | null;
   outsideSource?: string;
   reason?: string[];
+  sourceSystemUrl?: string;
   time?: number | null;
   type?: string[];
 }
@@ -3804,6 +4090,8 @@ export interface TelematicsAlertFields {
   outsideSource?: string;
   proNumber?: string;
   severity?: string | null;
+  sourceSystemId?: string;
+  sourceSystemUrl?: string;
   terminal?: number | null;
   time?: number | null;
   type?: string | null;
@@ -3905,16 +4193,16 @@ export interface TrainingClassFields {
 
 export interface TrainingClassRelations {
   attendees?: TrainingAttendanceModel[];
+  improvementPlanTask?: ImprovementPlanTaskModel | null;
   trainer?: EmployeeModel | null;
   trainingCourse: TrainingCourseModel;
-  improvementPlanTask?: ImprovementPlanTaskModel;
 }
 
 export interface TrainingClassInputRelations {
   attendees?: TrainingAttendanceInputModel[];
+  improvementPlanTask?: ImprovementPlanTaskInputModel | null;
   trainer?: EmployeeInputModel | null;
   trainingCourse: TrainingCourseInputModel;
-  improvementPlanTask?: ImprovementPlanTaskModel;
 }
 
 export interface TrainingClassComputations {
@@ -3942,6 +4230,7 @@ export type TrainingClassInputModel = InputModel<
 // Type definitions for /training / Training Course (training_course)
 
 export interface TrainingCourseFields {
+  active?: boolean;
   dayOffset?: number | null;
   description?: string;
   expirationInterval?: number | null;
@@ -3965,7 +4254,7 @@ export interface TrainingCourseInputRelations {
 export interface TrainingCourseComputations {
   dropdownLabel: any;
   expiresEvery: any;
-  label: any;
+  label: string;
 }
 
 export type TrainingCourseModel = Model<
@@ -3986,7 +4275,7 @@ export interface EmployeeWatchListFields {
   date?: number | null;
   percentile?: number | null;
   score30DaysAgo?: number | null;
-  scorePercentChangeInLast30Days?: number | null;
+  scoreChangeInLast30Days?: number | null;
   scores?: (number | null)[];
 }
 
@@ -4065,6 +4354,7 @@ export interface WatchListReasonRelations {
     | AccidentModel
     | BillOfLadingViolationModel
     | EnforcementModel
+    | EnforcementViolationModel
     | TelematicsAlertModel
     | InjuryIllnessModel
     | ForkliftIncidentModel
@@ -4084,6 +4374,7 @@ export interface WatchListReasonInputRelations {
     | AccidentInputModel
     | BillOfLadingViolationInputModel
     | EnforcementInputModel
+    | EnforcementViolationInputModel
     | TelematicsAlertInputModel
     | InjuryIllnessInputModel
     | ForkliftIncidentInputModel
