@@ -418,10 +418,12 @@ export interface ChecklistItemTemplateFields {
 
 export interface ChecklistItemTemplateRelations {
   checklistTemplate: ChecklistTemplateModel;
+  assignee?: EmployeeModel | null;
 }
 
 export interface ChecklistItemTemplateInputRelations {
   checklistTemplate: ChecklistTemplateInputModel;
+  assignee?: EmployeeInputModel | null;
 }
 
 export interface ChecklistItemTemplateComputations {}
