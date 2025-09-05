@@ -414,6 +414,8 @@ export type ChecklistItemInputModel = InputModel<
 export interface ChecklistItemTemplateFields {
   daysDueAfterEventDate: number;
   name: string;
+  assignTo?: string | null;
+  positionAssignedTo?: string | null;
 }
 
 export interface ChecklistItemTemplateRelations {
