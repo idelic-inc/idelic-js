@@ -412,15 +412,19 @@ export type ChecklistItemInputModel = InputModel<
 // Type definitions for /default/checklist / Checklist Item Template (checklist_item_template)
 
 export interface ChecklistItemTemplateFields {
+  assignTo?: string | null;
   daysDueAfterEventDate: number;
   name: string;
+  positionAssignedTo?: string | null;
 }
 
 export interface ChecklistItemTemplateRelations {
+  assignee?: EmployeeModel | null;
   checklistTemplate: ChecklistTemplateModel;
 }
 
 export interface ChecklistItemTemplateInputRelations {
+  assignee?: EmployeeInputModel | null;
   checklistTemplate: ChecklistTemplateInputModel;
 }
 
@@ -2242,6 +2246,7 @@ export interface EmployeeFields {
 export interface EmployeeRelations {
   accidents?: AccidentModel[];
   asset?: EquipmentModel | null;
+  assignedChecklistItemTemplates?: ChecklistItemTemplateModel[];
   assignedChecklistItems?: ChecklistItemModel[];
   assignedCorrectiveActions?: CorrectiveActionModel[];
   awards?: EmployeeAwardModel[];
@@ -2313,6 +2318,7 @@ export interface EmployeeRelations {
 export interface EmployeeInputRelations {
   accidents?: AccidentInputModel[];
   asset?: EquipmentInputModel | null;
+  assignedChecklistItemTemplates?: ChecklistItemTemplateInputModel[];
   assignedChecklistItems?: ChecklistItemInputModel[];
   assignedCorrectiveActions?: CorrectiveActionInputModel[];
   awards?: EmployeeAwardInputModel[];
