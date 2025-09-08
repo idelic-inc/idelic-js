@@ -5,12 +5,12 @@ __metadata:
   version: 8
   cacheKey: 10c0
 
-"@idelic/safety-net@npm:^2.1.4":
-  version: 2.1.4
-  resolution: "@idelic/safety-net@npm:2.1.4"
+"@idelic/safety-net@npm:^2.1.5":
+  version: 2.1.5
+  resolution: "@idelic/safety-net@npm:2.1.5"
   dependencies:
     source-map-support: "npm:^0.5.13"
-  checksum: 10c0/b6c512973fcb27866b9e084cf63eb94bceb032a78f4025ab8089d2592a95030bf68fb5c90606bd70063d1737a28ef7eebf6f8bfee58a23b29483cd1754b7bcc2
+  checksum: 10c0/d4564730a0f09d7066e1366cd3bc710e8f761d156bad589700f3023ecc65e308f3c2646ccf203d2cc0bbc756d22afaaab7558d4e621f1c02bd2466c5934e1295
   languageName: node
   linkType: hard
 
@@ -18,7 +18,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@idelic/safety-suite-api@workspace:."
   dependencies:
-    "@idelic/safety-net": "npm:^2.1.4"
+    "@idelic/safety-net": "npm:^2.1.5"
     react: "npm:^16.10.2"
     source-map-support: "npm:^0.5.13"
     typescript: "npm:4.1.2"
