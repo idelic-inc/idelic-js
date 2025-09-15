@@ -428,7 +428,9 @@ export interface ChecklistItemTemplateInputRelations {
   checklistTemplate: ChecklistTemplateInputModel;
 }
 
-export interface ChecklistItemTemplateComputations {}
+export interface ChecklistItemTemplateComputations {
+  assignmentTarget: any;
+}
 
 export type ChecklistItemTemplateModel = Model<
   ChecklistItemTemplateFields,
@@ -2547,6 +2549,7 @@ export interface EnforcementFields {
   locationType?: string | null;
   otherLocationType?: string;
   performedBy?: string | null;
+  postedDate?: number | null;
   proNumber?: string;
   scaleHouse?: string | null;
   source?: string | null;
