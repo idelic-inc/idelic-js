@@ -370,6 +370,7 @@ export type ChecklistInputModel = InputModel<
 // Type definitions for /default/checklist / Checklist Item (checklist_item)
 
 export interface ChecklistItemFields {
+  assignmentTarget?: string;
   completedById?: number | null;
   completedByName?: string;
   dateCompleted?: number | null;
@@ -446,8 +447,9 @@ export type ChecklistItemTemplateInputModel = InputModel<
 // Type definitions for /default/checklist / Checklist Template (checklist_template)
 
 export interface ChecklistTemplateFields {
-  applicableDatasets?: string[];
+  applicableDatasets: string[];
   name: string;
+  status?: string | null;
 }
 
 export interface ChecklistTemplateRelations {
@@ -960,12 +962,14 @@ export interface ClaimFields {
   city?: string;
   claimStatus?: string | null;
   claimType?: string | null;
+  claimantDescription?: string;
   closingDate?: number | null;
   companyName?: string;
   costCenter?: string | null;
   dateOfNextAction?: number | null;
   dateSubmittedToInsurance?: number | null;
   description?: string;
+  email?: string;
   fullName?: string;
   insuranceClaimNumber?: string;
   insuranceCompany?: string;
@@ -979,6 +983,7 @@ export interface ClaimFields {
   state?: string | null;
   submittedToInsurance?: string | null;
   vehicleColor?: string;
+  vehicleDescription?: string;
   vehicleLicense?: string;
   vehicleMake?: string;
   vehicleModel?: string;
