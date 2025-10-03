@@ -348,6 +348,7 @@ export interface ChecklistInputRelations {
 }
 
 export interface ChecklistComputations {
+  eventTemplateAlias: string;
   numberOfCompletedItems: number | null;
   numberOfExemptItems: number | null;
   numberOfItems: number | null;
@@ -560,7 +561,11 @@ export interface DotUnitInputRelations {
 
 export interface DotUnitComputations {
   activeDriverCount: any;
+  averageDriverWatchListScore: number | null;
   inactiveDriverCount: any;
+  lastCompletedPDP: string;
+  lastCompletedPdpDate: number | null;
+  numberOfScoredEmployees: number | null;
 }
 
 export type DotUnitModel = Model<
@@ -1024,6 +1029,7 @@ export interface ClaimComputations {
   disposalExpensePaid: number | null;
   disposalExpenseRemaining: number | null;
   disposalExpenseReserves: number | null;
+  eventType: string;
   generalExpensePaid: number | null;
   generalExpenseRemaining: number | null;
   generalExpenseReserves: number | null;
@@ -1065,6 +1071,7 @@ export interface CorrectiveActionFields {
   criticalEventCompleted?: boolean;
   criticalEventRuleIds?: string[];
   criticalEventRuleName?: string;
+  criticalEventWorkflowStatus?: string | null;
   dateOfAction?: number | null;
   description?: string;
   disciplinaryAction?: string | null;
