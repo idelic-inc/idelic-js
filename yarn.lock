@@ -972,7 +972,7 @@ __metadata:
 
 "@idelic/formatron-react@file:packages/formatron-react::locator=idelic%40workspace%3A.":
   version: 5.0.0
-  resolution: "@idelic/formatron-react@file:packages/formatron-react#packages/formatron-react::hash=319f2e&locator=idelic%40workspace%3A."
+  resolution: "@idelic/formatron-react@file:packages/formatron-react#packages/formatron-react::hash=d4168d&locator=idelic%40workspace%3A."
   dependencies:
     "@fluentui/react": "npm:^7.145.0"
     "@fluentui/react-hooks": "npm:^8.3.3"
@@ -985,7 +985,7 @@ __metadata:
     "@idelic/formatron": 1.0.0-alpha.0
     react: ^16.13.1
     react-dom: ^16.13.1
-  checksum: 10c0/fcc204a7bf87926563c3397a9f2d4127faddf0ca0740c6b040f15824eb4c131be8a84d9ba015888ac6c6b0f7b9d2fe191ea3390e8906bc21bc63ce37d55a10c9
+  checksum: 10c0/cf321e9615c5cb240e69400d740dd45a08ed54c6c9b848f1e96e93050591baf41aa9e8beb985b2d9d47d1eb0d7fdda070b247534c84620bf6d66ca8508cbe77b
   languageName: node
   linkType: hard
 
@@ -1009,13 +1009,13 @@ __metadata:
 
 "@idelic/formatron@file:packages/formatron::locator=idelic%40workspace%3A.":
   version: 2.0.6
-  resolution: "@idelic/formatron@file:packages/formatron#packages/formatron::hash=d528f0&locator=idelic%40workspace%3A."
+  resolution: "@idelic/formatron@file:packages/formatron#packages/formatron::hash=4fe2d4&locator=idelic%40workspace%3A."
   dependencies:
     idelic-safety-suite-api: "npm:^7.0.1"
     immutable: "npm:^4.0.0-rc.12"
     lodash: "npm:^4.17.20"
     moment: "npm:^2.29.4"
-  checksum: 10c0/c171745d9ec5a2aad1e56de22e709b15f79460a2486d3a9101af9f50fde4471724fd301e27790ba78f2ae95474ab33990e87f8f8e96babfe1743cc0fb7a97bcf
+  checksum: 10c0/99e05189f4d0f0380b38657854706a335968824a54e3504736b65b9685697b8ce2a674ee130fd8f24b52774a31a47fadc73fc8cff28152a556f5624fc55b4127
   languageName: node
   linkType: hard
 
@@ -1032,10 +1032,10 @@ __metadata:
 
 "@idelic/safety-net@file:packages/safety-net::locator=idelic%40workspace%3A.":
   version: 2.1.5
-  resolution: "@idelic/safety-net@file:packages/safety-net#packages/safety-net::hash=47e2ea&locator=idelic%40workspace%3A."
+  resolution: "@idelic/safety-net@file:packages/safety-net#packages/safety-net::hash=db5fdc&locator=idelic%40workspace%3A."
   dependencies:
     source-map-support: "npm:^0.5.13"
-  checksum: 10c0/273e1a7b56c1803f67aaeb827e77657b8ece1518dd2462baad376e96fd593799273554fd66202ff237b438d9774db2101321443261c2bd5ce5eec6a7c267fd3b
+  checksum: 10c0/8ad0ae238caaa5c4c4cc2759e59bdd5dedc4dc2caefab53c652b6a299211283fda86de76f795c3c9d5443a339372da6f2eb00586062d7ff7c36dd22e72d50546
   languageName: node
   linkType: hard
 
@@ -1048,8 +1048,8 @@ __metadata:
   linkType: soft
 
 "@idelic/safety-suite-api@file:packages/safety-suite-api::locator=idelic%40workspace%3A.":
-  version: 59.2.1
-  resolution: "@idelic/safety-suite-api@file:packages/safety-suite-api#packages/safety-suite-api::hash=f424ab&locator=idelic%40workspace%3A."
+  version: 59.4.2
+  resolution: "@idelic/safety-suite-api@file:packages/safety-suite-api#packages/safety-suite-api::hash=5e1628&locator=idelic%40workspace%3A."
   dependencies:
     "@idelic/safety-net": "npm:^2.1.5"
     react: "npm:^16.10.2"
@@ -1060,7 +1060,7 @@ __metadata:
   dependenciesMeta:
     react:
       optional: true
-  checksum: 10c0/887d061653d37f7df6156714f757af63b6953c6a0cb2cfa339401ead28981b8a8107ca936d8976d8c6b8dc7d370600c7f731f0601ff37567148709be9739e331
+  checksum: 10c0/73e9adc66e91758ab969ceb9ecd3911fe407fe1756edebbea3e1e43e36f0438ac9d792f28e780f0d1d13fd8444f990edd1da61ddba7b16322dc50337d69a83ba
   languageName: node
   linkType: hard
 
@@ -5157,7 +5157,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^7.1.1, glob@npm:^7.1.2, glob@npm:^7.1.3, glob@npm:^7.1.4, glob@npm:^7.1.6":
+"glob@npm:^10.5.0":
+  version: 10.5.0
+  resolution: "glob@npm:10.5.0"
+  dependencies:
+    foreground-child: "npm:^3.1.0"
+    jackspeak: "npm:^3.1.2"
+    minimatch: "npm:^9.0.4"
+    minipass: "npm:^7.1.2"
+    package-json-from-dist: "npm:^1.0.0"
+    path-scurry: "npm:^1.11.1"
+  bin:
+    glob: dist/esm/bin.mjs
+  checksum: 10c0/100705eddbde6323e7b35e1d1ac28bcb58322095bd8e63a7d0bef1a2cdafe0d0f7922a981b2b48369a4f8c1b077be5c171804534c3509dfe950dde15fbe6d828
+  languageName: node
+  linkType: hard
+
+"glob@npm:^7.1.1, glob@npm:^7.1.2, glob@npm:^7.1.3, glob@npm:^7.1.4":
   version: 7.2.0
   resolution: "glob@npm:7.2.0"
   dependencies:
@@ -5495,9 +5511,8 @@ __metadata:
     eslint-plugin-prettier: "npm:^3.1.4"
     eslint-plugin-react: "npm:^7.21.5"
     eslint-plugin-simple-import-sort: "npm:^5.0.3"
-    glob: "npm:^7.1.6"
+    glob: "npm:^10.5.0"
     husky: "npm:^4.3.0"
-    immutable: "npm:^4.0.0-rc.12"
     jest: "npm:^27.0.4"
     lint-staged: "npm:^10.5.0"
     luxon: "npm:^2.5.2"
@@ -5995,6 +6010,19 @@ __metadata:
     "@pkgjs/parseargs":
       optional: true
   checksum: 10c0/f01d8f972d894cd7638bc338e9ef5ddb86f7b208ce177a36d718eac96ec86638a6efa17d0221b10073e64b45edc2ce15340db9380b1f5d5c5d000cbc517dc111
+  languageName: node
+  linkType: hard
+
+"jackspeak@npm:^3.1.2":
+  version: 3.4.3
+  resolution: "jackspeak@npm:3.4.3"
+  dependencies:
+    "@isaacs/cliui": "npm:^8.0.2"
+    "@pkgjs/parseargs": "npm:^0.11.0"
+  dependenciesMeta:
+    "@pkgjs/parseargs":
+      optional: true
+  checksum: 10c0/6acc10d139eaefdbe04d2f679e6191b3abf073f111edf10b1de5302c97ec93fffeb2fdd8681ed17f16268aa9dd4f8c588ed9d1d3bffbbfa6e8bf897cbb3149b9
   languageName: node
   linkType: hard
 
@@ -6930,7 +6958,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lru-cache@npm:^10.2.2":
+"lru-cache@npm:^10.2.0, lru-cache@npm:^10.2.2":
   version: 10.4.3
   resolution: "lru-cache@npm:10.4.3"
   checksum: 10c0/ebd04fbca961e6c1d6c0af3799adcc966a1babe798f685bb84e6599266599cd95d94630b10262f5424539bc4640107e8a33aa28585374abf561d30d16f4b39fb
@@ -7841,6 +7869,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"package-json-from-dist@npm:^1.0.0":
+  version: 1.0.1
+  resolution: "package-json-from-dist@npm:1.0.1"
+  checksum: 10c0/62ba2785eb655fec084a257af34dbe24292ab74516d6aecef97ef72d4897310bc6898f6c85b5cd22770eaa1ce60d55a0230e150fb6a966e3ecd6c511e23d164b
+  languageName: node
+  linkType: hard
+
 "pacote@npm:^21.0.0":
   version: 21.0.0
   resolution: "pacote@npm:21.0.0"
@@ -8014,6 +8049,16 @@ __metadata:
     lru-cache: "npm:^9.1.1 || ^10.0.0"
     minipass: "npm:^5.0.0 || ^6.0.2 || ^7.0.0"
   checksum: 10c0/e5dc78a7348d25eec61ab166317e9e9c7b46818aa2c2b9006c507a6ff48c672d011292d9662527213e558f5652ce0afcc788663a061d8b59ab495681840c0c1e
+  languageName: node
+  linkType: hard
+
+"path-scurry@npm:^1.11.1":
+  version: 1.11.1
+  resolution: "path-scurry@npm:1.11.1"
+  dependencies:
+    lru-cache: "npm:^10.2.0"
+    minipass: "npm:^5.0.0 || ^6.0.2 || ^7.0.0"
+  checksum: 10c0/32a13711a2a505616ae1cc1b5076801e453e7aae6ac40ab55b388bb91b9d0547a52f5aaceff710ea400205f18691120d4431e520afbe4266b836fadede15872d
   languageName: node
   linkType: hard
 
