@@ -79,10 +79,12 @@
     "ssri": "^8.0.1",
     "y18n": "^5.0.8",
     "lodash": "^4.17.21",
-    "tar": "^6.1.11",
+    "tar": "^7.5.11",
     "micromatch": "^4.0.8",
     "cross-spawn": "^7.0.5",
-    "glob": "^10.5.0"
+    "glob": "^10.5.0",
+    "minimatch": "^10.2.3",
+    "immutable": "^4.3.8"
   },
   "packageManager": "yarn@4.10.2"
 }
