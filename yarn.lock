@@ -972,20 +972,20 @@ __metadata:
 
 "@idelic/formatron-react@file:packages/formatron-react::locator=idelic%40workspace%3A.":
   version: 5.0.0
-  resolution: "@idelic/formatron-react@file:packages/formatron-react#packages/formatron-react::hash=695f95&locator=idelic%40workspace%3A."
+  resolution: "@idelic/formatron-react@file:packages/formatron-react#packages/formatron-react::hash=a5da3d&locator=idelic%40workspace%3A."
   dependencies:
     "@fluentui/react": "npm:^7.145.0"
     "@fluentui/react-hooks": "npm:^8.3.3"
     "@idelic/formatron": "npm:^2.0.6"
     "@types/react": "npm:^16.9.51"
     formik: "npm:^2.2.0"
-    lodash: "npm:^4.17.20"
+    lodash: "npm:^4.18.0"
     moment: "npm:^2.29.4"
   peerDependencies:
     "@idelic/formatron": 1.0.0-alpha.0
     react: ^16.13.1
     react-dom: ^16.13.1
-  checksum: 10c0/3033f1334c2638a2bfb45c8257c6de8885d0a2c254de000995a03683def9d6bc6623a4594992c5c497de4b36587c8b2d8e464e5fe4590537353af22dc78bc57b
+  checksum: 10c0/4c56aae324ab4343e93fa90135e53571fbbc9309f60eb5fb5658565909663c6c3b3da032e01428aeb6984b0ee152c1c61c1d78fb9431e3ed28526d515910e3c3
   languageName: node
   linkType: hard
 
@@ -998,7 +998,7 @@ __metadata:
     "@idelic/formatron": "npm:^2.0.6"
     "@types/react": "npm:^16.9.51"
     formik: "npm:^2.2.0"
-    lodash: "npm:^4.17.20"
+    lodash: "npm:^4.18.0"
     moment: "npm:^2.29.4"
   peerDependencies:
     "@idelic/formatron": 1.0.0-alpha.0
@@ -1009,13 +1009,13 @@ __metadata:
 
 "@idelic/formatron@file:packages/formatron::locator=idelic%40workspace%3A.":
   version: 2.0.6
-  resolution: "@idelic/formatron@file:packages/formatron#packages/formatron::hash=b22bb6&locator=idelic%40workspace%3A."
+  resolution: "@idelic/formatron@file:packages/formatron#packages/formatron::hash=ed65b3&locator=idelic%40workspace%3A."
   dependencies:
     idelic-safety-suite-api: "npm:^7.0.1"
     immutable: "npm:^4.3.8"
-    lodash: "npm:^4.17.20"
+    lodash: "npm:^4.18.0"
     moment: "npm:^2.29.4"
-  checksum: 10c0/658103ddd6336c8bfb55d0060087a27c4febe369a35b98da4f84e9948ed1fcdcecefa119ea59e8c69baf8f4da55b19d466d99bac48b085f9b57bd42ff349abdd
+  checksum: 10c0/d3994e5c84ae2561da276e176a832e60651db8c2fdaf89aebf396a3c766e17da3f81880886bf1ca55f47100c283f7234e5a9547599ee0049a0c5a1fd59e46e75
   languageName: node
   linkType: hard
 
@@ -1025,7 +1025,7 @@ __metadata:
   dependencies:
     idelic-safety-suite-api: "npm:^7.0.1"
     immutable: "npm:^4.3.8"
-    lodash: "npm:^4.17.20"
+    lodash: "npm:^4.18.0"
     moment: "npm:^2.29.4"
   languageName: unknown
   linkType: soft
@@ -1049,7 +1049,7 @@ __metadata:
 
 "@idelic/safety-suite-api@file:packages/safety-suite-api::locator=idelic%40workspace%3A.":
   version: 59.4.2
-  resolution: "@idelic/safety-suite-api@file:packages/safety-suite-api#packages/safety-suite-api::hash=f0fc33&locator=idelic%40workspace%3A."
+  resolution: "@idelic/safety-suite-api@file:packages/safety-suite-api#packages/safety-suite-api::hash=f8874e&locator=idelic%40workspace%3A."
   dependencies:
     "@idelic/safety-net": "npm:^2.1.5"
     react: "npm:^16.10.2"
@@ -1060,7 +1060,7 @@ __metadata:
   dependenciesMeta:
     react:
       optional: true
-  checksum: 10c0/47da39440bdb3191b1eda89571a1730126e70a06f5e7430e7fdf621eae2946b53abc11d1646d4991d6e7e3cacf744f484862002beb7dad55ad4bc5098865cb4a
+  checksum: 10c0/90bd622c8ac894b778a290db93217eee2abf81c65a178f6a37f2ce320cfc13a5aec809395fc02550e50621c8b75a5a30deb55a9a4ed1942ca83c9d6299f8c000
   languageName: node
   linkType: hard
 
@@ -4883,10 +4883,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flatted@npm:^2.0.0":
-  version: 2.0.2
-  resolution: "flatted@npm:2.0.2"
-  checksum: 10c0/1895ac3971c3a71b0384c6d8b8ef1f217dfe7e72bc7dabc51ef532772b761e626dd7cae53a729b9e65389409d7f03fd84f1900bde4f9e719ed04e57e8510e0d4
+"flatted@npm:^3.4.2":
+  version: 3.4.2
+  resolution: "flatted@npm:3.4.2"
+  checksum: 10c0/a65b67aae7172d6cdf63691be7de6c5cd5adbdfdfe2e9da1a09b617c9512ed794037741ee53d93114276bff3f93cd3b0d97d54f9b316e1e4885dde6e9ffdf7ed
   languageName: node
   linkType: hard
 
@@ -5185,12 +5185,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"handlebars@npm:^4.7.7":
-  version: 4.7.7
-  resolution: "handlebars@npm:4.7.7"
+"handlebars@npm:^4.7.9":
+  version: 4.7.9
+  resolution: "handlebars@npm:4.7.9"
   dependencies:
     minimist: "npm:^1.2.5"
-    neo-async: "npm:^2.6.0"
+    neo-async: "npm:^2.6.2"
     source-map: "npm:^0.6.1"
     uglify-js: "npm:^3.1.4"
     wordwrap: "npm:^1.0.0"
@@ -5199,7 +5199,7 @@ __metadata:
       optional: true
   bin:
     handlebars: bin/handlebars
-  checksum: 10c0/4c0913fc0018a2a2e358ee94e4fe83f071762b8bec51a473d187e6642e94e569843adcf550ffe329554c63ad450c062f3a05447bd2e3fff5ebfe698e214225c6
+  checksum: 10c0/22f8105a7e68e81aff2662bb434edf05f757d21d850731d71cec886d69c10cd33d3c43e34b2892968ec62de8241611851d3d0674c8ef324ea3e01dc66262faa9
   languageName: node
   linkType: hard
 
@@ -6822,17 +6822,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash-es@npm:^4.17.14":
-  version: 4.17.21
-  resolution: "lodash-es@npm:4.17.21"
-  checksum: 10c0/fb407355f7e6cd523a9383e76e6b455321f0f153a6c9625e21a8827d10c54c2a2341bd2ae8d034358b60e07325e1330c14c224ff582d04612a46a4f0479ff2f2
+"lodash-es@npm:^4.18.0":
+  version: 4.18.1
+  resolution: "lodash-es@npm:4.18.1"
+  checksum: 10c0/35d4dcf87ef07f8d090f409447575800108057e360b445f590d0d25d09e3d1e33a163d2fc100d4d072b0f901d5e2fc533cd7c4bfd8eeb38a06abec693823c8b8
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.21":
-  version: 4.17.21
-  resolution: "lodash@npm:4.17.21"
-  checksum: 10c0/d8cbea072bb08655bb4c989da418994b073a608dffa608b09ac04b43a791b12aeae7cd7ad919aa4c925f33b48490b5cfe6c1f71d827956071dae2e7bb3a6b74c
+"lodash@npm:^4.18.0":
+  version: 4.18.1
+  resolution: "lodash@npm:4.18.1"
+  checksum: 10c0/757228fc68805c59789e82185135cf85f05d0b2d3d54631d680ca79ec21944ec8314d4533639a14b8bcfbd97a517e78960933041a5af17ecb693ec6eecb99a27
   languageName: node
   linkType: hard
 
@@ -7265,7 +7265,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"neo-async@npm:^2.6.0":
+"neo-async@npm:^2.6.2":
   version: 2.6.2
   resolution: "neo-async@npm:2.6.2"
   checksum: 10c0/c2f5a604a54a8ec5438a342e1f356dff4bc33ccccdb6dc668d94fe8e5eccfc9d2c2eea6064b0967a767ba63b33763f51ccf2cd2441b461a7322656c1f06b3f5d
