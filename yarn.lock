@@ -972,7 +972,7 @@ __metadata:
 
 "@idelic/formatron-react@file:packages/formatron-react::locator=idelic%40workspace%3A.":
   version: 5.0.0
-  resolution: "@idelic/formatron-react@file:packages/formatron-react#packages/formatron-react::hash=a5da3d&locator=idelic%40workspace%3A."
+  resolution: "@idelic/formatron-react@file:packages/formatron-react#packages/formatron-react::hash=4130e5&locator=idelic%40workspace%3A."
   dependencies:
     "@fluentui/react": "npm:^7.145.0"
     "@fluentui/react-hooks": "npm:^8.3.3"
@@ -985,7 +985,7 @@ __metadata:
     "@idelic/formatron": 1.0.0-alpha.0
     react: ^16.13.1
     react-dom: ^16.13.1
-  checksum: 10c0/4c56aae324ab4343e93fa90135e53571fbbc9309f60eb5fb5658565909663c6c3b3da032e01428aeb6984b0ee152c1c61c1d78fb9431e3ed28526d515910e3c3
+  checksum: 10c0/600d0333e1ce2c3a4e21eff32a83f31c9d5e06d5dcc45cba560b3362b26ac2013dd1e4ca13fdc60935305b0c0572c42a21c1da10c36a622799b1173d5a9bb5f4
   languageName: node
   linkType: hard
 
@@ -1009,13 +1009,13 @@ __metadata:
 
 "@idelic/formatron@file:packages/formatron::locator=idelic%40workspace%3A.":
   version: 2.0.6
-  resolution: "@idelic/formatron@file:packages/formatron#packages/formatron::hash=ed65b3&locator=idelic%40workspace%3A."
+  resolution: "@idelic/formatron@file:packages/formatron#packages/formatron::hash=d2b088&locator=idelic%40workspace%3A."
   dependencies:
     idelic-safety-suite-api: "npm:^7.0.1"
     immutable: "npm:^4.3.8"
     lodash: "npm:^4.18.0"
     moment: "npm:^2.29.4"
-  checksum: 10c0/d3994e5c84ae2561da276e176a832e60651db8c2fdaf89aebf396a3c766e17da3f81880886bf1ca55f47100c283f7234e5a9547599ee0049a0c5a1fd59e46e75
+  checksum: 10c0/2f65ea2829730bbe4e2aec2d0c944ab4e926eb075c793f129574bf9cb4db051efda083c8fa882fa4fc8e506c894c8aa67d5db80467a813ce9eabd7036cba77e2
   languageName: node
   linkType: hard
 
@@ -7967,31 +7967,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"picomatch@npm:^2.0.4, picomatch@npm:^2.2.3":
-  version: 2.3.0
-  resolution: "picomatch@npm:2.3.0"
-  checksum: 10c0/a65bde78212368e16afb82429a0ea033d20a836270446acb53ec6e31d939bccf1213f788bc49361f7aff47b67c1fb74d898f99964f67f26ca07a3cd815ddbcbb
-  languageName: node
-  linkType: hard
-
-"picomatch@npm:^2.2.1":
-  version: 2.2.2
-  resolution: "picomatch@npm:2.2.2"
-  checksum: 10c0/0fa37cfc2ceaf7cc1021ec1936841351a2fcbcfbb50540994a4531c77ac613dd78ef9d2ee93b1afc18c02642a9a51e5115c728427fc1f1df2b5d231b720569f0
-  languageName: node
-  linkType: hard
-
-"picomatch@npm:^2.3.1":
-  version: 2.3.1
-  resolution: "picomatch@npm:2.3.1"
-  checksum: 10c0/26c02b8d06f03206fc2ab8d16f19960f2ff9e81a658f831ecb656d8f17d9edc799e8364b1f4a7873e89d9702dff96204be0fa26fe4181f6843f040f819dac4be
-  languageName: node
-  linkType: hard
-
-"picomatch@npm:^4.0.2":
-  version: 4.0.2
-  resolution: "picomatch@npm:4.0.2"
-  checksum: 10c0/7c51f3ad2bb42c776f49ebf964c644958158be30d0a510efd5a395e8d49cb5acfed5b82c0c5b365523ce18e6ab85013c9ebe574f60305892ec3fa8eee8304ccc
+"picomatch@npm:>=2.3.2":
+  version: 4.0.4
+  resolution: "picomatch@npm:4.0.4"
+  checksum: 10c0/e2c6023372cc7b5764719a5ffb9da0f8e781212fa7ca4bd0562db929df8e117460f00dff3cb7509dacfc06b86de924b247f504d0ce1806a37fac4633081466b0
   languageName: node
   linkType: hard
 
