@@ -75,6 +75,8 @@
     "@idelic/safety-suite-api": "file:packages/safety-suite-api"
   },
   "resolutions": {
+    "ip-address": "^10.2.0",
+    "sigstore": "^4.1.1",
     "handlebars": "^4.7.9",
     "ssri": "^8.0.1",
     "y18n": "^5.0.8",
