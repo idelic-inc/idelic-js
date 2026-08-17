@@ -979,7 +979,7 @@ __metadata:
 
 "@idelic/formatron-react@file:packages/formatron-react::locator=idelic%40workspace%3A.":
   version: 5.0.0
-  resolution: "@idelic/formatron-react@file:packages/formatron-react#packages/formatron-react::hash=5fa814&locator=idelic%40workspace%3A."
+  resolution: "@idelic/formatron-react@file:packages/formatron-react#packages/formatron-react::hash=041101&locator=idelic%40workspace%3A."
   dependencies:
     "@fluentui/react": "npm:^7.145.0"
     "@fluentui/react-hooks": "npm:^8.3.3"
@@ -992,7 +992,7 @@ __metadata:
     "@idelic/formatron": 1.0.0-alpha.0
     react: ^16.13.1
     react-dom: ^16.13.1
-  checksum: 10c0/88682b781fe4ea6658e6edef56af0da136464679649a329934e28f26fe7396c5b4fc2ae7f9ec115695cc301522fe8f69c1533793bd60a465d10111731a7bd2fe
+  checksum: 10c0/d2fbc9933fcc1890754257254b750acaf374484e042a8d7e4be8e49bc8a13d23fab39141ceff5cb455913c6794eb5bea848d25242ae5843250e74c142495af7a
   languageName: node
   linkType: hard
 
@@ -1016,13 +1016,13 @@ __metadata:
 
 "@idelic/formatron@file:packages/formatron::locator=idelic%40workspace%3A.":
   version: 2.0.6
-  resolution: "@idelic/formatron@file:packages/formatron#packages/formatron::hash=00c98b&locator=idelic%40workspace%3A."
+  resolution: "@idelic/formatron@file:packages/formatron#packages/formatron::hash=1e9d48&locator=idelic%40workspace%3A."
   dependencies:
     idelic-safety-suite-api: "npm:^7.0.1"
-    immutable: "npm:^4.3.8"
+    immutable: "npm:^4.3.9"
     lodash: "npm:^4.18.0"
     moment: "npm:^2.29.4"
-  checksum: 10c0/7d1eee2aea021067917c88447d6fc60a4d8d08e302dddefcf3e5d5709e7b64e85f244d1337795730e7794fa53545f01eceb43db7b9a54722fa02cc665df4a512
+  checksum: 10c0/3e793aef8656ab7ae0d558820bc9f3cc695af593f387032fbfbc4cbdf3af7bf0f1ba3af5db7a37d811b305047fcfc2253164c0d2d5f07aa40f3c2482fdfe175c
   languageName: node
   linkType: hard
 
@@ -1031,7 +1031,7 @@ __metadata:
   resolution: "@idelic/formatron@workspace:packages/formatron"
   dependencies:
     idelic-safety-suite-api: "npm:^7.0.1"
-    immutable: "npm:^4.3.8"
+    immutable: "npm:^4.3.9"
     lodash: "npm:^4.18.0"
     moment: "npm:^2.29.4"
   languageName: unknown
@@ -1039,10 +1039,10 @@ __metadata:
 
 "@idelic/safety-net@file:packages/safety-net::locator=idelic%40workspace%3A.":
   version: 2.1.5
-  resolution: "@idelic/safety-net@file:packages/safety-net#packages/safety-net::hash=45f5f1&locator=idelic%40workspace%3A."
+  resolution: "@idelic/safety-net@file:packages/safety-net#packages/safety-net::hash=971e65&locator=idelic%40workspace%3A."
   dependencies:
     source-map-support: "npm:^0.5.13"
-  checksum: 10c0/de7f84f6595bd9fc4049216d3ea9fe15958413fc7d9d8ed8ccee141119b0bbc484bef23305770c949522a110b297b5f958fb077cdf7e57fd6673c3596c0f7f9a
+  checksum: 10c0/ccaf534e92782b5b1b358a61a46de9b57433091f3930e638349535a17e3290202bea0fff3777757e4cb332354f1b6d247e0775dac90723668d616ce0f4dedaac
   languageName: node
   linkType: hard
 
@@ -1056,7 +1056,7 @@ __metadata:
 
 "@idelic/safety-suite-api@file:packages/safety-suite-api::locator=idelic%40workspace%3A.":
   version: 59.4.2
-  resolution: "@idelic/safety-suite-api@file:packages/safety-suite-api#packages/safety-suite-api::hash=eb585b&locator=idelic%40workspace%3A."
+  resolution: "@idelic/safety-suite-api@file:packages/safety-suite-api#packages/safety-suite-api::hash=809352&locator=idelic%40workspace%3A."
   dependencies:
     "@idelic/safety-net": "npm:^2.1.5"
     react: "npm:^16.10.2"
@@ -1067,7 +1067,7 @@ __metadata:
   dependenciesMeta:
     react:
       optional: true
-  checksum: 10c0/508847fd61cfcd0d0a685640d1a018c6062fc2f9a555677f1023477b68149b38db9583ebe323820c237914cb7e05ffb0524a31723a51f24e3b9f32c238c87242
+  checksum: 10c0/57274aa0ed94df4679b4306f8b739f8e98affadcd4dbb97972627bf0cf95c2967db6fb689f520baed5b2309652f2631855be63c50e6bb0c49800ec8a34eef1b0
   languageName: node
   linkType: hard
 
@@ -2972,15 +2972,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"argparse@npm:^1.0.7":
-  version: 1.0.10
-  resolution: "argparse@npm:1.0.10"
-  dependencies:
-    sprintf-js: "npm:~1.0.2"
-  checksum: 10c0/b2972c5c23c63df66bca144dbc65d180efa74f25f8fd9b7d9a0a6c88ae839db32df3d54770dcb6460cf840d232b60695d1a6b1053f599d84e73f7437087712de
-  languageName: node
-  linkType: hard
-
 "argparse@npm:^2.0.1":
   version: 2.0.1
   resolution: "argparse@npm:2.0.1"
@@ -3218,12 +3209,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"brace-expansion@npm:^5.0.5":
-  version: 5.0.6
-  resolution: "brace-expansion@npm:5.0.6"
+"brace-expansion@npm:^5.0.9":
+  version: 5.0.9
+  resolution: "brace-expansion@npm:5.0.9"
   dependencies:
     balanced-match: "npm:^4.0.2"
-  checksum: 10c0/8c919869b90f61d533b341d3340be5ee4413232ea89b8246cbc2f38eb014f1d8182785c98a006eaf6111d02dc9eeffefdc240d5ac158625b2ed084dccd4bbf9b
+  checksum: 10c0/3dea38884a1c3c8b1c9c44a7402a0c76fca460f70cffb3127242b0b4cbf4472019e022ade021eec44838ff19f1dac2625dfd11dd459d7e1e055b0698a8d52fec
   languageName: node
   linkType: hard
 
@@ -4708,7 +4699,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esprima@npm:^4.0.0, esprima@npm:^4.0.1":
+"esprima@npm:^4.0.1":
   version: 4.0.1
   resolution: "esprima@npm:4.0.1"
   bin:
@@ -5699,10 +5690,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"immutable@npm:^4.3.8":
-  version: 4.3.8
-  resolution: "immutable@npm:4.3.8"
-  checksum: 10c0/3de58996305a0faf6ef3fc0685f996c42653ad757760214f5aec7d4a6b59ea7abb882522c5f9a61776fae88c0b45e08eb77cbded5a4f57745ec7c63f9642e44b
+"immutable@npm:^4.3.9":
+  version: 4.3.9
+  resolution: "immutable@npm:4.3.9"
+  checksum: 10c0/394faa90ac8f2f62824e6c639705efdb8313787d6bc7864e28a48ee36aa2ba4b724eaf54a701ad991c278967a412b09143dd24fd19e3e2b0204eb481a5afa6ef
   languageName: node
   linkType: hard
 
@@ -5796,10 +5787,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ip-address@npm:^10.2.0":
-  version: 10.2.0
-  resolution: "ip-address@npm:10.2.0"
-  checksum: 10c0/5a00aada6e922c9c69dfc800ed5d0fa3348675ebdeed0e1575f503f27ca385b5f534363c9af7ad1daf64c1f1409388cdd3cc2e9b9b0fe1c924a431378d55075a
+"ip-address@npm:^10.3.1":
+  version: 10.5.0
+  resolution: "ip-address@npm:10.5.0"
+  checksum: 10c0/c6616bc99c90b552dad2beb850ca697c1ea3e2b89662d652a4439cd72a549b0c9af100a54be0d25be86599e2b089db87ef5303157d142e5b4c21bd2a1301dfa7
   languageName: node
   linkType: hard
 
@@ -6664,26 +6655,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-yaml@npm:^3.13.1":
-  version: 3.14.0
-  resolution: "js-yaml@npm:3.14.0"
-  dependencies:
-    argparse: "npm:^1.0.7"
-    esprima: "npm:^4.0.0"
-  bin:
-    js-yaml: bin/js-yaml.js
-  checksum: 10c0/9b21ab19f03aae734c83e5c8a3d5e6f80bab5ce0e24bdbb186e531fb0887ff0034affd96ae3eed993c33e33bc606a6b78389207b853df97094393804d6c37184
-  languageName: node
-  linkType: hard
-
-"js-yaml@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "js-yaml@npm:4.1.0"
+"js-yaml@npm:^4.3.1":
+  version: 4.3.1
+  resolution: "js-yaml@npm:4.3.1"
   dependencies:
     argparse: "npm:^2.0.1"
   bin:
     js-yaml: bin/js-yaml.js
-  checksum: 10c0/184a24b4eaacfce40ad9074c64fd42ac83cf74d8c8cd137718d456ced75051229e5061b8633c3366b8aada17945a7a356b337828c19da92b51ae62126575018f
+  checksum: 10c0/13c500ca322e0c3f8c81686e6ecda96d2ea37b45247a420c17c7db36932d6965cc27391abc2d1a104501600e7f0d947a5f8b7be6db619c4fefa87901b3512807
   languageName: node
   linkType: hard
 
@@ -9084,13 +9063,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sprintf-js@npm:~1.0.2":
-  version: 1.0.3
-  resolution: "sprintf-js@npm:1.0.3"
-  checksum: 10c0/ecadcfe4c771890140da5023d43e190b7566d9cf8b2d238600f31bec0fc653f328da4450eb04bd59a431771a8e9cc0e118f0aa3974b683a4981b4e07abc2a5bb
-  languageName: node
-  linkType: hard
-
 "ssri@npm:^8.0.1":
   version: 8.0.1
   resolution: "ssri@npm:8.0.1"
@@ -9824,12 +9796,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:^11.1.0":
-  version: 11.1.0
-  resolution: "uuid@npm:11.1.0"
+"uuid@npm:^11.1.1":
+  version: 11.1.1
+  resolution: "uuid@npm:11.1.1"
   bin:
     uuid: dist/esm/bin/uuid
-  checksum: 10c0/34aa51b9874ae398c2b799c88a127701408cd581ee89ec3baa53509dd8728cbb25826f2a038f9465f8b7be446f0fbf11558862965b18d21c993684297628d4d3
+  checksum: 10c0/9e3af58eba872ece5a5e76f4773a94fc78a0ef2c2444c38dbe6b42f41dadf76c01850fd783604f27986f6195e6286aef064d45987d401b2a33127b98ddf7c0c5
   languageName: node
   linkType: hard
 
@@ -10121,9 +10093,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:^7.4.5":
-  version: 7.5.10
-  resolution: "ws@npm:7.5.10"
+"ws@npm:^7.5.11":
+  version: 7.5.13
+  resolution: "ws@npm:7.5.13"
   peerDependencies:
     bufferutil: ^4.0.1
     utf-8-validate: ^5.0.2
@@ -10132,7 +10104,7 @@ __metadata:
       optional: true
     utf-8-validate:
       optional: true
-  checksum: 10c0/bd7d5f4aaf04fae7960c23dcb6c6375d525e00f795dd20b9385902bd008c40a94d3db3ce97d878acc7573df852056ca546328b27b39f47609f80fb22a0a9b61d
+  checksum: 10c0/e223726bbda5768ed58ec9252d04eda7018ef380ea122bb94e595a4d7a02b5baeb423933936576fddb8fa51b642375f7ae814bf0f6f5d9a3ce290566578a8c5a
   languageName: node
   linkType: hard
 
