@@ -3,7 +3,7 @@
   "version": "5.0.0",
   "description": "React components to render formatron data.",
   "author": "Idelic",
-  "homepage": "https://github.com/idelic-inc/idelic-js#readme",
+  "homepage": "https://github.com/DSG-FleetSafetySuite/idelic-js#readme",
   "license": "MIT",
   "main": "lib/index.js",
   "directories": {
@@ -15,10 +15,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/idelic-inc/idelic-js.git"
+    "url": "git+https://github.com/DSG-FleetSafetySuite/idelic-js.git"
   },
   "bugs": {
-    "url": "https://github.com/idelic-inc/idelic-js/issues"
+    "url": "https://github.com/DSG-FleetSafetySuite/idelic-js/issues"
   },
   "scripts": {
     "start": "tsc --watch",

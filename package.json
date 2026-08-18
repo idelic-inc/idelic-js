@@ -2,7 +2,7 @@
   "name": "idelic",
   "version": "1.0.0",
   "description": "Monorepo for Idelic JS Libraries",
-  "repository": "git@github.com:idelic-inc/idelic-js.git",
+  "repository": "git@github.com:DSG-FleetSafetySuite/idelic-js.git",
   "author": "Idelic",
   "license": "MIT",
   "workspaces": [
