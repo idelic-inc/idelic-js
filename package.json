@@ -75,7 +75,7 @@
     "@idelic/safety-suite-api": "file:packages/safety-suite-api"
   },
   "resolutions": {
-    "ip-address": "^10.2.0",
+    "ip-address": "^10.3.1",
     "sigstore": "^4.1.1",
     "handlebars": "^4.7.9",
     "ssri": "^8.0.1",
@@ -86,12 +86,15 @@
     "cross-spawn": "^7.0.5",
     "glob": "^10.5.0",
     "minimatch": "^10.2.3",
-    "immutable": "^4.3.8",
+    "immutable": "^4.3.9",
     "lodash-es": "^4.18.0",
     "flatted": "^3.4.2",
     "picomatch": ">=2.3.2",
-    "brace-expansion": "^5.0.5",
-    "form-data": "^3.0.5"
+    "brace-expansion": "^5.0.9",
+    "form-data": "^3.0.5",
+    "ws": "^7.5.11",
+    "js-yaml": "^4.3.1",
+    "uuid": "^11.1.1"
   },
   "packageManager": "yarn@4.10.2"
 }
